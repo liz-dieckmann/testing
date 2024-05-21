@@ -1,6 +1,6 @@
 
 .kuiTabTopUnselected {
-	color:#0085CF; 
+	color: #0085CF; 
 	font-weight: normal;
 	border: 1px solid lightgrey; 	
 	cursor: pointer;
@@ -15,8 +15,8 @@
 	display: grid;
 	grid-gap: 5px;
 	align-items: center;
-	font-family:Arial,Helvetica,sans-serif; 
-	font-size:18px; 
+	font-family: Arial,Helvetica,sans-serif; 
+	font-size: 18px; 
 	white-space: nowrap; 
 	padding-left: 32px; 
 	padding-right: 32px;

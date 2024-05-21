@@ -760,6 +760,9 @@ div.trax-notify-recipients dd {
 .displayBlock{
 	display: block;
 	}
+.standardGridGap{
+	gap: 5px;
+	}
 .traxIconButton {
 	cursor: pointer;
 	border: 0px;
@@ -767,11 +770,13 @@ div.trax-notify-recipients dd {
 	border-radius: 6px;
 	justify-self: center;
 	}
-
-.traxButton {
+.traxBoundedButton, .traxButton{
 	cursor: pointer;
 	display: flex;
 	align-items: center;
+	}
+.traxBoundedButton{
+	justify-self: self-start;
 	}
 	
 .traxMultiselectButtonBase {
@@ -912,6 +917,11 @@ div.trax-notify-recipients dd {
 	display: grid;
 	min-width: 0px;
 	align-self: center;
+	}
+.mediumInputField{
+	display: grid;
+	align-self: center;
+	width: 100px;
 	}
 .inputFieldDateSized{
 	display: grid;
