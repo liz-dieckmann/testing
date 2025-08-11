@@ -1,162 +1,182 @@
 /**
- * External Tailwind MFE Launcher - Self-Contained
+ * Single-File Tailwind MFE Loader - Cross-Origin Compatible
  * 
- * This file should be placed next to the "tailwind-mfe" folder on your server.
- * It automatically detects its own location and loads the cssScopingLoader.js 
- * from the sibling "tailwind-mfe" folder.
+ * This is a completely self-contained loader that:
+ * 1. Detects its own script location
+ * 2. Loads all MFE assets from the same base domain/path
+ * 3. Works across different domains (site vs static files)
  * 
- * Key Features:
- * - Self-contained: No configuration needed
- * - Cross-origin compatible: Works regardless of embedding context
- * - Auto-detection: Always uses its own script source URL as base path
- * - Zero dependencies: Works in any environment where it's placed
- * 
- * Usage in Shell App (Simple):
+ * Usage:
  * <div id="tailwind-mfe-container"></div>
- * <script src="/path/to/loadTailwindMFE.js"></script>
- * 
- * File Structure on Server:
- * /your-static-folder/
- * ├── loadTailwindMFE.js          ← This file
- * └── tailwind-mfe/               ← MFE folder (renamed from dist)
- *     ├── cssScopingLoader.js     ← Will be loaded automatically
- *     ├── mfe-manifest.json       ← Asset manifest
- *     └── assets/                 ← Built assets
+ * <script src="http://your-static-server/path/singleFileLoader.js"></script>
  */
 
 (function() {
   'use strict';
   
-  console.log('🚀 External Tailwind MFE Launcher starting...');
+  console.log('🚀 Single-File MFE Loader starting...');
   
-  // Configuration
-  const MFE_FOLDER_NAME = 'tailwind-mfe';
-  const LOADER_FILENAME = 'cssScopingLoader.js';
   const CONTAINER_ID = 'tailwind-mfe-container';
+  const MFE_FOLDER_NAME = 'tailwind-mfe';
   
   /**
-   * Get the base URL for loading MFE assets
-   * Always derives from the current script's own source URL
+   * Get the current script element
    */
-  function getBaseUrl() {
+  function getCurrentScript() {
+    if (document.currentScript) {
+      return document.currentScript;
+    }
+    const scripts = document.getElementsByTagName('script');
+    return scripts[scripts.length - 1];
+  }
+  
+  /**
+   * Get the base URL where this script is located
+   */
+  function getScriptBaseUrl() {
     const currentScript = getCurrentScript();
     
     if (currentScript && currentScript.src) {
       const scriptSrc = currentScript.src;
       const lastSlash = scriptSrc.lastIndexOf('/');
       const baseUrl = lastSlash !== -1 ? scriptSrc.substring(0, lastSlash) : '';
-      console.log('📍 Derived base URL from script source:', baseUrl);
-      console.log('📍 Script source URL:', scriptSrc);
+      console.log('📍 Script base URL:', baseUrl);
+      console.log('📍 Script full URL:', scriptSrc);
       return baseUrl;
     }
     
-    // This should rarely happen, but provide a fallback
-    console.error('❌ Could not determine script source URL');
-    console.error('This might happen in very old browsers or unusual execution contexts');
+    console.error('❌ Could not determine script URL');
     return '';
   }
   
   /**
-   * Get the current script element
+   * Create absolute URL for MFE assets
    */
-  function getCurrentScript() {
-    // Modern browsers
-    if (document.currentScript) {
-      return document.currentScript;
-    }
-    
-    // Fallback for older browsers
-    const scripts = document.getElementsByTagName('script');
-    return scripts[scripts.length - 1];
+  function createAssetUrl(baseUrl, relativePath) {
+    // Remove leading slash from relative path if present
+    const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
+    const fullUrl = `${baseUrl}/${MFE_FOLDER_NAME}/${cleanPath}`;
+    console.log('🔗 Asset URL created:', fullUrl);
+    return fullUrl;
   }
   
   /**
-   * Test if a URL is accessible
+   * Load CSS file
    */
-  async function testUrl(url) {
+  function loadCSS(url) {
+    return new Promise((resolve, reject) => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = url;
+      link.onload = () => {
+        console.log('✅ CSS loaded:', url);
+        resolve();
+      };
+      link.onerror = () => {
+        console.error('❌ CSS failed to load:', url);
+        reject(new Error(`Failed to load CSS: ${url}`));
+      };
+      document.head.appendChild(link);
+    });
+  }
+  
+  /**
+   * Load JavaScript module
+   */
+  async function loadModule(url) {
     try {
-      const response = await fetch(url, { method: 'HEAD' });
-      return response.ok;
+      console.log('📥 Loading module:', url);
+      const module = await import(url);
+      console.log('✅ Module loaded:', url);
+      return module;
     } catch (error) {
-      return false;
+      console.error('❌ Module failed to load:', url, error);
+      throw error;
     }
   }
   
   /**
-   * Load and execute the CSS Scoping Loader with robust URL handling
+   * Main loader function
    */
-  async function loadMFELoader() {
+  async function loadMFE() {
     try {
-      // Check if container exists
+      console.log('📦 Starting MFE loading process...');
+      
+      // Step 1: Get base URL from script location
+      const baseUrl = getScriptBaseUrl();
+      if (!baseUrl) {
+        throw new Error('Could not determine script base URL');
+      }
+      
+      // Step 2: Check container
       const container = document.getElementById(CONTAINER_ID);
       if (!container) {
-        console.error(`❌ Container #${CONTAINER_ID} not found. Please add <div id="${CONTAINER_ID}"></div> to your HTML.`);
-        return;
+        throw new Error(`Container #${CONTAINER_ID} not found`);
+      }
+      console.log('✅ Container found');
+      
+      // Step 3: Load manifest
+      const manifestUrl = createAssetUrl(baseUrl, 'mfe-manifest.json');
+      console.log('📋 Loading manifest from:', manifestUrl);
+      
+      const manifestResponse = await fetch(manifestUrl);
+      if (!manifestResponse.ok) {
+        throw new Error(`Failed to load manifest: ${manifestResponse.status} ${manifestResponse.statusText}`);
       }
       
-      console.log('✅ Container found, loading MFE loader...');
+      const manifest = await manifestResponse.json();
+      console.log('✅ Manifest loaded:', manifest);
       
-      // Get the base URL using our robust method
-      const baseUrl = getBaseUrl();
-      const loaderPath = `${baseUrl}/${MFE_FOLDER_NAME}/${LOADER_FILENAME}`;
+      // Step 4: Load CSS
+      const cssUrl = createAssetUrl(baseUrl, `assets/${manifest.css}`);
+      await loadCSS(cssUrl);
       
-      console.log(`📦 Attempting to load CSS Scoping Loader from: ${loaderPath}`);
+      // Step 5: Load and mount bootstrap
+      const bootstrapUrl = createAssetUrl(baseUrl, `assets/${manifest.bootstrap}`);
+      const bootstrap = await loadModule(bootstrapUrl);
       
-      // Test if the URL is accessible (optional, but helpful for debugging)
-      const isAccessible = await testUrl(loaderPath);
-      if (!isAccessible) {
-        console.warn(`⚠️ URL test failed for: ${loaderPath}`);
-        console.warn('This might be due to CORS restrictions or the file not existing.');
-        console.warn('Proceeding with script loading anyway...');
+      // Step 6: Add scoping class and mount
+      container.classList.add('tailwind-mfe-scope');
+      console.log('✅ Added CSS scoping class to container');
+      
+      // Mount the MFE
+      if (bootstrap.mount) {
+        console.log('🎯 Mounting MFE...');
+        await bootstrap.mount(container);
+        console.log('✅ MFE mounted successfully!');
+      } else {
+        console.error('❌ Bootstrap module does not export mount function');
       }
-      
-      // Create and load the script
-      const script = document.createElement('script');
-      script.src = loaderPath;
-      script.type = 'text/javascript';
-      
-      // Handle load success
-      script.onload = function() {
-        console.log('✅ CSS Scoping Loader loaded successfully');
-      };
-      
-      // Handle load error with detailed troubleshooting
-      script.onerror = function() {
-        console.error(`❌ Failed to load CSS Scoping Loader from: ${loaderPath}`);
-        console.error('🔍 Troubleshooting steps:');
-        console.error(`1. Verify the "${MFE_FOLDER_NAME}" folder exists at: ${baseUrl}/${MFE_FOLDER_NAME}/`);
-        console.error(`2. Verify the "${LOADER_FILENAME}" file exists inside the folder`);
-        console.error('3. Check server CORS configuration for cross-origin requests');
-        console.error('4. Ensure static file serving is properly configured');
-        console.error('5. Check browser network tab for detailed error information');
-        console.error('');
-        console.error('💡 Configuration options:');
-        console.error('• Set data-base-url attribute on script tag');
-        console.error('• Set window.TAILWIND_MFE_CONFIG = { baseUrl: "your-url" }');
-        console.error('• Current base URL:', baseUrl);
-      };
-      
-      // Add script to document
-      document.head.appendChild(script);
       
     } catch (error) {
-      console.error('❌ Error in MFE Launcher:', error);
+      console.error('❌ MFE Loading failed:', error);
+      
+      // Show user-friendly error in container
+      const container = document.getElementById(CONTAINER_ID);
+      if (container) {
+        container.innerHTML = `
+          <div style="padding: 20px; border: 2px solid #ef4444; border-radius: 8px; background: #fef2f2; color: #dc2626;">
+            <h3 style="margin: 0 0 10px 0;">⚠️ Microfrontend Loading Failed</h3>
+            <p style="margin: 0; font-size: 14px;">${error.message}</p>
+            <p style="margin: 10px 0 0 0; font-size: 12px; color: #991b1b;">Check browser console for detailed error information.</p>
+          </div>
+        `;
+      }
     }
   }
   
   /**
-   * Initialize the launcher when DOM is ready
+   * Initialize when DOM is ready
    */
   function initialize() {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', loadMFELoader);
+      document.addEventListener('DOMContentLoaded', loadMFE);
     } else {
-      // DOM is already ready
-      loadMFELoader();
+      loadMFE();
     }
   }
   
-  // Start the launcher
+  // Start the process
   initialize();
   
 })();
