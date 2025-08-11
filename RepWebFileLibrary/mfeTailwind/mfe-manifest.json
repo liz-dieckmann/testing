@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-08-11T12:58:46.090Z",
+  "files": {
+    "federation": [
+      "__federation_expose_App-DwG_12xm.js",
+      "__federation_expose_ButtonPage-CrzyuLJM.js",
+      "__federation_expose_DatepickerPage-BKl_JwCP.js",
+      "__federation_expose_HomePage-ClZNp4IW.js",
+      "__federation_expose_InputPage-FEFI7kDA.js",
+      "__federation_expose_Mount-DkbMNdr3.js",
+      "__federation_expose_Navigation-C1b5tCXL.js",
+      "__federation_fn_import-Bi7vPVnK.js",
+      "__federation_shared_react-BrALZ0a1.js",
+      "__federation_shared_react-dom-B-igiCQ4.js",
+      "__federation_shared_react-router-dom-D6v5hdKT.js"
+    ],
+    "shared": [
+      "__federation_shared_react-BrALZ0a1.js",
+      "__federation_shared_react-dom-B-igiCQ4.js",
+      "__federation_shared_react-router-dom-D6v5hdKT.js"
+    ],
+    "exposed": [
+      "__federation_expose_App-DwG_12xm.js",
+      "__federation_expose_ButtonPage-CrzyuLJM.js",
+      "__federation_expose_DatepickerPage-BKl_JwCP.js",
+      "__federation_expose_HomePage-ClZNp4IW.js",
+      "__federation_expose_InputPage-FEFI7kDA.js",
+      "__federation_expose_Mount-DkbMNdr3.js",
+      "__federation_expose_Navigation-C1b5tCXL.js"
+    ]
+  },
+  "bootstrap": "__federation_expose_Mount-DkbMNdr3.js",
+  "css": "style-DQMKYuWw.css",
+  "remoteEntry": "remoteEntry.js"
+}
