@@ -6,7 +6,14 @@
  * 2. Loads all MFE assets from the same base domain/path
  * 3. Works across different domains (site vs static files)
  * 
- * Usage:
+ * Usage (Auto-detection):
+ * <div id="tailwind-mfe-container"></div>
+ * <script src="http://your-static-server/path/singleFileLoader.js"></script>
+ * 
+ * Usage (Manual configuration if auto-detection fails):
+ * <script>
+ *   window.MFE_BASE_URL = 'http://nor-vltrx-t02.htseng.com/files/RepWebFileLibrary';
+ * </script>
  * <div id="tailwind-mfe-container"></div>
  * <script src="http://your-static-server/path/singleFileLoader.js"></script>
  */
@@ -20,32 +27,81 @@
   const MFE_FOLDER_NAME = 'tailwind-mfe';
   
   /**
-   * Get the current script element
+   * Get the current script element with multiple fallback methods
    */
   function getCurrentScript() {
+    // Method 1: Modern browsers
     if (document.currentScript) {
+      console.log('📍 Using document.currentScript');
       return document.currentScript;
     }
+    
+    // Method 2: Look for our specific script by checking src
     const scripts = document.getElementsByTagName('script');
-    return scripts[scripts.length - 1];
+    for (let i = scripts.length - 1; i >= 0; i--) {
+      const script = scripts[i];
+      if (script.src && script.src.includes('singleFileLoader.js')) {
+        console.log('📍 Found script by filename match');
+        return script;
+      }
+    }
+    
+    // Method 3: Last script (traditional fallback)
+    if (scripts.length > 0) {
+      console.log('📍 Using last script as fallback');
+      return scripts[scripts.length - 1];
+    }
+    
+    return null;
   }
   
   /**
-   * Get the base URL where this script is located
+   * Get the base URL where this script is located with enhanced debugging
    */
   function getScriptBaseUrl() {
+    console.log('🔍 Attempting to detect script base URL...');
+    
+    // Try multiple methods to get the script URL
     const currentScript = getCurrentScript();
     
-    if (currentScript && currentScript.src) {
-      const scriptSrc = currentScript.src;
-      const lastSlash = scriptSrc.lastIndexOf('/');
-      const baseUrl = lastSlash !== -1 ? scriptSrc.substring(0, lastSlash) : '';
-      console.log('📍 Script base URL:', baseUrl);
-      console.log('📍 Script full URL:', scriptSrc);
-      return baseUrl;
+    if (currentScript) {
+      console.log('📍 Current script element found:', currentScript);
+      console.log('📍 Script src attribute:', currentScript.src);
+      
+      if (currentScript.src) {
+        const scriptSrc = currentScript.src;
+        const lastSlash = scriptSrc.lastIndexOf('/');
+        const baseUrl = lastSlash !== -1 ? scriptSrc.substring(0, lastSlash) : '';
+        
+        console.log('✅ Script base URL derived:', baseUrl);
+        console.log('✅ Script full URL:', scriptSrc);
+        
+        if (baseUrl) {
+          return baseUrl;
+        } else {
+          console.warn('⚠️ Base URL is empty after processing');
+        }
+      } else {
+        console.warn('⚠️ Script element has no src attribute');
+      }
+    } else {
+      console.error('❌ No script element found');
     }
     
-    console.error('❌ Could not determine script URL');
+    // Fallback: Try to construct from window.location if we have a hint
+    console.log('🔄 Attempting fallback URL construction...');
+    
+    // Check if there's a global configuration
+    if (window.MFE_BASE_URL) {
+      console.log('✅ Using global MFE_BASE_URL:', window.MFE_BASE_URL);
+      return window.MFE_BASE_URL;
+    }
+    
+    console.error('❌ Could not determine script base URL');
+    console.error('💡 Debugging info:');
+    console.error('- document.currentScript:', document.currentScript);
+    console.error('- All scripts:', Array.from(document.getElementsByTagName('script')).map(s => s.src));
+    
     return '';
   }
   
