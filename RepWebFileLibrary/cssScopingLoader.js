@@ -1,29 +1,27 @@
 /**
- * External Tailwind MFE Launcher - Cross-Origin Compatible
+ * External Tailwind MFE Launcher - Self-Contained
  * 
  * This file should be placed next to the "tailwind-mfe" folder on your server.
- * It dynamically loads and executes the cssScopingLoader.js from the tailwind-mfe folder.
+ * It automatically detects its own location and loads the cssScopingLoader.js 
+ * from the sibling "tailwind-mfe" folder.
  * 
- * Supports multiple configuration methods for different deployment scenarios:
- * 1. Auto-detection (default)
- * 2. Manual base URL configuration
- * 3. Data attributes configuration
+ * Key Features:
+ * - Self-contained: No configuration needed
+ * - Cross-origin compatible: Works regardless of embedding context
+ * - Auto-detection: Always uses its own script source URL as base path
+ * - Zero dependencies: Works in any environment where it's placed
  * 
- * Usage in Shell App:
+ * Usage in Shell App (Simple):
  * <div id="tailwind-mfe-container"></div>
  * <script src="/path/to/loadTailwindMFE.js"></script>
  * 
- * Advanced Usage with Manual Base URL:
- * <script>
- *   window.TAILWIND_MFE_CONFIG = {
- *     baseUrl: 'http://nor-vltrx-102.htseng.com/files/RepWebFileLibrary'
- *   };
- * </script>
- * <script src="/path/to/loadTailwindMFE.js"></script>
- * 
- * Or with data attributes:
- * <script src="/path/to/loadTailwindMFE.js" 
- *         data-base-url="http://nor-vltrx-102.htseng.com/files/RepWebFileLibrary"></script>
+ * File Structure on Server:
+ * /your-static-folder/
+ * ├── loadTailwindMFE.js          ← This file
+ * └── tailwind-mfe/               ← MFE folder (renamed from dist)
+ *     ├── cssScopingLoader.js     ← Will be loaded automatically
+ *     ├── mfe-manifest.json       ← Asset manifest
+ *     └── assets/                 ← Built assets
  */
 
 (function() {
@@ -38,40 +36,24 @@
   
   /**
    * Get the base URL for loading MFE assets
-   * Tries multiple methods in order of preference:
-   * 1. Data attribute on script tag
-   * 2. Global configuration object
-   * 3. Auto-detection from script URL
+   * Always derives from the current script's own source URL
    */
   function getBaseUrl() {
-    // Method 1: Check for data attribute on current script
     const currentScript = getCurrentScript();
-    if (currentScript && currentScript.dataset.baseUrl) {
-      const baseUrl = currentScript.dataset.baseUrl;
-      console.log('📍 Using base URL from data attribute:', baseUrl);
-      return baseUrl;
-    }
     
-    // Method 2: Check for global configuration
-    if (window.TAILWIND_MFE_CONFIG && window.TAILWIND_MFE_CONFIG.baseUrl) {
-      const baseUrl = window.TAILWIND_MFE_CONFIG.baseUrl;
-      console.log('📍 Using base URL from global config:', baseUrl);
-      return baseUrl;
-    }
-    
-    // Method 3: Auto-detect from script URL (fallback)
     if (currentScript && currentScript.src) {
       const scriptSrc = currentScript.src;
       const lastSlash = scriptSrc.lastIndexOf('/');
       const baseUrl = lastSlash !== -1 ? scriptSrc.substring(0, lastSlash) : '';
-      console.log('📍 Auto-detected base URL from script:', baseUrl);
+      console.log('📍 Derived base URL from script source:', baseUrl);
+      console.log('📍 Script source URL:', scriptSrc);
       return baseUrl;
     }
     
-    // Method 4: Use current origin as last resort
-    const fallbackUrl = window.location.origin;
-    console.warn('⚠️ Using fallback base URL (current origin):', fallbackUrl);
-    return fallbackUrl;
+    // This should rarely happen, but provide a fallback
+    console.error('❌ Could not determine script source URL');
+    console.error('This might happen in very old browsers or unusual execution contexts');
+    return '';
   }
   
   /**
