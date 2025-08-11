@@ -30,28 +30,42 @@
    * Get the current script element with multiple fallback methods
    */
   function getCurrentScript() {
+    console.log('🔍 Searching for current script...');
+    
     // Method 1: Modern browsers
     if (document.currentScript) {
-      console.log('📍 Using document.currentScript');
+      console.log('📍 Using document.currentScript:', document.currentScript.src);
       return document.currentScript;
     }
     
-    // Method 2: Look for our specific script by checking src
+    // Method 2: Look for our specific script by checking src (search all scripts)
     const scripts = document.getElementsByTagName('script');
+    console.log('📍 Total scripts found:', scripts.length);
+    
+    // First, try to find by exact filename match
+    for (let i = 0; i < scripts.length; i++) {
+      const script = scripts[i];
+      if (script.src) {
+        console.log(`📍 Script ${i}:`, script.src);
+        if (script.src.includes('cssScopingLoader.js') || script.src.includes('singleFileLoader.js')) {
+          console.log('✅ Found our script by filename match:', script.src);
+          return script;
+        }
+      } else {
+        console.log(`📍 Script ${i}: (no src - inline script)`);
+      }
+    }
+    
+    // Method 3: Look for last non-empty script src
     for (let i = scripts.length - 1; i >= 0; i--) {
       const script = scripts[i];
-      if (script.src && script.src.includes('singleFileLoader.js')) {
-        console.log('📍 Found script by filename match');
+      if (script.src && script.src.trim() !== '') {
+        console.log('📍 Using last non-empty script as fallback:', script.src);
         return script;
       }
     }
     
-    // Method 3: Last script (traditional fallback)
-    if (scripts.length > 0) {
-      console.log('📍 Using last script as fallback');
-      return scripts[scripts.length - 1];
-    }
-    
+    console.error('❌ No suitable script found');
     return null;
   }
   
