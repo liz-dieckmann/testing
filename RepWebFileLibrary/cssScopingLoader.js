@@ -1,85 +1,98 @@
 /**
- * Ultra-Simple CSS Scoping MFE Loader
+ * External Tailwind MFE Launcher
  * 
- * This is the simplest possible loader that just:
- * 1. Loads CSS via link tag
- * 2. Loads bootstrap module
- * 3. Mounts MFE with CSS scoping class
+ * This file should be placed next to the "tailwind-mfe" folder on your server.
+ * It dynamically loads and executes the cssScopingLoader.js from the tailwind-mfe folder.
+ * 
+ * Usage in Shell App:
+ * <div id="tailwind-mfe-container"></div>
+ * <script src="/path/to/loadTailwindMFE.js"></script>
  */
 
 (function() {
+  'use strict';
   
-  console.log('🚀 Ultra-Simple CSS Scoping Loader starting...');
+  console.log('🚀 External Tailwind MFE Launcher starting...');
   
-  const BASE_PATH = '/tailwind-mfe';
+  // Configuration
+  const MFE_FOLDER_NAME = 'tailwind-mfe';
+  const LOADER_FILENAME = 'cssScopingLoader.js';
   const CONTAINER_ID = 'tailwind-mfe-container';
   
-  async function loadMFE() {
+  /**
+   * Get the base path where this launcher script is located
+   */
+  function getBasePath() {
+    // Get the current script's URL
+    const scripts = document.getElementsByTagName('script');
+    const currentScript = scripts[scripts.length - 1];
+    const scriptSrc = currentScript.src;
+    
+    // Extract the directory path (remove the filename)
+    const lastSlash = scriptSrc.lastIndexOf('/');
+    return lastSlash !== -1 ? scriptSrc.substring(0, lastSlash) : '';
+  }
+  
+  /**
+   * Load and execute the CSS Scoping Loader
+   */
+  async function loadMFELoader() {
     try {
-      console.log('📦 Loading MFE...');
-      
-      // Step 1: Find container
+      // Check if container exists
       const container = document.getElementById(CONTAINER_ID);
       if (!container) {
-        console.error(`❌ Container #${CONTAINER_ID} not found`);
+        console.error(`❌ Container #${CONTAINER_ID} not found. Please add <div id="${CONTAINER_ID}"></div> to your HTML.`);
         return;
       }
       
-      console.log('✅ Container found');
+      console.log('✅ Container found, loading MFE loader...');
       
-      // Step 2: Load manifest to get dynamic file paths
-      console.log('📋 Loading manifest...');
-      const manifestResponse = await fetch(`${BASE_PATH}/mfeTailwind/mfe-manifest.json`);
-      const manifest = await manifestResponse.json();
-      console.log('✅ Manifest loaded:', manifest);
+      // Construct the path to the CSS Scoping Loader
+      const basePath = getBasePath();
+      const loaderPath = `${basePath}/${MFE_FOLDER_NAME}/${LOADER_FILENAME}`;
       
-      // Step 3: Load CSS
-      const cssLink = document.createElement('link');
-      cssLink.rel = 'stylesheet';
-      cssLink.href = `${BASE_PATH}/mfeTailwind/assets/${manifest.css}`;
-      cssLink.onload = () => console.log('✅ CSS loaded');
-      cssLink.onerror = () => console.warn('⚠️ CSS loading failed');
-      document.head.appendChild(cssLink);
+      console.log(`📦 Loading CSS Scoping Loader from: ${loaderPath}`);
       
-      // Step 4: Load bootstrap module
-      console.log('📥 Loading bootstrap module...');
-      const bootstrapUrl = `${BASE_PATH}/mfeTailwind/assets/${manifest.bootstrap}`;
+      // Create and load the script
+      const script = document.createElement('script');
+      script.src = loaderPath;
+      script.type = 'text/javascript';
       
-      const bootstrap = await import(bootstrapUrl);
-      console.log('✅ Bootstrap module loaded');
+      // Handle load success
+      script.onload = function() {
+        console.log('✅ CSS Scoping Loader loaded successfully');
+      };
       
-      if (!bootstrap.mount) {
-        throw new Error('Mount function not found');
-      }
+      // Handle load error
+      script.onerror = function() {
+        console.error(`❌ Failed to load CSS Scoping Loader from: ${loaderPath}`);
+        console.error('Please ensure:');
+        console.error(`1. The "${MFE_FOLDER_NAME}" folder exists next to this launcher script`);
+        console.error(`2. The "${LOADER_FILENAME}" file exists inside the "${MFE_FOLDER_NAME}" folder`);
+        console.error('3. The server is serving static files correctly');
+      };
       
-      // Step 4: Mount MFE
-      console.log('🎯 Mounting MFE...');
-      const result = await bootstrap.mount(container);
-      
-      console.log('🎉 MFE mounted successfully with CSS scoping!');
-      
-      // Dispatch success event
-      window.dispatchEvent(new CustomEvent('mfe:loaded', {
-        detail: { container: CONTAINER_ID }
-      }));
-      
-      return result;
+      // Add script to document
+      document.head.appendChild(script);
       
     } catch (error) {
-      console.error('❌ MFE loading failed:', error);
-      
-      // Dispatch error event
-      window.dispatchEvent(new CustomEvent('mfe:error', {
-        detail: error.message
-      }));
+      console.error('❌ Error in MFE Launcher:', error);
     }
   }
   
-  // Auto-start when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadMFE);
-  } else {
-    loadMFE();
+  /**
+   * Initialize the launcher when DOM is ready
+   */
+  function initialize() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadMFELoader);
+    } else {
+      // DOM is already ready
+      loadMFELoader();
+    }
   }
+  
+  // Start the launcher
+  initialize();
   
 })();

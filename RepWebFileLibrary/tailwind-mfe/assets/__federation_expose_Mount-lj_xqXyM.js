@@ -1,7 +1,66 @@
-import { j as jsxRuntimeExports } from './jsx-runtime-XI9uIe3W.js';
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/page-CAjqUYEf.js","assets/__federation_fn_import-Bi7vPVnK.js","assets/Navigation-CEXmG17B.js","assets/page-BVW62MBx.js","assets/page-CI-S81y5.js","assets/page-Ca7rjv42.js"])))=>i.map(i=>d[i]);
 import { r as requireReact } from './index-CIQ6_Rzc.js';
 import { r as requireReactDom } from './index-DPp_4SNT.js';
-import App from './__federation_expose_App-B5QF-kAC.js';
+import { _ as __vitePreload } from './preload-helper-DozDN73s.js';
+import { importShared } from './__federation_fn_import-Bi7vPVnK.js';
+
+var jsxRuntime = {exports: {}};
+
+var reactJsxRuntime_production = {};
+
+/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var hasRequiredReactJsxRuntime_production;
+
+function requireReactJsxRuntime_production () {
+	if (hasRequiredReactJsxRuntime_production) return reactJsxRuntime_production;
+	hasRequiredReactJsxRuntime_production = 1;
+	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element"),
+	  REACT_FRAGMENT_TYPE = Symbol.for("react.fragment");
+	function jsxProd(type, config, maybeKey) {
+	  var key = null;
+	  void 0 !== maybeKey && (key = "" + maybeKey);
+	  void 0 !== config.key && (key = "" + config.key);
+	  if ("key" in config) {
+	    maybeKey = {};
+	    for (var propName in config)
+	      "key" !== propName && (maybeKey[propName] = config[propName]);
+	  } else maybeKey = config;
+	  config = maybeKey.ref;
+	  return {
+	    $$typeof: REACT_ELEMENT_TYPE,
+	    type: type,
+	    key: key,
+	    ref: void 0 !== config ? config : null,
+	    props: maybeKey
+	  };
+	}
+	reactJsxRuntime_production.Fragment = REACT_FRAGMENT_TYPE;
+	reactJsxRuntime_production.jsx = jsxProd;
+	reactJsxRuntime_production.jsxs = jsxProd;
+	return reactJsxRuntime_production;
+}
+
+var hasRequiredJsxRuntime;
+
+function requireJsxRuntime () {
+	if (hasRequiredJsxRuntime) return jsxRuntime.exports;
+	hasRequiredJsxRuntime = 1;
+	{
+	  jsxRuntime.exports = requireReactJsxRuntime_production();
+	}
+	return jsxRuntime.exports;
+}
+
+var jsxRuntimeExports = requireJsxRuntime();
 
 var client = {exports: {}};
 
@@ -15787,6 +15846,80 @@ function requireClient () {
 
 var clientExports = requireClient();
 
+const {createHashRouter,RouterProvider:ReactRouterProvider} = await importShared('react-router-dom');
+
+const {lazy,Suspense,useState,useEffect} = await importShared('react');
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+let globalSetLoading = null;
+const HomePage = lazy(async () => {
+  globalSetLoading?.(true);
+  await delay(1e3);
+  const module = await __vitePreload(() => import('./page-CAjqUYEf.js'),true              ?__vite__mapDeps([0,1,2]):void 0);
+  globalSetLoading?.(false);
+  return module;
+});
+const InputPage = lazy(async () => {
+  globalSetLoading?.(true);
+  await delay(1500);
+  const module = await __vitePreload(() => import('./page-BVW62MBx.js'),true              ?__vite__mapDeps([3,1,2]):void 0);
+  globalSetLoading?.(false);
+  return module;
+});
+const ButtonPage = lazy(async () => {
+  globalSetLoading?.(true);
+  await delay(1200);
+  const module = await __vitePreload(() => import('./page-CI-S81y5.js'),true              ?__vite__mapDeps([4,1,2]):void 0);
+  globalSetLoading?.(false);
+  return module;
+});
+const DatepickerPage = lazy(async () => {
+  globalSetLoading?.(true);
+  await delay(1800);
+  const module = await __vitePreload(() => import('./page-Ca7rjv42.js'),true              ?__vite__mapDeps([5,1,2]):void 0);
+  globalSetLoading?.(false);
+  return module;
+});
+const LoadingSpinner = () => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center min-h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
+function LoadingWrapper({ children }) {
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    globalSetLoading = setIsLoading;
+    return () => {
+      globalSetLoading = null;
+    };
+  }, []);
+  if (isLoading) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, {});
+  }
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, {}), children });
+}
+const router = createHashRouter([
+  {
+    path: "/",
+    element: /* @__PURE__ */ jsxRuntimeExports.jsx(HomePage, {})
+  },
+  {
+    path: "/input",
+    element: /* @__PURE__ */ jsxRuntimeExports.jsx(InputPage, {})
+  },
+  {
+    path: "/button",
+    element: /* @__PURE__ */ jsxRuntimeExports.jsx(ButtonPage, {})
+  },
+  {
+    path: "/datepicker",
+    element: /* @__PURE__ */ jsxRuntimeExports.jsx(DatepickerPage, {})
+  }
+]);
+function RouterProvider() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingWrapper, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRouterProvider, { router }) });
+}
+
+function App() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterProvider, {});
+}
+
 const mountedInstances = /* @__PURE__ */ new Map();
 function cleanupAll() {
   mountedInstances.forEach(({ dispose }) => {
@@ -15910,4 +16043,12 @@ if (typeof window !== "undefined" && !window.__WEBPACK_PUBLIC_PATH__) {
 }
 const bootstrap = { mount, cleanupAll };
 
-export { autoMount, cleanupAll, bootstrap as default, mount };
+const bootstrap$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  autoMount,
+  cleanupAll,
+  default: bootstrap,
+  mount
+}, Symbol.toStringTag, { value: 'Module' }));
+
+export { autoMount, bootstrap$1 as b, cleanupAll, bootstrap as default, jsxRuntimeExports as j, mount };

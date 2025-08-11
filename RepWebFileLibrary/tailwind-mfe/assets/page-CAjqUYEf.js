@@ -1,6 +1,6 @@
 import { importShared } from './__federation_fn_import-Bi7vPVnK.js';
-import { j as jsxRuntimeExports } from './jsx-runtime-XI9uIe3W.js';
-import { Navigation, B as Button } from './__federation_expose_Navigation-C1b5tCXL.js';
+import { j as jsxRuntimeExports } from './__federation_expose_Mount-lj_xqXyM.js';
+import { N as Navigation, B as Button } from './Navigation-CEXmG17B.js';
 
 const {Link} = await importShared('react-router-dom');
 function HomePage() {

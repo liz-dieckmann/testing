@@ -1,5 +1,5 @@
 import { importShared } from './__federation_fn_import-Bi7vPVnK.js';
-import { j as jsxRuntimeExports } from './jsx-runtime-XI9uIe3W.js';
+import { j as jsxRuntimeExports } from './__federation_expose_Mount-lj_xqXyM.js';
 
 // packages/react/compose-refs/src/compose-refs.tsx
 await importShared('react');
@@ -3190,4 +3190,4 @@ function Navigation() {
   ] }) }) });
 }
 
-export { Button as B, Navigation };
+export { Button as B, Navigation as N };
