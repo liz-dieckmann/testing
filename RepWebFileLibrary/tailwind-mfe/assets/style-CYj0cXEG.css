@@ -422,10 +422,6 @@
     position: relative;
   }
 
-  .tailwind-mfe-scope .static {
-    position: static;
-  }
-
   .tailwind-mfe-scope .inset-y-0 {
     inset-block: calc(var(--spacing) * 0);
   }
