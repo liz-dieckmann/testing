@@ -513,10 +513,6 @@
     display: grid;
   }
 
-  .tailwind-mfe-scope .hidden {
-    display: none;
-  }
-
   .tailwind-mfe-scope .inline-flex {
     display: inline-flex;
   }
