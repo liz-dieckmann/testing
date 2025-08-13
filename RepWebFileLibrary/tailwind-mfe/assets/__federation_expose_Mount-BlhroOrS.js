@@ -1,8 +1,8 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/page-CAjqUYEf.js","assets/__federation_fn_import-Bi7vPVnK.js","assets/Navigation-CEXmG17B.js","assets/page-BVW62MBx.js","assets/page-CI-S81y5.js","assets/page-Ca7rjv42.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/page-Cg1w0-Eq.js","assets/__federation_fn_import-Bi7vPVnK.js","assets/Navigation-CsZ1fjOa.js","assets/page-BP51bD1c.js","assets/page-D7ewDERB.js","assets/page-C6LGobax.js"])))=>i.map(i=>d[i]);
+import { importShared } from './__federation_fn_import-Bi7vPVnK.js';
 import { r as requireReact } from './index-CIQ6_Rzc.js';
 import { r as requireReactDom } from './index-DPp_4SNT.js';
 import { _ as __vitePreload } from './preload-helper-DozDN73s.js';
-import { importShared } from './__federation_fn_import-Bi7vPVnK.js';
 
 var jsxRuntime = {exports: {}};
 
@@ -15855,28 +15855,28 @@ let globalSetLoading = null;
 const HomePage = lazy(async () => {
   globalSetLoading?.(true);
   await delay(1e3);
-  const module = await __vitePreload(() => import('./page-CAjqUYEf.js'),true              ?__vite__mapDeps([0,1,2]):void 0);
+  const module = await __vitePreload(() => import('./page-Cg1w0-Eq.js'),true              ?__vite__mapDeps([0,1,2]):void 0);
   globalSetLoading?.(false);
   return module;
 });
 const InputPage = lazy(async () => {
   globalSetLoading?.(true);
   await delay(1500);
-  const module = await __vitePreload(() => import('./page-BVW62MBx.js'),true              ?__vite__mapDeps([3,1,2]):void 0);
+  const module = await __vitePreload(() => import('./page-BP51bD1c.js'),true              ?__vite__mapDeps([3,1,2]):void 0);
   globalSetLoading?.(false);
   return module;
 });
 const ButtonPage = lazy(async () => {
   globalSetLoading?.(true);
   await delay(1200);
-  const module = await __vitePreload(() => import('./page-CI-S81y5.js'),true              ?__vite__mapDeps([4,1,2]):void 0);
+  const module = await __vitePreload(() => import('./page-D7ewDERB.js'),true              ?__vite__mapDeps([4,1,2]):void 0);
   globalSetLoading?.(false);
   return module;
 });
 const DatepickerPage = lazy(async () => {
   globalSetLoading?.(true);
   await delay(1800);
-  const module = await __vitePreload(() => import('./page-Ca7rjv42.js'),true              ?__vite__mapDeps([5,1,2]):void 0);
+  const module = await __vitePreload(() => import('./page-C6LGobax.js'),true              ?__vite__mapDeps([5,1,2]):void 0);
   globalSetLoading?.(false);
   return module;
 });
@@ -15920,135 +15920,112 @@ function App() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterProvider, {});
 }
 
+const {StrictMode} = await importShared('react');
 const mountedInstances = /* @__PURE__ */ new Map();
-function cleanupAll() {
-  mountedInstances.forEach(({ dispose }) => {
-    dispose();
-  });
+const mount = (element) => {
+  const targetElement = typeof element === "string" ? document.getElementById(element) || document.querySelector(element) : element;
+  if (!targetElement) {
+    console.error("Tailwind MFE: Target element not found");
+    return null;
+  }
+  if (mountedInstances.has(targetElement)) {
+    console.warn("Tailwind MFE: Already mounted to this element");
+    return mountedInstances.get(targetElement);
+  }
+  try {
+    targetElement.classList.add("tailwind-mfe-scope");
+    const root = clientExports.createRoot(targetElement);
+    root.render(
+      /* @__PURE__ */ jsxRuntimeExports.jsx(StrictMode, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) })
+    );
+    mountedInstances.set(targetElement, root);
+    console.log("✅ Tailwind MFE: Successfully mounted with CSS scoping!");
+    return root;
+  } catch (error) {
+    console.error("❌ Tailwind MFE: Error during mount", error);
+    return null;
+  }
+};
+const unmount = (root) => {
+  try {
+    if (root && typeof root.unmount === "function") {
+      root.unmount();
+      for (const [element, registeredRoot] of mountedInstances.entries()) {
+        if (registeredRoot === root) {
+          mountedInstances.delete(element);
+          break;
+        }
+      }
+      console.log("Tailwind MFE: Successfully unmounted");
+    }
+  } catch (error) {
+    console.error("Tailwind MFE: Error during unmount", error);
+  }
+};
+const cleanupAll = () => {
+  console.log("Tailwind MFE: Cleaning up all instances");
+  for (const [element, root] of mountedInstances.entries()) {
+    try {
+      if (root && typeof root.unmount === "function") {
+        root.unmount();
+      }
+      element.innerHTML = "";
+    } catch (error) {
+      console.error("Tailwind MFE: Error during cleanup", error);
+    }
+  }
   mountedInstances.clear();
-}
-async function mount(element, props) {
-  let container;
-  let root;
-  if (typeof element === "string") {
-    const found = document.querySelector(element);
-    if (!found) {
-      throw new Error(`Tailwind MFE: Element not found: ${element}`);
-    }
-    container = found;
-  } else {
-    container = element;
-  }
-  if (mountedInstances.has(container)) {
-    console.warn("Tailwind MFE: Already mounted on this element");
-    return mountedInstances.get(container);
-  }
-  console.log("Tailwind MFE: Starting mount process...");
-  const performMount = async () => {
-    try {
-      container.classList.add("tailwind-mfe-scope");
-      root = clientExports.createRoot(container);
-      root.render(/* @__PURE__ */ jsxRuntimeExports.jsx(App, { ...props }));
-      console.log("✅ Tailwind MFE: Successfully mounted with CSS scoping");
-    } catch (error) {
-      console.error("Tailwind MFE: Mount error:", error);
-      throw error;
-    }
-  };
-  if (typeof window !== "undefined") {
-    if (document.readyState === "loading") {
-      await new Promise((resolve) => {
-        const handleReady = () => {
-          performMount().then(() => {
-            document.removeEventListener("DOMContentLoaded", handleReady);
-            resolve();
-          });
-        };
-        document.addEventListener("DOMContentLoaded", handleReady);
-      });
-    } else {
-      await performMount();
-    }
-  }
-  const dispose = () => {
-    try {
-      const instance2 = mountedInstances.get(container);
-      if (instance2) {
-        mountedInstances.delete(container);
-        instance2.observer.disconnect();
-        if (instance2.root) {
-          instance2.root.unmount();
-        }
-        container.classList.remove("tailwind-mfe-scope");
-        container.innerHTML = "";
-        console.log("Tailwind MFE: Successfully disposed");
-      }
-    } catch (error) {
-      console.error("Tailwind MFE: Error during disposal:", error);
-    }
-  };
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "childList") {
-        if (!document.body.contains(container)) {
-          console.log("Tailwind MFE: Container removed from DOM, disposing...");
-          dispose();
-          return;
-        }
-      }
-    }
-  });
-  observer.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
-  const instance = { root, dispose, observer };
-  mountedInstances.set(container, instance);
-  console.log("Tailwind MFE: Mount completed (SSR-safe)");
-  return { dispose };
-}
-let autoMountExecuted = false;
-async function autoMount() {
-  if (typeof window === "undefined" || autoMountExecuted) return;
-  autoMountExecuted = true;
-  const hasExternalLoader = document.querySelector('script[src*="direct-loader"]') || document.querySelector('script[src*="boot-tailwind"]') || document.querySelector('script[src*="mfe-loader"]');
+};
+const autoMount = () => {
+  const ssrContainer = document.getElementById("tailwind-mfe-container");
   const rootElement = document.getElementById("root");
-  const ssrElement = document.getElementById("tailwind-mfe-container");
-  if (rootElement && !hasExternalLoader) {
-    console.log("Tailwind MFE: Auto-mounting to #root (standalone mode)");
-    await mount(rootElement);
-  } else if (ssrElement && hasExternalLoader) {
-    console.log("Tailwind MFE: External loader detected, skipping auto-mount");
-  } else if (rootElement) {
-    console.log("Tailwind MFE: Auto-mounting to #root (fallback)");
-    await mount(rootElement);
-  } else {
-    console.warn("Tailwind MFE: No suitable container found for auto-mount");
+  if (typeof window !== "undefined" && window.tailwindMFE && ssrContainer) {
+    console.log("Tailwind MFE: External loader detected with SSR container, skipping auto-mount");
+    return null;
   }
-}
+  if (rootElement && !mountedInstances.has(rootElement)) {
+    console.log("Tailwind MFE: Auto-mounting to root element (standalone mode)");
+    return mount(rootElement);
+  }
+  if (ssrContainer && !mountedInstances.has(ssrContainer)) {
+    console.log("Tailwind MFE: Auto-mounting to SSR container");
+    return mount(ssrContainer);
+  }
+  return null;
+};
+const setupCleanupListeners = () => {
+  if (typeof window === "undefined") return;
+  window.addEventListener("beforeunload", () => {
+    console.log("Tailwind MFE: Page unloading, cleaning up...");
+    cleanupAll();
+  });
+  window.addEventListener("pagehide", (event) => {
+    if (event.persisted) {
+      console.log("Tailwind MFE: Page cached, cleaning up...");
+      cleanupAll();
+    }
+  });
+  window.addEventListener("popstate", () => {
+    console.log("Tailwind MFE: Navigation detected, checking for cleanup...");
+    const container = document.getElementById("tailwind-mfe-container");
+    if (!container) {
+      cleanupAll();
+    }
+  });
+};
 if (typeof window !== "undefined") {
+  setupCleanupListeners();
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => autoMount());
+    document.addEventListener("DOMContentLoaded", autoMount);
   } else {
     autoMount();
   }
 }
-if (typeof window !== "undefined") {
-  window.addEventListener("beforeunload", cleanupAll);
-  window.addEventListener("pagehide", cleanupAll);
-  window.addEventListener("popstate", cleanupAll);
-}
-if (typeof window !== "undefined" && !window.__WEBPACK_PUBLIC_PATH__) {
-  autoMount();
-}
-const bootstrap = { mount, cleanupAll };
 
-const bootstrap$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+const bootstrap = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
-  autoMount,
-  cleanupAll,
-  default: bootstrap,
-  mount
+  mount,
+  unmount
 }, Symbol.toStringTag, { value: 'Module' }));
 
-export { autoMount, bootstrap$1 as b, cleanupAll, bootstrap as default, jsxRuntimeExports as j, mount };
+export { bootstrap as b, jsxRuntimeExports as j, mount, unmount };
