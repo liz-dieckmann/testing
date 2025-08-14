@@ -12,6 +12,7 @@
   
   const CONTAINER_ID = 'tailwind-mfe-container';
   const SCOPE_CLASS = 'tailwind-mfe-scope';
+  const FILE_NAME = 'cssScopingLoader.js';
   
   /**
    * Get the current script element
@@ -21,12 +22,20 @@
     if (document.currentScript) {
       return document.currentScript;
     }
-    
-    // Fallback for older browsers
-    const scripts = document.getElementsByTagName('script');
-    console.log('Scripts:', scripts);
-    const theScript = scripts[scripts.length - 1];
-    console.log('The script:', theScript);
+
+    const scripts = document.scripts; // same as getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      const s = scripts[i];
+      const srcAttr = s.getAttribute('src'); // don't auto-resolve relative → keep try/catch below
+      if (!srcAttr) continue;
+      try {
+        const u = new URL(srcAttr, document.baseURI);
+        const last = (u.pathname.split('/').pop() || '').toLowerCase();
+        if (last === FILE_NAME.toLowerCase()) return s;
+      } catch {
+        // ignore malformed src
+      }
+    }
     
     return theScript;
   }
