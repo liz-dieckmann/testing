@@ -37,7 +37,7 @@
       }
     }
     
-    return theScript;
+    return null;
   }
   
   /**

@@ -1,5 +1,5 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/__federation_expose_Mount-Dx-cylFR.js","assets/__federation_fn_import-Bi7vPVnK.js","assets/index-CIQ6_Rzc.js","assets/index-DPp_4SNT.js","assets/preload-helper-BtT-Y0jn.js"])))=>i.map(i=>d[i]);
-import { _ as __vitePreload } from './preload-helper-BtT-Y0jn.js';
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/__federation_expose_Mount-oku2ZOAC.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-Bi7vPVnK.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-CIQ6_Rzc.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-DPp_4SNT.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-BlcUzgXh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+import { _ as __vitePreload } from './preload-helper-BlcUzgXh.js';
 
 true              &&(function polyfill() {
 	const relList = document.createElement("link").relList;
@@ -31,4 +31,4 @@ true              &&(function polyfill() {
 	}
 }());
 
-__vitePreload(() => import('./__federation_expose_Mount-Dx-cylFR.js').then(n => n.b),true              ?__vite__mapDeps([0,1,2,3,4]):void 0);
+__vitePreload(() => import('./__federation_expose_Mount-oku2ZOAC.js').then(n => n.b),true              ?__vite__mapDeps([0,1,2,3,4]):void 0,import.meta.url);

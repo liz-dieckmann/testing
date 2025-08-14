@@ -1,5 +1,5 @@
 import { importShared } from './__federation_fn_import-Bi7vPVnK.js';
-import { j as jsxRuntimeExports } from './__federation_expose_Mount-Dx-cylFR.js';
+import { j as jsxRuntimeExports } from './__federation_expose_Mount-oku2ZOAC.js';
 
 // packages/react/compose-refs/src/compose-refs.tsx
 await importShared('react');
