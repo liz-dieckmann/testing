@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports, e as et, S as Settings } from "./__federation_expose_Mount-DYWP1syE.js";
+import { j as jsxRuntimeExports, e as et, S as Settings } from "./__federation_expose_Mount-k9zrPodp.js";
 const SettingsPage = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-6", children: [

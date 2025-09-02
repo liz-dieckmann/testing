@@ -166,7 +166,7 @@
     --color-gray-900: oklch(21% .034 264.665);
     --container-6xl: 72rem;
     --animate-spin: spin 1s linear infinite;
-    --exp-blue-500: #13528e;
+    --color-exp-blue-500: #13528e;
   }
 }
 
@@ -2980,8 +2980,8 @@
     font-weight: var(--font-weight-semibold);
   }
 
-  .text-\[--exp-blue-500\] {
-    color: --exp-blue-500;
+  .text-exp-blue-500 {
+    color: var(--color-exp-blue-500);
   }
 
   .text-gray-400 {
@@ -3006,10 +3006,6 @@
   }
 
   @media (hover: hover) {
-    .hover\:text-\[--exp-blue-600\]:hover {
-      color: --exp-blue-600;
-    }
-
     .hover\:text-gray-900:hover {
       color: var(--color-gray-900);
     }
