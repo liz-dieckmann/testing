@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-02T01:14:51.740Z",
+  "timestamp": "2025-09-02T01:23:10.397Z",
   "files": {
     "federation": [
       "__federation_expose_Mount-C5NYmzZl.js",
@@ -16,6 +16,6 @@
     ]
   },
   "bootstrap": "__federation_expose_Mount-C5NYmzZl.js",
-  "css": "style-CiEPX7YZ.css",
+  "css": "style-jYrDYLbA.css",
   "remoteEntry": "remoteEntry.js"
 }
