@@ -1,5 +1,5 @@
-import { c as createLucideIcon, j as jsxRuntimeExports, e as et, t as tt, K, F as FileText, o as ot, I as Ie, J, R as Re, L as Le, Z as Ze, a as Fe, C as ChartColumn, M as Me, u as useNavigate, _ as _t, A as Ae, G as Ge, $ as $e, H as He, U as Ue, b as I } from "./__federation_expose_Mount-C5NYmzZl.js";
-import { E as ExpensesList } from "./ExpensesList-Dox4qBoe.js";
+import { c as createLucideIcon, j as jsxRuntimeExports, e as et, t as tt, K, F as FileText, o as ot, I as Ie, J, R as Re, L as Le, Z as Ze, a as Fe, C as ChartColumn, M as Me, u as useNavigate, _ as _t, A as Ae, G as Ge, $ as $e, H as He, U as Ue, b as I } from "./__federation_expose_Mount-Bik0eIrT.js";
+import { E as ExpensesList } from "./ExpensesList-QmXiNhj4.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 /**
  * @license lucide-react v0.542.0 - ISC
@@ -267,11 +267,13 @@ const ExpenseForm = ({ onSubmit }) => {
 };
 const NewExpensePage = () => {
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e == null ? void 0 : e.preventDefault();
     console.log("Expense submitted");
     navigate("/expenses");
   };
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e == null ? void 0 : e.preventDefault();
     navigate("/expenses");
   };
   const handleOpenChange = (open) => {
@@ -286,10 +288,12 @@ const NewExpensePage = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsx($e, { children: "New Expense" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(He, { children: "Fill in the details for your new expense submission." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ExpenseForm, { onSubmit: handleSubmit, onCancel: handleCancel }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Ue, { className: "border-t pt-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(I, { variant: "outlined", onClick: handleCancel, children: "Cancel" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(I, { variant: "primary", onClick: handleSubmit, children: "Save Expense" })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "flex-1 overflow-y-auto flex flex-col", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ExpenseForm, { onSubmit: handleSubmit, onCancel: handleCancel }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Ue, { className: "border-t pt-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(I, { type: "button", variant: "outlined", onClick: handleCancel, children: "Cancel" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(I, { type: "submit", variant: "primary", children: "Save Expense" })
+        ] })
       ] })
     ] }) })
   ] });

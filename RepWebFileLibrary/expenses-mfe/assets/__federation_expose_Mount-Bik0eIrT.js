@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-CTS2ZWpv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-Dox4qBoe.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/NewExpensePage-7DgWENkh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-CMA_d3M5.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-QmXiNhj4.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/NewExpensePage-Cyv9Mn71.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { r as requireReact } from "./index-BQNfSwzb.js";
 import { r as requireReactDom } from "./index-BZmWk3Ws.js";
@@ -32967,10 +32967,10 @@ const Layout = () => {
 };
 const { lazy, Suspense } = await importShared("react");
 const LoadingSpinner = () => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center min-h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
-const ExpensesPage = lazy(() => __vitePreload(() => import("./ExpensesPage-CTS2ZWpv.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
-const NewExpensePage = lazy(() => __vitePreload(() => import("./NewExpensePage-7DgWENkh.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
-const SettingsPage = lazy(() => __vitePreload(() => import("./SettingsPage-C8BnZVLl.js"), true ? [] : void 0, import.meta.url));
-const ReportsPage = lazy(() => __vitePreload(() => import("./ReportsPage-DymJRtb6.js"), true ? [] : void 0, import.meta.url));
+const ExpensesPage = lazy(() => __vitePreload(() => import("./ExpensesPage-CMA_d3M5.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
+const NewExpensePage = lazy(() => __vitePreload(() => import("./NewExpensePage-Cyv9Mn71.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
+const SettingsPage = lazy(() => __vitePreload(() => import("./SettingsPage-CrEaD0sf.js"), true ? [] : void 0, import.meta.url));
+const ReportsPage = lazy(() => __vitePreload(() => import("./ReportsPage-B5dL_Z88.js"), true ? [] : void 0, import.meta.url));
 const router = createHashRouter([
   {
     path: "/",
