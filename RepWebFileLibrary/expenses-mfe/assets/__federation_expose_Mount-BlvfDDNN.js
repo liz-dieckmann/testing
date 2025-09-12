@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-BH8hyJg0.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-DxheFumr.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-Dx2hc-4y.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-CHdFkdDO.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-D1ij2AkG.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-3zpkSZHl.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/browser-DWBrSDVK.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-Bw9j5A9Q.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/interceptor-SNnGG0Z0.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-Brc2Gtre.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-se8qUi_j.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-D9jq1ZOi.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-DfzfAW50.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-DF4PmXrQ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-Cja0TbOa.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/browser-KBsPWXHK.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-BqAAxzMf.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/interceptor-DmUzCvo4.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { r as requireReact } from "./index-BQNfSwzb.js";
@@ -41363,14 +41363,14 @@ const Layout = () => {
 };
 const LoadingSpinner = ({ className }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex items-center justify-center ${className}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
 const { Suspense, lazy } = await importShared("react");
-const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-BH8hyJg0.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
-const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-Dx2hc-4y.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
-const Configurations = lazy(() => __vitePreload(() => import("./Configurations-CLA8gwjX.js"), true ? [] : void 0, import.meta.url));
-const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-BWmNG7BZ.js"), true ? [] : void 0, import.meta.url));
-const Payroll = lazy(() => __vitePreload(() => import("./Payroll-DEfBfXt0.js"), true ? [] : void 0, import.meta.url));
-const Allocations = lazy(() => __vitePreload(() => import("./Allocations-BTYE53Ky.js"), true ? [] : void 0, import.meta.url));
-const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-CHdFkdDO.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
-const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-3zpkSZHl.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
+const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-Brc2Gtre.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
+const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-D9jq1ZOi.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
+const Configurations = lazy(() => __vitePreload(() => import("./Configurations-BPItJ8uN.js"), true ? [] : void 0, import.meta.url));
+const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-BKBjx6PW.js"), true ? [] : void 0, import.meta.url));
+const Payroll = lazy(() => __vitePreload(() => import("./Payroll-C_eW_o07.js"), true ? [] : void 0, import.meta.url));
+const Allocations = lazy(() => __vitePreload(() => import("./Allocations-9ORJCI6-.js"), true ? [] : void 0, import.meta.url));
+const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-DfzfAW50.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
+const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-Cja0TbOa.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
 const router = createHashRouter([
   {
     path: RoutePaths.Root,
@@ -41514,7 +41514,7 @@ async function initializeMSW() {
       await new Promise((resolve) => setTimeout(resolve, 100));
       try {
         const { worker } = await __vitePreload(async () => {
-          const { worker: worker2 } = await import("./browser-DWBrSDVK.js");
+          const { worker: worker2 } = await import("./browser-KBsPWXHK.js");
           return { worker: worker2 };
         }, true ? __vite__mapDeps([7,8]) : void 0, import.meta.url);
         const serviceWorkerUrl = window.location.pathname.includes("/") ? `${window.location.pathname.split("/").slice(0, -1).join("/")}/mockServiceWorker.js` : "/mockServiceWorker.js";
@@ -41540,7 +41540,7 @@ async function initializeMSW() {
     }
     try {
       const { httpInterceptor } = await __vitePreload(async () => {
-        const { httpInterceptor: httpInterceptor2 } = await import("./interceptor-SNnGG0Z0.js");
+        const { httpInterceptor: httpInterceptor2 } = await import("./interceptor-DmUzCvo4.js");
         return { httpInterceptor: httpInterceptor2 };
       }, true ? __vite__mapDeps([9,8]) : void 0, import.meta.url);
       httpInterceptor.start();

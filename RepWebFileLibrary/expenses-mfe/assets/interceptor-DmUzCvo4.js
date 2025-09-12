@@ -1,4 +1,4 @@
-import { m as mockCompanies } from "./index-Bw9j5A9Q.js";
+import { m as mockCompanies } from "./index-BqAAxzMf.js";
 class HTTPInterceptor {
   originalFetch;
   originalXHR;
@@ -33,13 +33,15 @@ class HTTPInterceptor {
       open(method, url, async, user, password) {
         this._method = method.toUpperCase();
         this._url = typeof url === "string" ? url : url.toString();
+        console.log(`🌐 MSW: XHR.open called - ${this._method} ${this._url}`);
         const shouldMock = this._url.includes("/api/") || this._url.includes("localhost:3001");
         if (shouldMock) {
           console.log(`🔄 MSW: Intercepting XHR ${this._method} ${this._url}`);
           const mockResponse = interceptor.getMockResponse(this._method, new URL(this._url).pathname, this._url);
           if (mockResponse) {
             console.log(`✅ MSW: Mocked XHR response for ${this._method} ${this._url}`);
-            this.send = () => {
+            this.send = (body) => {
+              console.log(`📦 MSW: send() called for ${this._method} ${this._url}`, body);
               console.log(`📦 MSW: Sending mock data for ${this._method} ${this._url}:`, mockResponse.data);
               setTimeout(() => {
                 Object.defineProperty(this, "status", { value: mockResponse.status, writable: false });
