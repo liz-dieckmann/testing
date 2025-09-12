@@ -1,9 +1,11 @@
-import { m as mockCompanies } from "./index-Do5ZqSWG.js";
+import { m as mockCompanies } from "./index-iZWAQiAL.js";
 class HTTPInterceptor {
   originalFetch;
+  originalXHR;
   isActive = false;
   constructor() {
     this.originalFetch = window.fetch.bind(window);
+    this.originalXHR = window.XMLHttpRequest;
   }
   start() {
     if (this.isActive) {
@@ -11,14 +13,53 @@ class HTTPInterceptor {
       return;
     }
     window.fetch = this.interceptedFetch.bind(this);
+    window.XMLHttpRequest = this.createInterceptedXHR();
     this.isActive = true;
     console.log("✅ MSW: HTTP Interceptor started (Service Worker fallback)");
   }
   stop() {
     if (!this.isActive) return;
     window.fetch = this.originalFetch;
+    window.XMLHttpRequest = this.originalXHR;
     this.isActive = false;
     console.log("MSW: HTTP Interceptor stopped");
+  }
+  createInterceptedXHR() {
+    const originalXHR = this.originalXHR;
+    const interceptor = this;
+    return class extends originalXHR {
+      _url = "";
+      _method = "GET";
+      open(method, url, async, user, password) {
+        this._method = method.toUpperCase();
+        this._url = typeof url === "string" ? url : url.toString();
+        const shouldMock = this._url.includes("/api/") || this._url.includes("localhost:3001");
+        if (shouldMock) {
+          console.log(`🔄 MSW: Intercepting XHR ${this._method} ${this._url}`);
+          const mockResponse = interceptor.getMockResponse(this._method, new URL(this._url).pathname, this._url);
+          if (mockResponse) {
+            console.log(`✅ MSW: Mocked XHR response for ${this._method} ${this._url}`);
+            this.send = () => {
+              setTimeout(() => {
+                Object.defineProperty(this, "status", { value: mockResponse.status, writable: false });
+                Object.defineProperty(this, "statusText", { value: "OK", writable: false });
+                Object.defineProperty(this, "response", { value: JSON.stringify(mockResponse.data), writable: false });
+                Object.defineProperty(this, "responseText", { value: JSON.stringify(mockResponse.data), writable: false });
+                Object.defineProperty(this, "readyState", { value: 4, writable: false });
+                if (this.onreadystatechange) {
+                  this.onreadystatechange(new Event("readystatechange"));
+                }
+                if (this.onload) {
+                  this.onload(new ProgressEvent("load", { lengthComputable: true, loaded: 0, total: 0 }));
+                }
+              }, 10);
+            };
+            return;
+          }
+        }
+        return super.open(method, url, async ?? true, user, password);
+      }
+    };
   }
   async interceptedFetch(input, init) {
     const request = new Request(input, init);
