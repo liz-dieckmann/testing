@@ -1,5 +1,5 @@
-import { c as createLucideIcon, j as jsxRuntimeExports, s as st, d as dt, n as ne, F as FileText, a as ct, B as Be, o as oe, L as Le, V as Ve, b as nt, A as Ae, C as ChartColumn, U as Ue, e as CreditCard, u as useNavigate, f as jt, E as Ee, W as We, X as Xe, I, g as ChevronRight, Y as Ye, R as RoutePaths } from "./__federation_expose_Mount-BYmudq81.js";
-import { E as ExpensesList } from "./ExpensesList-A4qrugT-.js";
+import { c as createLucideIcon, j as jsxRuntimeExports, W as Wn, Y as Yn, Z as Ze, F as FileText, a as Zn, _ as _n, Q as Qe, N as Nn, I as In, K as Kn, b as Fn, C as ChartColumn, P as Pn, d as CreditCard, u as useNavigate, e as Nr, z as zn, E as En, L as Ln, B, f as ChevronRight, H as Hn, g as RoutePaths } from "./__federation_expose_Mount-rEeUfBTo.js";
+import { E as ExpensesList } from "./ExpensesList-DGrIfFRB.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 /**
  * @license lucide-react v0.542.0 - ISC
@@ -203,18 +203,18 @@ const ExpenseForm = (_) => {
     }));
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(st, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(dt, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ne,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Yn, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Ze,
         {
           title: "EXPENSE DETAILS",
           icon: /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "w-4 h-4 text-trax-neutral-950" }),
           required: true
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ct, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zn, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Be,
+          _n,
           {
             label: "Expense type",
             placeholder: "Select expense type",
@@ -224,7 +224,7 @@ const ExpenseForm = (_) => {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          oe,
+          Qe,
           {
             label: "Vendor",
             placeholder: "Enter vendor name",
@@ -233,7 +233,7 @@ const ExpenseForm = (_) => {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Le,
+          Nn,
           {
             label: "Expense date",
             placeholder: "Select date expense incurred",
@@ -242,7 +242,7 @@ const ExpenseForm = (_) => {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Be,
+          _n,
           {
             label: "Expense location",
             placeholder: "Select location",
@@ -252,7 +252,7 @@ const ExpenseForm = (_) => {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Be,
+          _n,
           {
             label: "Payment method",
             placeholder: "Select payment method",
@@ -263,7 +263,7 @@ const ExpenseForm = (_) => {
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Ve,
+            In,
             {
               label: isDifferentCurrency ? "Total (foreign)" : "NET/HST Amount",
               placeholder: "0.00",
@@ -278,7 +278,7 @@ const ExpenseForm = (_) => {
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Ve,
+            In,
             {
               label: isDifferentCurrency ? "Total (converted)" : "Total (including taxes)",
               placeholder: "0.00",
@@ -293,12 +293,12 @@ const ExpenseForm = (_) => {
             }
           )
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(nt, { label: "Expense made in a different currency", checked: isDifferentCurrency, onCheckedChange: (checked) => setEnableSelector(checked) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Kn, { label: "Expense made in a different currency", checked: isDifferentCurrency, onCheckedChange: (checked) => setEnableSelector(checked) })
       ] }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(st, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(dt, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ne,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Yn, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Ze,
         {
           iconClassName: "bg-trax-blue-100",
           title: "EXPENSE JUSTIFICATION",
@@ -306,9 +306,9 @@ const ExpenseForm = (_) => {
           required: true
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ct, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 gap-4", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zn, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 gap-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Be,
+          _n,
           {
             label: "Business purpose",
             placeholder: "Specify what this expense was for",
@@ -318,7 +318,7 @@ const ExpenseForm = (_) => {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Ae,
+          Fn,
           {
             label: "Expense description",
             placeholder: "Describe what was purchased",
@@ -328,7 +328,7 @@ const ExpenseForm = (_) => {
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Ae,
+          Fn,
           {
             label: "Persons entertained",
             placeholder: "Enter the full names of clients/guests entertained",
@@ -339,9 +339,9 @@ const ExpenseForm = (_) => {
         )
       ] }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(st, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(dt, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ne,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Yn, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Ze,
         {
           iconClassName: "bg-trax-yellow-600",
           title: "COST ALLOCATION",
@@ -349,8 +349,8 @@ const ExpenseForm = (_) => {
           required: true
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ct, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Ue,
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zn, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Pn,
         {
           allocations,
           totalAmount: 71.6,
@@ -365,9 +365,9 @@ const ExpenseForm = (_) => {
         }
       ) }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(st, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(dt, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        ne,
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Yn, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Ze,
         {
           iconClassName: "bg-trax-violet-100",
           title: "ADDITIONAL COMMENTS",
@@ -375,8 +375,8 @@ const ExpenseForm = (_) => {
           required: true
         }
       ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ct, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Ae,
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Zn, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        Fn,
         {
           placeholder: "Add any additional comments...",
           rows: 1,
@@ -408,19 +408,19 @@ const NewExpensePage = () => {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(ExpensesList, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(jt, { open: true, onOpenChange: handleOpenChange, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Ee, { className: "max-w-4xl max-h-[90vh] overflow-hidden flex flex-col", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(We, { className: "pb-3 mb-3 border-b border-exp-primary-blue-100", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Xe, { className: "text-exp-neutral-950", children: "New Expense" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Nr, { open: true, onOpenChange: handleOpenChange, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(zn, { className: "max-w-4xl max-h-[90vh] overflow-hidden flex flex-col", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(En, { className: "pb-3 mb-3 border-b border-exp-primary-blue-100", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 relative", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Ln, { className: "text-exp-neutral-950", children: "New Expense" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 relative", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-7 top-[-24px] flex flex-nowrap", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(I, { variant: "outlined", iconPosition: "center", className: "text-exp-neutral-70 hover:text-exp-neutral-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "size-5" }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(I, { variant: "outlined", iconPosition: "center", className: "text-exp-neutral-70 hover:text-exp-neutral-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "size-5" }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(B, { variant: "outlined", iconPosition: "center", className: "text-exp-neutral-70 hover:text-exp-neutral-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "size-5" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(B, { variant: "outlined", iconPosition: "center", className: "text-exp-neutral-70 hover:text-exp-neutral-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "size-5" }) })
         ] }) })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("form", { onSubmit: handleSubmit, className: "flex-1 overflow-y-auto flex flex-col", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 overflow-y-auto py-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ExpenseForm, { onSubmit: handleSubmit }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Ye, { className: "pt-4 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(I, { type: "button", variant: "outlined", onClick: handleClick, children: "Save Draft" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(I, { type: "submit", variant: "primary", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Hn, { className: "pt-4 gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(B, { type: "button", variant: "outlined", onClick: handleClick, children: "Save Draft" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(B, { type: "submit", variant: "primary", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "size-5" }),
             "Submit Expense"
           ] })

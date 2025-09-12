@@ -1,6 +1,51 @@
-import { c as createLucideIcon, S as Subscribable, p as shallowEqualObjects, q as hashKey, r as getDefaultState, t as notifyManager, v as useQueryClient, w as noop, x as shouldThrowError, i as useQuery, k as apiClient, l as useCompanyStore, j as jsxRuntimeExports, s as st, a as ct, m as LoadingSpinner } from "./__federation_expose_Mount-BYmudq81.js";
+import { c as createLucideIcon, S as Subscribable, s as shallowEqualObjects, r as hashKey, t as getDefaultState, v as notifyManager, w as useQueryClient, x as noop, A as shouldThrowError, i as useQuery, k as apiClient, l as useCompanyStore, j as jsxRuntimeExports, W as Wn, a as Zn, m as LoadingSpinner } from "./__federation_expose_Mount-rEeUfBTo.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
-import { u as useExpenseStore, A as ArrowUp, a as ArrowDown, C as CircleCheckBig, b as CircleX, P as Pencil } from "./store-CWhTJceI.js";
+import { u as useExpenseStore, P as Pencil } from "./store-DGBl5ukh.js";
+/**
+ * @license lucide-react v0.542.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$4 = [
+  ["path", { d: "M12 5v14", key: "s699le" }],
+  ["path", { d: "m19 12-7 7-7-7", key: "1idqje" }]
+];
+const ArrowDown = createLucideIcon("arrow-down", __iconNode$4);
+/**
+ * @license lucide-react v0.542.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$3 = [
+  ["path", { d: "m5 12 7-7 7 7", key: "hav0vg" }],
+  ["path", { d: "M12 19V5", key: "x0mq9r" }]
+];
+const ArrowUp = createLucideIcon("arrow-up", __iconNode$3);
+/**
+ * @license lucide-react v0.542.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$2 = [
+  ["path", { d: "M21.801 10A10 10 0 1 1 17 3.335", key: "yps3ct" }],
+  ["path", { d: "m9 11 3 3L22 4", key: "1pflzl" }]
+];
+const CircleCheckBig = createLucideIcon("circle-check-big", __iconNode$2);
+/**
+ * @license lucide-react v0.542.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1 = [
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "m15 9-6 6", key: "1uzhvr" }],
+  ["path", { d: "m9 9 6 6", key: "z0biqf" }]
+];
+const CircleX = createLucideIcon("circle-x", __iconNode$1);
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -265,7 +310,7 @@ const BusinessPurposeTable = () => {
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-8 text-center text-red-500", children: "Failed to load business purposes. Please try again." });
   }
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(st, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(ct, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Wn, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Zn, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold text-gray-900 mb-4", children: "Business Purposes" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("ul", { style: { listStyleType: "none" }, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
