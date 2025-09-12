@@ -1,8 +1,8 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-CZVJOguT.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-tryKeIEM.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-DHJlJ1gb.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-DOVzJkgp.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-waZI_-2G.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-CmsaVL2J.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/browser-C_lUkBkG.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-uZx0pVZp.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/interceptor-HGVlpvyK.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
-import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-De51yoPi.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-FGh1T69x.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-DR77gH0j.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-Dob5mTGo.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-q1rEOmdn.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-C2wenr4O.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { r as requireReact } from "./index-BQNfSwzb.js";
 import { r as requireReactDom } from "./index-BZmWk3Ws.js";
+import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
 /**
@@ -11459,9 +11459,9 @@ function createHashHistory(options = {}) {
     }
     return href + "#" + (typeof to === "string" ? to : createPath(to));
   }
-  function validateHashLocation(location2, to) {
+  function validateHashLocation(location, to) {
     warning(
-      location2.pathname.charAt(0) === "/",
+      location.pathname.charAt(0) === "/",
       `relative pathnames are not supported in hash history.push(${JSON.stringify(
         to
       )})`
@@ -11491,15 +11491,15 @@ function warning(cond, message2) {
 function createKey() {
   return Math.random().toString(36).substring(2, 10);
 }
-function getHistoryState(location2, index2) {
+function getHistoryState(location, index2) {
   return {
-    usr: location2.state,
-    key: location2.key,
+    usr: location.state,
+    key: location.key,
     idx: index2
   };
 }
 function createLocation(current2, to, state = null, key) {
-  let location2 = {
+  let location = {
     pathname: typeof current2 === "string" ? current2 : current2.pathname,
     search: "",
     hash: "",
@@ -11511,7 +11511,7 @@ function createLocation(current2, to, state = null, key) {
     // keep as is for the time being and just let any incoming keys take precedence
     key: to && to.key || key || createKey()
   };
-  return location2;
+  return location;
 }
 function createPath({
   pathname = "/",
@@ -11568,11 +11568,11 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   }
   function push(to, state) {
     action = "PUSH";
-    let location2 = createLocation(history.location, to, state);
-    if (validateLocation) validateLocation(location2, to);
+    let location = createLocation(history.location, to, state);
+    if (validateLocation) validateLocation(location, to);
     index2 = getIndex() + 1;
-    let historyState = getHistoryState(location2, index2);
-    let url = history.createHref(location2);
+    let historyState = getHistoryState(location, index2);
+    let url = history.createHref(location);
     try {
       globalHistory.pushState(historyState, "", url);
     } catch (error) {
@@ -11587,11 +11587,11 @@ function getUrlBasedHistory(getLocation, createHref2, validateLocation, options 
   }
   function replace2(to, state) {
     action = "REPLACE";
-    let location2 = createLocation(history.location, to, state);
-    if (validateLocation) validateLocation(location2, to);
+    let location = createLocation(history.location, to, state);
+    if (validateLocation) validateLocation(location, to);
     index2 = getIndex();
-    let historyState = getHistoryState(location2, index2);
-    let url = history.createHref(location2);
+    let historyState = getHistoryState(location, index2);
+    let url = history.createHref(location);
     globalHistory.replaceState(historyState, "", url);
     if (v5Compat && listener) {
       listener({ action, location: history.location, delta: 0 });
@@ -11770,8 +11770,8 @@ function matchRoutes(routes, locationArg, basename = "/") {
   return matchRoutesImpl(routes, locationArg, basename, false);
 }
 function matchRoutesImpl(routes, locationArg, basename, allowPartial) {
-  let location2 = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
-  let pathname = stripBasename(location2.pathname || "/", basename);
+  let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+  let pathname = stripBasename(location.pathname || "/", basename);
   if (pathname == null) {
     return null;
   }
@@ -12334,7 +12334,7 @@ function createRouter(init) {
   let pendingRevalidationDfd = null;
   function initialize() {
     unlistenHistory = init.history.listen(
-      ({ action: historyAction, location: location2, delta }) => {
+      ({ action: historyAction, location, delta }) => {
         if (unblockBlockerHistoryUpdate) {
           unblockBlockerHistoryUpdate();
           unblockBlockerHistoryUpdate = void 0;
@@ -12346,7 +12346,7 @@ function createRouter(init) {
         );
         let blockerKey = shouldBlockNavigation({
           currentLocation: state.location,
-          nextLocation: location2,
+          nextLocation: location,
           historyAction
         });
         if (blockerKey && delta != null) {
@@ -12356,13 +12356,13 @@ function createRouter(init) {
           init.history.go(delta * -1);
           updateBlocker(blockerKey, {
             state: "blocked",
-            location: location2,
+            location,
             proceed() {
               updateBlocker(blockerKey, {
                 state: "proceeding",
                 proceed: void 0,
                 reset: void 0,
-                location: location2
+                location
               });
               nextHistoryUpdatePromise.then(() => init.history.go(delta));
             },
@@ -12374,7 +12374,7 @@ function createRouter(init) {
           });
           return;
         }
-        return startNavigation(historyAction, location2);
+        return startNavigation(historyAction, location);
       }
     );
     if (isBrowser2) {
@@ -12450,9 +12450,9 @@ function createRouter(init) {
     unmountedFetchers.forEach((key) => deleteFetcher(key));
     mountedFetchers.forEach((key) => state.fetchers.delete(key));
   }
-  function completeNavigation(location2, newState, { flushSync } = {}) {
+  function completeNavigation(location, newState, { flushSync } = {}) {
     var _a, _b;
-    let isActionReload = state.actionData != null && state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && state.navigation.state === "loading" && ((_a = location2.state) == null ? void 0 : _a._isRedirect) !== true;
+    let isActionReload = state.actionData != null && state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && state.navigation.state === "loading" && ((_a = location.state) == null ? void 0 : _a._isRedirect) !== true;
     let actionData;
     if (newState.actionData) {
       if (Object.keys(newState.actionData).length > 0) {
@@ -12476,8 +12476,8 @@ function createRouter(init) {
       blockers = new Map(blockers);
       blockers.forEach((_, k2) => blockers.set(k2, IDLE_BLOCKER));
     }
-    let restoreScrollPosition = isUninterruptedRevalidation ? false : getSavedScrollPosition(location2, newState.matches || state.matches);
-    let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && ((_b = location2.state) == null ? void 0 : _b._isRedirect) !== true;
+    let restoreScrollPosition = isUninterruptedRevalidation ? false : getSavedScrollPosition(location, newState.matches || state.matches);
+    let preventScrollReset = pendingPreventScrollReset === true || state.navigation.formMethod != null && isMutationMethod(state.navigation.formMethod) && ((_b = location.state) == null ? void 0 : _b._isRedirect) !== true;
     if (inFlightDataRoutes) {
       dataRoutes = inFlightDataRoutes;
       inFlightDataRoutes = void 0;
@@ -12485,35 +12485,35 @@ function createRouter(init) {
     if (isUninterruptedRevalidation) ;
     else if (pendingAction === "POP") ;
     else if (pendingAction === "PUSH") {
-      init.history.push(location2, location2.state);
+      init.history.push(location, location.state);
     } else if (pendingAction === "REPLACE") {
-      init.history.replace(location2, location2.state);
+      init.history.replace(location, location.state);
     }
     let viewTransitionOpts;
     if (pendingAction === "POP") {
       let priorPaths = appliedViewTransitions.get(state.location.pathname);
-      if (priorPaths && priorPaths.has(location2.pathname)) {
+      if (priorPaths && priorPaths.has(location.pathname)) {
         viewTransitionOpts = {
           currentLocation: state.location,
-          nextLocation: location2
+          nextLocation: location
         };
-      } else if (appliedViewTransitions.has(location2.pathname)) {
+      } else if (appliedViewTransitions.has(location.pathname)) {
         viewTransitionOpts = {
-          currentLocation: location2,
+          currentLocation: location,
           nextLocation: state.location
         };
       }
     } else if (pendingViewTransitionEnabled) {
       let toPaths = appliedViewTransitions.get(state.location.pathname);
       if (toPaths) {
-        toPaths.add(location2.pathname);
+        toPaths.add(location.pathname);
       } else {
-        toPaths = /* @__PURE__ */ new Set([location2.pathname]);
+        toPaths = /* @__PURE__ */ new Set([location.pathname]);
         appliedViewTransitions.set(state.location.pathname, toPaths);
       }
       viewTransitionOpts = {
         currentLocation: state.location,
-        nextLocation: location2
+        nextLocation: location
       };
     }
     updateState(
@@ -12523,7 +12523,7 @@ function createRouter(init) {
         actionData,
         loaderData,
         historyAction: pendingAction,
-        location: location2,
+        location,
         initialized: true,
         navigation: IDLE_NAVIGATION,
         revalidation: "idle",
@@ -12642,7 +12642,7 @@ function createRouter(init) {
     );
     return promise;
   }
-  async function startNavigation(historyAction, location2, opts) {
+  async function startNavigation(historyAction, location, opts) {
     pendingNavigationController && pendingNavigationController.abort();
     pendingNavigationController = null;
     pendingAction = historyAction;
@@ -12655,22 +12655,22 @@ function createRouter(init) {
     let matches = (opts == null ? void 0 : opts.initialHydration) && state.matches && state.matches.length > 0 && !initialMatchesIsFOW ? (
       // `matchRoutes()` has already been called if we're in here via `router.initialize()`
       state.matches
-    ) : matchRoutes(routesToUse, location2, basename);
+    ) : matchRoutes(routesToUse, location, basename);
     let flushSync = (opts && opts.flushSync) === true;
-    if (matches && state.initialized && !isRevalidationRequired && isHashChangeOnly(state.location, location2) && !(opts && opts.submission && isMutationMethod(opts.submission.formMethod))) {
-      completeNavigation(location2, { matches }, { flushSync });
+    if (matches && state.initialized && !isRevalidationRequired && isHashChangeOnly(state.location, location) && !(opts && opts.submission && isMutationMethod(opts.submission.formMethod))) {
+      completeNavigation(location, { matches }, { flushSync });
       return;
     }
-    let fogOfWar = checkFogOfWar(matches, routesToUse, location2.pathname);
+    let fogOfWar = checkFogOfWar(matches, routesToUse, location.pathname);
     if (fogOfWar.active && fogOfWar.matches) {
       matches = fogOfWar.matches;
     }
     if (!matches) {
       let { error, notFoundMatches, route } = handleNavigational404(
-        location2.pathname
+        location.pathname
       );
       completeNavigation(
-        location2,
+        location,
         {
           matches: notFoundMatches,
           loaderData: {},
@@ -12685,7 +12685,7 @@ function createRouter(init) {
     pendingNavigationController = new AbortController();
     let request = createClientSideRequest(
       init.history,
-      location2,
+      location,
       pendingNavigationController.signal,
       opts && opts.submission
     );
@@ -12699,7 +12699,7 @@ function createRouter(init) {
     } else if (opts && opts.submission && isMutationMethod(opts.submission.formMethod)) {
       let actionResult = await handleAction(
         request,
-        location2,
+        location,
         opts.submission,
         matches,
         scopedContext,
@@ -12714,7 +12714,7 @@ function createRouter(init) {
         let [routeId, result] = actionResult.pendingActionResult;
         if (isErrorResult(result) && isRouteErrorResponse(result.error) && result.error.status === 404) {
           pendingNavigationController = null;
-          completeNavigation(location2, {
+          completeNavigation(location, {
             matches: actionResult.matches,
             loaderData: {},
             errors: {
@@ -12726,7 +12726,7 @@ function createRouter(init) {
       }
       matches = actionResult.matches || matches;
       pendingActionResult = actionResult.pendingActionResult;
-      loadingNavigation = getLoadingNavigation(location2, opts.submission);
+      loadingNavigation = getLoadingNavigation(location, opts.submission);
       flushSync = false;
       fogOfWar.active = false;
       request = createClientSideRequest(
@@ -12742,7 +12742,7 @@ function createRouter(init) {
       errors
     } = await handleLoaders(
       request,
-      location2,
+      location,
       matches,
       scopedContext,
       fogOfWar.active,
@@ -12758,21 +12758,21 @@ function createRouter(init) {
       return;
     }
     pendingNavigationController = null;
-    completeNavigation(location2, {
+    completeNavigation(location, {
       matches: updatedMatches || matches,
       ...getActionDataForCommit(pendingActionResult),
       loaderData,
       errors
     });
   }
-  async function handleAction(request, location2, submission, matches, scopedContext, isFogOfWar, initialHydration, opts = {}) {
+  async function handleAction(request, location, submission, matches, scopedContext, isFogOfWar, initialHydration, opts = {}) {
     interruptActiveLoads();
-    let navigation = getSubmittingNavigation(location2, submission);
+    let navigation = getSubmittingNavigation(location, submission);
     updateState({ navigation }, { flushSync: opts.flushSync === true });
     if (isFogOfWar) {
       let discoverResult = await discoverRoutes(
         matches,
-        location2.pathname,
+        location.pathname,
         request.signal
       );
       if (discoverResult.type === "aborted") {
@@ -12804,7 +12804,7 @@ function createRouter(init) {
         };
       } else if (!discoverResult.matches) {
         let { notFoundMatches, error, route } = handleNavigational404(
-          location2.pathname
+          location.pathname
         );
         return {
           matches: notFoundMatches,
@@ -12821,13 +12821,13 @@ function createRouter(init) {
       }
     }
     let result;
-    let actionMatch = getTargetMatch(matches, location2);
+    let actionMatch = getTargetMatch(matches, location);
     if (!actionMatch.route.action && !actionMatch.route.lazy) {
       result = {
         type: "error",
         error: getInternalRouterError(405, {
           method: request.method,
-          pathname: location2.pathname,
+          pathname: location.pathname,
           routeId: actionMatch.route.id
         })
       };
@@ -12865,12 +12865,12 @@ function createRouter(init) {
       if (opts && opts.replace != null) {
         replace2 = opts.replace;
       } else {
-        let location22 = normalizeRedirectLocation(
+        let location2 = normalizeRedirectLocation(
           result.response.headers.get("Location"),
           new URL(request.url),
           basename
         );
-        replace2 = location22 === state.location.pathname + state.location.search;
+        replace2 = location2 === state.location.pathname + state.location.search;
       }
       await startRedirectNavigation(request, result, true, {
         submission,
@@ -12897,8 +12897,8 @@ function createRouter(init) {
       pendingActionResult: [actionMatch.route.id, result]
     };
   }
-  async function handleLoaders(request, location2, matches, scopedContext, isFogOfWar, overrideNavigation, submission, fetcherSubmission, replace2, initialHydration, flushSync, pendingActionResult) {
-    let loadingNavigation = overrideNavigation || getLoadingNavigation(location2, submission);
+  async function handleLoaders(request, location, matches, scopedContext, isFogOfWar, overrideNavigation, submission, fetcherSubmission, replace2, initialHydration, flushSync, pendingActionResult) {
+    let loadingNavigation = overrideNavigation || getLoadingNavigation(location, submission);
     let activeSubmission = submission || fetcherSubmission || getSubmissionFromNavigation(loadingNavigation);
     let shouldUpdateNavigationState = !isUninterruptedRevalidation && !initialHydration;
     if (isFogOfWar) {
@@ -12916,7 +12916,7 @@ function createRouter(init) {
       }
       let discoverResult = await discoverRoutes(
         matches,
-        location2.pathname,
+        location.pathname,
         request.signal
       );
       if (discoverResult.type === "aborted") {
@@ -12942,7 +12942,7 @@ function createRouter(init) {
         };
       } else if (!discoverResult.matches) {
         let { error, notFoundMatches, route } = handleNavigational404(
-          location2.pathname
+          location.pathname
         );
         return {
           matches: notFoundMatches,
@@ -12965,7 +12965,7 @@ function createRouter(init) {
       state,
       matches,
       activeSubmission,
-      location2,
+      location,
       initialHydration ? [] : hydrationRouteProperties2,
       initialHydration === true,
       isRevalidationRequired,
@@ -12982,7 +12982,7 @@ function createRouter(init) {
     if (!init.dataStrategy && !dsMatches.some((m) => m.shouldLoad) && !dsMatches.some((m) => m.route.middleware) && revalidatingFetchers.length === 0) {
       let updatedFetchers2 = markFetchRedirectsDone();
       completeNavigation(
-        location2,
+        location,
         {
           matches,
           loaderData: {},
@@ -13480,31 +13480,31 @@ function createRouter(init) {
     if (redirect2.response.headers.has("X-Remix-Revalidate")) {
       isRevalidationRequired = true;
     }
-    let location2 = redirect2.response.headers.get("Location");
-    invariant(location2, "Expected a Location header on the redirect Response");
-    location2 = normalizeRedirectLocation(
-      location2,
+    let location = redirect2.response.headers.get("Location");
+    invariant(location, "Expected a Location header on the redirect Response");
+    location = normalizeRedirectLocation(
+      location,
       new URL(request.url),
       basename
     );
-    let redirectLocation = createLocation(state.location, location2, {
+    let redirectLocation = createLocation(state.location, location, {
       _isRedirect: true
     });
     if (isBrowser2) {
       let isDocumentReload = false;
       if (redirect2.response.headers.has("X-Remix-Reload-Document")) {
         isDocumentReload = true;
-      } else if (isAbsoluteUrl(location2)) {
-        const url = createBrowserURLImpl(location2, true);
+      } else if (isAbsoluteUrl(location)) {
+        const url = createBrowserURLImpl(location, true);
         isDocumentReload = // Hard reload if it's an absolute URL to a new origin
         url.origin !== routerWindow.location.origin || // Hard reload if it's an absolute URL that does not match our basename
         stripBasename(url.pathname, basename) == null;
       }
       if (isDocumentReload) {
         if (replace2) {
-          routerWindow.location.replace(location2);
+          routerWindow.location.replace(location);
         } else {
-          routerWindow.location.assign(location2);
+          routerWindow.location.assign(location);
         }
         return;
       }
@@ -13520,7 +13520,7 @@ function createRouter(init) {
       await startNavigation(redirectNavigationType, redirectLocation, {
         submission: {
           ...activeSubmission,
-          formAction: location2
+          formAction: location
         },
         // Preserve these flags across redirects
         preventScrollReset: preventScrollReset || pendingPreventScrollReset,
@@ -13792,25 +13792,25 @@ function createRouter(init) {
       getScrollRestorationKey2 = null;
     };
   }
-  function getScrollKey(location2, matches) {
+  function getScrollKey(location, matches) {
     if (getScrollRestorationKey2) {
       let key = getScrollRestorationKey2(
-        location2,
+        location,
         matches.map((m) => convertRouteMatchToUiMatch(m, state.loaderData))
       );
-      return key || location2.key;
+      return key || location.key;
     }
-    return location2.key;
+    return location.key;
   }
-  function saveScrollPosition(location2, matches) {
+  function saveScrollPosition(location, matches) {
     if (savedScrollPositions2 && getScrollPosition) {
-      let key = getScrollKey(location2, matches);
+      let key = getScrollKey(location, matches);
       savedScrollPositions2[key] = getScrollPosition();
     }
   }
-  function getSavedScrollPosition(location2, matches) {
+  function getSavedScrollPosition(location, matches) {
     if (savedScrollPositions2) {
-      let key = getScrollKey(location2, matches);
+      let key = getScrollKey(location, matches);
       let y = savedScrollPositions2[key];
       if (typeof y === "number") {
         return y;
@@ -13967,7 +13967,7 @@ function createRouter(init) {
 function isSubmissionNavigation(opts) {
   return opts != null && ("formData" in opts && opts.formData != null || "body" in opts && opts.body !== void 0);
 }
-function normalizeTo(location2, matches, basename, to, fromRouteId, relative) {
+function normalizeTo(location, matches, basename, to, fromRouteId, relative) {
   let contextualMatches;
   let activeRouteMatch;
   if (fromRouteId) {
@@ -13986,12 +13986,12 @@ function normalizeTo(location2, matches, basename, to, fromRouteId, relative) {
   let path = resolveTo(
     to ? to : ".",
     getResolveToMatches(contextualMatches),
-    stripBasename(location2.pathname, basename) || location2.pathname,
+    stripBasename(location.pathname, basename) || location.pathname,
     relative === "path"
   );
   if (to == null) {
-    path.search = location2.search;
-    path.hash = location2.hash;
+    path.search = location.search;
+    path.hash = location.hash;
   }
   if ((to == null || to === "" || to === ".") && activeRouteMatch) {
     let nakedIndex = hasNakedIndexQuery(path.search);
@@ -14118,11 +14118,11 @@ function normalizeNavigateOptions(isFetcher, path, opts) {
   parsedPath.search = `?${searchParams}`;
   return { path: createPath(parsedPath), submission };
 }
-function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest, history, state, matches, submission, location2, lazyRoutePropertiesToSkip, initialHydration, isRevalidationRequired, cancelledFetcherLoads, fetchersQueuedForDeletion, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, hasPatchRoutesOnNavigation, pendingActionResult) {
+function getMatchesToLoad(request, scopedContext, mapRouteProperties2, manifest, history, state, matches, submission, location, lazyRoutePropertiesToSkip, initialHydration, isRevalidationRequired, cancelledFetcherLoads, fetchersQueuedForDeletion, fetchLoadMatches, fetchRedirectIds, routesToUse, basename, hasPatchRoutesOnNavigation, pendingActionResult) {
   var _a;
   let actionResult = pendingActionResult ? isErrorResult(pendingActionResult[1]) ? pendingActionResult[1].error : pendingActionResult[1].data : void 0;
   let currentUrl = history.createURL(state.location);
-  let nextUrl = history.createURL(location2);
+  let nextUrl = history.createURL(location);
   let maxIdx;
   if (initialHydration && state.errors) {
     let boundaryId = Object.keys(state.errors)[0];
@@ -14976,39 +14976,39 @@ async function convertDataStrategyResultToDataResult(dataStrategyResult) {
   return { type: "data", data: result };
 }
 function normalizeRelativeRoutingRedirectResponse(response, request, routeId, matches, basename) {
-  let location2 = response.headers.get("Location");
+  let location = response.headers.get("Location");
   invariant(
-    location2,
+    location,
     "Redirects returned/thrown from loaders/actions must have a Location header"
   );
-  if (!isAbsoluteUrl(location2)) {
+  if (!isAbsoluteUrl(location)) {
     let trimmedMatches = matches.slice(
       0,
       matches.findIndex((m) => m.route.id === routeId) + 1
     );
-    location2 = normalizeTo(
+    location = normalizeTo(
       new URL(request.url),
       trimmedMatches,
       basename,
-      location2
+      location
     );
-    response.headers.set("Location", location2);
+    response.headers.set("Location", location);
   }
   return response;
 }
-function normalizeRedirectLocation(location2, currentUrl, basename) {
-  if (isAbsoluteUrl(location2)) {
-    let normalizedLocation = location2;
+function normalizeRedirectLocation(location, currentUrl, basename) {
+  if (isAbsoluteUrl(location)) {
+    let normalizedLocation = location;
     let url = normalizedLocation.startsWith("//") ? new URL(currentUrl.protocol + normalizedLocation) : new URL(normalizedLocation);
     let isSameBasename = stripBasename(url.pathname, basename) != null;
     if (url.origin === currentUrl.origin && isSameBasename) {
       return url.pathname + url.search + url.hash;
     }
   }
-  return location2;
+  return location;
 }
-function createClientSideRequest(history, location2, signal, submission) {
-  let url = history.createURL(stripHashFromPath(location2)).toString();
+function createClientSideRequest(history, location, signal, submission) {
+  let url = history.createURL(stripHashFromPath(location)).toString();
   let init = { signal };
   if (submission && isMutationMethod(submission.formMethod)) {
     let { formMethod, formEncType } = submission;
@@ -15280,8 +15280,8 @@ function isMutationMethod(method) {
 function hasNakedIndexQuery(search) {
   return new URLSearchParams(search).getAll("index").some((v) => v === "");
 }
-function getTargetMatch(matches, location2) {
-  let search = typeof location2 === "string" ? parsePath(location2).search : location2.search;
+function getTargetMatch(matches, location) {
+  let search = typeof location === "string" ? parsePath(location).search : location.search;
   if (matches[matches.length - 1].route.index && hasNakedIndexQuery(search || "")) {
     return matches[matches.length - 1];
   }
@@ -15322,11 +15322,11 @@ function getSubmissionFromNavigation(navigation) {
     };
   }
 }
-function getLoadingNavigation(location2, submission) {
+function getLoadingNavigation(location, submission) {
   if (submission) {
     let navigation = {
       state: "loading",
-      location: location2,
+      location,
       formMethod: submission.formMethod,
       formAction: submission.formAction,
       formEncType: submission.formEncType,
@@ -15338,7 +15338,7 @@ function getLoadingNavigation(location2, submission) {
   } else {
     let navigation = {
       state: "loading",
-      location: location2,
+      location,
       formMethod: void 0,
       formAction: void 0,
       formEncType: void 0,
@@ -15349,10 +15349,10 @@ function getLoadingNavigation(location2, submission) {
     return navigation;
   }
 }
-function getSubmittingNavigation(location2, submission) {
+function getSubmittingNavigation(location, submission) {
   let navigation = {
     state: "submitting",
-    location: location2,
+    location,
     formMethod: submission.formMethod,
     formAction: submission.formAction,
     formEncType: submission.formEncType,
@@ -15652,11 +15652,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     );
   }
   let locationFromContext = useLocation();
-  let location2;
+  let location;
   {
-    location2 = locationFromContext;
+    location = locationFromContext;
   }
-  let pathname = location2.pathname || "/";
+  let pathname = location.pathname || "/";
   let remainingPathname = pathname;
   if (parentPathnameBase !== "/") {
     let parentSegments = parentPathnameBase.replace(/^\//, "").split("/");
@@ -15667,11 +15667,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   {
     warning(
       parentRoute || matches != null,
-      `No routes matched location "${location2.pathname}${location2.search}${location2.hash}" `
+      `No routes matched location "${location.pathname}${location.search}${location.hash}" `
     );
     warning(
       matches == null || matches[matches.length - 1].route.element !== void 0 || matches[matches.length - 1].route.Component !== void 0 || matches[matches.length - 1].route.lazy !== void 0,
-      `Matched leaf route at location "${location2.pathname}${location2.search}${location2.hash}" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.`
+      `Matched leaf route at location "${location.pathname}${location.search}${location.hash}" does not have an element or Component. This means it will render an <Outlet /> with a null value by default resulting in an "empty" page.`
     );
   }
   let renderedMatches = _renderMatches(
@@ -16555,7 +16555,7 @@ async function getKeyedPrefetchLinks(matches, manifest, routeModules) {
     )
   );
 }
-function getNewMatchesForLinks(page, nextMatches, currentMatches, manifest, location2, mode) {
+function getNewMatchesForLinks(page, nextMatches, currentMatches, manifest, location, mode) {
   let isNew = (match2, index2) => {
     if (!currentMatches[index2]) return true;
     return match2.route.id !== currentMatches[index2].route.id;
@@ -16587,7 +16587,7 @@ function getNewMatchesForLinks(page, nextMatches, currentMatches, manifest, loca
       if (match2.route.shouldRevalidate) {
         let routeChoice = match2.route.shouldRevalidate({
           currentUrl: new URL(
-            location2.pathname + location2.search + location2.hash,
+            location.pathname + location.search + location.hash,
             window.origin
           ),
           currentParams: ((_a = currentMatches[0]) == null ? void 0 : _a.params) || {},
@@ -16812,7 +16812,7 @@ function PrefetchPageLinksImpl({
   matches: nextMatches,
   ...linkProps
 }) {
-  let location2 = useLocation();
+  let location = useLocation();
   let { manifest, routeModules } = useFrameworkContext();
   let { basename } = useDataRouterContext2();
   let { loaderData, matches } = useDataRouterStateContext();
@@ -16822,10 +16822,10 @@ function PrefetchPageLinksImpl({
       nextMatches,
       matches,
       manifest,
-      location2,
+      location,
       "data"
     ),
-    [page, nextMatches, matches, manifest, location2]
+    [page, nextMatches, matches, manifest, location]
   );
   let newMatchesForAssets = React8.useMemo(
     () => getNewMatchesForLinks(
@@ -16833,13 +16833,13 @@ function PrefetchPageLinksImpl({
       nextMatches,
       matches,
       manifest,
-      location2,
+      location,
       "assets"
     ),
-    [page, nextMatches, matches, manifest, location2]
+    [page, nextMatches, matches, manifest, location]
   );
   let dataHrefs = React8.useMemo(() => {
-    if (page === location2.pathname + location2.search + location2.hash) {
+    if (page === location.pathname + location.search + location.hash) {
       return [];
     }
     let routesParams = /* @__PURE__ */ new Set();
@@ -16872,7 +16872,7 @@ function PrefetchPageLinksImpl({
   }, [
     basename,
     loaderData,
-    location2,
+    location,
     manifest,
     newMatchesForData,
     nextMatches,
@@ -17321,14 +17321,14 @@ var NavLink = React10.forwardRef(
     ...rest
   }, ref) {
     let path = useResolvedPath(to, { relative: rest.relative });
-    let location2 = useLocation();
+    let location = useLocation();
     let routerState = React10.useContext(DataRouterStateContext);
     let { navigator: navigator2, basename } = React10.useContext(NavigationContext);
     let isTransitioning = routerState != null && // Conditional usage is OK here because the usage of a data router is static
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useViewTransitionState(path) && viewTransition === true;
     let toPathname = navigator2.encodeLocation ? navigator2.encodeLocation(path).pathname : path.pathname;
-    let locationPathname = location2.pathname;
+    let locationPathname = location.pathname;
     let nextLocationPathname = routerState && routerState.navigation && routerState.navigation.location ? routerState.navigation.location.pathname : null;
     if (!caseSensitive) {
       locationPathname = locationPathname.toLowerCase();
@@ -17443,13 +17443,13 @@ function useLinkClickHandler(to, {
   viewTransition
 } = {}) {
   let navigate = useNavigate();
-  let location2 = useLocation();
+  let location = useLocation();
   let path = useResolvedPath(to, { relative });
   return React10.useCallback(
     (event) => {
       if (shouldProcessLinkClick(event, target)) {
         event.preventDefault();
-        let replace2 = replaceProp !== void 0 ? replaceProp : createPath(location2) === createPath(path);
+        let replace2 = replaceProp !== void 0 ? replaceProp : createPath(location) === createPath(path);
         navigate(to, {
           replace: replace2,
           state,
@@ -17460,7 +17460,7 @@ function useLinkClickHandler(to, {
       }
     },
     [
-      location2,
+      location,
       navigate,
       path,
       replaceProp,
@@ -17522,9 +17522,9 @@ function useFormAction(action, { relative } = {}) {
   invariant(routeContext, "useFormAction must be used inside a RouteContext");
   let [match2] = routeContext.matches.slice(-1);
   let path = { ...useResolvedPath(action ? action : ".", { relative }) };
-  let location2 = useLocation();
+  let location = useLocation();
   if (action == null) {
-    path.search = location2.search;
+    path.search = location.search;
     let params = new URLSearchParams(path.search);
     let indexValues = params.getAll("index");
     let hasNakedIndexParam = indexValues.some((v) => v === "");
@@ -39259,7 +39259,7 @@ const globalFetchAPI = (({ fetch, Request: Request2, Response }) => ({
 }))(utils$1.global);
 const {
   ReadableStream: ReadableStream$1,
-  TextEncoder: TextEncoder$1
+  TextEncoder
 } = utils$1.global;
 const test = (fn2, ...args) => {
   try {
@@ -39277,7 +39277,7 @@ const factory = (env) => {
     return false;
   }
   const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream$1);
-  const encodeText = isFetchSupported && (typeof TextEncoder$1 === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder$1()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
+  const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
   const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
     let duplexAccessed = false;
     const hasContentType = new Request2(platform.origin, {
@@ -40005,6 +40005,601 @@ const {
   getAdapter,
   mergeConfig
 } = axios;
+var ExpenseFormType = /* @__PURE__ */ ((ExpenseFormType2) => {
+  ExpenseFormType2["STANDARD"] = "standard";
+  ExpenseFormType2["ENTERTAINMENT"] = "entertainment";
+  ExpenseFormType2["MILEAGE"] = "mileage";
+  return ExpenseFormType2;
+})(ExpenseFormType || {});
+const mockCompanies = [
+  {
+    id: RouteCompanyIds.DirectExpansion,
+    name: "Direct Expansion Solutions Inc",
+    code: "DES",
+    description: "HVAC direct expansion systems and solutions",
+    isActive: true,
+    settings: {
+      currency: "CAD",
+      timezone: "Canada/Eastern",
+      fiscalYearStart: "January",
+      defaultExpenseCategories: ["Travel", "Equipment", "Client", "Mileage"]
+    },
+    createdAt: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+    updatedAt: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+  },
+  {
+    id: RouteCompanyIds.HeatTransfer,
+    name: "Heat Transfer Solutions, Inc",
+    code: "HTS",
+    description: "Industrial heat transfer equipment and services",
+    isActive: true,
+    settings: {
+      currency: "CAD",
+      timezone: "Canada/Toronto",
+      fiscalYearStart: "January",
+      defaultExpenseCategories: ["Manufacturing", "Installation", "Maintenance"]
+    },
+    createdAt: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z"),
+    updatedAt: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z")
+  },
+  {
+    id: RouteCompanyIds.OslinNation,
+    name: "Oslin Nation",
+    code: "ON",
+    description: "HVAC system integration and automation",
+    isActive: true,
+    settings: {
+      currency: "CAD",
+      timezone: "Canada/Eastern",
+      fiscalYearStart: "July",
+      defaultExpenseCategories: ["Integration", "Software", "Training", "Mileage"]
+    },
+    createdAt: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+    updatedAt: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+  },
+  {
+    id: RouteCompanyIds.TritonThermal,
+    name: "Triton Thermal",
+    code: "TT",
+    description: "Thermal management solutions and consulting",
+    isActive: true,
+    settings: {
+      currency: "CAD",
+      timezone: "Canada/Vancouver",
+      fiscalYearStart: "January",
+      defaultExpenseCategories: ["Consulting", "Research", "Testing", "Mileage"]
+    },
+    createdAt: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+    updatedAt: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+  },
+  {
+    id: RouteCompanyIds.VrfServices,
+    name: "VRF Services of Texas",
+    code: "VRF",
+    description: "Variable refrigerant flow systems installation and service",
+    isActive: true,
+    settings: {
+      currency: "CAD",
+      timezone: "Canada/Eastern",
+      fiscalYearStart: "January",
+      defaultExpenseCategories: ["Service", "Installation", "Parts", "Mileage"]
+    },
+    createdAt: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+    updatedAt: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+  }
+];
+({
+  [RouteCompanyIds.DirectExpansion]: [
+    {
+      id: "exp-001-1",
+      name: "Airfare",
+      status: "active",
+      description: "Airfare",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Airfare",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-2",
+      name: "Business Meal (attendees) - During Travel",
+      status: "inactive",
+      description: "Business Meal (attendees) - During Travel",
+      formType: ExpenseFormType.ENTERTAINMENT,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Business Meal (attendees) - During Travel",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-3",
+      name: "Business Meal (attendees) - Non-Travel",
+      status: "inactive",
+      description: "Business Meal (attendees) - Non-Travel",
+      formType: ExpenseFormType.ENTERTAINMENT,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Business Meal (attendees) - Non-Travel",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-4",
+      name: "Car Rental",
+      status: "inactive",
+      description: "Car Rental",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Car Rental",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-5",
+      name: "Cellular Phone",
+      status: "active",
+      description: "Cellular Phone",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Cellular Phone",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-6",
+      name: "Dues",
+      status: "active",
+      description: "Dues",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Dues",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-7",
+      name: "Entertainment - Other",
+      status: "active",
+      description: "Entertainment - Other",
+      formType: ExpenseFormType.ENTERTAINMENT,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Entertainment - Other",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-8",
+      name: "Gasoline",
+      status: "active",
+      description: "Gasoline",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Gasoline",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-9",
+      name: "Materials",
+      status: "active",
+      description: "Materials",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Materials",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-10",
+      name: "Meals (Breakfast/Lunch/Dinner) - Non-Travel",
+      status: "active",
+      description: "Meals (Breakfast/Lunch/Dinner) - Non-Travel",
+      formType: ExpenseFormType.ENTERTAINMENT,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Meals (Breakfast/Lunch/Dinner) - Non-Travel",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-11",
+      name: "Mileage w/out Allowance",
+      status: "active",
+      description: "Mileage w/out Allowance",
+      formType: ExpenseFormType.MILEAGE,
+      mileage: 0.67,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Mileage w/out Allowance",
+      mileageRate: 0.67,
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-12",
+      name: "Mileage with Allowance",
+      status: "active",
+      description: "Mileage with Allowance",
+      formType: ExpenseFormType.MILEAGE,
+      mileage: 0.67,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Mileage with Allowance",
+      mileageRate: 0.67,
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-13",
+      name: "Misc. Promotional Expense",
+      status: "active",
+      description: "Misc. Promotional Expense",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Misc. Promotional Expense",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-14",
+      name: "Office and General",
+      status: "active",
+      description: "Office and General",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Office and General",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "exp-001-15",
+      name: "Miscellaneous",
+      status: "active",
+      description: "Miscellaneous",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      // Legacy compatibility
+      type: "Miscellaneous",
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.HeatTransfer]: [
+    // Empty state for testing empty table design
+  ],
+  [RouteCompanyIds.OslinNation]: [
+    {
+      id: "exp-003-1",
+      name: "Consulting Travel",
+      status: "active",
+      description: "Client site visits and travel",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      type: "Consulting Travel",
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "exp-003-2",
+      name: "Research Materials",
+      status: "active",
+      description: "Books, journals, and research materials",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      type: "Research Materials",
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "exp-003-3",
+      name: "Client Hospitality",
+      status: "active",
+      description: "Client dinners and hospitality",
+      formType: ExpenseFormType.ENTERTAINMENT,
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      type: "Client Hospitality",
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "exp-003-4",
+      name: "Project Mileage",
+      status: "active",
+      description: "Mileage for project-related travel",
+      formType: ExpenseFormType.MILEAGE,
+      mileage: 0.655,
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      type: "Project Mileage",
+      mileageRate: 0.655,
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.TritonThermal]: [
+    {
+      id: "exp-004-1",
+      name: "Thermal Testing",
+      status: "active",
+      description: "Thermal analysis and testing services",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      type: "Thermal Testing",
+      modified: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+    },
+    {
+      id: "exp-004-2",
+      name: "Consulting Services",
+      status: "active",
+      description: "Thermal management consulting",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      type: "Consulting Services",
+      modified: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+    },
+    {
+      id: "exp-004-3",
+      name: "Project Mileage",
+      status: "active",
+      description: "Client site visits and project travel",
+      formType: ExpenseFormType.MILEAGE,
+      mileage: 0.655,
+      created: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      type: "Project Mileage",
+      mileageRate: 0.655,
+      modified: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.VrfServices]: [
+    {
+      id: "exp-005-1",
+      name: "VRF Installation",
+      status: "active",
+      description: "VRF system installation expenses",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      type: "VRF Installation",
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    },
+    {
+      id: "exp-005-2",
+      name: "Service Calls",
+      status: "active",
+      description: "VRF system maintenance and service",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      type: "Service Calls",
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    },
+    {
+      id: "exp-005-3",
+      name: "Parts & Materials",
+      status: "active",
+      description: "VRF system parts and materials",
+      formType: ExpenseFormType.STANDARD,
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      type: "Parts & Materials",
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    },
+    {
+      id: "exp-005-4",
+      name: "Service Mileage",
+      status: "active",
+      description: "Mileage for service calls",
+      formType: ExpenseFormType.MILEAGE,
+      mileage: 0.655,
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      updated: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      type: "Service Mileage",
+      mileageRate: 0.655,
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    }
+  ]
+});
+({
+  [RouteCompanyIds.DirectExpansion]: [
+    {
+      id: "bp-001-1",
+      isActive: true,
+      businessPurpose: "Sales Meeting",
+      description: "Customer acquisition and sales activities",
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "bp-001-2",
+      isActive: true,
+      businessPurpose: "Product Development",
+      description: "Product research and development",
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "bp-001-3",
+      isActive: true,
+      businessPurpose: "Internal Training",
+      description: "Employee training and development",
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "bp-001-4",
+      isActive: true,
+      businessPurpose: "Conference Attendance",
+      description: "Industry conferences and events",
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    },
+    {
+      id: "bp-001-5",
+      isActive: true,
+      businessPurpose: "Client Support",
+      description: "Customer support and service delivery",
+      created: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-01T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.HeatTransfer]: [
+    {
+      id: "bp-002-1",
+      isActive: true,
+      businessPurpose: "Sprint Planning",
+      description: "Agile sprint planning and retrospectives",
+      created: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z")
+    },
+    {
+      id: "bp-002-2",
+      isActive: true,
+      businessPurpose: "User Research",
+      description: "User experience research and testing",
+      created: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z")
+    },
+    {
+      id: "bp-002-3",
+      isActive: true,
+      businessPurpose: "Hackathon",
+      description: "Innovation events and hackathons",
+      created: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z")
+    },
+    {
+      id: "bp-002-4",
+      isActive: true,
+      businessPurpose: "Partnership Meeting",
+      description: "Strategic partnership discussions",
+      created: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-01-15T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.OslinNation]: [
+    {
+      id: "bp-003-1",
+      isActive: true,
+      businessPurpose: "Client Workshop",
+      description: "Client strategy and planning workshops",
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "bp-003-2",
+      isActive: true,
+      businessPurpose: "Project Kickoff",
+      description: "New project initiation meetings",
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "bp-003-3",
+      isActive: true,
+      businessPurpose: "Audit Review",
+      description: "Financial and compliance audits",
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "bp-003-4",
+      isActive: true,
+      businessPurpose: "Market Research",
+      description: "Market analysis and competitive research",
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "bp-003-5",
+      isActive: true,
+      businessPurpose: "Executive Briefing",
+      description: "C-level executive meetings",
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    },
+    {
+      id: "bp-003-6",
+      isActive: false,
+      businessPurpose: "Team Offsite",
+      description: "Team building and strategy offsites",
+      created: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-02-01T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.TritonThermal]: [
+    {
+      id: "bp-004-1",
+      isActive: true,
+      businessPurpose: "Thermal Analysis",
+      description: "Thermal system analysis and optimization",
+      created: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+    },
+    {
+      id: "bp-004-2",
+      isActive: true,
+      businessPurpose: "Client Consulting",
+      description: "Thermal management consulting services",
+      created: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+    },
+    {
+      id: "bp-004-3",
+      isActive: true,
+      businessPurpose: "R&D Testing",
+      description: "Research and development thermal testing",
+      created: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-03-01T00:00:00Z")
+    }
+  ],
+  [RouteCompanyIds.VrfServices]: [
+    {
+      id: "bp-005-1",
+      isActive: true,
+      businessPurpose: "VRF Installation",
+      description: "Variable refrigerant flow system installation",
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    },
+    {
+      id: "bp-005-2",
+      isActive: true,
+      businessPurpose: "Maintenance Service",
+      description: "Preventive and corrective maintenance",
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    },
+    {
+      id: "bp-005-3",
+      isActive: true,
+      businessPurpose: "System Commissioning",
+      description: "VRF system commissioning and startup",
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    },
+    {
+      id: "bp-005-4",
+      isActive: true,
+      businessPurpose: "Training & Support",
+      description: "Client training and technical support",
+      created: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z"),
+      modified: /* @__PURE__ */ new Date("2024-04-01T00:00:00Z")
+    }
+  ]
+});
 const API_BASE_URL = "http://localhost:3001/api";
 const API_TIMEOUT = 3e4;
 class ApiClient {
@@ -40048,11 +40643,25 @@ class ApiClient {
         return response;
       },
       async (error) => {
-        var _a, _b;
-        if (((_a = error.response) == null ? void 0 : _a.status) === 401) {
+        var _a, _b, _c, _d;
+        if (error.code === "ERR_NETWORK" || error.code === "ECONNREFUSED" || ((_a = error.message) == null ? void 0 : _a.includes("Network Error"))) {
+          const url = (_b = error.config) == null ? void 0 : _b.url;
+          console.log(`🔄 API: Network error for ${url}, trying mock data`);
+          if (url === "/companies") {
+            console.log(`✅ API: Returning mock companies data`, mockCompanies);
+            return Promise.resolve({
+              data: { data: mockCompanies },
+              status: 200,
+              statusText: "OK",
+              headers: { "content-type": "application/json" },
+              config: error.config
+            });
+          }
+        }
+        if (((_c = error.response) == null ? void 0 : _c.status) === 401) {
           await this.handleUnauthorized();
         }
-        if (((_b = error.response) == null ? void 0 : _b.status) === 429) {
+        if (((_d = error.response) == null ? void 0 : _d.status) === 429) {
           const retryAfter = error.response.headers["retry-after"];
           if (retryAfter) {
             await this.delay(parseInt(retryAfter) * 1e3);
@@ -41124,15 +41733,7 @@ const useCompanies = () => {
     // 10 minutes
   });
   useEffect$1(() => {
-    console.log("📈 useCompanies: query state changed", {
-      data: query.data,
-      isLoading: query.isLoading,
-      isSuccess: query.isSuccess,
-      isError: query.isError,
-      error: query.error
-    });
     if (query.data) {
-      console.log("💾 useCompanies: Setting companies data", query.data);
       setCompanies(query.data);
       setLoading(false);
       setError(null);
@@ -41155,14 +41756,6 @@ const NavigationSidebar = ({
 }) => {
   const companiesQuery = useCompanies();
   const companies = companiesQuery.data || [];
-  console.log("🔍 NavigationSidebar: useCompanies query state:", {
-    data: companiesQuery.data,
-    isLoading: companiesQuery.isLoading,
-    isError: companiesQuery.isError,
-    error: companiesQuery.error,
-    companies,
-    companiesLength: companies.length
-  });
   const navigationElements = useMemo(() => getNavigationElements(), []);
   const [expandedItems, setExpandedItems] = useState(() => {
     return /* @__PURE__ */ new Set();
@@ -41286,10 +41879,6 @@ const NavigationSidebar = ({
       value: company.id,
       label: company.name
     }));
-    console.log("🏢 NavigationSidebar: renderSelector called");
-    console.log("📊 Companies data:", companies);
-    console.log("🎛️ Company options:", companyOptions);
-    console.log("✅ Selected company:", selectedCompany);
     return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(_n, { options: companyOptions, value: selectedCompany, onValueChange: handleCompanyChange }) }, selector.id);
   }, [companies, selectedCompany, handleCompanyChange]);
   const renderSection = useCallback$1((section) => {
@@ -41336,7 +41925,7 @@ const NavigationSidebar = ({
 const { useCallback, useEffect } = await importShared("react");
 const Layout = () => {
   const navigate = useNavigate();
-  const location2 = useLocation();
+  const location = useLocation();
   const params = useParams();
   const { selectedCompany, setSelectedCompany } = useCompanyStore();
   const { data: companies } = useCompanies();
@@ -41363,7 +41952,7 @@ const Layout = () => {
     const company = companies == null ? void 0 : companies.find((c2) => c2.id === companyId);
     if (company) {
       setSelectedCompany(company);
-      const path = location2.pathname;
+      const path = location.pathname;
       if (path.includes(`/${RoutePathConfigChunks.ExpensesType}/`) || path.includes(`/${RoutePathConfigChunks.BusinessPurpose}/`)) {
         const segments = path.split("/");
         const baseRoute = segments.slice(0, -1).join("/");
@@ -41371,7 +41960,7 @@ const Layout = () => {
         navigate(newPath);
       }
     }
-  }, [companies, location2.pathname, navigate, setSelectedCompany]);
+  }, [companies, location.pathname, navigate, setSelectedCompany]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen bg-exp-neutral-0 flex flex-col", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Header, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-1 p-4.5", children: [
@@ -41389,14 +41978,14 @@ const Layout = () => {
 };
 const LoadingSpinner = ({ className }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex items-center justify-center ${className}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
 const { Suspense, lazy } = await importShared("react");
-const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-CZVJOguT.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
-const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-DHJlJ1gb.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
-const Configurations = lazy(() => __vitePreload(() => import("./Configurations-PMn2oClT.js"), true ? [] : void 0, import.meta.url));
-const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-BjRb8WIV.js"), true ? [] : void 0, import.meta.url));
-const Payroll = lazy(() => __vitePreload(() => import("./Payroll-z_pWzIRJ.js"), true ? [] : void 0, import.meta.url));
-const Allocations = lazy(() => __vitePreload(() => import("./Allocations-DLA_UN7Z.js"), true ? [] : void 0, import.meta.url));
-const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-DOVzJkgp.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
-const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-CmsaVL2J.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
+const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-De51yoPi.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
+const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-DR77gH0j.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
+const Configurations = lazy(() => __vitePreload(() => import("./Configurations-DUmqTsof.js"), true ? [] : void 0, import.meta.url));
+const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-DeD3k1b_.js"), true ? [] : void 0, import.meta.url));
+const Payroll = lazy(() => __vitePreload(() => import("./Payroll-Cv_Vqxic.js"), true ? [] : void 0, import.meta.url));
+const Allocations = lazy(() => __vitePreload(() => import("./Allocations-BdjVOcwu.js"), true ? [] : void 0, import.meta.url));
+const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-Dob5mTGo.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
+const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-C2wenr4O.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
 const router = createHashRouter([
   {
     path: RoutePaths.Root,
@@ -41523,58 +42112,7 @@ const CONTAINER_ID = "module-mfe";
 const { StrictMode } = await importShared("react");
 const mountedInstances = /* @__PURE__ */ new Map();
 async function initializeMSW() {
-  {
-    console.log("🔍 MSW Debug Info:");
-    console.log("- navigator available:", typeof navigator !== "undefined");
-    console.log("- serviceWorker in navigator:", "serviceWorker" in navigator);
-    console.log("- navigator.serviceWorker:", !!navigator.serviceWorker);
-    console.log(
-      "- addEventListener available:",
-      navigator.serviceWorker && typeof navigator.serviceWorker.addEventListener === "function"
-    );
-    console.log("- location.protocol:", location.protocol);
-    console.log("- window.location.href:", window.location.href);
-    const hasServiceWorker = "serviceWorker" in navigator && !!navigator.serviceWorker && location.protocol !== "file:";
-    if (hasServiceWorker) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      try {
-        const { worker } = await __vitePreload(async () => {
-          const { worker: worker2 } = await import("./browser-C_lUkBkG.js");
-          return { worker: worker2 };
-        }, true ? __vite__mapDeps([7,8]) : void 0, import.meta.url);
-        const serviceWorkerUrl = window.location.pathname.includes("/") ? `${window.location.pathname.split("/").slice(0, -1).join("/")}/mockServiceWorker.js` : "/mockServiceWorker.js";
-        console.log("🔍 MSW: Service worker URL:", serviceWorkerUrl);
-        const startOptions = {
-          onUnhandledRequest: "bypass",
-          serviceWorker: {
-            url: serviceWorkerUrl
-          },
-          quiet: false,
-          waitUntilReady: true
-        };
-        console.log("🚀 MSW: Attempting to start with Service Worker...");
-        await worker.start(startOptions);
-        console.log("✅ MSW: Mock Service Worker started successfully");
-        return;
-      } catch (error) {
-        console.warn("⚠️ MSW: Service Worker failed, falling back to HTTP interceptor");
-        console.error("Service Worker error:", error);
-      }
-    } else {
-      console.log("⚠️ MSW: Service Worker not available, using HTTP interceptor");
-    }
-    try {
-      const { httpInterceptor } = await __vitePreload(async () => {
-        const { httpInterceptor: httpInterceptor2 } = await import("./interceptor-HGVlpvyK.js");
-        return { httpInterceptor: httpInterceptor2 };
-      }, true ? __vite__mapDeps([9,8]) : void 0, import.meta.url);
-      httpInterceptor.start();
-      console.log("✅ MSW: HTTP Interceptor started successfully");
-    } catch (interceptorError) {
-      console.error("❌ MSW: HTTP Interceptor also failed:", interceptorError);
-      console.log("🔄 MSW: App will continue without mocking (using real API)");
-    }
-  }
+  console.log("✅ MSW: Using axios interceptor for mock data - no additional setup needed");
 }
 const mount = (element) => {
   const targetElement = typeof element === "string" ? document.getElementById(element) || document.querySelector(element) : element;
@@ -41683,24 +42221,23 @@ const bootstrap = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePro
 }, Symbol.toStringTag, { value: "Module" }));
 export {
   $t as $,
-  shouldThrowError as A,
+  create as A,
   B,
   ChartColumn as C,
-  create as D,
+  devtools as D,
   En as E,
   FileText as F,
-  devtools as G,
+  subscribeWithSelector as G,
   Hn as H,
   In as I,
-  subscribeWithSelector as J,
+  immer as J,
   Kn as K,
   Ln as L,
-  immer as M,
+  bootstrap as M,
   Nn as N,
-  bootstrap as O,
   Pn as P,
   Qe as Q,
-  RouteCompanyIds as R,
+  RoutePaths as R,
   Subscribable as S,
   Wn as W,
   Yn as Y,
@@ -41712,26 +42249,26 @@ export {
   CreditCard as d,
   Nr as e,
   ChevronRight as f,
-  RoutePaths as g,
-  Receipt as h,
-  useQuery as i,
+  Receipt as g,
+  useQuery as h,
+  apiClient as i,
   jsxRuntimeExports as j,
-  apiClient as k,
-  useCompanyStore as l,
-  LoadingSpinner as m,
+  useCompanyStore as k,
+  LoadingSpinner as l,
+  Rr as m,
   mount,
-  Rr as n,
-  Plus as o,
-  c as p,
-  LayoutDashboard as q,
-  hashKey as r,
+  Plus as n,
+  c as o,
+  LayoutDashboard as p,
+  hashKey as q,
+  getDefaultState as r,
   shallowEqualObjects as s,
-  getDefaultState as t,
+  notifyManager as t,
   useNavigate as u,
   unmount,
-  notifyManager as v,
-  useQueryClient as w,
-  noop$1 as x,
+  useQueryClient as v,
+  noop$1 as w,
+  shouldThrowError as x,
   yr as y,
   zn as z
 };
