@@ -1,4 +1,4 @@
-import { m as mockCompanies } from "./index-iZWAQiAL.js";
+import { m as mockCompanies } from "./index-Bw9j5A9Q.js";
 class HTTPInterceptor {
   originalFetch;
   originalXHR;
@@ -40,17 +40,41 @@ class HTTPInterceptor {
           if (mockResponse) {
             console.log(`✅ MSW: Mocked XHR response for ${this._method} ${this._url}`);
             this.send = () => {
+              console.log(`📦 MSW: Sending mock data for ${this._method} ${this._url}:`, mockResponse.data);
               setTimeout(() => {
                 Object.defineProperty(this, "status", { value: mockResponse.status, writable: false });
                 Object.defineProperty(this, "statusText", { value: "OK", writable: false });
                 Object.defineProperty(this, "response", { value: JSON.stringify(mockResponse.data), writable: false });
                 Object.defineProperty(this, "responseText", { value: JSON.stringify(mockResponse.data), writable: false });
+                Object.defineProperty(this, "responseType", { value: "", writable: false });
                 Object.defineProperty(this, "readyState", { value: 4, writable: false });
+                this.getResponseHeader = (name) => {
+                  if (name.toLowerCase() === "content-type") {
+                    return "application/json";
+                  }
+                  return null;
+                };
+                this.getAllResponseHeaders = () => {
+                  return "content-type: application/json\r\n";
+                };
+                console.log(`📡 MSW: Mock XHR properties set - status: ${this.status}, readyState: ${this.readyState}`);
+                console.log(`📄 MSW: Response data:`, this.responseText);
+                Object.defineProperty(this, "readyState", { value: 2, writable: true });
                 if (this.onreadystatechange) {
                   this.onreadystatechange(new Event("readystatechange"));
                 }
+                Object.defineProperty(this, "readyState", { value: 3, writable: true });
+                if (this.onreadystatechange) {
+                  this.onreadystatechange(new Event("readystatechange"));
+                }
+                Object.defineProperty(this, "readyState", { value: 4, writable: false });
+                if (this.onreadystatechange) {
+                  console.log(`🔄 MSW: Triggering final onreadystatechange for ${this._url}`);
+                  this.onreadystatechange(new Event("readystatechange"));
+                }
                 if (this.onload) {
-                  this.onload(new ProgressEvent("load", { lengthComputable: true, loaded: 0, total: 0 }));
+                  console.log(`✅ MSW: Triggering onload for ${this._url}`);
+                  this.onload(new ProgressEvent("load", { lengthComputable: true, loaded: this.responseText.length, total: this.responseText.length }));
                 }
               }, 10);
             };

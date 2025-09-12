@@ -1,4 +1,4 @@
-import { m as mockCompanies, a as mockExpenseTypes, b as mockBusinessPurposes } from "./index-iZWAQiAL.js";
+import { m as mockCompanies, a as mockExpenseTypes, b as mockBusinessPurposes } from "./index-Bw9j5A9Q.js";
 function isObject$1(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
 }
