@@ -1,4 +1,4 @@
-import { m as mockCompanies } from "./index-CQiXI8Sm.js";
+import { m as mockCompanies } from "./index-Do5ZqSWG.js";
 class HTTPInterceptor {
   originalFetch;
   isActive = false;
@@ -23,13 +23,14 @@ class HTTPInterceptor {
   async interceptedFetch(input, init) {
     const request = new Request(input, init);
     const url = new URL(request.url);
-    if (!url.pathname.startsWith("/api/")) {
+    const isApiCall = url.pathname.startsWith("/api/") || url.href.includes("/api/") || url.hostname === "localhost" && url.port === "3001";
+    if (!isApiCall) {
       return this.originalFetch(input, init);
     }
-    console.log(`🔄 MSW: Intercepting ${request.method} ${url.pathname}`);
-    const mockResponse = this.getMockResponse(request.method, url.pathname);
+    console.log(`🔄 MSW: Intercepting ${request.method} ${request.url}`);
+    const mockResponse = this.getMockResponse(request.method, url.pathname, request.url);
     if (mockResponse) {
-      console.log(`✅ MSW: Mocked response for ${request.method} ${url.pathname}`);
+      console.log(`✅ MSW: Mocked response for ${request.method} ${request.url}`);
       return new Response(JSON.stringify(mockResponse.data), {
         status: mockResponse.status,
         statusText: "OK",
@@ -39,17 +40,17 @@ class HTTPInterceptor {
         }
       });
     }
-    console.log(`⚠️ MSW: No mock found for ${request.method} ${url.pathname}, using real request`);
+    console.log(`⚠️ MSW: No mock found for ${request.method} ${request.url}, using real request`);
     return this.originalFetch(input, init);
   }
-  getMockResponse(method, pathname) {
-    if (method === "GET" && pathname === "/api/companies") {
+  getMockResponse(method, pathname, fullUrl) {
+    if (method === "GET" && (pathname === "/api/companies" || fullUrl.includes("/api/companies"))) {
       return {
         status: 200,
         data: mockCompanies
       };
     }
-    if (method === "GET" && pathname.startsWith("/api/expenses")) {
+    if (method === "GET" && (pathname.startsWith("/api/expenses") || fullUrl.includes("/api/expenses"))) {
       return {
         status: 200,
         data: {
@@ -60,7 +61,7 @@ class HTTPInterceptor {
         }
       };
     }
-    if (method === "GET" && pathname.includes("/form-settings")) {
+    if (method === "GET" && (pathname.includes("/form-settings") || fullUrl.includes("/form-settings"))) {
       return {
         status: 200,
         data: {
