@@ -1,8 +1,8 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-agBL8tCd.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-CtEHQc_i.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-CaaTGLaR.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-DtQqKyn2.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-Dc-N9_bj.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-CMFEzlux.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-C0tZgBLR.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-BZem6lhQ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-D0xhsbN8.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-BDS5xWHY.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-BaAgUyP6.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-CtV-O2OO.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/mockingStrategy-Cpe2ADEX.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-Be6eT6eU.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { r as requireReact } from "./index-BQNfSwzb.js";
 import { r as requireReactDom } from "./index-BZmWk3Ws.js";
-import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
 /**
@@ -39259,7 +39259,7 @@ const globalFetchAPI = (({ fetch, Request: Request2, Response }) => ({
 }))(utils$1.global);
 const {
   ReadableStream: ReadableStream$1,
-  TextEncoder
+  TextEncoder: TextEncoder$1
 } = utils$1.global;
 const test = (fn2, ...args) => {
   try {
@@ -39277,7 +39277,7 @@ const factory = (env) => {
     return false;
   }
   const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream$1);
-  const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
+  const encodeText = isFetchSupported && (typeof TextEncoder$1 === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder$1()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
   const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
     let duplexAccessed = false;
     const hasContentType = new Request2(platform.origin, {
@@ -40754,9 +40754,11 @@ class ApiClient {
   cleanup() {
     if (this.requestInterceptor !== null) {
       this.instance.interceptors.request.eject(this.requestInterceptor);
+      this.requestInterceptor = null;
     }
     if (this.responseInterceptor !== null) {
       this.instance.interceptors.response.eject(this.responseInterceptor);
+      this.responseInterceptor = null;
     }
   }
 }
@@ -42004,14 +42006,14 @@ const Layout = () => {
 };
 const LoadingSpinner = ({ className }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex items-center justify-center ${className}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
 const { Suspense, lazy } = await importShared("react");
-const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-agBL8tCd.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
-const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-CaaTGLaR.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
-const Configurations = lazy(() => __vitePreload(() => import("./Configurations-C3dtHZm-.js"), true ? [] : void 0, import.meta.url));
-const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-DHyYloum.js"), true ? [] : void 0, import.meta.url));
-const Payroll = lazy(() => __vitePreload(() => import("./Payroll-BvOB_tZ1.js"), true ? [] : void 0, import.meta.url));
-const Allocations = lazy(() => __vitePreload(() => import("./Allocations-CJQmKZbp.js"), true ? [] : void 0, import.meta.url));
-const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-DtQqKyn2.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
-const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-CMFEzlux.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
+const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-C0tZgBLR.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
+const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-D0xhsbN8.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
+const Configurations = lazy(() => __vitePreload(() => import("./Configurations-CaddkgSh.js"), true ? [] : void 0, import.meta.url));
+const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-EcyZU69q.js"), true ? [] : void 0, import.meta.url));
+const Payroll = lazy(() => __vitePreload(() => import("./Payroll-CIbIAi6K.js"), true ? [] : void 0, import.meta.url));
+const Allocations = lazy(() => __vitePreload(() => import("./Allocations-BOwRuUur.js"), true ? [] : void 0, import.meta.url));
+const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-BDS5xWHY.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
+const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-CtV-O2OO.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
 const router = createHashRouter([
   {
     path: RoutePaths.Root,
@@ -42137,8 +42139,12 @@ function App() {
 const CONTAINER_ID = "module-mfe";
 const { StrictMode } = await importShared("react");
 const mountedInstances = /* @__PURE__ */ new Map();
-async function initializeMSW() {
-  console.log("✅ MSW: Using axios interceptor for mock data - no additional setup needed");
+async function initializeMocking() {
+  const { mockingStrategy } = await __vitePreload(async () => {
+    const { mockingStrategy: mockingStrategy2 } = await import("./mockingStrategy-Cpe2ADEX.js");
+    return { mockingStrategy: mockingStrategy2 };
+  }, true ? __vite__mapDeps([7,8]) : void 0, import.meta.url);
+  await mockingStrategy.initialize();
 }
 const mount = (element) => {
   const targetElement = typeof element === "string" ? document.getElementById(element) || document.querySelector(element) : element;
@@ -42195,7 +42201,7 @@ const cleanupAll = () => {
   mountedInstances.clear();
 };
 const autoMount = async () => {
-  await initializeMSW();
+  await initializeMocking();
   const ssrContainer = document.getElementById(CONTAINER_ID);
   const rootElement = document.getElementById("root");
   if (typeof window !== "undefined" && window.tailwindMFE && ssrContainer) {
@@ -42259,12 +42265,15 @@ export {
   immer as J,
   Kn as K,
   Ln as L,
-  bootstrap as M,
+  mockCompanies as M,
   Nn as N,
+  mockExpenseTypes as O,
   Pn as P,
   Qe as Q,
   RoutePaths as R,
   Subscribable as S,
+  mockBusinessPurposes as T,
+  bootstrap as U,
   Wn as W,
   Yn as Y,
   Ze as Z,
