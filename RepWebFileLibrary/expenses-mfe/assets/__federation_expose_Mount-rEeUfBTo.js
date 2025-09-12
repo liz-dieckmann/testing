@@ -1,8 +1,8 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-CB0lT0Np.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-TMeLHEy7.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-pJ19vk9v.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-ivmtgr-Z.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-BVliwSQI.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-dhCUCkAe.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-327MjqL1.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-DGrIfFRB.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-GFoCmudv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-DkQFpdu3.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-DGBl5ukh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-BVIGn9uD.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { r as requireReact } from "./index-BQNfSwzb.js";
 import { r as requireReactDom } from "./index-BZmWk3Ws.js";
-import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
 /**
@@ -35250,7 +35250,7 @@ const createImpl = (createState) => {
   return useBoundStore;
 };
 const create = ((createState) => createState ? createImpl(createState) : createImpl);
-const __vite_import_meta_env__ = { "BASE_URL": "./", "DEV": false, "MODE": "production", "PROD": true, "SSR": false, "VITE_API_URL": "https://api.????.com/api", "VITE_APP_ENV": "production", "VITE_ENABLE_DEVTOOLS": "false", "VITE_ENABLE_MSW": "false" };
+const __vite_import_meta_env__ = { "BASE_URL": "./", "DEV": false, "MODE": "test", "PROD": true, "SSR": false, "VITE_API_URL": "http://localhost:3001/api", "VITE_APP_ENV": "test", "VITE_ENABLE_DEVTOOLS": "true", "VITE_ENABLE_MSW": "true" };
 const trackedConnections = /* @__PURE__ */ new Map();
 const getTrackedConnectionState = (name) => {
   const api = trackedConnections.get(name);
@@ -35301,7 +35301,7 @@ const devtoolsImpl = (fn2, devtoolsOptions = {}) => (set2, get, api) => {
   const { enabled, anonymousActionType, store, ...options } = devtoolsOptions;
   let extensionConnector;
   try {
-    extensionConnector = (enabled != null ? enabled : (__vite_import_meta_env__ ? "production" : void 0) !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
+    extensionConnector = (enabled != null ? enabled : (__vite_import_meta_env__ ? "test" : void 0) !== "production") && window.__REDUX_DEVTOOLS_EXTENSION__;
   } catch (e) {
   }
   if (!extensionConnector) {
@@ -35363,7 +35363,7 @@ const devtoolsImpl = (fn2, devtoolsOptions = {}) => (set2, get, api) => {
     let didWarnAboutReservedActionType = false;
     const originalDispatch = api.dispatch;
     api.dispatch = (...args) => {
-      if ((__vite_import_meta_env__ ? "production" : void 0) !== "production" && args[0].type === "__setState" && !didWarnAboutReservedActionType) {
+      if ((__vite_import_meta_env__ ? "test" : void 0) !== "production" && args[0].type === "__setState" && !didWarnAboutReservedActionType) {
         console.warn(
           '[zustand devtools middleware] "__setState" action type is reserved to set state from the devtools. Avoid using it.'
         );
@@ -40410,7 +40410,7 @@ const globalFetchAPI = (({ fetch, Request: Request2, Response }) => ({
 }))(utils$1.global);
 const {
   ReadableStream: ReadableStream$1,
-  TextEncoder
+  TextEncoder: TextEncoder$1
 } = utils$1.global;
 const test = (fn2, ...args) => {
   try {
@@ -40428,7 +40428,7 @@ const factory = (env) => {
     return false;
   }
   const isReadableStreamSupported = isFetchSupported && isFunction(ReadableStream$1);
-  const encodeText = isFetchSupported && (typeof TextEncoder === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
+  const encodeText = isFetchSupported && (typeof TextEncoder$1 === "function" ? /* @__PURE__ */ ((encoder) => (str) => encoder.encode(str))(new TextEncoder$1()) : async (str) => new Uint8Array(await new Request2(str).arrayBuffer()));
   const supportsRequestStream = isRequestSupported && isReadableStreamSupported && test(() => {
     let duplexAccessed = false;
     const hasContentType = new Request2(platform.origin, {
@@ -41156,7 +41156,7 @@ const {
   getAdapter,
   mergeConfig
 } = axios;
-const API_BASE_URL = "https://api.????.com/api";
+const API_BASE_URL = "http://localhost:3001/api";
 const API_TIMEOUT = 3e4;
 class ApiClient {
   instance;
@@ -41363,14 +41363,14 @@ const Layout = () => {
 };
 const LoadingSpinner = ({ className }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex items-center justify-center ${className}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
 const { Suspense, lazy } = await importShared("react");
-const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-CB0lT0Np.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
-const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-pJ19vk9v.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
-const Configurations = lazy(() => __vitePreload(() => import("./Configurations-Qry5nV67.js"), true ? [] : void 0, import.meta.url));
-const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-BMqN0rJG.js"), true ? [] : void 0, import.meta.url));
-const Payroll = lazy(() => __vitePreload(() => import("./Payroll-dtVliRWq.js"), true ? [] : void 0, import.meta.url));
-const Allocations = lazy(() => __vitePreload(() => import("./Allocations-D227mWPV.js"), true ? [] : void 0, import.meta.url));
-const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-ivmtgr-Z.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
-const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-dhCUCkAe.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
+const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-327MjqL1.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
+const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-GFoCmudv.js"), true ? __vite__mapDeps([2,1,3]) : void 0, import.meta.url));
+const Configurations = lazy(() => __vitePreload(() => import("./Configurations-DQPGa1SY.js"), true ? [] : void 0, import.meta.url));
+const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-DHcHbBBz.js"), true ? [] : void 0, import.meta.url));
+const Payroll = lazy(() => __vitePreload(() => import("./Payroll-C8h5WDaH.js"), true ? [] : void 0, import.meta.url));
+const Allocations = lazy(() => __vitePreload(() => import("./Allocations-DEefWfwm.js"), true ? [] : void 0, import.meta.url));
+const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-DkQFpdu3.js"), true ? __vite__mapDeps([4,3,5]) : void 0, import.meta.url));
+const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-BVIGn9uD.js"), true ? __vite__mapDeps([6,3,5]) : void 0, import.meta.url));
 const router = createHashRouter([
   {
     path: RoutePaths.Root,
@@ -41498,6 +41498,23 @@ const CONTAINER_ID = "module-mfe";
 const { StrictMode } = await importShared("react");
 const mountedInstances = /* @__PURE__ */ new Map();
 async function initializeMSW() {
+  {
+    try {
+      const { worker } = await __vitePreload(async () => {
+        const { worker: worker2 } = await import("./browser-R1v_zOZS.js");
+        return { worker: worker2 };
+      }, true ? [] : void 0, import.meta.url);
+      await worker.start({
+        onUnhandledRequest: "bypass",
+        serviceWorker: {
+          url: "/mockServiceWorker.js"
+        }
+      });
+      console.log("✅ MSW: Mock Service Worker started");
+    } catch (error) {
+      console.error("❌ MSW: Failed to start Mock Service Worker", error);
+    }
+  }
 }
 const mount = (element) => {
   const targetElement = typeof element === "string" ? document.getElementById(element) || document.querySelector(element) : element;
@@ -41606,23 +41623,24 @@ const bootstrap = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePro
 }, Symbol.toStringTag, { value: "Module" }));
 export {
   $t as $,
-  create as A,
+  shouldThrowError as A,
   B,
   ChartColumn as C,
-  devtools as D,
+  create as D,
   En as E,
   FileText as F,
-  subscribeWithSelector as G,
+  devtools as G,
   Hn as H,
   In as I,
-  immer as J,
+  subscribeWithSelector as J,
   Kn as K,
   Ln as L,
-  bootstrap as M,
+  immer as M,
   Nn as N,
+  bootstrap as O,
   Pn as P,
   Qe as Q,
-  RoutePaths as R,
+  RouteCompanyIds as R,
   Subscribable as S,
   Wn as W,
   Yn as Y,
@@ -41634,26 +41652,26 @@ export {
   CreditCard as d,
   Nr as e,
   ChevronRight as f,
-  Receipt as g,
-  useQuery as h,
-  apiClient as i,
+  RoutePaths as g,
+  Receipt as h,
+  useQuery as i,
   jsxRuntimeExports as j,
-  useCompanyStore as k,
-  LoadingSpinner as l,
-  Rr as m,
+  apiClient as k,
+  useCompanyStore as l,
+  LoadingSpinner as m,
   mount,
-  Plus as n,
-  c as o,
-  LayoutDashboard as p,
-  hashKey as q,
-  getDefaultState as r,
+  Rr as n,
+  Plus as o,
+  c as p,
+  LayoutDashboard as q,
+  hashKey as r,
   shallowEqualObjects as s,
-  notifyManager as t,
+  getDefaultState as t,
   useNavigate as u,
   unmount,
-  useQueryClient as v,
-  noop$1 as w,
-  shouldThrowError as x,
+  notifyManager as v,
+  useQueryClient as w,
+  noop$1 as x,
   yr as y,
   zn as z
 };
