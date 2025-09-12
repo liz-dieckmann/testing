@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports } from "./__federation_expose_Mount-hCYHd-4O.js";
+import { j as jsxRuntimeExports } from "./__federation_expose_Mount-uf8vnx7v.js";
 const Configurations = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-2xl font-bold text-gray-900 mb-4", children: "Configurations" }),
