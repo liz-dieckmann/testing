@@ -1,4 +1,4 @@
-import { m as mockCompanies } from "./index-DfPgIOgu.js";
+import { m as mockCompanies } from "./index-uZx0pVZp.js";
 class HTTPInterceptor {
   originalFetch;
   originalXHR;
@@ -48,70 +48,76 @@ class HTTPInterceptor {
           const mockResponse = interceptor.getMockResponse(this._method, new URL(this._url).pathname, this._url);
           if (mockResponse) {
             console.log(`✅ MSW: Mocked XHR response for ${this._method} ${this._url}`);
-            this.send = (body) => {
-              console.log(`📦 MSW: send() called for ${this._method} ${this._url}`, body);
-              console.log(`📦 MSW: Sending mock data for ${this._method} ${this._url}:`, mockResponse.data);
-              setTimeout(() => {
-                Object.defineProperty(this, "status", { value: mockResponse.status, configurable: true });
-                Object.defineProperty(this, "statusText", { value: "OK", configurable: true });
-                Object.defineProperty(this, "response", { value: JSON.stringify(mockResponse.data), configurable: true });
-                Object.defineProperty(this, "responseText", { value: JSON.stringify(mockResponse.data), configurable: true });
-                Object.defineProperty(this, "responseType", { value: "", configurable: true });
-                this.getResponseHeader = (name) => {
-                  if (name.toLowerCase() === "content-type") {
-                    return "application/json";
-                  }
-                  return null;
-                };
-                this.getAllResponseHeaders = () => {
-                  return "content-type: application/json\r\n";
-                };
-                console.log(`📡 MSW: Mock XHR properties set - status: ${this.status}`);
-                console.log(`📡 MSW: readyState: ${this.readyState}`);
-                console.log(`📄 MSW: Response data:`, this.responseText);
-                console.log(`🔄 MSW: Starting readyState transitions for ${this._url}`);
-                Object.defineProperty(this, "readyState", { value: 2, configurable: true });
-                console.log(`🔄 MSW: Triggering readyState 2 (HEADERS_RECEIVED) for ${this._url}`);
-                console.log(`🔄 MSW: onreadystatechange handler exists: ${!!this.onreadystatechange}`);
-                if (this.onreadystatechange) {
-                  try {
-                    this.onreadystatechange(new Event("readystatechange"));
-                    console.log(`✅ MSW: readyState 2 event triggered successfully`);
-                  } catch (error) {
-                    console.error(`❌ MSW: Error triggering readyState 2:`, error);
-                  }
+            const self = this;
+            const waitForHandlers = async () => {
+              console.log(`⏳ MSW: Waiting for handlers to be set up for ${self._url}`);
+              await Promise.resolve();
+              let attempts = 0;
+              while (!self.onreadystatechange && attempts < 10) {
+                await new Promise((resolve) => setTimeout(resolve, 5));
+                attempts++;
+                console.log(`⏳ MSW: Waiting attempt ${attempts} for ${self._url}`);
+              }
+              console.log(`🔍 MSW: Handler check complete for ${self._url}, handler exists: ${!!self.onreadystatechange}`);
+            };
+            const triggerReadyStateEvents = () => {
+              console.log(`🔄 MSW: Starting readyState transitions for ${self._url}`);
+              try {
+                Object.defineProperty(self, "readyState", { value: 2, configurable: true });
+                console.log(`🔄 MSW: Triggering readyState 2 (HEADERS_RECEIVED) for ${self._url}`);
+                if (self.onreadystatechange) {
+                  self.onreadystatechange(new Event("readystatechange"));
+                  console.log(`✅ MSW: readyState 2 event triggered successfully`);
                 }
-                Object.defineProperty(this, "readyState", { value: 3, configurable: true });
-                console.log(`🔄 MSW: Triggering readyState 3 (LOADING) for ${this._url}`);
-                if (this.onreadystatechange) {
-                  try {
-                    this.onreadystatechange(new Event("readystatechange"));
-                    console.log(`✅ MSW: readyState 3 event triggered successfully`);
-                  } catch (error) {
-                    console.error(`❌ MSW: Error triggering readyState 3:`, error);
-                  }
+                Object.defineProperty(self, "readyState", { value: 3, configurable: true });
+                console.log(`🔄 MSW: Triggering readyState 3 (LOADING) for ${self._url}`);
+                if (self.onreadystatechange) {
+                  self.onreadystatechange(new Event("readystatechange"));
+                  console.log(`✅ MSW: readyState 3 event triggered successfully`);
                 }
-                Object.defineProperty(this, "readyState", { value: 4, configurable: true });
-                console.log(`🔄 MSW: Triggering readyState 4 (DONE) for ${this._url}`);
-                if (this.onreadystatechange) {
-                  try {
-                    this.onreadystatechange(new Event("readystatechange"));
-                    console.log(`✅ MSW: readyState 4 event triggered successfully`);
-                  } catch (error) {
-                    console.error(`❌ MSW: Error triggering readyState 4:`, error);
-                  }
+                Object.defineProperty(self, "readyState", { value: 4, configurable: true });
+                console.log(`🔄 MSW: Triggering readyState 4 (DONE) for ${self._url}`);
+                if (self.onreadystatechange) {
+                  self.onreadystatechange(new Event("readystatechange"));
+                  console.log(`✅ MSW: readyState 4 event triggered successfully`);
+                } else {
+                  console.log(`❌ MSW: Still no onreadystatechange handler for ${self._url}`);
                 }
-                if (this.onload) {
-                  console.log(`✅ MSW: Triggering onload for ${this._url}`);
-                  this.onload(new ProgressEvent("load", {
+                if (self.onload) {
+                  console.log(`✅ MSW: Triggering onload for ${self._url}`);
+                  self.onload(new ProgressEvent("load", {
                     lengthComputable: true,
-                    loaded: this.responseText.length,
-                    total: this.responseText.length
+                    loaded: self.responseText.length,
+                    total: self.responseText.length
                   }));
                 } else {
-                  console.log(`⚠️ MSW: No onload handler for ${this._url}`);
+                  console.log(`⚠️ MSW: No onload handler for ${self._url}`);
                 }
-              }, 10);
+              } catch (error) {
+                console.error(`❌ MSW: Error during readyState transitions for ${self._url}:`, error);
+              }
+            };
+            this.send = async (body) => {
+              console.log(`📦 MSW: send() called for ${self._method} ${self._url}`, body);
+              console.log(`📦 MSW: Sending mock data for ${self._method} ${self._url}:`, mockResponse.data);
+              Object.defineProperty(self, "status", { value: mockResponse.status, configurable: true });
+              Object.defineProperty(self, "statusText", { value: "OK", configurable: true });
+              Object.defineProperty(self, "response", { value: JSON.stringify(mockResponse.data), configurable: true });
+              Object.defineProperty(self, "responseText", { value: JSON.stringify(mockResponse.data), configurable: true });
+              Object.defineProperty(self, "responseType", { value: "", configurable: true });
+              self.getResponseHeader = (name) => {
+                if (name.toLowerCase() === "content-type") {
+                  return "application/json";
+                }
+                return null;
+              };
+              self.getAllResponseHeaders = () => {
+                return "content-type: application/json\r\n";
+              };
+              console.log(`📡 MSW: Mock XHR properties set - status: ${self.status}`);
+              console.log(`📄 MSW: Response data:`, self.responseText);
+              await waitForHandlers();
+              triggerReadyStateEvents();
             };
             return;
           }
