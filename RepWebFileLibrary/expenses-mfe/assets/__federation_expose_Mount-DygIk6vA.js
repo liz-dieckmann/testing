@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-QuFuoEGi.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-B20XN_8w.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-yWkBhR62.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/send-BfYqQqqe.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-BAQtZSZy.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-DUcXJchW.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-Dhb18jp7.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/circle-check-big-DZ6vMkib.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/JWTDemo-CS44IWvY.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/mockingStrategy-DdSFWSN8.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-Be6eT6eU.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-C-2FA86_.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-CIGfwBhT.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-BGpw_67s.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/send-DqA9sY0q.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-FfcrUKxl.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/store-7lEFu_0s.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-DL_DfmUe.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/circle-check-big-DbOc4LM_.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/JWTDemo-BSjocSsc.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/mockingStrategy-DlD7T4y_.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-Be6eT6eU.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { r as requireReact } from "./index-BQNfSwzb.js";
@@ -42443,15 +42443,15 @@ const Layout = () => {
 };
 const LoadingSpinner = ({ className }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex items-center justify-center ${className}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" }) });
 const { Suspense, lazy } = await importShared("react");
-const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-QuFuoEGi.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
-const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-yWkBhR62.js"), true ? __vite__mapDeps([2,1,3,4]) : void 0, import.meta.url));
-const Configurations = lazy(() => __vitePreload(() => import("./Configurations-sxqLquZp.js"), true ? [] : void 0, import.meta.url));
-const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-Cc30cSYC.js"), true ? [] : void 0, import.meta.url));
-const Payroll = lazy(() => __vitePreload(() => import("./Payroll-CIXKY0SM.js"), true ? [] : void 0, import.meta.url));
-const Allocations = lazy(() => __vitePreload(() => import("./Allocations-Ba9nuaQ6.js"), true ? [] : void 0, import.meta.url));
-const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-BAQtZSZy.js"), true ? __vite__mapDeps([5,3,6]) : void 0, import.meta.url));
-const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-Dhb18jp7.js"), true ? __vite__mapDeps([7,3,6,8]) : void 0, import.meta.url));
-const TestingAuthentication = lazy(() => __vitePreload(() => import("./JWTDemo-CS44IWvY.js"), true ? __vite__mapDeps([9,3,8,4]) : void 0, import.meta.url));
+const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-C-2FA86_.js"), true ? __vite__mapDeps([0,1]) : void 0, import.meta.url));
+const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-BGpw_67s.js"), true ? __vite__mapDeps([2,1,3,4]) : void 0, import.meta.url));
+const Configurations = lazy(() => __vitePreload(() => import("./Configurations-BhqTnfSG.js"), true ? [] : void 0, import.meta.url));
+const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-DAJ33hYF.js"), true ? [] : void 0, import.meta.url));
+const Payroll = lazy(() => __vitePreload(() => import("./Payroll-CrqmNf3f.js"), true ? [] : void 0, import.meta.url));
+const Allocations = lazy(() => __vitePreload(() => import("./Allocations-xl7hccNY.js"), true ? [] : void 0, import.meta.url));
+const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-FfcrUKxl.js"), true ? __vite__mapDeps([5,3,6]) : void 0, import.meta.url));
+const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-DL_DfmUe.js"), true ? __vite__mapDeps([7,3,6,8]) : void 0, import.meta.url));
+const TestingAuthentication = lazy(() => __vitePreload(() => import("./JWTDemo-BSjocSsc.js"), true ? __vite__mapDeps([9,3,8,4]) : void 0, import.meta.url));
 const createRouteConfig = () => {
   const baseRoutes = [
     {
@@ -42589,7 +42589,7 @@ const { StrictMode } = await importShared("react");
 const mountedInstances = /* @__PURE__ */ new Map();
 async function initializeMocking() {
   const { mockingStrategy } = await __vitePreload(async () => {
-    const { mockingStrategy: mockingStrategy2 } = await import("./mockingStrategy-DdSFWSN8.js");
+    const { mockingStrategy: mockingStrategy2 } = await import("./mockingStrategy-DlD7T4y_.js");
     return { mockingStrategy: mockingStrategy2 };
   }, true ? __vite__mapDeps([10,11]) : void 0, import.meta.url);
   await mockingStrategy.initialize();

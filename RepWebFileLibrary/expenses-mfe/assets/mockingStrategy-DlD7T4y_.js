@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/mswStrategy-CPdj6ygh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_expose_Mount-C8is39no.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-Be6eT6eU.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-BQNfSwzb.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-BZmWk3Ws.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosStrategy-CZcDwHr3.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/mswStrategy-B7g62lgQ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_expose_Mount-DygIk6vA.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-Be6eT6eU.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-CFnudcB9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-BQNfSwzb.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-BZmWk3Ws.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosStrategy-CXCecVzI.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { _ as __vitePreload } from "./preload-helper-Be6eT6eU.js";
 const hasServiceWorkerSupport = () => {
   return typeof window !== "undefined" && "serviceWorker" in navigator && "navigator" in window;
@@ -14,7 +14,7 @@ class UnifiedMockingStrategy {
     if (hasServiceWorkerSupport()) {
       try {
         const { MSWStrategy } = await __vitePreload(async () => {
-          const { MSWStrategy: MSWStrategy2 } = await import("./mswStrategy-CPdj6ygh.js");
+          const { MSWStrategy: MSWStrategy2 } = await import("./mswStrategy-B7g62lgQ.js");
           return { MSWStrategy: MSWStrategy2 };
         }, true ? __vite__mapDeps([0,1,2,3,4,5]) : void 0, import.meta.url);
         this.activeStrategy = new MSWStrategy();
@@ -32,7 +32,7 @@ class UnifiedMockingStrategy {
   }
   async initializeAxiosStrategy() {
     const { AxiosStrategy } = await __vitePreload(async () => {
-      const { AxiosStrategy: AxiosStrategy2 } = await import("./axiosStrategy-CZcDwHr3.js");
+      const { AxiosStrategy: AxiosStrategy2 } = await import("./axiosStrategy-CXCecVzI.js");
       return { AxiosStrategy: AxiosStrategy2 };
     }, true ? __vite__mapDeps([6,1,2,3,4,5]) : void 0, import.meta.url);
     this.activeStrategy = new AxiosStrategy();

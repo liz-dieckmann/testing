@@ -1,7 +1,7 @@
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
-import { c as createLucideIcon, M as useJWTStore, O as jwtSelectors, T as ensureJWTInitialized, U as DOMEventNames, j as jsxRuntimeExports, V as Shield, W as Wn, $ as $t, X as He, a0 as TokenPlaceholders, B, a1 as Te, a2 as Le, i as apiClient } from "./__federation_expose_Mount-C8is39no.js";
-import { C as CircleCheckBig } from "./circle-check-big-DZ6vMkib.js";
-import { S as Send } from "./send-BfYqQqqe.js";
+import { c as createLucideIcon, M as useJWTStore, O as jwtSelectors, T as ensureJWTInitialized, U as DOMEventNames, j as jsxRuntimeExports, V as Shield, W as Wn, $ as $t, X as He, a0 as TokenPlaceholders, B, a1 as Te, a2 as Le, i as apiClient } from "./__federation_expose_Mount-DygIk6vA.js";
+import { C as CircleCheckBig } from "./circle-check-big-DbOc4LM_.js";
+import { S as Send } from "./send-DqA9sY0q.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -272,7 +272,6 @@ const { useState } = React;
 const JWTDemo = () => {
   var _a;
   const [testToken, setTestToken] = useState("");
-  const [customEventData, setCustomEventData] = useState("");
   const [showTokens, setShowTokens] = useState(false);
   const { isAuthenticated, isLoading, token } = useAuth();
   const { setToken, clearToken } = useJWT();
@@ -302,7 +301,7 @@ const JWTDemo = () => {
   };
   const handleSetCustomToken = () => {
     if (testToken.trim()) {
-      setToken(testToken.trim());
+      sessionStorage.setItem("trax_jwt_auth", testToken.trim());
     }
   };
   const handleClearToken = () => {
@@ -310,12 +309,7 @@ const JWTDemo = () => {
     setTestToken("");
   };
   const handleEmitEvent = () => {
-    try {
-      const eventData = customEventData ? JSON.parse(customEventData) : { token: createDemoToken() };
-      jwtUtils.emitJWTUpdateEvent(eventData.token);
-    } catch (error) {
-      console.error("Invalid event data:", error);
-    }
+    jwtUtils.emitJWTUpdateEvent();
   };
   const handleTestAPI = async () => {
     try {
@@ -576,15 +570,21 @@ const JWTDemo = () => {
               rows: 3
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            B,
-            {
-              onClick: handleSetCustomToken,
-              disabled: !testToken.trim(),
-              className: "w-full",
-              children: "Set Custom Token"
-            }
-          )
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              B,
+              {
+                onClick: () => handleSetCustomToken(),
+                disabled: !testToken.trim(),
+                className: "w-full",
+                children: "Set Custom Token"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-gray-500", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "This will Save token to Session Storage" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: 'For triggering state with new token from Session Storage click "Emit JWT Update Event"' })
+            ] })
+          ] })
         ] })
       ] })
     ] }),
@@ -605,19 +605,24 @@ const JWTDemo = () => {
             ] })
           ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Event Data (JSON)" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Le,
-            {
-              value: customEventData,
-              onChange: (e) => setCustomEventData(e.target.value),
-              placeholder: '{"token": "your-jwt-token-here"}',
-              className: "font-mono text-sm",
-              rows: 3
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(B, { onClick: handleEmitEvent, className: "w-full", children: "Emit JWT Update Event" })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700 mb-2 block", children: "Event Structure" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-gray-50 p-3 rounded-lg border", children: /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "text-xs text-gray-700", children: JSON.stringify({
+              type: "trax-jwt-token-updated",
+              bubbles: true,
+              cancelable: true
+            }, null, 2) }) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(B, { onClick: handleEmitEvent, className: "w-full", children: "Emit JWT Update Event" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-gray-500 space-y-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "• This event triggers the system to read JWT from Session Storage" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "• The event itself doesn't contain token data" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+              "• Event name: ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("code", { className: "bg-gray-200 px-1 rounded", children: "trax-jwt-token-updated" })
+            ] })
+          ] })
         ] })
       ] })
     ] }),
