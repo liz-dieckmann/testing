@@ -24,8 +24,7 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
       seen[dep] = true;
       const isCss = dep.endsWith(".css");
       const cssSelector = isCss ? '[rel="stylesheet"]' : "";
-      const isBaseRelative = !!importerUrl;
-      if (isBaseRelative) for (let i$1 = links.length - 1; i$1 >= 0; i$1--) {
+      if (!!importerUrl) for (let i$1 = links.length - 1; i$1 >= 0; i$1--) {
         const link$1 = links[i$1];
         if (link$1.href === dep && (!isCss || link$1.rel === "stylesheet")) return;
       }

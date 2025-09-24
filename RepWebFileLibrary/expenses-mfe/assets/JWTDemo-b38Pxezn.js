@@ -1,7 +1,10 @@
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
-import { c as createLucideIcon, M as useJWTStore, O as jwtSelectors, T as ensureJWTInitialized, U as DOMEventNames, j as jsxRuntimeExports, V as Shield, W as Wn, $ as $t, X as He, a0 as TokenPlaceholders, B, a1 as Te, a2 as Le, i as apiClient } from "./__federation_expose_Mount-DygIk6vA.js";
-import { C as CircleCheckBig } from "./circle-check-big-DbOc4LM_.js";
-import { S as Send } from "./send-DqA9sY0q.js";
+import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
+import { u as useJWTStore, j as jwtSelectors, e as ensureJWTInitialized, D as DOMEventNames, T as TokenPlaceholders, a as apiClient } from "./axiosInstance-CTyXU8xG.js";
+import { c as createLucideIcon, J as Jn, e as Pt, h as he, U, q as qe, G as Ge } from "./createLucideIcon-vlKPXI1O.js";
+import { S as Shield } from "./shield-2c-cGmAt.js";
+import { C as CircleCheckBig } from "./circle-check-big-gnwLSujF.js";
+import { S as Send } from "./send-WDPaEy6s.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -355,28 +358,28 @@ const JWTDemo = () => {
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-4 gap-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Wn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Jn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Shield, { className: "h-5 w-5 text-trax-blue-600" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-gray-600", children: "Status" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx($t, { ...getStatusBadgeProps() })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Pt, { ...getStatusBadgeProps() })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Wn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Jn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "h-5 w-5 text-orange-600" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-gray-600", children: "Expiration" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold", children: tokenExpiration.expiresAt ? `${Math.floor((tokenExpiration.timeUntilExpiration || 0) / 1e3 / 60)}m` : "N/A" })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Wn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Jn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(User, { className: "h-5 w-5 text-green-600" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-gray-600", children: "User" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold", children: (user == null ? void 0 : user.name) || "Not Available" })
         ] })
       ] }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Wn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Jn, { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Key, { className: "h-5 w-5 text-purple-600" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium text-gray-600", children: "Permissions" }),
@@ -384,7 +387,7 @@ const JWTDemo = () => {
         ] })
       ] }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { className: "p-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Jn, { className: "p-6", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between mb-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-xl font-semibold flex items-center gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Key, { className: "h-5 w-5" }),
@@ -408,7 +411,7 @@ const JWTDemo = () => {
           /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Current Token" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 mt-1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              He,
+              he,
               {
                 value: formatToken(token),
                 readOnly: true,
@@ -416,7 +419,7 @@ const JWTDemo = () => {
               }
             ),
             token && token !== TokenPlaceholders.NO_TOKEN_AVAILABLE && /* @__PURE__ */ jsxRuntimeExports.jsx(
-              B,
+              U,
               {
                 variant: "outline",
                 size: "sm",
@@ -429,7 +432,7 @@ const JWTDemo = () => {
         tokenExpiration.expiresAt && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Time Until Expiration" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 space-y-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Te, { value: getTimeProgress(), className: "h-2" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(qe, { value: getTimeProgress(), className: "h-2" }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-gray-600", children: [
               "Expires: ",
               tokenExpiration.expiresAt.toLocaleString()
@@ -468,7 +471,7 @@ const JWTDemo = () => {
         ] })
       ] })
     ] }),
-    user && /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { className: "p-6", children: [
+    user && /* @__PURE__ */ jsxRuntimeExports.jsxs(Jn, { className: "p-6", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-xl font-semibold flex items-center gap-2 mb-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(User, { className: "h-5 w-5" }),
         "User Information"
@@ -477,25 +480,25 @@ const JWTDemo = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "User ID" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(He, { value: user.id || "N/A", readOnly: true })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(he, { value: user.id || "N/A", readOnly: true })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Name" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(He, { value: user.name || "N/A", readOnly: true })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(he, { value: user.name || "N/A", readOnly: true })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Email" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(He, { value: user.email || "N/A", readOnly: true })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(he, { value: user.email || "N/A", readOnly: true })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Roles" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2 mt-1", children: roles.length > 0 ? roles.map((role) => /* @__PURE__ */ jsxRuntimeExports.jsx($t, { variant: "secondary", children: role }, role)) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-gray-500", children: "No roles assigned" }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2 mt-1", children: roles.length > 0 ? roles.map((role) => /* @__PURE__ */ jsxRuntimeExports.jsx(Pt, { variant: "secondary", children: role }, role)) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-gray-500", children: "No roles assigned" }) })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Permissions" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2 mt-1", children: permissions.length > 0 ? permissions.map((permission) => /* @__PURE__ */ jsxRuntimeExports.jsx($t, { variant: "outline", children: permission }, permission)) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-gray-500", children: "No permissions granted" }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2 mt-1", children: permissions.length > 0 ? permissions.map((permission) => /* @__PURE__ */ jsxRuntimeExports.jsx(Pt, { variant: "outline", children: permission }, permission)) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-gray-500", children: "No permissions granted" }) })
           ] })
         ] })
       ] }),
@@ -538,22 +541,22 @@ const JWTDemo = () => {
         )) })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { className: "p-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Jn, { className: "p-6", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-xl font-semibold flex items-center gap-2 mb-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(RefreshCw, { className: "h-5 w-5" }),
         "Token Management"
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(B, { onClick: handleSetDemoToken, className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(U, { onClick: handleSetDemoToken, className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Key, { className: "h-4 w-4" }),
             "Set Demo Token"
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(B, { variant: "destructive", onClick: handleClearToken, className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(U, { variant: "destructive", onClick: handleClearToken, className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { className: "h-4 w-4" }),
             "Clear Token"
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(B, { variant: "outline", onClick: handleTestAPI, className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(U, { variant: "outline", onClick: handleTestAPI, className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "h-4 w-4" }),
             "Test API Request"
           ] })
@@ -561,7 +564,7 @@ const JWTDemo = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Custom JWT Token" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Le,
+            Ge,
             {
               value: testToken,
               onChange: (e) => setTestToken(e.target.value),
@@ -572,7 +575,7 @@ const JWTDemo = () => {
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              B,
+              U,
               {
                 onClick: () => handleSetCustomToken(),
                 disabled: !testToken.trim(),
@@ -588,7 +591,7 @@ const JWTDemo = () => {
         ] })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { className: "p-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Jn, { className: "p-6", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-xl font-semibold flex items-center gap-2 mb-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "h-5 w-5" }),
         "DOM Event Testing"
@@ -614,7 +617,7 @@ const JWTDemo = () => {
               cancelable: true
             }, null, 2) }) })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(B, { onClick: handleEmitEvent, className: "w-full", children: "Emit JWT Update Event" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(U, { onClick: handleEmitEvent, className: "w-full", children: "Emit JWT Update Event" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-xs text-gray-500 space-y-1", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "• This event triggers the system to read JWT from Session Storage" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "• The event itself doesn't contain token data" }),
@@ -626,7 +629,7 @@ const JWTDemo = () => {
         ] })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Wn, { className: "p-6", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Jn, { className: "p-6", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("h2", { className: "text-xl font-semibold flex items-center gap-2 mb-4", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Eye, { className: "h-5 w-5" }),
         "Session Storage"
@@ -635,7 +638,7 @@ const JWTDemo = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Storage Key" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            He,
+            he,
             {
               value: "trax_jwt_auth",
               readOnly: true,
@@ -646,7 +649,7 @@ const JWTDemo = () => {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm font-medium text-gray-700", children: "Current Value" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Le,
+            Ge,
             {
               value: typeof window !== "undefined" ? sessionStorage.getItem("trax_jwt_auth") || "null" : "N/A (SSR)",
               readOnly: true,
