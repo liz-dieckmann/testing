@@ -4368,6 +4368,7 @@ const ensureJWTInitialized = async () => {
 };
 const API_BASE_URL = "http://localhost:3001/api";
 const API_TIMEOUT = 3e4;
+const dynamicExpenseTypes = { ...mockExpenseTypes };
 class ApiClient {
   instance;
   requestInterceptor = null;
@@ -4410,9 +4411,86 @@ class ApiClient {
         return response;
       },
       async (error) => {
-        var _a, _b, _c, _d;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
         if (error.code === "ERR_NETWORK" || error.code === "ECONNREFUSED" || ((_a = error.message) == null ? void 0 : _a.includes("Network Error"))) {
           const url = (_b = error.config) == null ? void 0 : _b.url;
+          const method = (_d = (_c = error.config) == null ? void 0 : _c.method) == null ? void 0 : _d.toUpperCase();
+          if (method === "POST" && (url == null ? void 0 : url.includes("/expense-types"))) {
+            const companyIdMatch = url.match(/\/companies\/([^/]+)\/expense-types/);
+            const companyId = companyIdMatch == null ? void 0 : companyIdMatch[1];
+            if (companyId) {
+              try {
+                const requestData = JSON.parse(((_e = error.config) == null ? void 0 : _e.data) || "{}");
+                console.log(`✅ API: Creating expense type for company: ${companyId}`, requestData);
+                const created = {
+                  ...requestData,
+                  id: `exp-${companyId}-${Date.now()}`,
+                  created: /* @__PURE__ */ new Date(),
+                  modified: /* @__PURE__ */ new Date(),
+                  // Legacy compatibility
+                  type: requestData.name,
+                  updated: /* @__PURE__ */ new Date(),
+                  mileageRate: requestData.mileage
+                };
+                if (!dynamicExpenseTypes[companyId]) {
+                  dynamicExpenseTypes[companyId] = [];
+                }
+                dynamicExpenseTypes[companyId].push(created);
+                return Promise.resolve({
+                  data: { data: created },
+                  status: 201,
+                  statusText: "Created",
+                  headers: { "content-type": "application/json" },
+                  config: error.config
+                });
+              } catch (parseError) {
+                console.error("Error parsing POST data for expense types:", parseError);
+              }
+            }
+          }
+          if (method === "PATCH" && (url == null ? void 0 : url.includes("/expense-types/"))) {
+            const expenseTypeIdMatch = url.match(/\/expense-types\/([^/?]+)/);
+            const expenseTypeId = expenseTypeIdMatch == null ? void 0 : expenseTypeIdMatch[1];
+            if (expenseTypeId) {
+              try {
+                const updates = JSON.parse(((_f = error.config) == null ? void 0 : _f.data) || "{}");
+                console.log(`✅ API: Updating expense type ${expenseTypeId}`, updates);
+                let foundExpenseType = null;
+                let foundCompanyId = null;
+                let foundIndex = -1;
+                for (const [companyId, types] of Object.entries(dynamicExpenseTypes)) {
+                  const index = types.findIndex((t) => t.id === expenseTypeId);
+                  if (index !== -1) {
+                    foundExpenseType = types[index];
+                    foundCompanyId = companyId;
+                    foundIndex = index;
+                    break;
+                  }
+                }
+                if (foundExpenseType && foundCompanyId) {
+                  const updated = {
+                    ...foundExpenseType,
+                    ...updates,
+                    modified: /* @__PURE__ */ new Date(),
+                    updated: /* @__PURE__ */ new Date(),
+                    // Legacy compatibility
+                    type: updates.name || foundExpenseType.name,
+                    mileageRate: updates.mileage || foundExpenseType.mileage
+                  };
+                  dynamicExpenseTypes[foundCompanyId][foundIndex] = updated;
+                  return Promise.resolve({
+                    data: { data: updated },
+                    status: 200,
+                    statusText: "OK",
+                    headers: { "content-type": "application/json" },
+                    config: error.config
+                  });
+                }
+              } catch (parseError) {
+                console.error("Error parsing PATCH data for expense types:", parseError);
+              }
+            }
+          }
           console.log(`🔄 API: Network error for ${url}, trying mock data`);
           if (url === "/companies") {
             console.log("✅ API: Returning mock companies data", mockCompanies);
@@ -4424,13 +4502,13 @@ class ApiClient {
               config: error.config
             });
           }
-          if (url == null ? void 0 : url.includes("/expense-types")) {
+          if ((url == null ? void 0 : url.includes("/expense-types")) && ((_h = (_g = error.config) == null ? void 0 : _g.method) == null ? void 0 : _h.toUpperCase()) === "GET") {
             const companyIdMatch = url.match(/\/companies\/([^/]+)\/expense-types/);
             const companyId = companyIdMatch == null ? void 0 : companyIdMatch[1];
-            console.log(`✅ API: Returning mock expense types for company: ${companyId}`);
-            const expenseTypes = companyId && mockExpenseTypes[companyId] ? mockExpenseTypes[companyId] : [];
+            console.log(`✅ API: Returning dynamic expense types for company: ${companyId}`);
+            const expenseTypes = companyId && dynamicExpenseTypes[companyId] ? dynamicExpenseTypes[companyId] : [];
             return Promise.resolve({
-              data: { data: expenseTypes },
+              data: { data: expenseTypes, total: expenseTypes.length, companyId },
               status: 200,
               statusText: "OK",
               headers: { "content-type": "application/json" },
@@ -4476,10 +4554,10 @@ class ApiClient {
             });
           }
         }
-        if (((_c = error.response) == null ? void 0 : _c.status) === 401) {
+        if (((_i = error.response) == null ? void 0 : _i.status) === 401) {
           await this.handleUnauthorized();
         }
-        if (((_d = error.response) == null ? void 0 : _d.status) === 429) {
+        if (((_j = error.response) == null ? void 0 : _j.status) === 429) {
           const retryAfter = error.response.headers["retry-after"];
           if (retryAfter) {
             await this.delay(parseInt(retryAfter) * 1e3);
