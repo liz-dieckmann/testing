@@ -4,7 +4,7 @@ import { E as ExpensesList } from "./ExpensesList-t4Kt9t33.js";
 import { c as createLucideIcon, U, J as Jn, t as tr, Q as Qn, a as tt, Y as Yn, F as Fn, N as Nn, $ as $n, D as Dn, P as Pn, V as Vn, b as Pr, L as Ln, H as Hn, k as kn, A as An } from "./createLucideIcon-CfH1iyFR.js";
 import { I as Icon } from "./Icon-Wf3UDBMf.js";
 import { L as LoadingSpinner, u as useQueryClient } from "./LoadingSpinner-CJp2omDf.js";
-import { d as apiClient, R as RoutePaths } from "./axiosInstance-Bl1yIpuu.js";
+import { d as apiClient, R as RoutePaths } from "./axiosInstance-BiB8Ce56.js";
 import { u as useMutation } from "./useMutation-eZm-mCcH.js";
 import { F as FileText, C as ChartColumn, a as CreditCard, u as useNavigate, b as ChevronRight } from "./file-text-azDgsO3u.js";
 import { S as Send } from "./send-Dqyf82OZ.js";
@@ -241,6 +241,8 @@ const ReceiptUpload = ({
       const newAttachment = {
         id: uploadResponse.id,
         url: uploadResponse.url,
+        blobUrl: uploadResponse.blobUrl,
+        // Include blob URL from response
         filename: uploadResponse.filename,
         originalName: file.name,
         size: file.size,

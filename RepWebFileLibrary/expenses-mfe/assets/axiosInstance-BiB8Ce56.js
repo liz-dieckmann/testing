@@ -4588,10 +4588,17 @@ class ApiClient {
               }
               const fileId = `receipt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
               const serverUrl = `https://storage.yourapp.com/receipts/${fileId}.${fileType}`;
+              let blobUrl = "";
+              if (originalFile) {
+                blobUrl = URL.createObjectURL(originalFile);
+                console.log("🔥 AXIOS FALLBACK: Created blob URL for preview:", blobUrl);
+              }
               const mockResponse = {
                 id: fileId,
                 url: serverUrl,
-                // Server URL, not blob URL
+                // Server URL (fake)
+                blobUrl,
+                // Real blob URL for immediate preview
                 filename: `${fileId}.${fileType}`,
                 originalName: (originalFile == null ? void 0 : originalFile.name) || `file.${fileType}`,
                 size: fileSize,

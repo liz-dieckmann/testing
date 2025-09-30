@@ -1,7 +1,7 @@
 import { R as Removable, j as replaceData, c as noop, k as resolveEnabled, s as skipToken, r as resolveStaleTime, t as timeUntilStale, l as createRetryer, C as CancelledError, n as notifyManager, e as ensureQueryFn, q as canFetch, S as Subscribable, v as pendingThenable, w as shallowEqualObjects, x as isServer, y as isValidTimeout, z as timeoutManager, f as focusManager, A as shouldThrowError, u as useQueryClient } from "./LoadingSpinner-CJp2omDf.js";
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import "./jsx-runtime-DLKWXVrv.js";
-import { f as create, g as devtools, s as subscribeWithSelector, i as immer } from "./axiosInstance-Bl1yIpuu.js";
+import { f as create, g as devtools, s as subscribeWithSelector, i as immer } from "./axiosInstance-BiB8Ce56.js";
 var Query = class extends Removable {
   #initialState;
   #revertState;
