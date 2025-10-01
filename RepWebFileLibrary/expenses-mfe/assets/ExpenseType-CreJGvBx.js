@@ -6056,7 +6056,10 @@ const ExpenseTypeTable = ({ className }) => {
   ], [
     editingRowId,
     stableControl,
-    stableShowMileageRate
+    stableShowMileageRate,
+    formHook.errors,
+    formHook.touchedFields,
+    formHook.dirtyFields
   ]);
   const actionsColumn = useMemo(
     () => createActionsColumn({
