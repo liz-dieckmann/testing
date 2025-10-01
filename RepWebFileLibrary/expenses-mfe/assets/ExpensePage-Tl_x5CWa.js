@@ -1,14 +1,14 @@
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
-import { E as ExpensesList } from "./ExpensesList-ZBMT558d.js";
-import { c as createLucideIcon, D as De, m as ma, w as wa, h as ha, x as xn, p as pa, B as Bo, O as Oo, G as Go, X as Xo, j as jo, Y as Yo, J as Ja, Z as Zo, a as Jo, e as ea, Q as Qo } from "./createLucideIcon-pu26MF0q.js";
+import { E as ExpensesList } from "./ExpensesList-Cz8AoCuh.js";
+import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, m as ma, w as wa, h as ha, x as xn, p as pa, B as Bo, O as Oo, G as Go, X as Xo, j as jo, Y as Yo, J as Ja, Z as Zo, a as Jo, e as ea, Q as Qo } from "./createLucideIcon-Cx5kkPig.js";
 import { I as Icon } from "./Icon-CPUYJCTZ.js";
 import { L as LoadingSpinner, u as useQueryClient } from "./LoadingSpinner-CJp2omDf.js";
 import { A as AllowedMimeType, v as validateReceiptFile, g as generateAcceptAttribute, a as getFilePreviewType, F as FilePreviewType, b as getSupportedFormatsText } from "./receipt-DLrGlexy.js";
 import { d as apiClient, R as RoutePaths } from "./axiosInstance-BiB8Ce56.js";
 import { u as useMutation } from "./useMutation-eZm-mCcH.js";
-import { F as FileText, C as ChartColumn, a as CreditCard, u as useNavigate, b as ChevronRight } from "./file-text-C5PLCptG.js";
-import { S as Send } from "./send-VjcpEmS2.js";
+import { F as FileText, C as ChartColumn, a as CreditCard, u as useNavigate, b as ChevronRight } from "./file-text-D-1Vmcw6.js";
+import { S as Send } from "./send-D8pJQYWU.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -63,6 +63,60 @@ const __iconNode = [
   ["path", { d: "M8 11h.01", key: "1dfujw" }]
 ];
 const MessageSquareMore = createLucideIcon("message-square-more", __iconNode);
+await importShared("react");
+const ConfirmDialog = ({
+  open,
+  onOpenChange,
+  title,
+  description,
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
+  onConfirm,
+  onCancel,
+  isLoading = false,
+  variant = "error",
+  confirmButtonClassName = "",
+  cancelButtonClassName = ""
+}) => {
+  const handleConfirm = async () => {
+    await onConfirm();
+  };
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    } else {
+      onOpenChange(false);
+    }
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ya, { open, onOpenChange, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Ca, { className: "max-w-md", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(Ra, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Na, { className: "text-base font-semibold text-exp-neutral-600", children: title }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(Fa, { className: "text-sm font-normal text-exp-grey-600", children: description })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(_a, { className: "gap-3 sm:gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        De,
+        {
+          variant: "soft",
+          onClick: handleCancel,
+          disabled: isLoading,
+          className: `min-w-20 ${cancelButtonClassName}`,
+          children: cancelLabel
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        De,
+        {
+          variant,
+          onClick: handleConfirm,
+          disabled: isLoading,
+          className: `min-w-20 ${confirmButtonClassName}`,
+          children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { className: "size-5" }) : confirmLabel
+        }
+      )
+    ] })
+  ] }) });
+};
 const DANGEROUS_PATTERNS = [
   /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
   /javascript:/gi,
@@ -127,7 +181,7 @@ const sanitizeUrl = (url) => {
   }
 };
 const validateFileContent = async (file) => {
-  var _a;
+  var _a2;
   const fileSignatures = [
     {
       mimeTypes: [AllowedMimeType.PNG],
@@ -212,9 +266,9 @@ const validateFileContent = async (file) => {
         message: "Unknown file format. File content does not match any supported format."
       };
     }
-    const expectedTypes = ((_a = fileSignatures.find(
+    const expectedTypes = ((_a2 = fileSignatures.find(
       (s) => s.mimeTypes.includes(detectedType)
-    )) == null ? void 0 : _a.mimeTypes) || [];
+    )) == null ? void 0 : _a2.mimeTypes) || [];
     if (expectedTypes.includes(file.type)) {
       return { isValid: true, actualMimeType: detectedType };
     }
@@ -232,7 +286,7 @@ const validateFileContent = async (file) => {
   }
 };
 const createSafeFileMetadata = (file, response) => {
-  var _a;
+  var _a2;
   return {
     id: response.id || `receipt-${Date.now()}`,
     url: sanitizeUrl(response.url) || "",
@@ -240,7 +294,7 @@ const createSafeFileMetadata = (file, response) => {
     filename: sanitizeFileName(response.filename || file.name),
     originalName: sanitizeFileName(file.name),
     size: Math.min(file.size, Number.MAX_SAFE_INTEGER),
-    type: ((_a = response.type) == null ? void 0 : _a.replace(/[^a-zA-Z0-9]/g, "")) || "unknown",
+    type: ((_a2 = response.type) == null ? void 0 : _a2.replace(/[^a-zA-Z0-9]/g, "")) || "unknown",
     mimeType: file.type,
     uploadedAt: new Date(response.uploadedAt || Date.now()).toISOString(),
     status: "uploaded"
@@ -274,7 +328,7 @@ setInterval(() => {
 const UPLOAD_TIMEOUT = 12e4;
 const MAX_RETRIES = 2;
 const uploadReceiptFile = async (file, onProgress, retryCount = 0) => {
-  var _a, _b, _c;
+  var _a2, _b, _c;
   const userKey = "global_upload";
   if (!checkRateLimit(userKey, 10, 6e4)) {
     throw new Error("Too many upload attempts. Please wait before trying again.");
@@ -317,7 +371,7 @@ const uploadReceiptFile = async (file, onProgress, retryCount = 0) => {
     if (error.name === "CanceledError" || error.code === "ECONNABORTED") {
       throw new Error("Upload timeout. Please check your connection and try again.");
     }
-    const status = (_a = error.response) == null ? void 0 : _a.status;
+    const status = (_a2 = error.response) == null ? void 0 : _a2.status;
     const message = (_c = (_b = error.response) == null ? void 0 : _b.data) == null ? void 0 : _c.message;
     switch (status) {
       case 413:
@@ -345,12 +399,12 @@ const uploadReceiptFile = async (file, onProgress, retryCount = 0) => {
   }
 };
 const deleteReceiptFile = async (receiptId) => {
-  var _a, _b;
+  var _a2, _b;
   try {
     await apiClient.delete(`/files/receipts/${receiptId}`);
   } catch (error) {
     console.error("Failed to delete receipt:", error);
-    throw new Error(((_b = (_a = error.response) == null ? void 0 : _a.data) == null ? void 0 : _b.message) || "Failed to delete receipt");
+    throw new Error(((_b = (_a2 = error.response) == null ? void 0 : _a2.data) == null ? void 0 : _b.message) || "Failed to delete receipt");
   }
 };
 const PREVIEWABLE_MIME_TYPES = /* @__PURE__ */ new Set([
@@ -365,11 +419,11 @@ const canPreviewFile = (attachment) => {
 const BLOB_URL_CLEANUP_DELAY = 5e3;
 const BLOB_URL_REGISTRY = /* @__PURE__ */ new WeakMap();
 const registerBlobUrl = (window2, url) => {
-  var _a;
+  var _a2;
   if (!BLOB_URL_REGISTRY.has(window2)) {
     BLOB_URL_REGISTRY.set(window2, /* @__PURE__ */ new Set());
   }
-  (_a = BLOB_URL_REGISTRY.get(window2)) == null ? void 0 : _a.add(url);
+  (_a2 = BLOB_URL_REGISTRY.get(window2)) == null ? void 0 : _a2.add(url);
 };
 const cleanupBlobUrl = (url) => {
   try {
@@ -450,6 +504,8 @@ const ReceiptUpload = ({
     dragActive: false
   });
   const [_uploadProgress, setUploadProgress] = useState$1(0);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState$1(false);
+  const [isDeleting, setIsDeleting] = useState$1(false);
   const blobUrlsRef = useRef$1(/* @__PURE__ */ new Set());
   useEffect(() => {
     return () => {
@@ -507,8 +563,8 @@ const ReceiptUpload = ({
     }
   }, [handleError, onReceiptChange]);
   const handleFileSelect = useCallback((event) => {
-    var _a;
-    const file = (_a = event.target.files) == null ? void 0 : _a[0];
+    var _a2;
+    const file = (_a2 = event.target.files) == null ? void 0 : _a2[0];
     if (file) {
       handleFileUpload(file);
     }
@@ -517,12 +573,17 @@ const ReceiptUpload = ({
     }
   }, [handleFileUpload]);
   const handleChooseFileClick = useCallback(() => {
-    var _a;
+    var _a2;
     if (disabled || uploadState.isUploading) return;
-    (_a = fileInputRef.current) == null ? void 0 : _a.click();
+    (_a2 = fileInputRef.current) == null ? void 0 : _a2.click();
   }, [disabled, uploadState.isUploading]);
-  const handleDeleteReceipt = useCallback(async () => {
+  const handleDeleteClick = useCallback(() => {
     if (!uploadState.attachment || disabled) return;
+    setIsDeleteDialogOpen(true);
+  }, [uploadState.attachment, disabled]);
+  const handleDeleteConfirm = useCallback(async () => {
+    if (!uploadState.attachment || disabled) return;
+    setIsDeleting(true);
     try {
       await deleteReceiptFile(uploadState.attachment.id);
       if (uploadState.attachment.blobUrl) {
@@ -539,14 +600,20 @@ const ReceiptUpload = ({
         error: void 0
       }));
       onReceiptChange == null ? void 0 : onReceiptChange(void 0);
+      setIsDeleteDialogOpen(false);
     } catch (error) {
       handleError({
         type: "network",
         message: "Failed to delete receipt",
         details: error.message
       });
+    } finally {
+      setIsDeleting(false);
     }
   }, [uploadState.attachment, disabled, handleError, onReceiptChange]);
+  const handleDeleteCancel = useCallback(() => {
+    setIsDeleteDialogOpen(false);
+  }, []);
   const handlePreviewClick = useCallback(async () => {
     if (uploadState.attachment) {
       try {
@@ -580,10 +647,10 @@ const ReceiptUpload = ({
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-exp-grey-600 font-normal", children: "Uploading file..." })
   ] });
   const renderErrorState = () => {
-    var _a;
+    var _a2;
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center p-8 text-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "size-24 flex items-center justify-center bg-exp-red-100 rounded-full mb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "error-outline", className: "size-14 text-exp-red-500" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-medium text-exp-red-500 mb-3", children: (_a = uploadState.error) == null ? void 0 : _a.message }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-medium text-exp-red-500 mb-3", children: (_a2 = uploadState.error) == null ? void 0 : _a2.message }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(De, { variant: "soft", size: "sm", onClick: handleChooseFileClick, children: "Choose file" })
     ] });
   };
@@ -641,7 +708,7 @@ const ReceiptUpload = ({
           De,
           {
             variant: "error-ghost",
-            onClick: handleDeleteReceipt,
+            onClick: handleDeleteClick,
             className: "rounded-full !bg-white/70",
             title: "Delete receipt",
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "delete", className: "size-5 text-exp-red-500" })
@@ -689,6 +756,20 @@ const ReceiptUpload = ({
         onChange: handleFileSelect,
         className: "hidden",
         disabled
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ConfirmDialog,
+      {
+        open: isDeleteDialogOpen,
+        onOpenChange: setIsDeleteDialogOpen,
+        title: "Delete receipt",
+        description: "Are you sure you want to delete this receipt?",
+        confirmLabel: "Delete",
+        cancelLabel: "Cancel",
+        onConfirm: handleDeleteConfirm,
+        onCancel: handleDeleteCancel,
+        isLoading: isDeleting
       }
     )
   ] });
@@ -1140,10 +1221,10 @@ const NewExpensePage = () => {
     }
   };
   const handleSaveDraftClick = (e) => {
-    var _a;
+    var _a2;
     e.preventDefault();
     e.stopPropagation();
-    (_a = expenseFormRef.current) == null ? void 0 : _a.saveDraft();
+    (_a2 = expenseFormRef.current) == null ? void 0 : _a2.saveDraft();
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(ExpensesList, {}),

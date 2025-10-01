@@ -657,6 +657,10 @@
     max-width: 100%;
   }
 
+  .min-w-20 {
+    min-width: calc(var(--spacing) * 20);
+  }
+
   .min-w-full {
     min-width: 100%;
   }
@@ -1051,6 +1055,10 @@
 
     .sm\:justify-between {
       justify-content: space-between;
+    }
+
+    .sm\:gap-3 {
+      gap: calc(var(--spacing) * 3);
     }
 
     .sm\:px-6 {

@@ -1,5 +1,5 @@
 import { importShared } from "./__federation_fn_import-CFnudcB9.js";
-import { c as createLucideIcon } from "./createLucideIcon-pu26MF0q.js";
+import { c as createLucideIcon } from "./createLucideIcon-Cx5kkPig.js";
 /**
  * react-router v7.9.3
  *

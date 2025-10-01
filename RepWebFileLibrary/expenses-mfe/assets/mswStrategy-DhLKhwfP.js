@@ -9886,7 +9886,7 @@ const fileHandlers = [
   }),
   // Delete receipt file
   http.delete("*/files/receipts/:fileId", async ({ params }) => {
-    await delay(500);
+    await delay(1500);
     const { fileId } = params;
     if (!uploadedFiles.has(fileId)) {
       return HttpResponse.json(
