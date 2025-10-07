@@ -1,4 +1,4 @@
-import { m as mockCompanies, k as mockExpenseTypes, l as mockBusinessPurposes, n as mockFormTypeOptions, o as mockMileageRateOptions } from "./axiosInstance-RihxE3WN.js";
+import { m as mockCompanies, k as mockExpenseTypes, l as mockBusinessPurposes, n as mockFormTypeOptions, o as mockMileageRateOptions } from "./axiosInstance-B6ouNjq7.js";
 import { A as AllowedMimeType, M as MIME_TYPE_CONFIG } from "./receipt-DLrGlexy.js";
 function isObject$1(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
@@ -9494,7 +9494,6 @@ const companyHandlers = [
   })
 ];
 const dynamicExpenseTypes = { ...mockExpenseTypes };
-const dynamicBusinessPurposes = { ...mockBusinessPurposes };
 const receiptDrafts = {};
 const expenseHandlers = [
   // Get expense types for a company
@@ -9611,38 +9610,22 @@ const expenseHandlers = [
       created: /* @__PURE__ */ new Date(),
       modified: /* @__PURE__ */ new Date()
     };
-    if (!dynamicBusinessPurposes[companyId]) {
-      dynamicBusinessPurposes[companyId] = [];
-    }
-    dynamicBusinessPurposes[companyId].push(created);
     return HttpResponse.json({ data: created }, { status: 201 });
   }),
   // Update business purpose
   http.patch("http://localhost:3001/api/business-purposes/:id", async ({ params, request }) => {
     await delay(300);
     const updates = await request.json();
-    let foundPurpose = null;
-    let foundCompanyId = null;
-    let foundIndex = -1;
-    for (const [companyId, purposes] of Object.entries(dynamicBusinessPurposes)) {
-      const index = purposes.findIndex((p) => p.id === params.id);
-      if (index !== -1) {
-        foundPurpose = purposes[index];
-        foundCompanyId = companyId;
-        foundIndex = index;
-        break;
-      }
-    }
-    if (!foundPurpose || !foundCompanyId) {
+    const allPurposes = Object.values(mockBusinessPurposes).flat();
+    const purpose = allPurposes.find((p) => p.id === params.id);
+    if (!purpose) {
       return new HttpResponse(null, { status: 404 });
     }
     const updated = {
-      ...foundPurpose,
+      ...purpose,
       ...updates,
       modified: /* @__PURE__ */ new Date()
     };
-    dynamicBusinessPurposes[foundCompanyId][foundIndex] = updated;
-    console.log(`🚀 MSW: Updated business purpose ${params.id}:`, updated);
     return HttpResponse.json({ data: updated });
   }),
   // Toggle business purpose status
