@@ -155,8 +155,8 @@ export {
   AllowedMimeType as A,
   FilePreviewType as F,
   MIME_TYPE_CONFIG as M,
-  getFilePreviewType as a,
-  getSupportedFormatsText as b,
-  generateAcceptAttribute as g,
+  generateAcceptAttribute as a,
+  getFilePreviewType as b,
+  getSupportedFormatsText as g,
   validateReceiptFile as v
 };
