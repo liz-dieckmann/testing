@@ -1,10 +1,11 @@
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-Tw1OVUoU.js";
+import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-tpJ3mtQJ.js";
 import { u as useQueryClient, L as LoadingSpinner } from "./LoadingSpinner-C-M1heDl.js";
 import { u as useMutation } from "./useMutation-BddyCFSz.js";
-import { d as apiClient } from "./axiosInstance-ZqQAdNHh.js";
-import { u as useExpenseStore, o as object, s as string, l as literal, a as useForm, b as a, T as Table2, C as Controller, c as Check, X, P as Pencil, E as EllipsisVertical } from "./schemas-BoSiWx0C.js";
+import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
+import { u as useExpenseStore, o as object, s as string, l as literal, a as useForm, b as a, T as Table2, C as Controller, c as Check, X, P as Pencil, E as EllipsisVertical } from "./schemas-BQdMg9MM.js";
+import { B as BUSINESS_PURPOSE_ENDPOINTS } from "./endpoints-CSCgD8A_.js";
 import { D as De, b as Oo, K as Ka, i as m, l as Xa } from "./createLucideIcon-DHpz6jFt.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
 const { useEffect: useEffect$2 } = await importShared("react");
@@ -16,7 +17,7 @@ const useBusinessPurposes = (companyId, includeInactive = false) => {
       if (!companyId) throw new Error("Company ID is required");
       const params = includeInactive ? { includeInactive: "true" } : {};
       const response = await apiClient.get(
-        `/companies/${companyId}/business-purposes`,
+        BUSINESS_PURPOSE_ENDPOINTS.GET_BY_COMPANY(companyId),
         { params }
       );
       return response.data.data;
@@ -45,7 +46,10 @@ const useCreateBusinessPurpose = () => {
   const { addBusinessPurpose } = useExpenseStore();
   return useMutation({
     mutationFn: async ({ companyId, data }) => {
-      const response = await apiClient.post(`/companies/${companyId}/business-purposes`, data);
+      const response = await apiClient.post(
+        BUSINESS_PURPOSE_ENDPOINTS.CREATE(companyId),
+        data
+      );
       return response.data.data;
     },
     onSuccess: (newBusinessPurpose) => {
@@ -59,7 +63,10 @@ const useUpdateBusinessPurpose = () => {
   const { updateBusinessPurpose } = useExpenseStore();
   return useMutation({
     mutationFn: async ({ id, data }) => {
-      const response = await apiClient.patch(`/business-purposes/${id}`, data);
+      const response = await apiClient.patch(
+        BUSINESS_PURPOSE_ENDPOINTS.UPDATE(id),
+        data
+      );
       return response.data.data;
     },
     onMutate: async ({ id, data }) => {

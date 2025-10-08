@@ -14,7 +14,7 @@ const ICON_NAMES = [
   "text-line-unknown"
 ];
 const ICON_METADATA = {
-  generatedAt: "2025-10-07T18:09:27.877Z"
+  generatedAt: "2025-10-08T02:23:50.938Z"
 };
 const React = await importShared("react");
 const { useMemo, useState } = React;

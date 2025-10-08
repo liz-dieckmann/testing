@@ -1,29 +1,100 @@
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-Tw1OVUoU.js";
+import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-tpJ3mtQJ.js";
 import { u as useQueryClient, L as LoadingSpinner } from "./LoadingSpinner-C-M1heDl.js";
 import { u as useMutation } from "./useMutation-BddyCFSz.js";
-import { d as apiClient, E as ExpenseFormType } from "./axiosInstance-ZqQAdNHh.js";
-import { u as useExpenseStore, o as object, n as number, _ as _enum, s as string, l as literal, a as useForm, b as a, T as Table2, C as Controller, c as Check, X, P as Pencil, E as EllipsisVertical } from "./schemas-BoSiWx0C.js";
+import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
+import { u as useExpenseStore, o as object, n as number, _ as _enum, s as string, l as literal, a as useForm, b as a, T as Table2, C as Controller, c as Check, X, P as Pencil, E as EllipsisVertical } from "./schemas-BQdMg9MM.js";
 import { D as De, b as Oo, B as Bo, K as Ka, i as m, k as ar, l as Xa } from "./createLucideIcon-DHpz6jFt.js";
 import { L as LayoutDashboard } from "./layout-dashboard-uSn23VCD.js";
+var ExpenseFormType = /* @__PURE__ */ ((ExpenseFormType2) => {
+  ExpenseFormType2["STANDARD"] = "standard";
+  ExpenseFormType2["ENTERTAINMENT"] = "entertainment";
+  ExpenseFormType2["MILEAGE"] = "mileage";
+  return ExpenseFormType2;
+})(ExpenseFormType || {});
 const { useEffect: useEffect$2 } = await importShared("react");
-const useExpenseTypes = (companyId, includeInactive = false) => {
+const API_BASE_PATH = "/api/v1.0/configuration";
+const mapBackendToFrontend = (backend) => {
+  return {
+    id: backend.Id.toString(),
+    name: backend.ExpenseTypeName,
+    description: backend.ExpenseTypeDescription || "",
+    formType: getFormTypeEnum(backend.FormTypeId),
+    status: backend.IsActive ? "active" : "inactive",
+    mileage: backend.MileageRateId || void 0,
+    created: new Date(backend.CreatedDate),
+    modified: backend.UpdatedDate ? new Date(backend.UpdatedDate) : new Date(backend.CreatedDate),
+    // Legacy fields for compatibility
+    type: backend.ExpenseTypeName,
+    updated: backend.UpdatedDate ? new Date(backend.UpdatedDate) : new Date(backend.CreatedDate)
+  };
+};
+const mapFrontendToBackendCreate = (frontend) => {
+  return {
+    FormTypeId: getFormTypeId(frontend.formType || "standard"),
+    ExpenseTypeName: frontend.name || "",
+    ExpenseTypeDescription: frontend.description || "",
+    MileageRate: frontend.formType === "mileage" ? frontend.mileage || null : null,
+    CreatedBy: getCurrentUser()
+  };
+};
+const mapFrontendToBackendUpdate = (id, frontend) => {
+  const update = {
+    Id: parseInt(id, 10),
+    UpdatedBy: getCurrentUser()
+  };
+  if (frontend.name !== void 0) {
+    update.ExpenseTypeName = frontend.name;
+  }
+  if (frontend.description !== void 0) {
+    update.ExpenseTypeDescription = frontend.description;
+  }
+  if (frontend.status !== void 0) {
+    update.IsActive = frontend.status === "active";
+  }
+  return update;
+};
+const getFormTypeId = (formType) => {
+  const normalizedType = typeof formType === "string" ? formType.toLowerCase() : formType;
+  const formTypeMap = {
+    "standard": 1,
+    "mileage": 2,
+    "entertainment": 3
+  };
+  return formTypeMap[normalizedType] || 1;
+};
+const getFormTypeEnum = (formTypeId) => {
+  const formTypeMap = {
+    1: ExpenseFormType.STANDARD,
+    2: ExpenseFormType.MILEAGE,
+    3: ExpenseFormType.ENTERTAINMENT
+  };
+  return formTypeMap[formTypeId] || ExpenseFormType.STANDARD;
+};
+const getCurrentUser = () => {
+  return "current-user";
+};
+const useExpenseTypes = (companyShortName, includeInactive = false) => {
   const { setExpenseTypes, setLoadingExpenseTypes, setExpenseTypesError } = useExpenseStore();
   const query = useQuery({
-    queryKey: ["expense-types", companyId, includeInactive],
+    queryKey: ["expense-types", companyShortName, includeInactive],
     queryFn: async () => {
-      if (!companyId) throw new Error("Company ID is required");
-      const params = includeInactive ? { includeInactive: "true" } : {};
+      if (!companyShortName) throw new Error("Company short name is required");
+      const params = {
+        show_inactive: includeInactive
+      };
       const response = await apiClient.get(
-        `/companies/${companyId}/expense-types`,
+        `${API_BASE_PATH}/${encodeURIComponent(companyShortName)}/expense-types`,
         { params }
       );
-      return response.data.data;
+      return response.data.map(mapBackendToFrontend);
     },
-    enabled: !!companyId,
-    staleTime: 3 * 1e3
-    // 3 seconds
+    enabled: !!companyShortName,
+    staleTime: 2 * 60 * 1e3,
+    // 2 minutes
+    gcTime: 5 * 60 * 1e3
+    // 5 minutes
   });
   useEffect$2(() => {
     if (query.data) {
@@ -40,20 +111,43 @@ const useExpenseTypes = (companyId, includeInactive = false) => {
   }, [query.error, setExpenseTypesError, setLoadingExpenseTypes]);
   return query;
 };
-const simulateApiDelay = async (ms = 1500) => {
-};
 const useCreateExpenseType = () => {
   const queryClient = useQueryClient();
   const { addExpenseType } = useExpenseStore();
   return useMutation({
-    mutationFn: async ({ companyId, data }) => {
-      await simulateApiDelay(1500);
-      const response = await apiClient.post(`/companies/${companyId}/expense-types`, data);
-      return response.data.data;
+    mutationFn: async ({ companyShortName, data }) => {
+      var _a, _b, _c, _d;
+      const createData = mapFrontendToBackendCreate(data);
+      console.log("Creating expense type:", {
+        url: `${API_BASE_PATH}/${encodeURIComponent(companyShortName)}/expense-type`,
+        payload: createData,
+        companyShortName
+      });
+      try {
+        const response = await apiClient.post(
+          `${API_BASE_PATH}/${encodeURIComponent(companyShortName)}/expense-type`,
+          createData
+        );
+        console.log("Create expense type response:", response.data);
+        return mapBackendToFrontend(response.data);
+      } catch (error) {
+        console.error("Create expense type failed:", {
+          status: (_a = error.response) == null ? void 0 : _a.status,
+          statusText: (_b = error.response) == null ? void 0 : _b.statusText,
+          data: (_c = error.response) == null ? void 0 : _c.data,
+          headers: (_d = error.response) == null ? void 0 : _d.headers
+        });
+        throw error;
+      }
     },
-    onSuccess: (newExpenseType) => {
-      queryClient.invalidateQueries({ queryKey: ["expense-types"] });
+    onSuccess: (newExpenseType, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["expense-types", variables.companyShortName]
+      });
       addExpenseType(newExpenseType);
+    },
+    onError: (error) => {
+      console.error("Failed to create expense type:", error);
     }
   });
 };
@@ -61,32 +155,26 @@ const useUpdateExpenseType = () => {
   const queryClient = useQueryClient();
   const { updateExpenseType } = useExpenseStore();
   return useMutation({
-    mutationFn: async ({ id, data }) => {
-      await simulateApiDelay(1200);
-      const response = await apiClient.patch(`/expense-types/${id}`, data);
-      return response.data.data;
+    mutationFn: async ({
+      companyShortName,
+      id,
+      data
+    }) => {
+      const updateData = mapFrontendToBackendUpdate(id, data);
+      const response = await apiClient.put(
+        `${API_BASE_PATH}/${encodeURIComponent(companyShortName)}/expense-type`,
+        updateData
+      );
+      return mapBackendToFrontend(response.data);
     },
-    onMutate: async ({ id, data }) => {
-      await queryClient.cancelQueries({ queryKey: ["expense-types", "detail", id] });
-      const previousExpenseType = queryClient.getQueryData(["expense-types", "detail", id]);
-      queryClient.setQueryData(["expense-types", "detail", id], (old) => ({
-        ...old,
-        ...data,
-        modified: /* @__PURE__ */ new Date()
-      }));
-      return { previousExpenseType };
-    },
-    onError: (_err, variables, context) => {
-      if (context == null ? void 0 : context.previousExpenseType) {
-        queryClient.setQueryData(
-          ["expense-types", "detail", variables.id],
-          context.previousExpenseType
-        );
-      }
-    },
-    onSuccess: (updatedExpenseType) => {
+    onSuccess: (updatedExpenseType, variables) => {
       updateExpenseType(updatedExpenseType.id, updatedExpenseType);
-      queryClient.invalidateQueries({ queryKey: ["expense-types"] });
+      queryClient.invalidateQueries({
+        queryKey: ["expense-types", variables.companyShortName]
+      });
+    },
+    onError: (error) => {
+      console.error("Failed to update expense type:", error);
     }
   });
 };
@@ -94,8 +182,36 @@ const useFormTypeOptions = () => {
   return useQuery({
     queryKey: ["form-type-options"],
     queryFn: async () => {
-      const response = await apiClient.get("/form-type-options");
-      return response.data.data;
+      const formTypes = [
+        {
+          id: "1",
+          value: "standard",
+          label: "Standard",
+          description: "Standard expense form",
+          isActive: true,
+          created: /* @__PURE__ */ new Date("2024-01-01"),
+          modified: /* @__PURE__ */ new Date("2024-01-01")
+        },
+        {
+          id: "2",
+          value: "mileage",
+          label: "Mileage",
+          description: "Mileage expense form",
+          isActive: true,
+          created: /* @__PURE__ */ new Date("2024-01-01"),
+          modified: /* @__PURE__ */ new Date("2024-01-01")
+        },
+        {
+          id: "3",
+          value: "entertainment",
+          label: "Entertainment",
+          description: "Entertainment expense form",
+          isActive: true,
+          created: /* @__PURE__ */ new Date("2024-01-01"),
+          modified: /* @__PURE__ */ new Date("2024-01-01")
+        }
+      ];
+      return formTypes;
     },
     staleTime: 5 * 60 * 1e3
     // 5 minutes - these don't change often
@@ -105,10 +221,33 @@ const useMileageRateOptions = () => {
   return useQuery({
     queryKey: ["mileage-rate-options"],
     queryFn: async () => {
-      const response = await apiClient.get("/mileage-rate-options");
+      const mileageRates = [
+        {
+          id: "1",
+          value: "0.67",
+          label: "2024 Rate - $0.67/km",
+          rate: 0.67,
+          description: "Standard mileage rate for 2024",
+          isActive: true,
+          effectiveDate: /* @__PURE__ */ new Date("2024-01-01"),
+          created: /* @__PURE__ */ new Date("2024-01-01"),
+          modified: /* @__PURE__ */ new Date("2024-01-01")
+        },
+        {
+          id: "2",
+          value: "0.65",
+          label: "2023 Rate - $0.65/km",
+          rate: 0.65,
+          description: "Standard mileage rate for 2023",
+          isActive: false,
+          effectiveDate: /* @__PURE__ */ new Date("2023-01-01"),
+          created: /* @__PURE__ */ new Date("2023-01-01"),
+          modified: /* @__PURE__ */ new Date("2023-01-01")
+        }
+      ];
       return {
-        rates: response.data.data,
-        currentRate: response.data.currentRate
+        rates: mileageRates,
+        currentRate: mileageRates.find((rate) => rate.isActive)
       };
     },
     staleTime: 5 * 60 * 1e3
@@ -385,7 +524,8 @@ const useExpenseTypeOperations = (companyId, onSuccess) => {
         status: "active"
       };
       await createExpenseTypeMutation.mutateAsync({
-        companyId,
+        companyShortName: companyId,
+        // companyId here is actually the short name
         data: expenseTypeData
       });
       onSuccess == null ? void 0 : onSuccess();
@@ -395,6 +535,7 @@ const useExpenseTypeOperations = (companyId, onSuccess) => {
     }
   }, [companyId, createExpenseTypeMutation, onSuccess]);
   const handleUpdateExpenseType = useCallback$1(async (id, data) => {
+    if (!companyId) return;
     try {
       const expenseTypeData = {
         name: data.name.trim(),
@@ -403,13 +544,18 @@ const useExpenseTypeOperations = (companyId, onSuccess) => {
         mileage: data.formType === "mileage" ? data.mileageRate : void 0,
         updated: /* @__PURE__ */ new Date()
       };
-      await updateExpenseTypeMutation.mutateAsync({ id, data: expenseTypeData });
+      await updateExpenseTypeMutation.mutateAsync({
+        companyShortName: companyId,
+        // companyId here is actually the short name
+        id,
+        data: expenseTypeData
+      });
       onSuccess == null ? void 0 : onSuccess();
     } catch (error) {
       console.error("Failed to update expense type:", error);
       throw error;
     }
-  }, [updateExpenseTypeMutation, onSuccess]);
+  }, [companyId, updateExpenseTypeMutation, onSuccess]);
   return {
     handleCreateExpenseType,
     handleUpdateExpenseType,

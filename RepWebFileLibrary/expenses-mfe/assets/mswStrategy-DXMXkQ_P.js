@@ -1,5 +1,6 @@
-import { m as mockCompanies, k as mockExpenseTypes, l as mockBusinessPurposes, n as mockFormTypeOptions, o as mockMileageRateOptions } from "./axiosInstance-ZqQAdNHh.js";
 import { A as AllowedMimeType, M as MIME_TYPE_CONFIG } from "./receipt-rJbbN-xt.js";
+import { E as ENDPOINT_PATTERNS } from "./endpoints-CSCgD8A_.js";
+import { m as mockBusinessPurposes, s as shouldMockEndpoint } from "./index-Bf0LqBxT.js";
 function isObject$1(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
 }
@@ -9459,309 +9460,16 @@ async function delay(durationOrMode) {
   }
   return new Promise((resolve) => setTimeout(resolve, delayTime));
 }
+function passthrough() {
+  return new Response(null, {
+    status: 302,
+    statusText: "Passthrough",
+    headers: {
+      "x-msw-intention": "passthrough"
+    }
+  });
+}
 checkGlobals();
-const companyHandlers = [
-  // Get all companies
-  http.get("http://localhost:3001/api/companies", async () => {
-    console.log("🚀 MSW: Intercepting GET /api/companies");
-    await delay(300);
-    return HttpResponse.json({
-      data: mockCompanies,
-      total: mockCompanies.length,
-      page: 1,
-      pageSize: 20
-    });
-  }),
-  // Get single company
-  http.get("http://localhost:3001/api/companies/:id", async ({ params }) => {
-    await delay(200);
-    const company = mockCompanies.find((c) => c.id === params.id);
-    if (!company) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    return HttpResponse.json({ data: company });
-  }),
-  // Update company
-  http.patch("http://localhost:3001/api/companies/:id", async ({ params, request }) => {
-    await delay(300);
-    const updates = await request.json();
-    const company = mockCompanies.find((c) => c.id === params.id);
-    if (!company) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    const updated = { ...company, ...updates, updatedAt: /* @__PURE__ */ new Date() };
-    return HttpResponse.json({ data: updated });
-  })
-];
-const dynamicExpenseTypes = { ...mockExpenseTypes };
-const dynamicBusinessPurposes = { ...mockBusinessPurposes };
-const receiptDrafts = {};
-const expenseHandlers = [
-  // Get expense types for a company
-  http.get("http://localhost:3001/api/companies/:companyId/expense-types", async ({ params }) => {
-    console.log(`🚀 MSW: Intercepting GET /api/companies/${params.companyId}/expense-types`);
-    await delay(300);
-    const companyId = params.companyId;
-    const expenseTypes = dynamicExpenseTypes[companyId] || [];
-    return HttpResponse.json({
-      data: expenseTypes,
-      total: expenseTypes.length,
-      companyId
-    });
-  }),
-  // Get single expense type
-  http.get("http://localhost:3001/api/expense-types/:id", async ({ params }) => {
-    await delay(200);
-    const allTypes = Object.values(dynamicExpenseTypes).flat();
-    const expenseType = allTypes.find((t) => t.id === params.id);
-    if (!expenseType) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    return HttpResponse.json({ data: expenseType });
-  }),
-  // Create expense type
-  http.post("http://localhost:3001/api/companies/:companyId/expense-types", async ({ params, request }) => {
-    await delay(400);
-    const companyId = params.companyId;
-    const newType = await request.json();
-    const created = {
-      ...newType,
-      id: `exp-${companyId}-${Date.now()}`,
-      created: /* @__PURE__ */ new Date(),
-      modified: /* @__PURE__ */ new Date(),
-      // Legacy compatibility
-      type: newType.name,
-      updated: /* @__PURE__ */ new Date(),
-      mileageRate: newType.mileage
-    };
-    if (!dynamicExpenseTypes[companyId]) {
-      dynamicExpenseTypes[companyId] = [];
-    }
-    dynamicExpenseTypes[companyId].push(created);
-    console.log(`🚀 MSW: Created expense type for ${companyId}:`, created);
-    return HttpResponse.json({ data: created }, { status: 201 });
-  }),
-  // Update expense type
-  http.patch("http://localhost:3001/api/expense-types/:id", async ({ params, request }) => {
-    await delay(300);
-    const updates = await request.json();
-    let foundExpenseType = null;
-    let foundCompanyId = null;
-    let foundIndex = -1;
-    for (const [companyId, types] of Object.entries(dynamicExpenseTypes)) {
-      const index = types.findIndex((t) => t.id === params.id);
-      if (index !== -1) {
-        foundExpenseType = types[index];
-        foundCompanyId = companyId;
-        foundIndex = index;
-        break;
-      }
-    }
-    if (!foundExpenseType || !foundCompanyId) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    const updated = {
-      ...foundExpenseType,
-      ...updates,
-      modified: /* @__PURE__ */ new Date(),
-      updated: /* @__PURE__ */ new Date(),
-      // Legacy compatibility
-      type: updates.name || foundExpenseType.name,
-      mileageRate: updates.mileage || foundExpenseType.mileage
-    };
-    dynamicExpenseTypes[foundCompanyId][foundIndex] = updated;
-    console.log(`🚀 MSW: Updated expense type ${params.id}:`, updated);
-    return HttpResponse.json({ data: updated });
-  }),
-  // Delete expense type
-  http.delete("http://localhost:3001/api/expense-types/:id", async () => {
-    await delay(300);
-    return new HttpResponse(null, { status: 204 });
-  }),
-  // Get business purposes for a company
-  http.get("http://localhost:3001/api/companies/:companyId/business-purposes", async ({ params }) => {
-    console.log(`🚀 MSW: Intercepting GET /api/companies/${params.companyId}/business-purposes`);
-    await delay(300);
-    const companyId = params.companyId;
-    const purposes = mockBusinessPurposes[companyId] || [];
-    return HttpResponse.json({
-      data: purposes,
-      total: purposes.length,
-      companyId
-    });
-  }),
-  // Get single business purpose
-  http.get("http://localhost:3001/api/business-purposes/:id", async ({ params }) => {
-    await delay(200);
-    const allPurposes = Object.values(mockBusinessPurposes).flat();
-    const purpose = allPurposes.find((p) => p.id === params.id);
-    if (!purpose) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    return HttpResponse.json({ data: purpose });
-  }),
-  // Create business purpose
-  http.post("http://localhost:3001/api/companies/:companyId/business-purposes", async ({ params, request }) => {
-    await delay(400);
-    const companyId = params.companyId;
-    const newPurpose = await request.json();
-    const created = {
-      ...newPurpose,
-      id: `bp-${companyId}-${Date.now()}`,
-      created: /* @__PURE__ */ new Date(),
-      modified: /* @__PURE__ */ new Date()
-    };
-    if (!dynamicBusinessPurposes[companyId]) {
-      dynamicBusinessPurposes[companyId] = [];
-    }
-    dynamicBusinessPurposes[companyId].push(created);
-    return HttpResponse.json({ data: created }, { status: 201 });
-  }),
-  // Update business purpose
-  http.patch("http://localhost:3001/api/business-purposes/:id", async ({ params, request }) => {
-    await delay(300);
-    const updates = await request.json();
-    let foundPurpose = null;
-    let foundCompanyId = null;
-    let foundIndex = -1;
-    for (const [companyId, purposes] of Object.entries(dynamicBusinessPurposes)) {
-      const index = purposes.findIndex((p) => p.id === params.id);
-      if (index !== -1) {
-        foundPurpose = purposes[index];
-        foundCompanyId = companyId;
-        foundIndex = index;
-        break;
-      }
-    }
-    if (!foundPurpose || !foundCompanyId) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    const updated = {
-      ...foundPurpose,
-      ...updates,
-      modified: /* @__PURE__ */ new Date()
-    };
-    dynamicBusinessPurposes[foundCompanyId][foundIndex] = updated;
-    console.log(`🚀 MSW: Updated business purpose ${params.id}:`, updated);
-    return HttpResponse.json({ data: updated });
-  }),
-  // Toggle business purpose status
-  http.post("http://localhost:3001/api/business-purposes/:id/toggle", async ({ params }) => {
-    await delay(200);
-    const allPurposes = Object.values(mockBusinessPurposes).flat();
-    const purpose = allPurposes.find((p) => p.id === params.id);
-    if (!purpose) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    const updated = {
-      ...purpose,
-      isActive: !purpose.isActive,
-      modified: /* @__PURE__ */ new Date()
-    };
-    return HttpResponse.json({ data: updated });
-  }),
-  // Delete business purpose
-  http.delete("http://localhost:3001/api/business-purposes/:id", async () => {
-    await delay(300);
-    return new HttpResponse(null, { status: 204 });
-  }),
-  // Get form type options
-  http.get("http://localhost:3001/api/form-type-options", async () => {
-    console.log("🚀 MSW: Intercepting GET /api/form-type-options");
-    await delay(200);
-    const activeOptions = mockFormTypeOptions.filter((option) => option.isActive);
-    return HttpResponse.json({
-      data: activeOptions,
-      total: activeOptions.length
-    });
-  }),
-  // Get mileage rate options
-  http.get("http://localhost:3001/api/mileage-rate-options", async () => {
-    console.log("🚀 MSW: Intercepting GET /api/mileage-rate-options");
-    await delay(200);
-    return HttpResponse.json({
-      data: mockMileageRateOptions,
-      total: mockMileageRateOptions.length,
-      currentRate: mockMileageRateOptions.find((rate) => rate.isActive)
-    });
-  }),
-  // Receipt Draft endpoints
-  // Save receipt draft
-  http.post("http://localhost:3001/api/companies/:companyId/receipt-drafts", async ({ params, request }) => {
-    console.log(`🚀 MSW: Intercepting POST /api/companies/${params.companyId}/receipt-drafts`);
-    await delay(800);
-    const companyId = params.companyId;
-    const draftData = await request.json();
-    const newDraft = {
-      id: `draft-${companyId}-${Date.now()}`,
-      receiptAttachment: draftData.receiptAttachment,
-      isReceiptUnavailable: draftData.isReceiptUnavailable,
-      companyId,
-      userId: "current-user",
-      createdAt: /* @__PURE__ */ new Date(),
-      updatedAt: /* @__PURE__ */ new Date()
-    };
-    if (!receiptDrafts[companyId]) {
-      receiptDrafts[companyId] = [];
-    }
-    receiptDrafts[companyId].push(newDraft);
-    console.log(`🚀 MSW: Saved receipt draft for ${companyId}:`, newDraft);
-    return HttpResponse.json({ data: newDraft }, { status: 201 });
-  }),
-  // Save receipt draft (without company)
-  http.post("http://localhost:3001/api/receipt-drafts", async ({ request }) => {
-    console.log("🚀 MSW: Intercepting POST /api/receipt-drafts");
-    await delay(800);
-    const draftData = await request.json();
-    const newDraft = {
-      id: `draft-${Date.now()}`,
-      receiptAttachment: draftData.receiptAttachment,
-      isReceiptUnavailable: draftData.isReceiptUnavailable,
-      userId: "current-user",
-      createdAt: /* @__PURE__ */ new Date(),
-      updatedAt: /* @__PURE__ */ new Date()
-    };
-    console.log("🚀 MSW: Saved receipt draft:", newDraft);
-    return HttpResponse.json({ data: newDraft }, { status: 201 });
-  }),
-  // Get receipt drafts for a company
-  http.get("http://localhost:3001/api/companies/:companyId/receipt-drafts", async ({ params }) => {
-    console.log(`🚀 MSW: Intercepting GET /api/companies/${params.companyId}/receipt-drafts`);
-    await delay(300);
-    const companyId = params.companyId;
-    const drafts = receiptDrafts[companyId] || [];
-    return HttpResponse.json({
-      data: drafts,
-      total: drafts.length,
-      companyId
-    });
-  }),
-  // Get single receipt draft
-  http.get("http://localhost:3001/api/receipt-drafts/:id", async ({ params }) => {
-    console.log(`🚀 MSW: Intercepting GET /api/receipt-drafts/${params.id}`);
-    await delay(200);
-    const allDrafts = Object.values(receiptDrafts).flat();
-    const draft = allDrafts.find((d) => d.id === params.id);
-    if (!draft) {
-      return new HttpResponse(null, { status: 404 });
-    }
-    return HttpResponse.json({ data: draft });
-  }),
-  // Delete receipt draft
-  http.delete("http://localhost:3001/api/receipt-drafts/:id", async ({ params }) => {
-    console.log(`🚀 MSW: Intercepting DELETE /api/receipt-drafts/${params.id}`);
-    await delay(500);
-    for (const [companyId, drafts] of Object.entries(receiptDrafts)) {
-      const index = drafts.findIndex((d) => d.id === params.id);
-      if (index !== -1) {
-        drafts.splice(index, 1);
-        console.log(`🚀 MSW: Deleted receipt draft ${params.id} from ${companyId}`);
-        break;
-      }
-    }
-    return new HttpResponse(null, { status: 204 });
-  })
-];
 const uploadedFiles = /* @__PURE__ */ new Map();
 const validateFile = (file) => {
   const allowedTypes = Object.values(AllowedMimeType);
@@ -9799,7 +9507,7 @@ const generateCloudStorageUrl = (fileId, fileExtension) => {
 };
 const fileHandlers = [
   // Upload supporting file
-  http.post("*/files/supporting", async ({ request }) => {
+  http.post(ENDPOINT_PATTERNS.FILES_SUPPORTING_UPLOAD, async ({ request }) => {
     var _a2;
     console.log("🔥 MSW: Intercepting supporting file upload request", { url: request.url });
     await delay(1e3);
@@ -9898,7 +9606,7 @@ const fileHandlers = [
     }
   }),
   // Delete supporting file
-  http.delete("*/files/supporting/:fileId", async ({ params }) => {
+  http.delete(ENDPOINT_PATTERNS.FILES_SUPPORTING_DELETE, async ({ params }) => {
     const { fileId } = params;
     console.log("🔥 MSW: Deleting supporting file", { fileId });
     await delay(500);
@@ -9918,7 +9626,7 @@ const fileHandlers = [
     );
   }),
   // Upload receipt file - match the actual axios request URL
-  http.post("*/files/receipts", async ({ request }) => {
+  http.post(ENDPOINT_PATTERNS.FILES_RECEIPTS_UPLOAD, async ({ request }) => {
     var _a2;
     console.log("🔥 MSW: Intercepting file upload request", { url: request.url });
     await delay(1500);
@@ -10021,7 +9729,7 @@ const fileHandlers = [
     }
   }),
   // Delete receipt file
-  http.delete("*/files/receipts/:fileId", async ({ params }) => {
+  http.delete(ENDPOINT_PATTERNS.FILES_RECEIPTS_DELETE, async ({ params }) => {
     await delay(1500);
     const { fileId } = params;
     if (!uploadedFiles.has(fileId)) {
@@ -10041,7 +9749,7 @@ const fileHandlers = [
     );
   }),
   // Get receipt file download URL (for files that need special download handling)
-  http.get("*/files/receipts/:fileId/download", async ({ params }) => {
+  http.get(ENDPOINT_PATTERNS.FILES_RECEIPTS_DOWNLOAD, async ({ params }) => {
     const { fileId } = params;
     const file = uploadedFiles.get(fileId);
     if (!file) {
@@ -10063,7 +9771,7 @@ const fileHandlers = [
     });
   }),
   // Get receipt file metadata
-  http.get("*/files/receipts/:fileId", async ({ params }) => {
+  http.get(ENDPOINT_PATTERNS.FILES_RECEIPTS_GET, async ({ params }) => {
     const { fileId } = params;
     const file = uploadedFiles.get(fileId);
     if (!file) {
@@ -10089,7 +9797,7 @@ const fileHandlers = [
     });
   }),
   // Serve uploaded files (simulate cloud storage endpoint)
-  http.get("https://storage.yourapp.com/receipts/:filename", ({ params }) => {
+  http.get(ENDPOINT_PATTERNS.FILES_STORAGE, ({ params }) => {
     const { filename } = params;
     const file = Array.from(uploadedFiles.values()).find((f) => f.filename === filename);
     if (!file || !file.data) {
@@ -10107,15 +9815,162 @@ const fileHandlers = [
     });
   })
 ];
-const handlers = [
-  ...companyHandlers,
-  ...expenseHandlers,
-  ...fileHandlers
+const businessPurposeStore = /* @__PURE__ */ new Map();
+Object.entries(mockBusinessPurposes).forEach(([companyId, purposes]) => {
+  businessPurposeStore.set(companyId, new Map(purposes.map((bp) => [bp.id, bp])));
+});
+let nextId = 1e3;
+const generateId = () => `bp-${Date.now()}-${nextId++}`;
+const businessPurposeHandlers = [
+  // Get business purposes for a company
+  http.get(ENDPOINT_PATTERNS.BUSINESS_PURPOSE_BY_COMPANY, async ({ params, request }) => {
+    console.log("🔥 MSW: Intercepting business purposes request", { url: request.url, params });
+    await delay(300);
+    const { companyId } = params;
+    const url = new URL(request.url);
+    const includeInactive = url.searchParams.get("includeInactive") === "true";
+    const companyPurposes = businessPurposeStore.get(companyId);
+    if (!companyPurposes) {
+      console.log("⚠️ MSW: No business purposes found for company", companyId);
+      const response2 = {
+        data: [],
+        status: 200,
+        timestamp: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      return HttpResponse.json(response2, { status: 200 });
+    }
+    let purposes = Array.from(companyPurposes.values());
+    if (!includeInactive) {
+      purposes = purposes.filter((bp) => bp.isActive);
+    }
+    console.log("✅ MSW: Returning business purposes", {
+      companyId,
+      count: purposes.length,
+      includeInactive
+    });
+    const response = {
+      data: purposes,
+      status: 200,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    return HttpResponse.json(response, { status: 200 });
+  }),
+  // Create business purpose
+  http.post(ENDPOINT_PATTERNS.BUSINESS_PURPOSE_BY_COMPANY, async ({ params, request }) => {
+    console.log("🔥 MSW: Intercepting create business purpose", { params });
+    await delay(500);
+    const { companyId } = params;
+    const data = await request.json();
+    const newBusinessPurpose = {
+      id: generateId(),
+      businessPurpose: data.businessPurpose || "",
+      description: data.description || "",
+      isActive: data.isActive !== void 0 ? data.isActive : true,
+      created: /* @__PURE__ */ new Date(),
+      modified: /* @__PURE__ */ new Date()
+    };
+    let companyPurposes = businessPurposeStore.get(companyId);
+    if (!companyPurposes) {
+      companyPurposes = /* @__PURE__ */ new Map();
+      businessPurposeStore.set(companyId, companyPurposes);
+    }
+    companyPurposes.set(newBusinessPurpose.id, newBusinessPurpose);
+    console.log("✅ MSW: Business purpose created", newBusinessPurpose);
+    const response = {
+      data: newBusinessPurpose,
+      status: 201,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    return HttpResponse.json(response, { status: 201 });
+  }),
+  // Update business purpose
+  http.patch(ENDPOINT_PATTERNS.BUSINESS_PURPOSE_CRUD, async ({ params, request }) => {
+    console.log("🔥 MSW: Intercepting update business purpose", { params });
+    await delay(300);
+    const { id } = params;
+    const data = await request.json();
+    let foundPurpose;
+    let foundCompanyId;
+    for (const [companyId, purposes] of businessPurposeStore.entries()) {
+      const purpose = purposes.get(id);
+      if (purpose) {
+        foundPurpose = purpose;
+        foundCompanyId = companyId;
+        break;
+      }
+    }
+    if (!foundPurpose || !foundCompanyId) {
+      return HttpResponse.json(
+        { error: "Business purpose not found" },
+        { status: 404 }
+      );
+    }
+    const updatedPurpose = {
+      ...foundPurpose,
+      ...data,
+      id: foundPurpose.id,
+      // Keep original ID
+      created: foundPurpose.created,
+      // Keep original created date
+      modified: /* @__PURE__ */ new Date()
+      // Update modified date
+    };
+    businessPurposeStore.get(foundCompanyId).set(updatedPurpose.id, updatedPurpose);
+    console.log("✅ MSW: Business purpose updated", updatedPurpose);
+    const response = {
+      data: updatedPurpose,
+      status: 200,
+      timestamp: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    return HttpResponse.json(response, { status: 200 });
+  }),
+  // Delete business purpose (soft delete - set isActive to false)
+  http.delete(ENDPOINT_PATTERNS.BUSINESS_PURPOSE_CRUD, async ({ params }) => {
+    console.log("🔥 MSW: Intercepting delete business purpose", { params });
+    await delay(300);
+    const { id } = params;
+    let found = false;
+    for (const purposes of businessPurposeStore.values()) {
+      const purpose = purposes.get(id);
+      if (purpose) {
+        purpose.isActive = false;
+        purpose.modified = /* @__PURE__ */ new Date();
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      return HttpResponse.json(
+        { error: "Business purpose not found" },
+        { status: 404 }
+      );
+    }
+    console.log("✅ MSW: Business purpose deleted (soft)", { id });
+    return HttpResponse.json({ message: "Deleted successfully" }, { status: 200 });
+  })
 ];
-const worker = setupWorker(...handlers);
+const handlers = [
+  ...fileHandlers,
+  ...businessPurposeHandlers
+];
+const createSmartHandler = () => {
+  return http.all("*", async ({ request }) => {
+    const url = request.url;
+    if (shouldMockEndpoint(url)) {
+      return;
+    }
+    console.log("🔄 MSW: Passing through to real backend:", url);
+    return passthrough();
+  });
+};
+const worker = setupWorker(createSmartHandler(), ...handlers);
 const startOptions = {
-  onUnhandledRequest: "bypass",
-  // Don't warn about unhandled requests
+  onUnhandledRequest(request) {
+    const url = new URL(request.url);
+    if (url.pathname.includes("/api/") || url.pathname.includes("/files/")) {
+      console.log("⚠️ MSW: Unhandled request (bypassing):", request.url);
+    }
+  },
   serviceWorker: {
     url: "/mockServiceWorker.js"
   }
