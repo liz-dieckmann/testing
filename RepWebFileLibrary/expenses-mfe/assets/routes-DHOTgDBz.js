@@ -1,7 +1,7 @@
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { c as createLucideIcon } from "./createLucideIcon-DHpz6jFt.js";
+import { c as createLucideIcon } from "./createLucideIcon-1g8Meoed.js";
 /**
- * react-router v7.9.3
+ * react-router v7.9.4
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -5781,7 +5781,7 @@ var isBrowser = typeof window !== "undefined" && typeof window.document !== "und
 try {
   if (isBrowser) {
     window.__reactRouterVersion = // @ts-expect-error
-    "7.9.3";
+    "7.9.4";
   }
 } catch (e) {
 }

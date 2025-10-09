@@ -134,14 +134,39 @@ const getSupportedFormatsText = () => {
   return `Upload ${imageFormats.join(", ")} (max. ${FILE_SIZE_LIMITS.IMAGE_MAX_SIZE_MB}MB) or ${pdfFormat} (max. ${FILE_SIZE_LIMITS.PDF_MAX_SIZE_MB}MB)`;
 };
 const validateReceiptFile = (file) => {
-  if (!isValidMimeType(file.type)) {
+  const fileName = file.name.toLowerCase();
+  const hasAllowedExtension = [".png", ".jpg", ".jpeg", ".heic", ".heif", ".webp", ".pdf"].some((ext) => fileName.endsWith(ext));
+  if (file.type && !isValidMimeType(file.type)) {
     return {
       type: "type",
       message: "Unsupported file type: File must be PNG, JPG/JPEG, HEIC/HEIF, WebP or PDF",
       details: `Received MIME type: ${file.type}`
     };
   }
-  const config = MIME_TYPE_CONFIG.get(file.type);
+  if (!file.type && !hasAllowedExtension) {
+    return {
+      type: "type",
+      message: "Unsupported file type: File must be PNG, JPG/JPEG, HEIC/HEIF, WebP or PDF",
+      details: `Unknown file type with extension: ${fileName.split(".").pop()}`
+    };
+  }
+  let mimeType = file.type;
+  if (!file.type && hasAllowedExtension) {
+    if (fileName.endsWith(".heic")) mimeType = "image/heic";
+    else if (fileName.endsWith(".heif")) mimeType = "image/heif";
+    else if (fileName.endsWith(".png")) mimeType = "image/png";
+    else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) mimeType = "image/jpeg";
+    else if (fileName.endsWith(".webp")) mimeType = "image/webp";
+    else if (fileName.endsWith(".pdf")) mimeType = "application/pdf";
+  }
+  const config = MIME_TYPE_CONFIG.get(mimeType);
+  if (!config) {
+    return {
+      type: "type",
+      message: "Unsupported file type: File must be PNG, JPG/JPEG, HEIC/HEIF, WebP or PDF",
+      details: `Could not determine file configuration for: ${mimeType}`
+    };
+  }
   if (file.size > config.maxSizeBytes) {
     return {
       type: "size",

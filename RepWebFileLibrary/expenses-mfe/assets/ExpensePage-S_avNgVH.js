@@ -1,17 +1,17 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/core-Dbi-QRzc.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/_commonjsHelpers-CUmg6egw.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
-import { E as ExpensesList } from "./ExpensesList-50Cklw0S.js";
-import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, p as pa, w as wa, B as Bo, b as Oo, d as Go, X as Xo, e as jo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-DHpz6jFt.js";
+import { E as ExpensesList } from "./ExpensesList-DGl4tmT2.js";
+import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, p as pa, w as wa, B as Bo, b as Oo, d as Go, X as Xo, e as jo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-1g8Meoed.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
 import { L as LoadingSpinner, u as useQueryClient } from "./LoadingSpinner-C-M1heDl.js";
-import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType } from "./receipt-rJbbN-xt.js";
+import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType } from "./receipt-BjxWsBul.js";
 import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
 import { F as FILE_ENDPOINTS } from "./endpoints-B6EuaDvp.js";
 import { u as useMutation } from "./useMutation-BddyCFSz.js";
-import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-BvbgC800.js";
-import { S as Send } from "./send-BOQgxVi_.js";
+import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-DHOTgDBz.js";
+import { S as Send } from "./send-jC1ojNZN.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -358,16 +358,8 @@ const validateFileContent = async (file) => {
     {
       mimeTypes: [AllowedMimeType.JPEG, AllowedMimeType.JPG],
       signatures: [
-        new Uint8Array([255, 216, 255, 224]),
-        // JPEG/JFIF
-        new Uint8Array([255, 216, 255, 225]),
-        // JPEG/Exif
-        new Uint8Array([255, 216, 255, 226]),
-        // JPEG/Canon
-        new Uint8Array([255, 216, 255, 232]),
-        // JPEG/SPIFF
-        new Uint8Array([255, 216, 255, 219])
-        // JPEG/Quantization
+        new Uint8Array([255, 216, 255])
+        // JPEG (check first 3 bytes only)
       ],
       description: "JPEG image signature"
     },
@@ -384,20 +376,13 @@ const validateFileContent = async (file) => {
         // RIFF
       ],
       description: "WebP image signature (RIFF container)"
-    },
-    {
-      mimeTypes: [AllowedMimeType.HEIF, AllowedMimeType.HEIC],
-      signatures: [
-        new Uint8Array([0, 0, 0, 24, 102, 116, 121, 112]),
-        // ftyp box
-        new Uint8Array([0, 0, 0, 28, 102, 116, 121, 112])
-        // ftyp box variant
-      ],
-      description: "HEIF/HEIC image signature"
     }
+    // NOTE: HEIC/HEIF validation is handled by file-type package in validateFileContentEnhanced
+    // This custom validation only handles files with valid MIME types (PNG, JPEG, PDF, WebP)
   ];
   try {
-    const arrayBuffer = await file.slice(0, 12).arrayBuffer();
+    const headerSize = 512;
+    const arrayBuffer = await file.slice(0, headerSize).arrayBuffer();
     const bytes = new Uint8Array(arrayBuffer);
     let detectedType = null;
     for (const check of fileSignatures) {
@@ -410,6 +395,30 @@ const validateFileContent = async (file) => {
         break;
       }
     }
+    if (detectedType) {
+      const maliciousSignatures = [
+        [77, 90],
+        // MZ (EXE/DLL)
+        [127, 69, 76, 70],
+        // ELF (Linux executable)
+        [202, 254, 186, 190],
+        // Mach-O (macOS executable)
+        [35, 33],
+        // #! (Shell script)
+        [60, 63, 112, 104, 112]
+        // <?php
+      ];
+      for (let i = 1; i < Math.min(bytes.length - 4, headerSize - 4); i++) {
+        for (const malSig of maliciousSignatures) {
+          if (malSig.every((byte, offset) => bytes[i + offset] === byte)) {
+            return {
+              isValid: false,
+              message: "File contains suspicious executable patterns. Possible polyglot attack."
+            };
+          }
+        }
+      }
+    }
     if (detectedType === AllowedMimeType.WEBP) {
       const webpCheck = new Uint8Array([87, 69, 66, 80]);
       const webpMatches = webpCheck.every((byte, index) => bytes[index + 8] === byte);
@@ -417,19 +426,23 @@ const validateFileContent = async (file) => {
         detectedType = null;
       }
     }
-    if (!detectedType) {
-      const allowedUnverifiableTypes = [
-        AllowedMimeType.HEIF,
-        AllowedMimeType.HEIC,
-        AllowedMimeType.WEBP
+    if (detectedType === AllowedMimeType.PDF) {
+      const pdfText = new TextDecoder("utf-8", { fatal: false }).decode(bytes);
+      const dangerousPatterns = [
+        "/JavaScript",
+        "/JS",
+        "/Launch",
+        "/SubmitForm",
+        "/ImportData"
       ];
-      if (allowedUnverifiableTypes.includes(file.type)) {
-        console.warn("Cannot verify file signature for:", file.type, "Allowing based on extension.");
-        return { isValid: true, actualMimeType: file.type };
+      if (dangerousPatterns.some((pattern) => pdfText.includes(pattern))) {
+        console.warn("PDF contains potentially dangerous features:", pdfText.substring(0, 200));
       }
+    }
+    if (!detectedType) {
       return {
         isValid: false,
-        message: "Unknown file format. File content does not match any supported format."
+        message: "Unable to verify file type. File content does not match any supported format."
       };
     }
     const expectedTypes = ((_a2 = fileSignatures.find(
@@ -508,7 +521,9 @@ const loadFileTypeModule = async () => {
 };
 const validateFileContentEnhanced = async (file) => {
   try {
-    if (file.type === "image/heic" || file.type === "image/heif" || file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif")) {
+    const shouldUseFileType = file.type === "image/heic" || file.type === "image/heif" || !file.type || // Windows may not provide MIME type
+    file.name.toLowerCase().endsWith(".heic") || file.name.toLowerCase().endsWith(".heif");
+    if (shouldUseFileType) {
       try {
         const fileType = await loadFileTypeModule();
         const buffer = await file.slice(0, 4100).arrayBuffer();
@@ -528,10 +543,24 @@ const validateFileContentEnhanced = async (file) => {
               isValid: true,
               actualMimeType: mappedMime
             };
+          } else {
+            return {
+              isValid: false,
+              message: `Unsupported file type detected: ${result.mime}`
+            };
           }
+        } else {
+          return {
+            isValid: false,
+            message: "Unable to verify file type. File may be corrupted or unsupported."
+          };
         }
       } catch (error) {
-        console.warn("file-type validation failed, falling back to custom validation:", error);
+        console.error("file-type validation failed:", error);
+        return {
+          isValid: false,
+          message: "File validation failed. Please try again with a valid file."
+        };
       }
     }
     const { validateFileContent: validateFileContent2 } = await __vitePreload(async () => {
@@ -549,7 +578,8 @@ const validateFileContentEnhanced = async (file) => {
 };
 const shouldUseEnhancedValidation = (file) => {
   const fileName2 = file.name.toLowerCase();
-  return fileName2.endsWith(".heic") || fileName2.endsWith(".heif") || file.type === "image/heic" || file.type === "image/heif";
+  return !file.type || // No MIME type - need enhanced detection
+  fileName2.endsWith(".heic") || fileName2.endsWith(".heif") || file.type === "image/heic" || file.type === "image/heif";
 };
 const UPLOAD_TIMEOUT$1 = 12e4;
 const MAX_RETRIES$1 = 2;
@@ -563,8 +593,15 @@ const uploadSupportingFile = async (file, onProgress, retryCount = 0) => {
   if (!validationResult.isValid) {
     throw new Error(validationResult.message || "File content does not match the declared type.");
   }
+  let fileToUpload = file;
+  if (validationResult.actualMimeType && validationResult.actualMimeType !== file.type) {
+    fileToUpload = new File([file], file.name, {
+      type: validationResult.actualMimeType,
+      lastModified: file.lastModified
+    });
+  }
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("file", fileToUpload);
   formData.append("type", "supporting");
   formData.append("originalName", file.name);
   const controller = new AbortController();
@@ -638,8 +675,15 @@ const uploadReceiptFile = async (file, onProgress, retryCount = 0) => {
   if (!validationResult.isValid) {
     throw new Error(validationResult.message || "File content does not match the declared type.");
   }
+  let fileToUpload = file;
+  if (validationResult.actualMimeType && validationResult.actualMimeType !== file.type) {
+    fileToUpload = new File([file], file.name, {
+      type: validationResult.actualMimeType,
+      lastModified: file.lastModified
+    });
+  }
   const formData = new FormData();
-  formData.append("file", file);
+  formData.append("file", fileToUpload);
   formData.append("type", "receipt");
   formData.append("originalName", file.name);
   const controller = new AbortController();
@@ -762,7 +806,7 @@ const openFilePreview = async (attachment) => {
   if (previewUrl.startsWith("https://storage.expensesapp.com/")) {
     try {
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 3e4);
+      const timeoutId = setTimeout(() => controller.abort(), UPLOAD_TIMEOUT);
       const response = await fetch(previewUrl, {
         signal: controller.signal,
         mode: "cors",
@@ -1707,7 +1751,7 @@ const ExpenseForm = forwardRef(({
               className: ""
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          !formData.receiptAttachment && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             pa,
             {
               label: "Unavailable",

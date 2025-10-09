@@ -1,5 +1,5 @@
 import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
-import { s as shouldMockEndpoint, m as mockBusinessPurposes } from "./index-DtsOMDP2.js";
+import { s as shouldMockEndpoint, m as mockBusinessPurposes } from "./index-B-BhrhQu.js";
 import { F as FILE_ENDPOINTS } from "./endpoints-B6EuaDvp.js";
 const uploadedFiles = /* @__PURE__ */ new Map();
 const businessPurposeStore = /* @__PURE__ */ new Map();
