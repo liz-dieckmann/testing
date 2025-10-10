@@ -1,5 +1,5 @@
 import { F as FILE_ENDPOINTS, a as ENDPOINT_REGEX } from "./endpoints-B6EuaDvp.js";
-import { e as RouteCompanyIds } from "./routes-DHOTgDBz.js";
+import { e as RouteCompanyIds } from "./routes-YnS7qqhP.js";
 const MOCKED_ENDPOINT_PATHS = [
   // File upload endpoints - currently mocked (no backend implementation yet)
   FILE_ENDPOINTS.RECEIPTS_UPLOAD,

@@ -1,17 +1,17 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/core-Dbi-QRzc.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/_commonjsHelpers-CUmg6egw.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
-import { E as ExpensesList } from "./ExpensesList-DGl4tmT2.js";
-import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, p as pa, w as wa, B as Bo, b as Oo, d as Go, X as Xo, e as jo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-1g8Meoed.js";
+import { E as ExpensesList } from "./ExpensesList-CVCqX-cX.js";
+import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, b as jo, p as pa, w as wa, B as Bo, d as Oo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-DyT7YbiM.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
 import { L as LoadingSpinner, u as useQueryClient } from "./LoadingSpinner-C-M1heDl.js";
-import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType } from "./receipt-BjxWsBul.js";
+import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
 import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
 import { F as FILE_ENDPOINTS } from "./endpoints-B6EuaDvp.js";
-import { u as useMutation } from "./useMutation-BddyCFSz.js";
-import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-DHOTgDBz.js";
-import { S as Send } from "./send-jC1ojNZN.js";
+import { C as Controller, o as object, s as string, b as boolean, c as custom, a as array, u as useMutation, d as useForm, e as a } from "./schemas-BbJoaiI5.js";
+import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-YnS7qqhP.js";
+import { S as Send } from "./send-BD6-HR5P.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -844,7 +844,7 @@ const splitFilename = (filename) => {
   };
 };
 const React$1 = await importShared("react");
-const { useCallback: useCallback$1, useEffect: useEffect$2, useRef: useRef$2, useState: useState$2 } = React$1;
+const { useCallback: useCallback$2, useEffect: useEffect$3, useRef: useRef$3, useState: useState$3 } = React$1;
 function fileName(fileName2) {
   const { name, ext } = splitFilename(fileName2);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -927,19 +927,19 @@ function SupportingFiles({
   disabled = false,
   className = ""
 }) {
-  const fileInputRef = useRef$2(null);
-  const [state, setState] = useState$2({
+  const fileInputRef = useRef$3(null);
+  const [state, setState] = useState$3({
     attachments: initialFiles,
     isUploading: false,
     errors: /* @__PURE__ */ new Map()
   });
-  const [deleteDialogState, setDeleteDialogState] = useState$2({
+  const [deleteDialogState, setDeleteDialogState] = useState$3({
     isOpen: false,
     fileIndex: null,
     isDeleting: false
   });
-  const blobUrlsRef = useRef$2(/* @__PURE__ */ new Set());
-  useEffect$2(() => {
+  const blobUrlsRef = useRef$3(/* @__PURE__ */ new Set());
+  useEffect$3(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => {
         try {
@@ -951,13 +951,13 @@ function SupportingFiles({
       blobUrlsRef.current.clear();
     };
   }, []);
-  const handleAddSupportingDocumentClick = useCallback$1((e) => {
+  const handleAddSupportingDocumentClick = useCallback$2((e) => {
     var _a2;
     e.preventDefault();
     if (disabled || state.isUploading) return;
     (_a2 = fileInputRef.current) == null ? void 0 : _a2.click();
   }, [disabled, state.isUploading]);
-  const handleFileChange = useCallback$1(async (e) => {
+  const handleFileChange = useCallback$2(async (e) => {
     var _a2, _b;
     const newFiles = Array.from(e.target.files || []);
     if (newFiles.length === 0) return;
@@ -1045,7 +1045,7 @@ function SupportingFiles({
       setState((prev) => {
         const newAttachments = [...prev.attachments, ...processedFiles];
         const newErrors = new Map([...prev.errors, ...fileErrors]);
-        const successfulAttachments = newAttachments.filter((a) => a.status !== "error");
+        const successfulAttachments = newAttachments.filter((a2) => a2.status !== "error");
         onFilesChange == null ? void 0 : onFilesChange(successfulAttachments);
         return {
           ...prev,
@@ -1060,7 +1060,7 @@ function SupportingFiles({
       fileInputRef.current.value = "";
     }
   }, [state.attachments, onFilesChange]);
-  const handleRemoveFile = useCallback$1((index) => {
+  const handleRemoveFile = useCallback$2((index) => {
     if (disabled || state.isUploading) return;
     setDeleteDialogState({
       isOpen: true,
@@ -1068,7 +1068,7 @@ function SupportingFiles({
       isDeleting: false
     });
   }, [disabled, state.isUploading]);
-  const handleDeleteConfirm = useCallback$1(async () => {
+  const handleDeleteConfirm = useCallback$2(async () => {
     const fileIndex = deleteDialogState.fileIndex;
     if (fileIndex === null || disabled) return;
     setDeleteDialogState((prev) => ({ ...prev, isDeleting: true }));
@@ -1098,7 +1098,7 @@ function SupportingFiles({
               reindexedErrors.set(oldIndex, error);
             }
           });
-          const successfulAttachments = newAttachments.filter((a) => a.status !== "error");
+          const successfulAttachments = newAttachments.filter((a2) => a2.status !== "error");
           onFilesChange == null ? void 0 : onFilesChange(successfulAttachments);
           return {
             ...prev,
@@ -1118,14 +1118,14 @@ function SupportingFiles({
       isDeleting: false
     });
   }, [deleteDialogState.fileIndex, state.attachments, disabled, onFilesChange]);
-  const handleDeleteCancel = useCallback$1(() => {
+  const handleDeleteCancel = useCallback$2(() => {
     setDeleteDialogState({
       isOpen: false,
       fileIndex: null,
       isDeleting: false
     });
   }, []);
-  const handlePreviewClick = useCallback$1(async (file) => {
+  const handlePreviewClick = useCallback$2(async (file) => {
     if (file.status === "error") {
       return;
     }
@@ -1138,7 +1138,7 @@ function SupportingFiles({
       });
     }
   }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ha, { className: `flex items-center flex-col w-full ${className}`, children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ha, { className: `flex items-center flex-col w-full h-fit overflow-clip ${className}`, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-row w-full items-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         xn,
@@ -1234,25 +1234,26 @@ function SupportingFiles({
   ] });
 }
 const React = await importShared("react");
-const { useCallback, useEffect: useEffect$1, useRef: useRef$1, useState: useState$1 } = React;
+const { useCallback: useCallback$1, useEffect: useEffect$2, useRef: useRef$2, useState: useState$2 } = React;
 const ReceiptUpload = ({
   onReceiptChange,
+  onUploadingChange,
   initialReceipt,
   disabled = false,
   className = ""
 }) => {
-  const fileInputRef = useRef$1(null);
-  const [uploadState, setUploadState] = useState$1({
+  const fileInputRef = useRef$2(null);
+  const [uploadState, setUploadState] = useState$2({
     attachment: initialReceipt,
     isUploading: false,
     error: void 0,
     dragActive: false
   });
-  const [_uploadProgress, setUploadProgress] = useState$1(0);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState$1(false);
-  const [isDeleting, setIsDeleting] = useState$1(false);
-  const blobUrlsRef = useRef$1(/* @__PURE__ */ new Set());
-  useEffect$1(() => {
+  const [_uploadProgress, setUploadProgress] = useState$2(0);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState$2(false);
+  const [isDeleting, setIsDeleting] = useState$2(false);
+  const blobUrlsRef = useRef$2(/* @__PURE__ */ new Set());
+  useEffect$2(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => {
         try {
@@ -1264,14 +1265,14 @@ const ReceiptUpload = ({
       blobUrlsRef.current.clear();
     };
   }, []);
-  const handleError = useCallback((error) => {
+  const handleError = useCallback$1((error) => {
     setUploadState((prev) => ({
       ...prev,
       error,
       isUploading: false
     }));
   }, []);
-  const handleFileUpload = useCallback(async (file) => {
+  const handleFileUpload = useCallback$1(async (file) => {
     const validationError = validateReceiptFile(file);
     if (validationError) {
       handleError(validationError);
@@ -1283,6 +1284,7 @@ const ReceiptUpload = ({
       isUploading: true,
       attachment: void 0
     }));
+    onUploadingChange == null ? void 0 : onUploadingChange(true);
     setUploadProgress(0);
     try {
       const uploadResponse = await uploadReceiptFile(file, (progress) => {
@@ -1298,6 +1300,7 @@ const ReceiptUpload = ({
         isUploading: false,
         error: void 0
       }));
+      onUploadingChange == null ? void 0 : onUploadingChange(false);
       onReceiptChange == null ? void 0 : onReceiptChange(newAttachment);
     } catch (error) {
       handleError({
@@ -1305,9 +1308,10 @@ const ReceiptUpload = ({
         message: error.message || "Upload failed",
         details: error.toString()
       });
+      onUploadingChange == null ? void 0 : onUploadingChange(false);
     }
-  }, [handleError, onReceiptChange]);
-  const handleFileSelect = useCallback((event) => {
+  }, [handleError, onReceiptChange, onUploadingChange]);
+  const handleFileSelect = useCallback$1((event) => {
     var _a2;
     const file = (_a2 = event.target.files) == null ? void 0 : _a2[0];
     if (file) {
@@ -1317,16 +1321,16 @@ const ReceiptUpload = ({
       fileInputRef.current.value = "";
     }
   }, [handleFileUpload]);
-  const handleChooseFileClick = useCallback(() => {
+  const handleChooseFileClick = useCallback$1(() => {
     var _a2;
     if (disabled || uploadState.isUploading) return;
     (_a2 = fileInputRef.current) == null ? void 0 : _a2.click();
   }, [disabled, uploadState.isUploading]);
-  const handleDeleteClick = useCallback(() => {
+  const handleDeleteClick = useCallback$1(() => {
     if (!uploadState.attachment || disabled) return;
     setIsDeleteDialogOpen(true);
   }, [uploadState.attachment, disabled]);
-  const handleDeleteConfirm = useCallback(async () => {
+  const handleDeleteConfirm = useCallback$1(async () => {
     if (!uploadState.attachment || disabled) return;
     setIsDeleting(true);
     try {
@@ -1356,10 +1360,10 @@ const ReceiptUpload = ({
       setIsDeleting(false);
     }
   }, [uploadState.attachment, disabled, handleError, onReceiptChange]);
-  const handleDeleteCancel = useCallback(() => {
+  const handleDeleteCancel = useCallback$1(() => {
     setIsDeleteDialogOpen(false);
   }, []);
-  const handlePreviewClick = useCallback(async () => {
+  const handlePreviewClick = useCallback$1(async () => {
     if (uploadState.attachment) {
       try {
         await openFilePreview(uploadState.attachment);
@@ -1368,17 +1372,17 @@ const ReceiptUpload = ({
       }
     }
   }, [uploadState.attachment]);
-  const handleDragOver = useCallback((e) => {
+  const handleDragOver = useCallback$1((e) => {
     e.preventDefault();
     if (!disabled && !uploadState.isUploading) {
       setUploadState((prev) => ({ ...prev, dragActive: true }));
     }
   }, [disabled, uploadState.isUploading]);
-  const handleDragLeave = useCallback((e) => {
+  const handleDragLeave = useCallback$1((e) => {
     e.preventDefault();
     setUploadState((prev) => ({ ...prev, dragActive: false }));
   }, []);
-  const handleDrop = useCallback((e) => {
+  const handleDrop = useCallback$1((e) => {
     e.preventDefault();
     setUploadState((prev) => ({ ...prev, dragActive: false }));
     if (disabled || uploadState.isUploading) return;
@@ -1519,81 +1523,172 @@ const ReceiptUpload = ({
     )
   ] });
 };
-const createEmptyExpenseFormData = () => ({
-  expenseType: "",
-  vendor: "",
-  expenseDate: "",
-  expenseLocation: "",
-  paymentMethod: "",
-  netAmount: "",
-  totalAmount: "",
-  businessPurpose: "",
-  expenseDescription: "",
-  personsEntertained: "",
-  additionalComments: "",
-  receiptAttachment: void 0,
-  isReceiptUnavailable: false,
-  isDifferentCurrency: false,
-  netCurrency: { code: "USD", locale: "en-US" },
-  totalCurrency: { code: "CAD", locale: "en-CA" },
-  costAllocations: [
-    {
-      id: "1",
-      name: "Project",
-      percentage: 0,
-      amount: 0,
-      type: "project"
-    },
-    {
-      id: "2",
-      name: "Admin",
-      percentage: 0,
-      amount: 0,
-      type: "admin"
-    },
-    {
-      id: "3",
-      name: "CCB Team",
-      percentage: 0,
-      amount: 0,
-      type: "team"
-    },
-    {
-      id: "4",
-      name: "CCB Rep",
-      percentage: 0,
-      amount: 0,
-      type: "team"
-    }
-  ]
-});
-const validateExpenseForm = (data) => {
-  const errors = [];
-  if (!data.expenseType) errors.push("Expense type is required");
-  if (!data.vendor) errors.push("Vendor is required");
-  if (!data.expenseDate) errors.push("Expense date is required");
-  if (!data.paymentMethod) errors.push("Payment method is required");
-  if (!data.businessPurpose) errors.push("Business purpose is required");
-  const netAmount = parseFloat(data.netAmount);
-  const totalAmount = parseFloat(data.totalAmount);
-  if (isNaN(netAmount) || netAmount <= 0) {
-    errors.push("Valid net amount is required");
+const getFieldError = (errors, touchedFields, dirtyFields, fieldPath) => {
+  var _a2, _b;
+  const [parent, child] = fieldPath.split(".");
+  const parentError = errors[parent];
+  if (!parentError || typeof parentError === "string") {
+    return void 0;
   }
-  if (isNaN(totalAmount) || totalAmount <= 0) {
-    errors.push("Valid total amount is required");
-  }
-  if (!data.isReceiptUnavailable && !data.receiptAttachment) {
-    errors.push("Receipt is required or mark as unavailable");
-  }
-  const totalPercentage = data.costAllocations.reduce((sum, allocation) => sum + allocation.percentage, 0);
-  if (Math.abs(totalPercentage - 100) > 0.01) {
-    errors.push("Cost allocation must total 100%");
-  }
-  return {
-    isValid: errors.length === 0,
-    errors
-  };
+  const fieldError = parentError[child];
+  const isTouched = (_a2 = touchedFields[parent]) == null ? void 0 : _a2[child];
+  const isDirty = (_b = dirtyFields[parent]) == null ? void 0 : _b[child];
+  return (isTouched || isDirty) && (fieldError == null ? void 0 : fieldError.message) ? fieldError.message : void 0;
 };
+function AffidavitSection({
+  control,
+  errors,
+  touchedFields,
+  dirtyFields
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full flex-1 flex flex-col min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ma, { className: "w-full max-h-full bg-yellow-50 border-1 border-yellow-200 p-3 flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2 h-full overflow-y-auto", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-normal text-exp-grey-600", children: "Please sign the affidavit:" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-normal text-exp-yellow-900", children: "I affirm that this expense was for legitimate business purposes and the original receipt was accidentally lost, destroyed, or unobtainable." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Controller,
+      {
+        name: "affidavit.justification",
+        control,
+        render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          jo,
+          {
+            ...field,
+            value: field.value || "",
+            onInput: (e) => {
+              const el = e.currentTarget;
+              el.style.height = "auto";
+              el.style.height = Math.min(el.scrollHeight + 5, 200) + "px";
+            },
+            className: "w-full text-wrap bg-white border resize-none overflow-y-auto min-h-16 max-h-34 leading-4 placeholder:text-sm placeholder:font-normal placeholder:text-exp-grey-500",
+            label: "Justification",
+            placeholder: "State reason for missing receipt",
+            maxCharacters: 150,
+            showCharacterCount: true,
+            enforceMaxLength: true,
+            error: getFieldError(errors, touchedFields, dirtyFields, "affidavit.justification"),
+            required: true
+          }
+        )
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-normal text-exp-yellow-900", children: "Information provided for this expense is complete and accurate. I understand that false claims may lead to disciplinary or legal action." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Controller,
+      {
+        name: "affidavit.digitalSignature",
+        control,
+        render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          jo,
+          {
+            ...field,
+            value: field.value || "",
+            onChange: (e) => {
+              const upperValue = e.target.value.toUpperCase();
+              const filteredValue = upperValue.replace(/[^A-Z]/g, "").slice(0, 3);
+              field.onChange(filteredValue);
+            },
+            className: "w-full bg-white border text-md h-11 resize-none placeholder:text-sm placeholder:font-normal placeholder:text-exp-grey-500",
+            label: "Digital Signature",
+            placeholder: "Enter initials",
+            maxLength: 3,
+            error: getFieldError(errors, touchedFields, dirtyFields, "affidavit.digitalSignature"),
+            required: true
+          }
+        )
+      }
+    )
+  ] }) }) });
+}
+function ReceiptSection({
+  control,
+  errors,
+  touchedFields,
+  dirtyFields,
+  receiptAttachment,
+  isReceiptUnavailable,
+  shouldShowCheckbox,
+  onReceiptChange,
+  onReceiptUnavailableChange,
+  onUploadingChange
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { className: "h-full p-0", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ha, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-nowrap justify-between items-center min-h-0", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        xn,
+        {
+          iconClassName: "bg-exp-yellow-001 justify-center items-center flex",
+          title: "RECEIPT",
+          icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "receipt_long", className: "text-neutral-950" }),
+          required: true,
+          className: ""
+        }
+      ),
+      shouldShowCheckbox && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        pa,
+        {
+          label: "Unavailable",
+          checked: isReceiptUnavailable,
+          onCheckedChange: onReceiptUnavailableChange
+        }
+      ) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { className: "min-h-0 h-full", children: isReceiptUnavailable ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+      AffidavitSection,
+      {
+        control,
+        errors,
+        touchedFields,
+        dirtyFields
+      }
+    ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ReceiptUpload,
+      {
+        onReceiptChange,
+        onUploadingChange,
+        initialReceipt: receiptAttachment || void 0,
+        disabled: isReceiptUnavailable,
+        className: "h-full"
+      }
+    ) })
+  ] });
+}
+const affidavitSchema = object({
+  justification: string().min(1, "Justification is required").max(150, "Maximum 150 characters allowed"),
+  digitalSignature: string().min(1, "Digital signature is required").max(3, "Maximum 3 initials allowed").regex(/^[A-Z]{1,3}$/, "Must be 1-3 uppercase letters").refine((val) => val.length >= 1 && val.length <= 3, {
+    message: "Digital signature must be 1-3 initials"
+  })
+});
+({
+  SUPPORTED_FORMATS: Object.values(AllowedMimeType),
+  MAX_FILE_SIZE_PDF: MIME_TYPE_CONFIG.get(AllowedMimeType.PDF).maxSizeBytes,
+  MAX_FILE_SIZE_IMAGE: MIME_TYPE_CONFIG.get(AllowedMimeType.PNG).maxSizeBytes
+});
+const receiptWithAffidavitSchema = object({
+  receiptAttachment: custom().optional().nullable(),
+  isReceiptUnavailable: boolean().default(false),
+  affidavit: affidavitSchema.optional().nullable()
+}).refine((data) => {
+  if (data.isReceiptUnavailable) {
+    return data.affidavit !== null && data.affidavit !== void 0 && data.affidavit.justification.length > 0 && data.affidavit.digitalSignature.length > 0;
+  }
+  if (!data.isReceiptUnavailable) {
+    return data.receiptAttachment !== null && data.receiptAttachment !== void 0;
+  }
+  return true;
+}, {
+  message: ((data) => (data == null ? void 0 : data.isReceiptUnavailable) ? "Affidavit is required when receipt is unavailable" : "Receipt is required unless marked as unavailable")(),
+  path: ["receiptAttachment"]
+});
+const supportingFilesSchema = object({
+  supportingFiles: array(custom()).optional().default([])
+});
+const expenseFormSchema = receiptWithAffidavitSchema.merge(supportingFilesSchema);
+const getDefaultExpenseFormValues = (initialData) => ({
+  receiptAttachment: (initialData == null ? void 0 : initialData.receiptAttachment) ?? null,
+  isReceiptUnavailable: (initialData == null ? void 0 : initialData.isReceiptUnavailable) ?? false,
+  affidavit: (initialData == null ? void 0 : initialData.affidavit) ?? null,
+  supportingFiles: (initialData == null ? void 0 : initialData.supportingFiles) ?? []
+});
 const simulateApiDelay = (ms = 1e3) => {
   {
     return Promise.resolve();
@@ -1623,6 +1718,239 @@ const useSaveReceiptDraft = () => {
     }
   });
 };
+const { useCallback, useEffect: useEffect$1, useMemo, useRef: useRef$1, useState: useState$1 } = await importShared("react");
+const useExpenseForm = ({
+  initialData,
+  onSaveDraft,
+  onCancel,
+  isLoading = false,
+  companyId
+} = {}) => {
+  const saveReceiptDraftMutation = useSaveReceiptDraft();
+  const abortControllerRef = useRef$1(null);
+  const [isReceiptUploading, setIsReceiptUploading] = useState$1(false);
+  const defaultValues = useMemo(
+    () => getDefaultExpenseFormValues(initialData),
+    []
+    // Only calculate once on mount
+  );
+  const form = useForm({
+    resolver: a(expenseFormSchema),
+    defaultValues,
+    mode: "onTouched",
+    // Validate on blur
+    reValidateMode: "onChange",
+    criteriaMode: "all"
+  });
+  useEffect$1(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+    };
+  }, []);
+  const {
+    handleSubmit,
+    watch,
+    setValue,
+    control,
+    reset,
+    formState: {
+      errors,
+      isValid,
+      isDirty,
+      isSubmitting,
+      touchedFields,
+      dirtyFields
+    }
+  } = form;
+  const receiptAttachment = watch("receiptAttachment");
+  const isReceiptUnavailable = watch("isReceiptUnavailable");
+  const affidavit = watch("affidavit");
+  const supportingFiles = watch("supportingFiles");
+  const handleReceiptChange = useCallback((attachment) => {
+    setValue("receiptAttachment", attachment || null, {
+      shouldDirty: true,
+      shouldValidate: true
+    });
+    if (attachment) {
+      setValue("isReceiptUnavailable", false, {
+        shouldDirty: true,
+        shouldValidate: false
+      });
+      setValue("affidavit", null, {
+        shouldDirty: true,
+        shouldValidate: false
+      });
+    }
+  }, [setValue]);
+  const handleReceiptUnavailableChange = useCallback((checked) => {
+    setValue("isReceiptUnavailable", checked, {
+      shouldDirty: true,
+      shouldValidate: true
+    });
+    if (checked) {
+      setValue("receiptAttachment", null, {
+        shouldDirty: true,
+        shouldValidate: false
+      });
+      setValue("affidavit", {
+        justification: "",
+        digitalSignature: ""
+      }, {
+        shouldDirty: true,
+        shouldValidate: false
+        // Don't validate immediately on checkbox check
+      });
+    } else {
+      setValue("affidavit", null, {
+        shouldDirty: true,
+        shouldValidate: false
+      });
+    }
+  }, [setValue]);
+  const handleSupportingFilesChange = useCallback((attachments) => {
+    setValue("supportingFiles", attachments, {
+      shouldDirty: true,
+      shouldValidate: true
+    });
+  }, [setValue]);
+  const handleSaveDraft = useCallback(
+    async (data) => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+      abortControllerRef.current = new AbortController();
+      try {
+        await saveReceiptDraftMutation.mutateAsync({
+          companyId,
+          data: {
+            receiptAttachment: data.receiptAttachment,
+            isReceiptUnavailable: data.isReceiptUnavailable
+          }
+        });
+        await (onSaveDraft == null ? void 0 : onSaveDraft(data));
+      } catch (error) {
+        if (error.name === "AbortError") {
+          return;
+        }
+        console.error("Save draft error:", error);
+        throw error;
+      } finally {
+        abortControllerRef.current = null;
+      }
+    },
+    [onSaveDraft, saveReceiptDraftMutation, companyId]
+  );
+  const handleCancel = useCallback(() => {
+    reset();
+    onCancel == null ? void 0 : onCancel();
+  }, [reset, onCancel]);
+  const getFieldError2 = useCallback(
+    (fieldName) => {
+      const parts = fieldName.split(".");
+      let error = errors;
+      let touched = touchedFields;
+      for (const part of parts) {
+        error = error == null ? void 0 : error[part];
+        touched = touched == null ? void 0 : touched[part];
+      }
+      return touched && (error == null ? void 0 : error.message) ? error.message : void 0;
+    },
+    [errors, touchedFields]
+  );
+  const hasFieldError = useCallback(
+    (fieldName) => {
+      return Boolean(getFieldError2(fieldName));
+    },
+    [getFieldError2]
+  );
+  const shouldShowReceiptCheckbox = useMemo(() => {
+    return !receiptAttachment && !isReceiptUploading;
+  }, [receiptAttachment, isReceiptUploading]);
+  return {
+    form,
+    handleSubmit: handleSubmit(handleSaveDraft),
+    setValue,
+    control,
+    watch,
+    reset,
+    receiptAttachment,
+    isReceiptUnavailable,
+    affidavit,
+    supportingFiles,
+    handleReceiptChange,
+    handleReceiptUnavailableChange,
+    handleSupportingFilesChange,
+    setIsReceiptUploading,
+    shouldShowReceiptCheckbox,
+    errors,
+    isValid,
+    isDirty,
+    isSubmitting,
+    touchedFields,
+    dirtyFields,
+    getFieldError: getFieldError2,
+    hasFieldError,
+    handleCancel,
+    canSaveDraft: useMemo(() => {
+      return !isSubmitting && !isLoading && !saveReceiptDraftMutation.isPending;
+    }, [isSubmitting, isLoading, saveReceiptDraftMutation.isPending]),
+    isFormLoading: isLoading || isSubmitting || saveReceiptDraftMutation.isPending,
+    isSavingDraft: saveReceiptDraftMutation.isPending,
+    saveDraftError: saveReceiptDraftMutation.error
+  };
+};
+const defaultCostAllocations = [
+  {
+    id: "1",
+    name: "Project",
+    percentage: 0,
+    amount: 0,
+    type: "project"
+  },
+  {
+    id: "2",
+    name: "Admin",
+    percentage: 0,
+    amount: 0,
+    type: "admin"
+  },
+  {
+    id: "3",
+    name: "CCB Team",
+    percentage: 0,
+    amount: 0,
+    type: "team"
+  },
+  {
+    id: "4",
+    name: "CCB Rep",
+    percentage: 0,
+    amount: 0,
+    type: "team"
+  }
+];
+const createEmptyExpenseFormData = () => ({
+  expenseType: "",
+  vendor: "",
+  expenseDate: "",
+  expenseLocation: "",
+  paymentMethod: "",
+  netAmount: "",
+  totalAmount: "",
+  businessPurpose: "",
+  expenseDescription: "",
+  personsEntertained: "",
+  additionalComments: "",
+  receiptAttachment: void 0,
+  isReceiptUnavailable: false,
+  affidavit: void 0,
+  isDifferentCurrency: false,
+  netCurrency: { code: "USD", locale: "en-US" },
+  totalCurrency: { code: "CAD", locale: "en-CA" },
+  costAllocations: [...defaultCostAllocations]
+});
 const { forwardRef, useImperativeHandle, useState } = await importShared("react");
 const ExpenseForm = forwardRef(({
   onSubmit,
@@ -1632,59 +1960,46 @@ const ExpenseForm = forwardRef(({
   isSubmitting = false
   // isDrafting = false,
 }, ref) => {
+  const receiptForm = useExpenseForm({
+    initialData: {
+      receiptAttachment: (initialData == null ? void 0 : initialData.receiptAttachment) ?? null,
+      isReceiptUnavailable: (initialData == null ? void 0 : initialData.isReceiptUnavailable) ?? false,
+      affidavit: (initialData == null ? void 0 : initialData.affidavit) ?? null,
+      supportingFiles: (initialData == null ? void 0 : initialData.supportingFiles) ?? []
+    },
+    isLoading: isSubmitting
+  });
   const [formData, setFormData] = useState(() => ({
     ...createEmptyExpenseFormData(),
     ...initialData
   }));
   const [formErrors, setFormErrors] = useState([]);
-  const saveReceiptDraftMutation = useSaveReceiptDraft();
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (formErrors.length > 0) {
       setFormErrors([]);
     }
   };
-  const handleReceiptChange = (attachment) => {
-    setFormData((prev) => ({ ...prev, receiptAttachment: attachment }));
-    if (formErrors.length > 0) {
-      setFormErrors([]);
-    }
-  };
-  const handleSupportingFilesChange = (attachments) => {
-    setFormData((prev) => ({ ...prev, supportingFiles: attachments }));
-  };
-  const handleReceiptUnavailableChange = (checked) => {
-    setFormData((prev) => ({
-      ...prev,
-      isReceiptUnavailable: checked,
-      receiptAttachment: checked ? void 0 : prev.receiptAttachment
-    }));
-    if (formErrors.length > 0) {
-      setFormErrors([]);
-    }
-  };
   const handleFormSubmit = () => {
-    const validation = validateExpenseForm(formData);
-    if (!validation.isValid) {
-      setFormErrors(validation.errors);
-      return;
-    }
-    onSubmit == null ? void 0 : onSubmit(formData);
+    const completeFormData = {
+      ...formData,
+      receiptAttachment: receiptForm.receiptAttachment || void 0,
+      isReceiptUnavailable: receiptForm.isReceiptUnavailable,
+      affidavit: receiptForm.affidavit || void 0,
+      supportingFiles: receiptForm.supportingFiles || []
+    };
+    onSubmit == null ? void 0 : onSubmit(completeFormData);
   };
   const handleSaveDraft = async () => {
-    const receiptData = {
-      receiptAttachment: formData.receiptAttachment || null,
-      isReceiptUnavailable: formData.isReceiptUnavailable
+    await receiptForm.handleSubmit();
+    const completeFormData = {
+      ...formData,
+      receiptAttachment: receiptForm.receiptAttachment || void 0,
+      isReceiptUnavailable: receiptForm.isReceiptUnavailable,
+      affidavit: receiptForm.affidavit || void 0,
+      supportingFiles: receiptForm.supportingFiles || []
     };
-    try {
-      await saveReceiptDraftMutation.mutateAsync({
-        data: receiptData
-      });
-      onSaveDraft == null ? void 0 : onSaveDraft(formData);
-    } catch (error) {
-      console.error("Failed to save receipt draft:", error);
-      onSaveDraft == null ? void 0 : onSaveDraft(formData);
-    }
+    onSaveDraft == null ? void 0 : onSaveDraft(completeFormData);
   };
   const expenseTypeOptions = [
     { value: "travel", label: "Travel" },
@@ -1734,47 +2049,37 @@ const ExpenseForm = forwardRef(({
   useImperativeHandle(ref, () => ({
     submitForm: handleFormSubmit,
     saveDraft: handleSaveDraft,
-    getFormData: () => formData,
-    validateForm: () => validateExpenseForm(formData)
+    getFormData: () => ({
+      ...formData,
+      receiptAttachment: receiptForm.receiptAttachment || void 0,
+      isReceiptUnavailable: receiptForm.isReceiptUnavailable,
+      affidavit: receiptForm.affidavit || void 0,
+      supportingFiles: receiptForm.supportingFiles || []
+    }),
+    validateForm: () => ({ isValid: receiptForm.isValid, errors: [] })
   }));
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 h-full overflow-y-auto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-2 flex-1 sticky top-0 bottom-0 h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { className: "w-full h-full flex flex-col", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { className: "h-full p-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ha, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-nowrap justify-between items-center", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            xn,
-            {
-              iconClassName: "bg-exp-yellow-001 justify-center items-center flex",
-              title: "RECEIPT",
-              icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "receipt_long", className: "text-neutral-950" }),
-              required: true,
-              className: ""
-            }
-          ),
-          !formData.receiptAttachment && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            pa,
-            {
-              label: "Unavailable",
-              checked: formData.isReceiptUnavailable,
-              onCheckedChange: handleReceiptUnavailableChange
-            }
-          ) })
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { className: "flex-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          ReceiptUpload,
-          {
-            onReceiptChange: handleReceiptChange,
-            initialReceipt: formData.receiptAttachment,
-            disabled: formData.isReceiptUnavailable,
-            className: "h-full"
-          }
-        ) })
-      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+        ReceiptSection,
+        {
+          control: receiptForm.control,
+          errors: receiptForm.errors,
+          touchedFields: receiptForm.touchedFields,
+          dirtyFields: receiptForm.dirtyFields,
+          receiptAttachment: receiptForm.receiptAttachment,
+          isReceiptUnavailable: receiptForm.isReceiptUnavailable,
+          shouldShowCheckbox: receiptForm.shouldShowReceiptCheckbox,
+          onReceiptChange: receiptForm.handleReceiptChange,
+          onReceiptUnavailableChange: receiptForm.handleReceiptUnavailableChange,
+          onUploadingChange: receiptForm.setIsReceiptUploading
+        }
+      ) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full flex items-center h-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         SupportingFiles,
         {
-          onFilesChange: handleSupportingFilesChange,
-          initialFiles: formData.supportingFiles,
+          onFilesChange: receiptForm.handleSupportingFilesChange,
+          initialFiles: receiptForm.supportingFiles,
           disabled: isSubmitting
         }
       ) })
@@ -1941,7 +2246,7 @@ const ExpenseForm = forwardRef(({
               console.log("Add allocation clicked");
             },
             onRemoveAllocation: (id) => {
-              const updatedAllocations = formData.costAllocations.filter((a) => a.id !== id);
+              const updatedAllocations = formData.costAllocations.filter((a2) => a2.id !== id);
               handleInputChange("costAllocations", updatedAllocations);
             }
           }

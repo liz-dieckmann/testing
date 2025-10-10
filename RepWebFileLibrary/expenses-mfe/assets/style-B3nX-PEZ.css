@@ -168,8 +168,10 @@
     --color-exp-neutral-500: #42526d;
     --color-exp-neutral-600: #354764;
     --color-exp-neutral-950: #041026;
+    --color-exp-yellow-900: #373100;
     --color-exp-yellow-y-700: #958725;
     --color-exp-yellow-001: #ffffc7;
+    --color-exp-grey-500: #888;
     --color-exp-grey-600: #525252;
     --color-exp-grey-700: #383838;
     --color-exp-primary-blue-50: #f1f5f9;
@@ -669,12 +671,36 @@
     height: calc(var(--spacing) * 0);
   }
 
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
+
   .h-auto {
     height: auto;
   }
 
+  .h-fit {
+    height: fit-content;
+  }
+
+  .max-h-34 {
+    max-height: calc(var(--spacing) * 34);
+  }
+
   .max-h-\[90vh\] {
     max-height: 90vh;
+  }
+
+  .max-h-full {
+    max-height: 100%;
+  }
+
+  .min-h-0 {
+    min-height: calc(var(--spacing) * 0);
+  }
+
+  .min-h-16 {
+    min-height: calc(var(--spacing) * 16);
   }
 
   .max-w-5xl {
@@ -763,6 +789,10 @@
     overflow: hidden;
   }
 
+  .overflow-clip {
+    overflow: clip;
+  }
+
   .\!rounded-b-none {
     border-bottom-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
@@ -771,6 +801,11 @@
   .rounded-b-lg {
     border-bottom-right-radius: var(--radius-lg);
     border-bottom-left-radius: var(--radius-lg);
+  }
+
+  .border-1 {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
   }
 
   .\!border-b-0 {
@@ -912,8 +947,17 @@
     padding-left: calc(var(--spacing) * 0) !important;
   }
 
+  .leading-4 {
+    --tw-leading: calc(var(--spacing) * 4);
+    line-height: calc(var(--spacing) * 4);
+  }
+
   .text-nowrap {
     text-wrap: nowrap;
+  }
+
+  .text-wrap {
+    text-wrap: wrap;
   }
 
   .text-ellipsis {
@@ -980,6 +1024,10 @@
     color: var(--color-exp-teal-600);
   }
 
+  .text-exp-yellow-900 {
+    color: var(--color-exp-yellow-900);
+  }
+
   .text-exp-yellow-y-700 {
     color: var(--color-exp-yellow-y-700);
   }
@@ -1038,6 +1086,20 @@
     --tw-backdrop-blur: blur(var(--blur-2xl)) !important;
     -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, ) !important;
     backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, ) !important;
+  }
+
+  .placeholder\:text-sm::placeholder {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+
+  .placeholder\:font-normal::placeholder {
+    --tw-font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .placeholder\:text-exp-grey-500::placeholder {
+    color: var(--color-exp-grey-500);
   }
 
   @media (hover: hover) {
@@ -4266,78 +4328,7 @@ body {
   initial-value: 0;
 }
 
-@property --tw-leading {
-  syntax: "*";
-  inherits: false
-}
-
 @property --tw-tracking {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-blur {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-brightness {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-contrast {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-grayscale {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-hue-rotate {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-invert {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-opacity {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-saturate {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-sepia {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-drop-shadow {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-drop-shadow-color {
-  syntax: "*";
-  inherits: false
-}
-
-@property --tw-drop-shadow-alpha {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 100%;
-}
-
-@property --tw-drop-shadow-size {
   syntax: "*";
   inherits: false
 }
@@ -4405,6 +4396,11 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+
+@property --tw-leading {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-font-weight {
@@ -4495,6 +4491,72 @@ body {
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+
+@property --tw-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-backdrop-blur {
