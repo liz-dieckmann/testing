@@ -153,7 +153,7 @@ const BUSINESS_PURPOSE_PLACEHOLDERS = {
 };
 const BUSINESS_PURPOSE_VALIDATION = {
   NAME_MIN_LENGTH: 3,
-  NAME_MAX_LENGTH: 100,
+  NAME_MAX_LENGTH: 45,
   DESCRIPTION_MAX_LENGTH: 400
 };
 const checkNameUniqueness = (name, existingData, currentId) => {
@@ -438,7 +438,7 @@ const BusinessPurposeField = ({ control, errors, touchedFields, dirtyFields }) =
             error: errorMessage,
             required: true,
             showCharacterCount: true,
-            maxCharacters: 100,
+            maxCharacters: BUSINESS_PURPOSE_VALIDATION.NAME_MAX_LENGTH,
             enforceMaxLength: false
           }
         );
@@ -457,7 +457,7 @@ const DescriptionField = ({ control, errors, touchedFields, dirtyFields }) => /*
         ...field,
         placeholder: BUSINESS_PURPOSE_PLACEHOLDERS.DESCRIPTION,
         error: getFieldError(errors, touchedFields, dirtyFields, "description", field.value),
-        maxCharacters: 400,
+        maxCharacters: BUSINESS_PURPOSE_VALIDATION.DESCRIPTION_MAX_LENGTH,
         enforceMaxLength: false
       }
     )
