@@ -1,30 +1,40 @@
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-oS9xoGUM.js";
+import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-DfhA5n5S.js";
 import { u as useQueryClient, L as LoadingSpinner } from "./LoadingSpinner-C-M1heDl.js";
 import { u as useMutation, o as object, s as string, l as literal, d as useForm, e as a, C as Controller } from "./schemas-BbJoaiI5.js";
 import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
-import { u as useExpenseStore, T as Table2, C as Check, X, P as Pencil, E as EllipsisVertical } from "./store-2hzq8Sto.js";
-import { B as BUSINESS_PURPOSE_ENDPOINTS } from "./endpoints-B6EuaDvp.js";
-import { D as De, d as Oo, K as Ka, i as m, l as Xa } from "./createLucideIcon-DyT7YbiM.js";
+import { u as useExpenseStore, T as Table2, C as Check, X, P as Pencil, E as EllipsisVertical } from "./store-I4CYG5LI.js";
+import { B as BUSINESS_PURPOSE_ENDPOINTS } from "./endpoints-DyuQahSx.js";
+import { D as De, d as Oo, K as Ka, i as m, l as Xa } from "./createLucideIcon-BoJdZXkQ.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
 const { useEffect: useEffect$2 } = await importShared("react");
+const mapToBusinessPurpose = (apiData) => {
+  return {
+    id: String(apiData.Id),
+    companyId: String(apiData.LogicalCompanyId),
+    businessPurpose: apiData.BusinessPurposeName,
+    description: apiData.BusinessPurposeDescription,
+    isActive: apiData.IsActive,
+    created: new Date(apiData.CreatedDate),
+    modified: apiData.UpdatedDate ? new Date(apiData.UpdatedDate) : new Date(apiData.CreatedDate)
+  };
+};
 const useBusinessPurposes = (companyId, includeInactive = false) => {
   const { setBusinessPurposes, setLoadingBusinessPurposes, setBusinessPurposesError } = useExpenseStore();
   const query = useQuery({
     queryKey: ["business-purposes", companyId, includeInactive],
     queryFn: async () => {
       if (!companyId) throw new Error("Company ID is required");
-      const params = includeInactive ? { includeInactive: "true" } : {};
+      const params = includeInactive ? { show_inactive: true } : {};
       const response = await apiClient.get(
-        BUSINESS_PURPOSE_ENDPOINTS.GET_BY_COMPANY(companyId),
+        BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSES(companyId),
         { params }
       );
-      return response.data.data;
+      return response.data.map(mapToBusinessPurpose);
     },
     enabled: !!companyId,
     staleTime: 3 * 60 * 1e3
-    // 3 minutes
   });
   useEffect$2(() => {
     if (query.data) {
@@ -41,16 +51,24 @@ const useBusinessPurposes = (companyId, includeInactive = false) => {
   }, [query.error, setBusinessPurposesError, setLoadingBusinessPurposes]);
   return query;
 };
+const getCurrentUser = () => {
+  return "current-user";
+};
 const useCreateBusinessPurpose = () => {
   const queryClient = useQueryClient();
   const { addBusinessPurpose } = useExpenseStore();
   return useMutation({
     mutationFn: async ({ companyId, data }) => {
+      const apiData = {
+        BusinessPurposeName: data.businessPurpose || "",
+        BusinessPurposeDescription: data.description || "",
+        CreatedBy: getCurrentUser()
+      };
       const response = await apiClient.post(
-        BUSINESS_PURPOSE_ENDPOINTS.CREATE(companyId),
-        data
+        BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSE_CREATE(companyId),
+        apiData
       );
-      return response.data.data;
+      return mapToBusinessPurpose(response.data);
     },
     onSuccess: (newBusinessPurpose) => {
       queryClient.invalidateQueries({ queryKey: ["business-purposes"] });
@@ -62,38 +80,53 @@ const useUpdateBusinessPurpose = () => {
   const queryClient = useQueryClient();
   const { updateBusinessPurpose } = useExpenseStore();
   return useMutation({
-    mutationFn: async ({ id, data }) => {
-      const response = await apiClient.patch(
-        BUSINESS_PURPOSE_ENDPOINTS.UPDATE(id),
-        data
+    mutationFn: async ({ id, companyId, data }) => {
+      var _a;
+      const apiData = {
+        Id: parseInt(id),
+        UpdatedBy: getCurrentUser()
+      };
+      if ("businessPurpose" in data) {
+        apiData.BusinessPurposeName = data.businessPurpose || null;
+      }
+      if ("description" in data) {
+        apiData.BusinessPurposeDescription = ((_a = data.description) == null ? void 0 : _a.trim()) ?? " ";
+      }
+      if ("isActive" in data) {
+        apiData.IsActive = data.isActive;
+      }
+      console.log("UPDATE Business Purpose payload:", apiData);
+      const response = await apiClient.put(
+        BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSE_UPDATE(companyId),
+        apiData
       );
-      return response.data.data;
+      return mapToBusinessPurpose(response.data);
     },
-    onMutate: async ({ id, data }) => {
-      await queryClient.cancelQueries({ queryKey: ["business-purposes"] });
-      const previousData = queryClient.getQueryData(["business-purposes"]);
-      queryClient.setQueriesData(
-        { queryKey: ["business-purposes"] },
-        (old) => {
-          if (!old) return old;
-          return old.map(
-            (bp) => bp.id === id ? { ...bp, ...data, modified: /* @__PURE__ */ new Date() } : bp
-          );
-        }
-      );
-      return { previousData };
+    onMutate: async ({ id, companyId, data }) => {
+      const queryKey = ["business-purposes", companyId];
+      await queryClient.cancelQueries({ queryKey });
+      const previousData = queryClient.getQueryData(queryKey);
+      queryClient.setQueryData(queryKey, (old) => {
+        if (!old) return old;
+        return old.map(
+          (bp) => bp.id === id ? { ...bp, ...data, modified: /* @__PURE__ */ new Date() } : bp
+        );
+      });
+      return { previousData, companyId };
     },
     onError: (_err, _variables, context) => {
-      if (context == null ? void 0 : context.previousData) {
-        queryClient.setQueriesData(
-          { queryKey: ["business-purposes"] },
+      if ((context == null ? void 0 : context.previousData) && (context == null ? void 0 : context.companyId)) {
+        queryClient.setQueryData(
+          ["business-purposes", context.companyId],
           context.previousData
         );
       }
     },
-    onSuccess: (updatedBusinessPurpose) => {
+    onSuccess: (updatedBusinessPurpose, variables) => {
       updateBusinessPurpose(updatedBusinessPurpose.id, updatedBusinessPurpose);
-      queryClient.invalidateQueries({ queryKey: ["business-purposes"] });
+      queryClient.invalidateQueries({
+        queryKey: ["business-purposes", variables.companyId]
+      });
     }
   });
 };
@@ -331,21 +364,24 @@ const useBusinessPurposeOperations = (companyId, onSuccess) => {
       throw err;
     }
   }, [companyId, createMutation, onSuccess]);
-  const handleUpdate = useCallback$1(async (id, data) => {
+  const handleUpdate = useCallback$1(async (id, data, originalData) => {
+    if (!companyId) return;
     try {
-      const updatedBP = {
-        businessPurpose: data.businessPurpose.trim(),
-        description: data.description || void 0,
-        isActive: true,
-        modified: /* @__PURE__ */ new Date()
-      };
-      await updateMutation.mutateAsync({ id, data: updatedBP });
+      const updatedBP = {};
+      if (!originalData || data.businessPurpose.trim() !== originalData.businessPurpose) {
+        updatedBP.businessPurpose = data.businessPurpose.trim();
+      }
+      if (!originalData || (data.description || "") !== (originalData.description || "")) {
+        updatedBP.description = data.description || void 0;
+      }
+      updatedBP.modified = /* @__PURE__ */ new Date();
+      await updateMutation.mutateAsync({ id, companyId, data: updatedBP });
       onSuccess == null ? void 0 : onSuccess();
     } catch (err) {
       console.error("Failed to update business purpose:", err);
       throw err;
     }
-  }, [updateMutation, onSuccess]);
+  }, [companyId, updateMutation, onSuccess]);
   return {
     handleCreate,
     handleUpdate,
@@ -620,9 +656,9 @@ const BusinessPurposeTable = ({ className }) => {
     if (editingRowId === NEW_ROW_ID) {
       await handleCreate(data);
     } else if (editingRowId) {
-      await handleUpdate(editingRowId, data);
+      await handleUpdate(editingRowId, data, editingData);
     }
-  }, [editingRowId, handleCreate, handleUpdate]);
+  }, [editingRowId, editingData, handleCreate, handleUpdate]);
   const formHookOptions = useMemo(() => ({
     initialData: editingData,
     existingData: processedData,
@@ -690,7 +726,7 @@ const BusinessPurposeTable = ({ className }) => {
         columns,
         data: tableData,
         emptyState,
-        className: "border-exp-neutral-30 !border-b-0 !rounded-b-none",
+        className: m(tableData.length === 0 || isAddingNew ? "border-exp-neutral-30 border-b" : "!border-b-0 !rounded-b-none"),
         editingRowId: editingRowId || (isAddingNew ? NEW_ROW_ID : void 0),
         onRowEdit: handleRowEdit,
         onRowSave: () => {

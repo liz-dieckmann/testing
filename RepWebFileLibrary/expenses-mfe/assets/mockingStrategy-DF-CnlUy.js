@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/mswStrategy-Bje0MP3f.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/receipt-BjxWsBul.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/endpoints-B6EuaDvp.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/index-CgHikzKV.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/routes-YnS7qqhP.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-DlFISMuz.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/createLucideIcon-DyT7YbiM.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/jsx-runtime-DLKWXVrv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosStrategy-BhIuuJVJ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosInstance-BPwdN1IK.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/mswStrategy-WJyW6zdT.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/receipt-BjxWsBul.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/endpoints-DyuQahSx.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/config-RezmlIHy.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosStrategy-6SBUNv7x.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosInstance-BPwdN1IK.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-DlFISMuz.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/routes-B7GpAfQa.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/createLucideIcon-BoJdZXkQ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/jsx-runtime-DLKWXVrv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
 const hasServiceWorkerSupport = () => {
   return typeof window !== "undefined" && "serviceWorker" in navigator && "navigator" in window;
@@ -14,9 +14,9 @@ class UnifiedMockingStrategy {
     if (hasServiceWorkerSupport()) {
       try {
         const { MSWStrategy } = await __vitePreload(async () => {
-          const { MSWStrategy: MSWStrategy2 } = await import("./mswStrategy-Bje0MP3f.js");
+          const { MSWStrategy: MSWStrategy2 } = await import("./mswStrategy-WJyW6zdT.js");
           return { MSWStrategy: MSWStrategy2 };
-        }, true ? __vite__mapDeps([0,1,2,3,4,5,6,7]) : void 0, import.meta.url);
+        }, true ? __vite__mapDeps([0,1,2,3]) : void 0, import.meta.url);
         this.activeStrategy = new MSWStrategy();
         await this.activeStrategy.initialize();
         console.log("✅ Mocking: Using MSW (Service Worker)");
@@ -32,9 +32,9 @@ class UnifiedMockingStrategy {
   }
   async initializeAxiosStrategy() {
     const { AxiosStrategy } = await __vitePreload(async () => {
-      const { AxiosStrategy: AxiosStrategy2 } = await import("./axiosStrategy-BhIuuJVJ.js");
+      const { AxiosStrategy: AxiosStrategy2 } = await import("./axiosStrategy-6SBUNv7x.js");
       return { AxiosStrategy: AxiosStrategy2 };
-    }, true ? __vite__mapDeps([8,9,5,3,2,4,6,7]) : void 0, import.meta.url);
+    }, true ? __vite__mapDeps([4,5,6,3,2,7,8,9]) : void 0, import.meta.url);
     this.activeStrategy = new AxiosStrategy();
     await this.activeStrategy.initialize();
     console.log("✅ Mocking: Using Axios interceptor");

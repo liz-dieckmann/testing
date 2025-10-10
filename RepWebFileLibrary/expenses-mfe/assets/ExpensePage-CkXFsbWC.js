@@ -1,17 +1,17 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/core-Dbi-QRzc.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/_commonjsHelpers-CUmg6egw.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
-import { E as ExpensesList } from "./ExpensesList-CVCqX-cX.js";
-import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, b as jo, p as pa, w as wa, B as Bo, d as Oo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-DyT7YbiM.js";
+import { E as ExpensesList } from "./ExpensesList-Bpt4UJ9A.js";
+import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, b as jo, p as pa, w as wa, B as Bo, d as Oo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-BoJdZXkQ.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
 import { L as LoadingSpinner, u as useQueryClient } from "./LoadingSpinner-C-M1heDl.js";
 import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
 import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
-import { F as FILE_ENDPOINTS } from "./endpoints-B6EuaDvp.js";
+import { F as FILE_ENDPOINTS } from "./endpoints-DyuQahSx.js";
 import { C as Controller, o as object, s as string, b as boolean, c as custom, a as array, u as useMutation, d as useForm, e as a } from "./schemas-BbJoaiI5.js";
-import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-YnS7qqhP.js";
-import { S as Send } from "./send-BD6-HR5P.js";
+import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-B7GpAfQa.js";
+import { S as Send } from "./send-USLwOcmS.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -2151,7 +2151,7 @@ const ExpenseForm = forwardRef(({
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Xo,
               {
-                label: formData.isDifferentCurrency ? "Total (foreign)" : "NET/HST Amount",
+                label: formData.isDifferentCurrency ? "Total (foreign)" : "Tax Amount",
                 placeholder: "0.00",
                 currencyCode: formData.netCurrency.code,
                 locale: formData.netCurrency.locale,

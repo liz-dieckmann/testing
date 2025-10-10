@@ -12,16 +12,11 @@ const FILE_ENDPOINTS = {
   STORAGE_GET: (filename) => `https://storage.expensesapp.com/receipts/${filename}`
 };
 const BUSINESS_PURPOSE_ENDPOINTS = {
-  // Get business purposes for a company
-  GET_BY_COMPANY: (companyId) => `/companies/${companyId}/business-purposes`,
-  // Create business purpose
-  CREATE: (companyId) => `/companies/${companyId}/business-purposes`,
-  // Update business purpose
-  UPDATE: (id) => `/business-purposes/${id}`,
-  // Delete business purpose
-  DELETE: (id) => `/business-purposes/${id}`,
-  // Toggle status (same as update, but semantic naming)
-  TOGGLE_STATUS: (id) => `/business-purposes/${id}`
+  // Business Purposes
+  BUSINESS_PURPOSES: (companyShortName) => `/api/v1.0/configuration/${encodeURIComponent(companyShortName)}/business-purposes`,
+  BUSINESS_PURPOSE_BY_ID: (companyShortName, id) => `/api/v1.0/configuration/${encodeURIComponent(companyShortName)}/business-purposes/${id}`,
+  BUSINESS_PURPOSE_CREATE: (companyShortName) => `/api/v1.0/configuration/${encodeURIComponent(companyShortName)}/business-purpose`,
+  BUSINESS_PURPOSE_UPDATE: (companyShortName) => `/api/v1.0/configuration/${encodeURIComponent(companyShortName)}/business-purpose`
 };
 const ENDPOINT_PATTERNS = {
   // Files
@@ -31,16 +26,12 @@ const ENDPOINT_PATTERNS = {
   FILES_RECEIPTS_DOWNLOAD: "*/files/receipts/:fileId/download",
   FILES_SUPPORTING_UPLOAD: "*/files/supporting",
   FILES_SUPPORTING_DELETE: "*/files/supporting/:fileId",
-  FILES_STORAGE: "https://storage.expensesapp.com/receipts/:filename",
-  // Business Purposes
-  BUSINESS_PURPOSE_BY_COMPANY: "*/companies/:companyId/business-purposes",
-  BUSINESS_PURPOSE_CRUD: "*/business-purposes/:id"
+  FILES_STORAGE: "https://storage.expensesapp.com/receipts/:filename"
 };
 const ENDPOINT_REGEX = {
   FILES_RECEIPTS: /\/files\/receipts/,
   FILES_SUPPORTING: /\/files\/supporting/,
-  FILES_STORAGE: /https:\/\/storage\.expensesapp\.com\/receipts/,
-  BUSINESS_PURPOSES: /\/(companies\/.*\/business-purposes|business-purposes)/
+  FILES_STORAGE: /https:\/\/storage\.expensesapp\.com\/receipts/
 };
 export {
   BUSINESS_PURPOSE_ENDPOINTS as B,

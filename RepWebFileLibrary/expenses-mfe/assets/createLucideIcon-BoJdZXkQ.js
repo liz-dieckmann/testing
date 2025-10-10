@@ -14512,7 +14512,7 @@ const Qt = _.forwardRef(
         "hover:border-primary-200",
         "focus-visible:border-primary-200 focus-visible:ring-[3px] focus-visible:ring-focus-ring outline-none",
         "disabled:bg-neutral-10 disabled:border-neutral-40 disabled:opacity-50 disabled:cursor-not-allowed",
-        "aria-invalid:border-trax-red-400 aria-invalid:hover:border-trax-red-600 aria-invalid:focus-visible:border-error-600 aria-invalid:focus-visible:ring-[3px] aria-invalid:focus-visible:ring-[var(--color-trax-red-focus-shadow)]",
+        "aria-invalid:border-trax-red-400 aria-invalid:hover:border-trax-red-600 aria-invalid:focus-visible:border-trax-red-700 aria-invalid:focus-visible:ring-[3px] aria-invalid:focus-visible:ring-[var(--color-trax-red-focus-shadow)]",
         e
       ),
       ...n
