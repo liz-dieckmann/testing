@@ -88,6 +88,7 @@
     --color-blue-200: oklch(88.2% .059 254.128);
     --color-blue-500: oklch(62.3% .214 259.815);
     --color-blue-600: oklch(54.6% .245 262.881);
+    --color-blue-700: oklch(48.8% .243 264.376);
     --color-blue-800: oklch(42.4% .199 265.638);
     --color-purple-100: oklch(94.6% .033 307.174);
     --color-purple-200: oklch(90.2% .063 306.703);
@@ -972,6 +973,10 @@
     color: var(--color-blue-500);
   }
 
+  .text-blue-700 {
+    color: var(--color-blue-700);
+  }
+
   .text-exp-grey-600 {
     color: var(--color-exp-grey-600);
   }
@@ -1129,6 +1134,10 @@
 
     .hover\:text-exp-neutral-200:hover {
       color: var(--color-exp-neutral-200);
+    }
+
+    .hover\:text-red-700:hover {
+      color: var(--color-red-700);
     }
 
     .hover\:text-trax-neutral-900:hover {
@@ -3294,10 +3303,6 @@
     }
   }
 
-  .focus\:border-error-600:focus {
-    border-color: var(--color-error-600);
-  }
-
   .focus\:border-primary-200:focus {
     border-color: var(--color-primary-200);
   }
@@ -3312,6 +3317,10 @@
 
   .focus\:border-trax-primary-blue-700:focus {
     border-color: var(--color-trax-primary-blue-700);
+  }
+
+  .focus\:border-trax-red-400:focus {
+    border-color: var(--color-trax-red-400);
   }
 
   .focus\:bg-accent:focus {
@@ -3430,6 +3439,12 @@
   .focus\:outline-none:focus {
     --tw-outline-style: none;
     outline-style: none;
+  }
+
+  @media (hover: hover) {
+    .focus\:hover\:border-trax-red-600:focus:hover {
+      border-color: var(--color-trax-red-600);
+    }
   }
 
   .focus-visible\:border-primary-200:focus-visible {
@@ -3621,17 +3636,27 @@
     border-color: var(--color-error-600);
   }
 
+  .aria-invalid\:focus\:border-trax-red-400[aria-invalid="true"]:focus {
+    border-color: var(--color-trax-red-400);
+  }
+
   .aria-invalid\:focus\:ring-\[3px\][aria-invalid="true"]:focus {
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .aria-invalid\:focus\:ring-\[var\(--color-trax-red-focus-shadow\)\][aria-invalid="true"]:focus {
+    --tw-ring-color: var(--color-trax-red-focus-shadow);
   }
 
   .aria-invalid\:focus\:ring-\[var\(--error-focus-ring\)\][aria-invalid="true"]:focus {
     --tw-ring-color: var(--error-focus-ring);
   }
 
-  .aria-invalid\:focus-visible\:border-error-600[aria-invalid="true"]:focus-visible {
-    border-color: var(--color-error-600);
+  @media (hover: hover) {
+    .aria-invalid\:focus\:hover\:border-trax-red-600[aria-invalid="true"]:focus:hover {
+      border-color: var(--color-trax-red-600);
+    }
   }
 
   .aria-invalid\:focus-visible\:border-trax-red-700[aria-invalid="true"]:focus-visible {

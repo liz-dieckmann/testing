@@ -1,5 +1,6 @@
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { S as Subscribable, w as shallowEqualObjects, i as hashKey, B as getDefaultState, n as notifyManager, u as useQueryClient, c as noop, A as shouldThrowError } from "./LoadingSpinner-C-M1heDl.js";
+import { S as Subscribable, t as shallowEqualObjects, i as hashKey, v as getDefaultState, n as notifyManager, k as useQueryClient, c as noop, w as shouldThrowError } from "./LoadingSpinner-DqE6Gge9.js";
+import { c as create, d as devtools, s as subscribeWithSelector, i as immer } from "./axiosInstance-D83Ho1lg.js";
 var MutationObserver = class extends Subscribable {
   #client;
   #currentResult = void 0;
@@ -607,7 +608,7 @@ function markFieldsDirty(data, fields = {}) {
     if (isTraversable(data[key])) {
       fields[key] = Array.isArray(data[key]) ? [] : {};
       markFieldsDirty(data[key], fields[key]);
-    } else if (!isNullOrUndefined(data[key])) {
+    } else if (!isUndefined(data[key])) {
       fields[key] = true;
     }
   }
@@ -1914,6 +1915,134 @@ function useForm(props = {}) {
   _formControl.current.formState = getProxyFormState(formState, control);
   return _formControl.current;
 }
+const initialState = () => ({
+  expenseTypes: [],
+  selectedExpenseType: null,
+  businessPurposes: [],
+  selectedBusinessPurpose: null,
+  formSettings: [],
+  selectedFormSetting: null,
+  isLoadingExpenseTypes: false,
+  isLoadingBusinessPurposes: false,
+  isLoadingFormSettings: false,
+  expenseTypesError: null,
+  businessPurposesError: null,
+  formSettingsError: null
+});
+const useExpenseStore = create()(
+  devtools(
+    subscribeWithSelector(
+      immer((set2) => ({
+        ...initialState(),
+        // Expense Types Actions
+        setExpenseTypes: (types) => set2((state) => {
+          state.expenseTypes = types;
+        }),
+        setSelectedExpenseType: (type) => set2((state) => {
+          state.selectedExpenseType = type;
+        }),
+        addExpenseType: (type) => set2((state) => {
+          state.expenseTypes.push(type);
+        }),
+        updateExpenseType: (id, updates) => set2((state) => {
+          var _a;
+          const index = state.expenseTypes.findIndex((t2) => t2.id === id);
+          if (index !== -1) {
+            state.expenseTypes[index] = { ...state.expenseTypes[index], ...updates };
+            if (((_a = state.selectedExpenseType) == null ? void 0 : _a.id) === id) {
+              state.selectedExpenseType = { ...state.selectedExpenseType, ...updates };
+            }
+          }
+        }),
+        removeExpenseType: (id) => set2((state) => {
+          var _a;
+          state.expenseTypes = state.expenseTypes.filter((t2) => t2.id !== id);
+          if (((_a = state.selectedExpenseType) == null ? void 0 : _a.id) === id) {
+            state.selectedExpenseType = null;
+          }
+        }),
+        // Business Purposes Actions
+        setBusinessPurposes: (purposes) => set2((state) => {
+          state.businessPurposes = purposes;
+        }),
+        setSelectedBusinessPurpose: (purpose) => set2((state) => {
+          state.selectedBusinessPurpose = purpose;
+        }),
+        addBusinessPurpose: (purpose) => set2((state) => {
+          state.businessPurposes.push(purpose);
+        }),
+        updateBusinessPurpose: (id, updates) => set2((state) => {
+          var _a;
+          const index = state.businessPurposes.findIndex((p) => p.id === id);
+          if (index !== -1) {
+            state.businessPurposes[index] = { ...state.businessPurposes[index], ...updates };
+            if (((_a = state.selectedBusinessPurpose) == null ? void 0 : _a.id) === id) {
+              state.selectedBusinessPurpose = { ...state.selectedBusinessPurpose, ...updates };
+            }
+          }
+        }),
+        removeBusinessPurpose: (id) => set2((state) => {
+          var _a;
+          state.businessPurposes = state.businessPurposes.filter((p) => p.id !== id);
+          if (((_a = state.selectedBusinessPurpose) == null ? void 0 : _a.id) === id) {
+            state.selectedBusinessPurpose = null;
+          }
+        }),
+        // Form Settings Actions
+        setFormSettings: (settings) => set2((state) => {
+          state.formSettings = settings;
+        }),
+        setSelectedFormSetting: (setting) => set2((state) => {
+          state.selectedFormSetting = setting;
+        }),
+        addFormSetting: (setting) => set2((state) => {
+          state.formSettings.push(setting);
+        }),
+        updateFormSetting: (id, updates) => set2((state) => {
+          var _a;
+          const index = state.formSettings.findIndex((s2) => s2.id === id);
+          if (index !== -1) {
+            state.formSettings[index] = { ...state.formSettings[index], ...updates };
+            if (((_a = state.selectedFormSetting) == null ? void 0 : _a.id) === id) {
+              state.selectedFormSetting = { ...state.selectedFormSetting, ...updates };
+            }
+          }
+        }),
+        removeFormSetting: (id) => set2((state) => {
+          var _a;
+          state.formSettings = state.formSettings.filter((s2) => s2.id !== id);
+          if (((_a = state.selectedFormSetting) == null ? void 0 : _a.id) === id) {
+            state.selectedFormSetting = null;
+          }
+        }),
+        // Loading Actions
+        setLoadingExpenseTypes: (isLoading) => set2((state) => {
+          state.isLoadingExpenseTypes = isLoading;
+        }),
+        setLoadingBusinessPurposes: (isLoading) => set2((state) => {
+          state.isLoadingBusinessPurposes = isLoading;
+        }),
+        setLoadingFormSettings: (isLoading) => set2((state) => {
+          state.isLoadingFormSettings = isLoading;
+        }),
+        // Error Actions
+        setExpenseTypesError: (error) => set2((state) => {
+          state.expenseTypesError = error;
+        }),
+        setBusinessPurposesError: (error) => set2((state) => {
+          state.businessPurposesError = error;
+        }),
+        setFormSettingsError: (error) => set2((state) => {
+          state.formSettingsError = error;
+        }),
+        reset: () => set2(() => initialState())
+      }))
+    ),
+    {
+      name: "expense-storage"
+    }
+  )
+);
 const r = (t2, r2, o2) => {
   if (t2 && "reportValidity" in t2) {
     const s2 = get(o2, r2);
@@ -5370,11 +5499,12 @@ export {
   array as a,
   boolean as b,
   custom as c,
-  useForm as d,
-  a as e,
+  a as d,
+  useMutation as e,
+  useExpenseStore as f,
   literal as l,
   number as n,
   object as o,
   string as s,
-  useMutation as u
+  useForm as u
 };

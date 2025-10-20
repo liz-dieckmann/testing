@@ -1,12 +1,12 @@
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { a as useQuery, P as Plus, u as useCompanyStore } from "./store-o90e_JfS.js";
-import { u as useQueryClient, L as LoadingSpinner } from "./LoadingSpinner-C-M1heDl.js";
-import { u as useMutation, o as object, n as number, _ as _enum, s as string, l as literal, d as useForm, e as a, C as Controller } from "./schemas-BbJoaiI5.js";
+import { l as useQuery, k as useQueryClient, q as queryKeys, u as useCompanyStore, L as LoadingSpinner } from "./LoadingSpinner-DqE6Gge9.js";
+import { f as useExpenseStore, e as useMutation, o as object, n as number, _ as _enum, s as string, l as literal, u as useForm, d as a, C as Controller } from "./schemas-DZYP4uWY.js";
 import { a as apiClient } from "./axiosInstance-D83Ho1lg.js";
-import { u as useExpenseStore, T as Table2, C as Check, X, P as Pencil, E as EllipsisVertical } from "./store-DwCb8LJX.js";
-import { D as De, d as Oo, B as Bo, K as Ka, i as m, k as ar, l as Xa } from "./createLucideIcon-DIm8u9Oh.js";
-import { L as LayoutDashboard } from "./layout-dashboard-B6fg-6E-.js";
+import { D as De, d as Ao, B as Bo, K as Ka, i as m, k as ar, l as Xa } from "./createLucideIcon-D0_eAq0F.js";
+import { T as Table2, C as Check, X, P as Pencil, E as EllipsisVertical } from "./x-B7RnTcsI.js";
+import { P as Plus } from "./plus-CKiclhdA.js";
+import { L as LayoutDashboard } from "./layout-dashboard-BoyZ5Pyk.js";
 var ExpenseFormType = /* @__PURE__ */ ((ExpenseFormType2) => {
   ExpenseFormType2["STANDARD"] = "standard";
   ExpenseFormType2["ENTERTAINMENT"] = "entertainment";
@@ -78,7 +78,7 @@ const getCurrentUser = () => {
 const useExpenseTypes = (companyShortName, includeInactive = false) => {
   const { setExpenseTypes, setLoadingExpenseTypes, setExpenseTypesError } = useExpenseStore();
   const query = useQuery({
-    queryKey: ["expense-types", companyShortName, includeInactive],
+    queryKey: companyShortName ? queryKeys.expenseTypes.list(companyShortName, includeInactive) : queryKeys.expenseTypes.lists(),
     queryFn: async () => {
       if (!companyShortName) throw new Error("Company short name is required");
       const params = {
@@ -142,7 +142,7 @@ const useCreateExpenseType = () => {
     },
     onSuccess: (newExpenseType, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["expense-types", variables.companyShortName]
+        queryKey: queryKeys.expenseTypes.list(variables.companyShortName)
       });
       addExpenseType(newExpenseType);
     },
@@ -170,7 +170,7 @@ const useUpdateExpenseType = () => {
     onSuccess: (updatedExpenseType, variables) => {
       updateExpenseType(updatedExpenseType.id, updatedExpenseType);
       queryClient.invalidateQueries({
-        queryKey: ["expense-types", variables.companyShortName]
+        queryKey: queryKeys.expenseTypes.list(variables.companyShortName)
       });
     },
     onError: (error) => {
@@ -180,7 +180,7 @@ const useUpdateExpenseType = () => {
 };
 const useFormTypeOptions = () => {
   return useQuery({
-    queryKey: ["form-type-options"],
+    queryKey: queryKeys.formTypes.list(),
     queryFn: async () => {
       const formTypes = [
         {
@@ -219,7 +219,7 @@ const useFormTypeOptions = () => {
 };
 const useMileageRateOptions = () => {
   return useQuery({
-    queryKey: ["mileage-rate-options"],
+    queryKey: queryKeys.mileageRates.list(),
     queryFn: async () => {
       const mileageRates = [
         {
@@ -605,7 +605,7 @@ const NameField = ({ control, errors, touchedFields, dirtyFields }) => {
       render: ({ field }) => {
         const errorMessage = getFieldError(errors, touchedFields, dirtyFields, "name", field.value);
         return /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Oo,
+          Ao,
           {
             ...field,
             placeholder: EXPENSE_TYPE_PLACEHOLDERS.NAME,
@@ -626,7 +626,7 @@ const DescriptionField = ({ control, errors, touchedFields, dirtyFields }) => /*
     name: "description",
     control,
     render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Oo,
+      Ao,
       {
         ...field,
         placeholder: EXPENSE_TYPE_PLACEHOLDERS.DESCRIPTION,

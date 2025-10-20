@@ -1,17 +1,18 @@
 const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/core-Dbi-QRzc.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/_commonjsHelpers-CUmg6egw.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
-import { E as ExpensesList } from "./ExpensesList-Xh6VcRDy.js";
-import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, O as Oa, a as Ba, G as Ga, m as ma, b as jo, d as Oo, p as pa, w as wa, B as Bo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-DIm8u9Oh.js";
+import { E as ExpensesList } from "./ExpensesList-Ccl5X_MC.js";
+import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, A as Aa, a as Ba, G as Ga, m as ma, b as jo, d as Ao, p as pa, w as wa, B as Bo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-D0_eAq0F.js";
+import { C as Controller, o as object, s as string, b as boolean, c as custom, a as array, _ as _enum, n as number, u as useForm, d as a, e as useMutation } from "./schemas-DZYP4uWY.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
-import { L as LoadingSpinner, u as useQueryClient } from "./LoadingSpinner-C-M1heDl.js";
+import { L as LoadingSpinner, k as useQueryClient, l as useQuery, q as queryKeys } from "./LoadingSpinner-DqE6Gge9.js";
 import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
 import { a as apiClient } from "./axiosInstance-D83Ho1lg.js";
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
-import { F as FILE_ENDPOINTS } from "./endpoints-DyuQahSx.js";
-import { C as Controller, o as object, s as string, b as boolean, c as custom, a as array, u as useMutation, d as useForm, e as a } from "./schemas-BbJoaiI5.js";
-import { F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, f as ChevronRight, a as RoutePaths } from "./routes-D_bdpp_f.js";
-import { S as Send } from "./send-BFf406_z.js";
+import { F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS } from "./endpoints-BdHtwkuO.js";
+import { u as useBusinessPurposes } from "./api-B6cyMCFZ.js";
+import { l as useDefaultCompany, F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, m as useSearchParams, g as ChevronRight, a as RoutePaths } from "./api-dfECdw7G.js";
+import { T as Trash2, S as Send } from "./trash-2-BDRPQK2n.js";
 /**
  * @license lucide-react v0.542.0 - ISC
  *
@@ -844,7 +845,7 @@ const splitFilename = (filename) => {
   };
 };
 const React$1 = await importShared("react");
-const { useCallback: useCallback$2, useEffect: useEffect$3, useRef: useRef$3, useState: useState$3 } = React$1;
+const { useCallback: useCallback$4, useEffect: useEffect$3, useRef: useRef$2, useState: useState$3 } = React$1;
 function fileName(fileName2) {
   const { name, ext } = splitFilename(fileName2);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
@@ -876,7 +877,7 @@ function FileCard({
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { className: "bg-red-50 px-2 py-2 w-full flex justify-between flex-row items-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center flex-1 min-w-0 gap-2", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(MdError, { className: "text-red-700 scale-110 shrink-0" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Oa, { delayDuration: FILE_NAME_POPOVER_DELAY, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { delayDuration: FILE_NAME_POPOVER_DELAY, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { className: "min-w-0 flex-1 text-left flex flex-nowrap items-center", children: fileName(file.originalName) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { variant: "light", size: "sm", className: "max-w-full", side: "bottom", showArrow: false, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-black", children: file.originalName }) })
         ] })
@@ -902,7 +903,7 @@ function FileCard({
       onClick: () => onPreview(file),
       children: [
         previewType === FilePreviewType.IMAGE ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "icon-file-img" }) : previewType === FilePreviewType.PDF ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "icon-file-pdf" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "text-line-unknown" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-w-0 flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Oa, { delayDuration: FILE_NAME_POPOVER_DELAY, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-w-0 flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { delayDuration: FILE_NAME_POPOVER_DELAY, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { className: "min-w-0 flex-1 text-left flex flex-nowrap items-center", children: fileName(file.originalName) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { variant: "light", size: "sm", className: "max-w-full", side: "bottom", showArrow: false, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm", children: file.originalName }) })
         ] }) }),
@@ -927,7 +928,7 @@ function SupportingFiles({
   disabled = false,
   className = ""
 }) {
-  const fileInputRef = useRef$3(null);
+  const fileInputRef = useRef$2(null);
   const [state, setState] = useState$3({
     attachments: initialFiles,
     isUploading: false,
@@ -938,7 +939,7 @@ function SupportingFiles({
     fileIndex: null,
     isDeleting: false
   });
-  const blobUrlsRef = useRef$3(/* @__PURE__ */ new Set());
+  const blobUrlsRef = useRef$2(/* @__PURE__ */ new Set());
   useEffect$3(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => {
@@ -951,13 +952,13 @@ function SupportingFiles({
       blobUrlsRef.current.clear();
     };
   }, []);
-  const handleAddSupportingDocumentClick = useCallback$2((e) => {
+  const handleAddSupportingDocumentClick = useCallback$4((e) => {
     var _a2;
     e.preventDefault();
     if (disabled || state.isUploading) return;
     (_a2 = fileInputRef.current) == null ? void 0 : _a2.click();
   }, [disabled, state.isUploading]);
-  const handleFileChange = useCallback$2(async (e) => {
+  const handleFileChange = useCallback$4(async (e) => {
     var _a2, _b;
     const newFiles = Array.from(e.target.files || []);
     if (newFiles.length === 0) return;
@@ -1060,7 +1061,7 @@ function SupportingFiles({
       fileInputRef.current.value = "";
     }
   }, [state.attachments, onFilesChange]);
-  const handleRemoveFile = useCallback$2((index) => {
+  const handleRemoveFile = useCallback$4((index) => {
     if (disabled || state.isUploading) return;
     setDeleteDialogState({
       isOpen: true,
@@ -1068,7 +1069,7 @@ function SupportingFiles({
       isDeleting: false
     });
   }, [disabled, state.isUploading]);
-  const handleDeleteConfirm = useCallback$2(async () => {
+  const handleDeleteConfirm = useCallback$4(async () => {
     const fileIndex = deleteDialogState.fileIndex;
     if (fileIndex === null || disabled) return;
     setDeleteDialogState((prev) => ({ ...prev, isDeleting: true }));
@@ -1118,14 +1119,14 @@ function SupportingFiles({
       isDeleting: false
     });
   }, [deleteDialogState.fileIndex, state.attachments, disabled, onFilesChange]);
-  const handleDeleteCancel = useCallback$2(() => {
+  const handleDeleteCancel = useCallback$4(() => {
     setDeleteDialogState({
       isOpen: false,
       fileIndex: null,
       isDeleting: false
     });
   }, []);
-  const handlePreviewClick = useCallback$2(async (file) => {
+  const handlePreviewClick = useCallback$4(async (file) => {
     if (file.status === "error") {
       return;
     }
@@ -1149,7 +1150,7 @@ function SupportingFiles({
           className: "text-nowrap w-auto"
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center w-full ml-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Oa, { delayDuration: 120, children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center w-full ml-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { delayDuration: 120, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(GrCircleInformation, { className: "text-gray-500 hover:cursor-pointer select-none" }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { variant: "default", side: "top", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-trax-blue-700 text-white border-none text-sm p-2 w-64", children: [
           "You can attach up to 3 documents, such as pre-approvals, order confirmations, or bank statements to support this expense. ",
@@ -1168,7 +1169,7 @@ function SupportingFiles({
             }
           )
         }
-      ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(Oa, { delayDuration: 120, children: [
+      ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { delayDuration: 120, children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: handleAddSupportingDocumentClick, disabled: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(FaPlus, { className: "opacity-20 hover:cursor-not-allowed" }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Ga,
@@ -1234,7 +1235,7 @@ function SupportingFiles({
   ] });
 }
 const React = await importShared("react");
-const { useCallback: useCallback$1, useEffect: useEffect$2, useRef: useRef$2, useState: useState$2 } = React;
+const { useCallback: useCallback$3, useEffect: useEffect$2, useRef: useRef$1, useState: useState$2 } = React;
 const ReceiptUpload = ({
   onReceiptChange,
   onUploadingChange,
@@ -1242,7 +1243,7 @@ const ReceiptUpload = ({
   disabled = false,
   className = ""
 }) => {
-  const fileInputRef = useRef$2(null);
+  const fileInputRef = useRef$1(null);
   const [uploadState, setUploadState] = useState$2({
     attachment: initialReceipt,
     isUploading: false,
@@ -1252,7 +1253,7 @@ const ReceiptUpload = ({
   const [_uploadProgress, setUploadProgress] = useState$2(0);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState$2(false);
   const [isDeleting, setIsDeleting] = useState$2(false);
-  const blobUrlsRef = useRef$2(/* @__PURE__ */ new Set());
+  const blobUrlsRef = useRef$1(/* @__PURE__ */ new Set());
   useEffect$2(() => {
     return () => {
       blobUrlsRef.current.forEach((url) => {
@@ -1265,14 +1266,14 @@ const ReceiptUpload = ({
       blobUrlsRef.current.clear();
     };
   }, []);
-  const handleError = useCallback$1((error) => {
+  const handleError = useCallback$3((error) => {
     setUploadState((prev) => ({
       ...prev,
       error,
       isUploading: false
     }));
   }, []);
-  const handleFileUpload = useCallback$1(async (file) => {
+  const handleFileUpload = useCallback$3(async (file) => {
     const validationError = validateReceiptFile(file);
     if (validationError) {
       handleError(validationError);
@@ -1311,7 +1312,7 @@ const ReceiptUpload = ({
       onUploadingChange == null ? void 0 : onUploadingChange(false);
     }
   }, [handleError, onReceiptChange, onUploadingChange]);
-  const handleFileSelect = useCallback$1((event) => {
+  const handleFileSelect = useCallback$3((event) => {
     var _a2;
     const file = (_a2 = event.target.files) == null ? void 0 : _a2[0];
     if (file) {
@@ -1321,16 +1322,16 @@ const ReceiptUpload = ({
       fileInputRef.current.value = "";
     }
   }, [handleFileUpload]);
-  const handleChooseFileClick = useCallback$1(() => {
+  const handleChooseFileClick = useCallback$3(() => {
     var _a2;
     if (disabled || uploadState.isUploading) return;
     (_a2 = fileInputRef.current) == null ? void 0 : _a2.click();
   }, [disabled, uploadState.isUploading]);
-  const handleDeleteClick = useCallback$1(() => {
+  const handleDeleteClick = useCallback$3(() => {
     if (!uploadState.attachment || disabled) return;
     setIsDeleteDialogOpen(true);
   }, [uploadState.attachment, disabled]);
-  const handleDeleteConfirm = useCallback$1(async () => {
+  const handleDeleteConfirm = useCallback$3(async () => {
     if (!uploadState.attachment || disabled) return;
     setIsDeleting(true);
     try {
@@ -1360,10 +1361,10 @@ const ReceiptUpload = ({
       setIsDeleting(false);
     }
   }, [uploadState.attachment, disabled, handleError, onReceiptChange]);
-  const handleDeleteCancel = useCallback$1(() => {
+  const handleDeleteCancel = useCallback$3(() => {
     setIsDeleteDialogOpen(false);
   }, []);
-  const handlePreviewClick = useCallback$1(async () => {
+  const handlePreviewClick = useCallback$3(async () => {
     if (uploadState.attachment) {
       try {
         await openFilePreview(uploadState.attachment);
@@ -1372,17 +1373,17 @@ const ReceiptUpload = ({
       }
     }
   }, [uploadState.attachment]);
-  const handleDragOver = useCallback$1((e) => {
+  const handleDragOver = useCallback$3((e) => {
     e.preventDefault();
     if (!disabled && !uploadState.isUploading) {
       setUploadState((prev) => ({ ...prev, dragActive: true }));
     }
   }, [disabled, uploadState.isUploading]);
-  const handleDragLeave = useCallback$1((e) => {
+  const handleDragLeave = useCallback$3((e) => {
     e.preventDefault();
     setUploadState((prev) => ({ ...prev, dragActive: false }));
   }, []);
-  const handleDrop = useCallback$1((e) => {
+  const handleDrop = useCallback$3((e) => {
     e.preventDefault();
     setUploadState((prev) => ({ ...prev, dragActive: false }));
     if (disabled || uploadState.isUploading) return;
@@ -1523,23 +1524,8 @@ const ReceiptUpload = ({
     )
   ] });
 };
-const getFieldError = (errors, touchedFields, dirtyFields, fieldPath) => {
-  var _a2, _b;
-  const [parent, child] = fieldPath.split(".");
-  const parentError = errors[parent];
-  if (!parentError || typeof parentError === "string") {
-    return void 0;
-  }
-  const fieldError = parentError[child];
-  const isTouched = (_a2 = touchedFields[parent]) == null ? void 0 : _a2[child];
-  const isDirty = (_b = dirtyFields[parent]) == null ? void 0 : _b[child];
-  return (isTouched || isDirty) && (fieldError == null ? void 0 : fieldError.message) ? fieldError.message : void 0;
-};
 function AffidavitSection({
-  control,
-  errors,
-  touchedFields,
-  dirtyFields
+  control
 }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full flex-1 flex flex-col min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ma, { className: "w-full max-h-full bg-yellow-50 border-1 border-yellow-200 p-3 flex flex-col overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2 h-full overflow-y-auto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-normal text-exp-grey-600", children: "Please sign the affidavit:" }),
@@ -1549,26 +1535,29 @@ function AffidavitSection({
       {
         name: "affidavit.justification",
         control,
-        render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          jo,
-          {
-            ...field,
-            value: field.value || "",
-            onInput: (e) => {
-              const el = e.currentTarget;
-              el.style.height = "auto";
-              el.style.height = Math.min(el.scrollHeight + 5, 200) + "px";
-            },
-            className: "w-full text-wrap bg-white border resize-none overflow-y-auto min-h-16 max-h-34 leading-4 placeholder:text-sm placeholder:font-normal placeholder:text-exp-grey-500",
-            label: "Justification",
-            placeholder: "State reason for missing receipt",
-            maxCharacters: 150,
-            showCharacterCount: true,
-            enforceMaxLength: true,
-            error: getFieldError(errors, touchedFields, dirtyFields, "affidavit.justification"),
-            required: true
-          }
-        )
+        render: ({ field, fieldState }) => {
+          var _a2;
+          return /* @__PURE__ */ jsxRuntimeExports.jsx(
+            jo,
+            {
+              ...field,
+              value: field.value || "",
+              onInput: (e) => {
+                const el = e.currentTarget;
+                el.style.height = "auto";
+                el.style.height = Math.min(el.scrollHeight + 5, 200) + "px";
+              },
+              className: "w-full text-wrap bg-white border resize-none overflow-y-auto min-h-16 max-h-34 leading-4 placeholder:text-sm placeholder:font-normal placeholder:text-exp-grey-500",
+              label: "Justification",
+              placeholder: "State reason for missing receipt",
+              maxCharacters: 150,
+              showCharacterCount: true,
+              enforceMaxLength: true,
+              error: (_a2 = fieldState.error) == null ? void 0 : _a2.message,
+              required: true
+            }
+          );
+        }
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-normal text-exp-yellow-900", children: "Information provided for this expense is complete and accurate. I understand that false claims may lead to disciplinary or legal action." }),
@@ -1577,33 +1566,33 @@ function AffidavitSection({
       {
         name: "affidavit.digitalSignature",
         control,
-        render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Oo,
-          {
-            ...field,
-            value: field.value || "",
-            onChange: (e) => {
-              const upperValue = e.target.value.toUpperCase();
-              const filteredValue = upperValue.replace(/[^A-Z]/g, "").slice(0, 3);
-              field.onChange(filteredValue);
-            },
-            className: "w-full bg-white border h-6 resize-none placeholder:font-normal placeholder:text-exp-grey-500 text-md px-2 py-4",
-            label: "Digital Signature",
-            placeholder: "Enter initials",
-            maxLength: 3,
-            error: getFieldError(errors, touchedFields, dirtyFields, "affidavit.digitalSignature"),
-            required: true
-          }
-        )
+        render: ({ field, fieldState }) => {
+          var _a2;
+          return /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Ao,
+            {
+              ...field,
+              value: field.value || "",
+              onChange: (e) => {
+                const upperValue = e.target.value.toUpperCase();
+                const filteredValue = upperValue.replace(/[^A-Z]/g, "").slice(0, 3);
+                field.onChange(filteredValue);
+              },
+              className: "w-full bg-white border h-6 resize-none placeholder:font-normal placeholder:text-exp-grey-500 text-md px-2 py-4",
+              label: "Digital Signature",
+              placeholder: "Enter initials",
+              maxLength: 3,
+              error: (_a2 = fieldState.error) == null ? void 0 : _a2.message,
+              required: true
+            }
+          );
+        }
       }
     )
   ] }) }) });
 }
 function ReceiptSection({
   control,
-  errors,
-  touchedFields,
-  dirtyFields,
   receiptAttachment,
   isReceiptUnavailable,
   shouldShowCheckbox,
@@ -1635,10 +1624,7 @@ function ReceiptSection({
     /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { className: "min-h-0 h-full", children: isReceiptUnavailable ? /* @__PURE__ */ jsxRuntimeExports.jsx(
       AffidavitSection,
       {
-        control,
-        errors,
-        touchedFields,
-        dirtyFields
+        control
       }
     ) : /* @__PURE__ */ jsxRuntimeExports.jsx(
       ReceiptUpload,
@@ -1652,6 +1638,39 @@ function ReceiptSection({
     ) })
   ] });
 }
+const BusinessPurposeSelect = ({
+  value,
+  onChange,
+  onBlur,
+  required = true,
+  disabled = false,
+  placeholder = "Select business purpose",
+  error
+}) => {
+  const { company, isLoading: isLoadingCompany } = useDefaultCompany();
+  const companyId = (company == null ? void 0 : company.shortName) || null;
+  const { data: businessPurposes, isLoading: isLoadingPurposes } = useBusinessPurposes(companyId, false);
+  const options = (businessPurposes == null ? void 0 : businessPurposes.map((bp) => ({
+    value: bp.id,
+    label: bp.businessPurpose
+  }))) || [];
+  const isLoading = isLoadingCompany || isLoadingPurposes;
+  const displayPlaceholder = isLoadingCompany ? "Loading company..." : isLoadingPurposes ? "Loading business purposes..." : !companyId ? "No company selected" : placeholder;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Bo,
+    {
+      label: "Business purpose",
+      placeholder: displayPlaceholder,
+      options,
+      value,
+      onValueChange: onChange,
+      onBlur,
+      required,
+      disabled: disabled || isLoading || !companyId,
+      error
+    }
+  );
+};
 const affidavitSchema = object({
   justification: string().min(1, "Justification is required").max(150, "Maximum 150 characters allowed"),
   digitalSignature: string().min(1, "Digital signature is required").max(3, "Maximum 3 initials allowed").regex(/^[A-Z]{1,3}$/, "Must be 1-3 uppercase letters").refine((val) => val.length >= 1 && val.length <= 3, {
@@ -1665,7 +1684,7 @@ const affidavitSchema = object({
 });
 const receiptWithAffidavitSchema = object({
   receiptAttachment: custom().optional().nullable(),
-  isReceiptUnavailable: boolean().default(false),
+  isReceiptUnavailable: boolean().optional(),
   affidavit: affidavitSchema.optional().nullable()
 }).refine((data) => {
   if (data.isReceiptUnavailable) {
@@ -1680,327 +1699,427 @@ const receiptWithAffidavitSchema = object({
   path: ["receiptAttachment"]
 });
 const supportingFilesSchema = object({
-  supportingFiles: array(custom()).optional().default([])
+  supportingFiles: array(custom()).max(3, "Maximum 3 supporting files allowed").optional()
 });
-const expenseFormSchema = receiptWithAffidavitSchema.merge(supportingFilesSchema);
-const getDefaultExpenseFormValues = (initialData) => ({
-  receiptAttachment: (initialData == null ? void 0 : initialData.receiptAttachment) ?? null,
-  isReceiptUnavailable: (initialData == null ? void 0 : initialData.isReceiptUnavailable) ?? false,
-  affidavit: (initialData == null ? void 0 : initialData.affidavit) ?? null,
-  supportingFiles: (initialData == null ? void 0 : initialData.supportingFiles) ?? []
+const expenseDetailsSchema = object({
+  expenseType: string().min(1, "Expense type is required"),
+  vendor: string().min(1, "Vendor is required").max(100, "Vendor name is too long"),
+  expenseDate: string().min(1, "Expense date is required"),
+  // Will be validated as date string
+  expenseLocation: string().min(1, "Expense location is required").max(100, "Location is too long"),
+  paymentMethod: string().min(1, "Payment method is required"),
+  // Currency fields - optional (defaults provided in form)
+  isDifferentCurrency: boolean().optional(),
+  netCurrency: object({
+    code: string(),
+    locale: string()
+  }).optional(),
+  totalCurrency: object({
+    code: string(),
+    locale: string()
+  }).optional(),
+  // Amount fields with HST/GST validation
+  netAmount: string().min(1, "HST/GST amount is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid amount format"),
+  totalAmount: string().min(1, "Total amount is required").regex(/^\d+(\.\d{1,2})?$/, "Invalid amount format"),
+  businessPurpose: string().min(1, "Business purpose is required"),
+  expenseDescription: string().min(1, "Expense description is required").max(500, "Description is too long"),
+  // Optional fields
+  personsEntertained: string().optional(),
+  additionalComments: string().max(500, "Comments are too long").optional(),
+  // Cost allocations - optional for now
+  costAllocations: array(object({
+    id: string(),
+    name: string(),
+    percentage: number().min(0).max(100),
+    amount: number(),
+    type: _enum(["project", "admin", "team"])
+  })).optional()
 });
-const simulateApiDelay = (ms = 1e3) => {
-  {
-    return Promise.resolve();
-  }
+const fullExpenseFormSchema = receiptWithAffidavitSchema.merge(supportingFilesSchema).merge(expenseDetailsSchema).refine((data) => {
+  const net = parseFloat(data.netAmount || "0");
+  const total = parseFloat(data.totalAmount || "0");
+  return total >= net;
+}, {
+  message: "Total amount must be greater than or equal to HST/GST amount",
+  path: ["totalAmount"]
+});
+const expenseDraftSchema = object({
+  receiptAttachment: custom().optional().nullable(),
+  isReceiptUnavailable: boolean().default(false),
+  affidavit: object({
+    justification: string().max(150).optional(),
+    digitalSignature: string().max(3).optional()
+  }).optional().nullable(),
+  supportingFiles: array(custom()).max(3, "Maximum 3 supporting files allowed").optional().default([]),
+  expenseType: string().optional(),
+  vendor: string().max(100).optional(),
+  expenseDate: string().optional(),
+  expenseLocation: string().max(100).optional(),
+  paymentMethod: string().optional(),
+  isDifferentCurrency: boolean().optional(),
+  netCurrency: object({
+    code: string(),
+    locale: string()
+  }).optional(),
+  totalCurrency: object({
+    code: string(),
+    locale: string()
+  }).optional(),
+  netAmount: string().optional(),
+  totalAmount: string().optional(),
+  businessPurpose: string().optional(),
+  expenseDescription: string().max(500).optional(),
+  personsEntertained: string().optional(),
+  additionalComments: string().max(500).optional(),
+  costAllocations: array(object({
+    id: string(),
+    name: string(),
+    percentage: number(),
+    amount: number(),
+    type: _enum(["project", "admin", "team"])
+  })).optional()
+});
+const validateExpenseForSubmission = (data) => {
+  return fullExpenseFormSchema.safeParse(data);
 };
-const useSaveReceiptDraft = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async ({ companyId, data }) => {
-      await simulateApiDelay(800);
-      try {
-        const response = await apiClient.post(
-          companyId ? `/companies/${companyId}/receipt-drafts` : "/receipt-drafts",
-          data
-        );
-        return response.data.data;
-      } catch (error) {
-        throw error;
-      }
-    },
-    onSuccess: (savedDraft) => {
-      queryClient.invalidateQueries({ queryKey: ["receipt-drafts"] });
-      console.log("Receipt draft saved successfully:", savedDraft);
-    },
-    onError: (error) => {
-      console.error("Failed to save receipt draft:", error);
-    }
-  });
+const validateExpenseForDraft = (data) => {
+  return expenseDraftSchema.safeParse(data);
 };
-const { useCallback, useEffect: useEffect$1, useMemo, useRef: useRef$1, useState: useState$1 } = await importShared("react");
-const useExpenseForm = ({
-  initialData,
-  onSaveDraft,
-  onCancel,
-  isLoading = false,
-  companyId
-} = {}) => {
-  const saveReceiptDraftMutation = useSaveReceiptDraft();
-  const abortControllerRef = useRef$1(null);
-  const [isReceiptUploading, setIsReceiptUploading] = useState$1(false);
-  const defaultValues = useMemo(
-    () => getDefaultExpenseFormValues(initialData),
-    []
-    // Only calculate once on mount
+const areRequiredFieldsFilled = (data) => {
+  var _a2, _b, _c, _d;
+  const requiredFields = [
+    "expenseType",
+    "vendor",
+    "expenseDate",
+    "expenseLocation",
+    "paymentMethod",
+    "netAmount",
+    "totalAmount",
+    "businessPurpose",
+    "expenseDescription"
+  ];
+  const basicFieldsFilled = requiredFields.every(
+    (field) => data[field] && String(data[field]).trim().length > 0
   );
+  if (!basicFieldsFilled) return false;
+  if (data.isReceiptUnavailable) {
+    return !!(((_b = (_a2 = data.affidavit) == null ? void 0 : _a2.justification) == null ? void 0 : _b.trim()) && ((_d = (_c = data.affidavit) == null ? void 0 : _c.digitalSignature) == null ? void 0 : _d.trim()));
+  }
+  return !!data.receiptAttachment;
+};
+const getFormValidationErrors = (data) => {
+  const result = validateExpenseForSubmission(data);
+  if (!result.success) {
+    return result.error.issues.map((issue) => issue.message);
+  }
+  return [];
+};
+const canSaveDraft = (data) => {
+  var _a2, _b, _c, _d;
+  const fields = [
+    "expenseType",
+    "vendor",
+    "expenseDate",
+    "expenseLocation",
+    "paymentMethod",
+    "netAmount",
+    "totalAmount",
+    "businessPurpose",
+    "expenseDescription",
+    "personsEntertained",
+    "additionalComments"
+  ];
+  const hasFieldValue = fields.some(
+    (field) => data[field] && String(data[field]).trim().length > 0
+  );
+  const hasFiles = !!(data.receiptAttachment || data.supportingFiles && data.supportingFiles.length > 0 || ((_b = (_a2 = data.affidavit) == null ? void 0 : _a2.justification) == null ? void 0 : _b.trim()) || ((_d = (_c = data.affidavit) == null ? void 0 : _c.digitalSignature) == null ? void 0 : _d.trim()));
+  return hasFieldValue || hasFiles;
+};
+const { useCallback: useCallback$2, useMemo: useMemo$1 } = await importShared("react");
+const useFullExpenseForm = ({
+  initialData,
+  onSubmit,
+  onSaveDraft,
+  isSubmitting = false,
+  isDrafting = false
+}) => {
+  const defaultValues = {
+    expenseType: (initialData == null ? void 0 : initialData.expenseType) || "",
+    vendor: (initialData == null ? void 0 : initialData.vendor) || "",
+    expenseDate: typeof (initialData == null ? void 0 : initialData.expenseDate) === "string" ? initialData.expenseDate : (initialData == null ? void 0 : initialData.expenseDate) instanceof Date ? initialData.expenseDate.toISOString() : "",
+    expenseLocation: (initialData == null ? void 0 : initialData.expenseLocation) || "",
+    paymentMethod: (initialData == null ? void 0 : initialData.paymentMethod) || "",
+    netAmount: (initialData == null ? void 0 : initialData.netAmount) || "",
+    totalAmount: (initialData == null ? void 0 : initialData.totalAmount) || "",
+    businessPurpose: (initialData == null ? void 0 : initialData.businessPurpose) || "",
+    expenseDescription: (initialData == null ? void 0 : initialData.expenseDescription) || "",
+    personsEntertained: (initialData == null ? void 0 : initialData.personsEntertained) || "",
+    additionalComments: (initialData == null ? void 0 : initialData.additionalComments) || "",
+    receiptAttachment: (initialData == null ? void 0 : initialData.receiptAttachment) || null,
+    isReceiptUnavailable: (initialData == null ? void 0 : initialData.isReceiptUnavailable) || false,
+    affidavit: (initialData == null ? void 0 : initialData.affidavit) || null,
+    supportingFiles: (initialData == null ? void 0 : initialData.supportingFiles) || [],
+    isDifferentCurrency: (initialData == null ? void 0 : initialData.isDifferentCurrency) || false,
+    netCurrency: (initialData == null ? void 0 : initialData.netCurrency) || { code: "CAD", locale: "en-CA" },
+    totalCurrency: (initialData == null ? void 0 : initialData.totalCurrency) || { code: "CAD", locale: "en-CA" },
+    costAllocations: (initialData == null ? void 0 : initialData.costAllocations) || []
+  };
   const form = useForm({
-    resolver: a(expenseFormSchema),
+    resolver: a(fullExpenseFormSchema),
     defaultValues,
     mode: "onTouched",
-    // Validate on blur
     reValidateMode: "onChange",
     criteriaMode: "all"
   });
-  useEffect$1(() => {
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
-  }, []);
   const {
     handleSubmit,
     watch,
     setValue,
-    control,
+    getValues,
+    formState: { errors, isValid, isDirty },
+    trigger,
     reset,
-    formState: {
-      errors,
-      isValid,
-      isDirty,
-      isSubmitting,
-      touchedFields,
-      dirtyFields
-    }
+    clearErrors,
+    setError
   } = form;
-  const receiptAttachment = watch("receiptAttachment");
-  const isReceiptUnavailable = watch("isReceiptUnavailable");
-  const affidavit = watch("affidavit");
-  const supportingFiles = watch("supportingFiles");
-  const handleReceiptChange = useCallback((attachment) => {
-    setValue("receiptAttachment", attachment || null, {
-      shouldDirty: true,
-      shouldValidate: true
-    });
-    if (attachment) {
-      setValue("isReceiptUnavailable", false, {
-        shouldDirty: true,
-        shouldValidate: false
-      });
-      setValue("affidavit", null, {
-        shouldDirty: true,
-        shouldValidate: false
-      });
-    }
-  }, [setValue]);
-  const handleReceiptUnavailableChange = useCallback((checked) => {
-    setValue("isReceiptUnavailable", checked, {
-      shouldDirty: true,
-      shouldValidate: true
-    });
-    if (checked) {
-      setValue("receiptAttachment", null, {
-        shouldDirty: true,
-        shouldValidate: false
-      });
-      setValue("affidavit", {
-        justification: "",
-        digitalSignature: ""
-      }, {
-        shouldDirty: true,
-        shouldValidate: false
-        // Don't validate immediately on checkbox check
-      });
-    } else {
-      setValue("affidavit", null, {
-        shouldDirty: true,
-        shouldValidate: false
-      });
-    }
-  }, [setValue]);
-  const handleSupportingFilesChange = useCallback((attachments) => {
-    setValue("supportingFiles", attachments, {
-      shouldDirty: true,
-      shouldValidate: true
-    });
-  }, [setValue]);
-  const handleSaveDraft = useCallback(
+  const formData = watch();
+  const requiredFieldsFilled = useMemo$1(
+    () => areRequiredFieldsFilled(formData),
+    [formData]
+  );
+  const validationErrors = useMemo$1(
+    () => getFormValidationErrors(formData),
+    [formData]
+  );
+  const hasErrors = validationErrors.length > 0;
+  const canSave = useMemo$1(
+    () => canSaveDraft(formData),
+    [formData]
+  );
+  const canSubmit = requiredFieldsFilled && !hasErrors && !isSubmitting;
+  const handleFormSubmit = useCallback$2(
     async (data) => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-      abortControllerRef.current = new AbortController();
       try {
-        await saveReceiptDraftMutation.mutateAsync({
-          companyId,
-          data: {
-            receiptAttachment: data.receiptAttachment,
-            isReceiptUnavailable: data.isReceiptUnavailable
-          }
-        });
-        await (onSaveDraft == null ? void 0 : onSaveDraft(data));
-      } catch (error) {
-        if (error.name === "AbortError") {
+        const result = validateExpenseForSubmission(data);
+        if (!result.success) {
+          console.error("Validation failed:", result.error.issues);
           return;
         }
-        console.error("Save draft error:", error);
+        const expenseData = {
+          ...data,
+          expenseDate: data.expenseDate || (/* @__PURE__ */ new Date()).toISOString(),
+          personsEntertained: data.personsEntertained || "",
+          additionalComments: data.additionalComments || "",
+          receiptAttachment: data.receiptAttachment || void 0,
+          affidavit: data.affidavit || void 0,
+          isReceiptUnavailable: data.isReceiptUnavailable ?? false,
+          isDifferentCurrency: data.isDifferentCurrency ?? false,
+          netCurrency: data.netCurrency || { code: "CAD", locale: "en-CA" },
+          totalCurrency: data.totalCurrency || { code: "CAD", locale: "en-CA" },
+          supportingFiles: data.supportingFiles || [],
+          costAllocations: data.costAllocations || []
+        };
+        await (onSubmit == null ? void 0 : onSubmit(expenseData));
+      } catch (error) {
+        console.error("Form submission error:", error);
         throw error;
-      } finally {
-        abortControllerRef.current = null;
       }
     },
-    [onSaveDraft, saveReceiptDraftMutation, companyId]
+    [onSubmit]
   );
-  const handleCancel = useCallback(() => {
-    reset();
-    onCancel == null ? void 0 : onCancel();
-  }, [reset, onCancel]);
-  const getFieldError2 = useCallback(
-    (fieldName) => {
-      const parts = fieldName.split(".");
-      let error = errors;
-      let touched = touchedFields;
-      for (const part of parts) {
-        error = error == null ? void 0 : error[part];
-        touched = touched == null ? void 0 : touched[part];
+  const handleDraftSave = useCallback$2(
+    async () => {
+      try {
+        const data = getValues();
+        const result = validateExpenseForDraft(data);
+        if (!result.success) {
+          console.error("Draft validation failed:", result.error.issues);
+          return;
+        }
+        const expenseData = {
+          ...data,
+          expenseDate: data.expenseDate || (/* @__PURE__ */ new Date()).toISOString(),
+          expenseType: data.expenseType || "",
+          vendor: data.vendor || "",
+          expenseLocation: data.expenseLocation || "",
+          paymentMethod: data.paymentMethod || "",
+          netAmount: data.netAmount || "",
+          totalAmount: data.totalAmount || "",
+          businessPurpose: data.businessPurpose || "",
+          expenseDescription: data.expenseDescription || "",
+          personsEntertained: data.personsEntertained || "",
+          additionalComments: data.additionalComments || "",
+          isDifferentCurrency: data.isDifferentCurrency ?? false,
+          netCurrency: data.netCurrency || { code: "CAD", locale: "en-CA" },
+          totalCurrency: data.totalCurrency || { code: "CAD", locale: "en-CA" },
+          costAllocations: data.costAllocations || [],
+          receiptAttachment: data.receiptAttachment || void 0,
+          affidavit: data.affidavit || void 0,
+          isReceiptUnavailable: data.isReceiptUnavailable ?? false,
+          supportingFiles: data.supportingFiles || []
+        };
+        await (onSaveDraft == null ? void 0 : onSaveDraft(expenseData));
+      } catch (error) {
+        console.error("Draft save error:", error);
+        throw error;
       }
-      return touched && (error == null ? void 0 : error.message) ? error.message : void 0;
     },
-    [errors, touchedFields]
+    [getValues, onSaveDraft]
   );
-  const hasFieldError = useCallback(
-    (fieldName) => {
-      return Boolean(getFieldError2(fieldName));
+  const validateField = useCallback$2(
+    async (fieldName) => {
+      await trigger(fieldName);
     },
-    [getFieldError2]
+    [trigger]
   );
-  const shouldShowReceiptCheckbox = useMemo(() => {
-    return !receiptAttachment && !isReceiptUploading;
-  }, [receiptAttachment, isReceiptUploading]);
+  const validateForm = useCallback$2(
+    async () => {
+      const result = await trigger();
+      return result;
+    },
+    [trigger]
+  );
+  const getSubmitButtonState = useCallback$2(() => {
+    if (!requiredFieldsFilled) {
+      return {
+        disabled: true,
+        tooltip: "Complete all required fields to submit"
+      };
+    }
+    if (hasErrors) {
+      return {
+        disabled: true,
+        tooltip: "Fix form error(s) to submit"
+      };
+    }
+    if (isSubmitting) {
+      return {
+        disabled: true
+      };
+    }
+    return {
+      disabled: false
+    };
+  }, [requiredFieldsFilled, hasErrors, isSubmitting]);
+  const getSaveDraftButtonState = useCallback$2(() => {
+    if (!canSave) {
+      return {
+        disabled: true,
+        tooltip: "Cannot save empty draft"
+      };
+    }
+    if (isDrafting) {
+      return {
+        disabled: true
+      };
+    }
+    return {
+      disabled: false
+    };
+  }, [canSave, isDrafting]);
+  const resetForm = useCallback$2(() => {
+    reset(defaultValues);
+  }, [reset, defaultValues]);
   return {
     form,
-    handleSubmit: handleSubmit(handleSaveDraft),
+    handleSubmit: () => handleSubmit(handleFormSubmit)(),
+    handleDraftSave,
     setValue,
-    control,
-    watch,
-    reset,
-    receiptAttachment,
-    isReceiptUnavailable,
-    affidavit,
-    supportingFiles,
-    handleReceiptChange,
-    handleReceiptUnavailableChange,
-    handleSupportingFilesChange,
-    setIsReceiptUploading,
-    shouldShowReceiptCheckbox,
+    getValues,
+    validateField,
+    validateForm,
+    resetForm,
+    clearErrors,
+    setError,
+    formData,
     errors,
     isValid,
     isDirty,
+    requiredFieldsFilled,
+    validationErrors,
+    hasErrors,
+    canSave,
+    canSubmit,
     isSubmitting,
-    touchedFields,
-    dirtyFields,
-    getFieldError: getFieldError2,
-    hasFieldError,
-    handleCancel,
-    canSaveDraft: useMemo(() => {
-      return !isSubmitting && !isLoading && !saveReceiptDraftMutation.isPending;
-    }, [isSubmitting, isLoading, saveReceiptDraftMutation.isPending]),
-    isFormLoading: isLoading || isSubmitting || saveReceiptDraftMutation.isPending,
-    isSavingDraft: saveReceiptDraftMutation.isPending,
-    saveDraftError: saveReceiptDraftMutation.error
+    isDrafting,
+    getSubmitButtonState,
+    getSaveDraftButtonState
   };
 };
-const defaultCostAllocations = [
-  {
-    id: "1",
-    name: "Project",
-    percentage: 0,
-    amount: 0,
-    type: "project"
-  },
-  {
-    id: "2",
-    name: "Admin",
-    percentage: 0,
-    amount: 0,
-    type: "admin"
-  },
-  {
-    id: "3",
-    name: "CCB Team",
-    percentage: 0,
-    amount: 0,
-    type: "team"
-  },
-  {
-    id: "4",
-    name: "CCB Rep",
-    percentage: 0,
-    amount: 0,
-    type: "team"
-  }
-];
-const createEmptyExpenseFormData = () => ({
-  expenseType: "",
-  vendor: "",
-  expenseDate: "",
-  expenseLocation: "",
-  paymentMethod: "",
-  netAmount: "",
-  totalAmount: "",
-  businessPurpose: "",
-  expenseDescription: "",
-  personsEntertained: "",
-  additionalComments: "",
-  receiptAttachment: void 0,
-  isReceiptUnavailable: false,
-  affidavit: void 0,
-  isDifferentCurrency: false,
-  netCurrency: { code: "USD", locale: "en-US" },
-  totalCurrency: { code: "CAD", locale: "en-CA" },
-  costAllocations: [...defaultCostAllocations]
-});
-const { forwardRef, useImperativeHandle, useState } = await importShared("react");
+const { forwardRef, useCallback: useCallback$1, useEffect: useEffect$1, useImperativeHandle, useMemo, useState: useState$1 } = await importShared("react");
 const ExpenseForm = forwardRef(({
   onSubmit,
   onSaveDraft,
-  // onCancel,
   initialData,
-  isSubmitting = false
-  // isDrafting = false,
+  isSubmitting = false,
+  isDrafting = false,
+  onButtonStateChange
 }, ref) => {
-  const receiptForm = useExpenseForm({
-    initialData: {
-      receiptAttachment: (initialData == null ? void 0 : initialData.receiptAttachment) ?? null,
-      isReceiptUnavailable: (initialData == null ? void 0 : initialData.isReceiptUnavailable) ?? false,
-      affidavit: (initialData == null ? void 0 : initialData.affidavit) ?? null,
-      supportingFiles: (initialData == null ? void 0 : initialData.supportingFiles) ?? []
-    },
-    isLoading: isSubmitting
+  var _a2;
+  const fullForm = useFullExpenseForm({
+    initialData,
+    onSubmit,
+    onSaveDraft,
+    isSubmitting,
+    isDrafting
   });
-  const [formData, setFormData] = useState(() => ({
-    ...createEmptyExpenseFormData(),
-    ...initialData
-  }));
-  const [formErrors, setFormErrors] = useState([]);
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    if (formErrors.length > 0) {
-      setFormErrors([]);
+  const { control, watch, setValue, formState } = fullForm.form;
+  const [formErrors, setFormErrors] = useState$1([]);
+  const [isReceiptUploading, setIsReceiptUploading] = useState$1(false);
+  const formValues = watch();
+  const isReceiptUnavailable = watch("isReceiptUnavailable");
+  const isDifferentCurrency = watch("isDifferentCurrency");
+  useEffect$1(() => {
+    if (onButtonStateChange) {
+      const submitState = fullForm.getSubmitButtonState();
+      const draftState = fullForm.getSaveDraftButtonState();
+      onButtonStateChange(submitState, draftState);
     }
-  };
-  const handleFormSubmit = () => {
-    const completeFormData = {
-      ...formData,
-      receiptAttachment: receiptForm.receiptAttachment || void 0,
-      isReceiptUnavailable: receiptForm.isReceiptUnavailable,
-      affidavit: receiptForm.affidavit || void 0,
-      supportingFiles: receiptForm.supportingFiles || []
-    };
-    onSubmit == null ? void 0 : onSubmit(completeFormData);
-  };
-  const handleSaveDraft = async () => {
-    await receiptForm.handleSubmit();
-    const completeFormData = {
-      ...formData,
-      receiptAttachment: receiptForm.receiptAttachment || void 0,
-      isReceiptUnavailable: receiptForm.isReceiptUnavailable,
-      affidavit: receiptForm.affidavit || void 0,
-      supportingFiles: receiptForm.supportingFiles || []
-    };
-    onSaveDraft == null ? void 0 : onSaveDraft(completeFormData);
-  };
+  }, [onButtonStateChange, formState.isDirty, formState.isValid, fullForm.requiredFieldsFilled, fullForm.hasErrors]);
+  const handleReceiptChange = useCallback$1((attachment) => {
+    setValue("receiptAttachment", attachment || null, { shouldValidate: true, shouldDirty: true });
+    if (attachment) {
+      setValue("isReceiptUnavailable", false, { shouldValidate: false });
+      setValue("affidavit", null, { shouldValidate: false });
+    }
+  }, [setValue]);
+  const handleReceiptUnavailableChange = useCallback$1((checked) => {
+    setValue("isReceiptUnavailable", checked, { shouldValidate: true, shouldDirty: true });
+    if (checked) {
+      setValue("receiptAttachment", null, { shouldValidate: false });
+      setValue("affidavit", { justification: "", digitalSignature: "" }, { shouldValidate: false });
+    } else {
+      setValue("affidavit", null, { shouldValidate: false });
+    }
+  }, [setValue]);
+  const handleSupportingFilesChange = useCallback$1((attachments) => {
+    setValue("supportingFiles", attachments, { shouldValidate: true, shouldDirty: true });
+  }, [setValue]);
+  const shouldShowReceiptCheckbox = useMemo(() => {
+    return !formValues.receiptAttachment && !isReceiptUploading;
+  }, [formValues.receiptAttachment, isReceiptUploading]);
+  const handleFormSubmit = useCallback$1(async () => {
+    const isValid = await fullForm.validateForm();
+    if (isValid) {
+      await fullForm.handleSubmit();
+    } else {
+      setFormErrors(fullForm.validationErrors);
+    }
+  }, [fullForm]);
+  const handleDraftSave = useCallback$1(async () => {
+    await fullForm.handleDraftSave();
+  }, [fullForm]);
+  useImperativeHandle(ref, () => ({
+    submitForm: handleFormSubmit,
+    saveDraft: handleDraftSave,
+    getFormData: () => fullForm.getValues(),
+    validateForm: () => ({
+      isValid: fullForm.canSubmit,
+      errors: fullForm.validationErrors
+    }),
+    submitButtonState: fullForm.getSubmitButtonState(),
+    saveDraftButtonState: fullForm.getSaveDraftButtonState()
+  }), [handleFormSubmit, handleDraftSave, fullForm, formValues]);
   const expenseTypeOptions = [
     { value: "travel", label: "Travel" },
     { value: "meals", label: "Meals & Entertainment" },
@@ -2037,49 +2156,25 @@ const ExpenseForm = forwardRef(({
     { code: "CAD", locale: "en-CA" },
     { code: "EUR", locale: "de-DE" }
   ];
-  const handleCurrencyInputChange = (field, value) => {
-    handleInputChange(field, value);
-  };
-  const handleCurrencyChange = (field, currency) => {
-    handleInputChange(field, currency);
-  };
-  const handleDifferentCurrencyChange = (checked) => {
-    handleInputChange("isDifferentCurrency", checked);
-  };
-  useImperativeHandle(ref, () => ({
-    submitForm: handleFormSubmit,
-    saveDraft: handleSaveDraft,
-    getFormData: () => ({
-      ...formData,
-      receiptAttachment: receiptForm.receiptAttachment || void 0,
-      isReceiptUnavailable: receiptForm.isReceiptUnavailable,
-      affidavit: receiptForm.affidavit || void 0,
-      supportingFiles: receiptForm.supportingFiles || []
-    }),
-    validateForm: () => ({ isValid: receiptForm.isValid, errors: [] })
-  }));
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-2 h-full overflow-y-auto", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-col gap-2 flex-1 sticky top-0 bottom-0 h-full", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { className: "w-full h-full flex flex-col", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full h-full min-h-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         ReceiptSection,
         {
-          control: receiptForm.control,
-          errors: receiptForm.errors,
-          touchedFields: receiptForm.touchedFields,
-          dirtyFields: receiptForm.dirtyFields,
-          receiptAttachment: receiptForm.receiptAttachment,
-          isReceiptUnavailable: receiptForm.isReceiptUnavailable,
-          shouldShowCheckbox: receiptForm.shouldShowReceiptCheckbox,
-          onReceiptChange: receiptForm.handleReceiptChange,
-          onReceiptUnavailableChange: receiptForm.handleReceiptUnavailableChange,
-          onUploadingChange: receiptForm.setIsReceiptUploading
+          control,
+          receiptAttachment: formValues.receiptAttachment,
+          isReceiptUnavailable: isReceiptUnavailable ?? false,
+          shouldShowCheckbox: shouldShowReceiptCheckbox,
+          onReceiptChange: handleReceiptChange,
+          onReceiptUnavailableChange: handleReceiptUnavailableChange,
+          onUploadingChange: setIsReceiptUploading
         }
       ) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-full flex items-center h-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
         SupportingFiles,
         {
-          onFilesChange: receiptForm.handleSupportingFilesChange,
-          initialFiles: receiptForm.supportingFiles,
+          onFilesChange: handleSupportingFilesChange,
+          initialFiles: formValues.supportingFiles || [],
           disabled: isSubmitting
         }
       ) })
@@ -2100,86 +2195,181 @@ const ExpenseForm = forwardRef(({
         ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Bo,
+            Controller,
             {
-              label: "Expense type",
-              placeholder: "Select expense type",
-              options: expenseTypeOptions,
-              value: formData.expenseType,
-              onValueChange: (id) => handleInputChange("expenseType", id)
+              name: "expenseType",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Bo,
+                  {
+                    label: "Expense type",
+                    placeholder: "Select expense type",
+                    options: expenseTypeOptions,
+                    value: field.value || "",
+                    onValueChange: field.onChange,
+                    onBlur: field.onBlur,
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
+                    required: true
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Oo,
+            Controller,
             {
-              label: "Vendor",
-              placeholder: "Enter vendor name",
-              value: formData.vendor,
-              onChange: (e) => handleInputChange("vendor", e.target.value)
+              name: "vendor",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Ao,
+                  {
+                    label: "Vendor",
+                    placeholder: "Enter vendor name",
+                    ...field,
+                    value: field.value || "",
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
+                    required: true
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Go,
+            Controller,
             {
-              label: "Expense date",
-              placeholder: "Select date expense incurred",
-              value: formData.expenseDate || void 0,
-              onChange: (date) => handleInputChange("expenseDate", date || "")
+              name: "expenseDate",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Go,
+                  {
+                    label: "Expense date",
+                    placeholder: "Select date expense incurred",
+                    value: field.value ? new Date(field.value) : void 0,
+                    onChange: (date) => field.onChange(date ? date.toISOString() : ""),
+                    onBlur: field.onBlur,
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
+                    required: true
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Bo,
+            Controller,
             {
-              label: "Expense location",
-              placeholder: "Select location",
-              options: expenseLocationOptions,
-              value: formData.expenseLocation,
-              onValueChange: (value) => handleInputChange("expenseLocation", value)
+              name: "expenseLocation",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Bo,
+                  {
+                    label: "Expense location",
+                    placeholder: "Select location",
+                    options: expenseLocationOptions,
+                    value: field.value || "",
+                    onValueChange: field.onChange,
+                    onBlur: field.onBlur,
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
+                    required: true
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Bo,
+            Controller,
             {
-              label: "Payment method",
-              placeholder: "Select payment method",
-              options: paymentMethodOptions,
-              value: formData.paymentMethod,
-              onValueChange: (value) => handleInputChange("paymentMethod", value)
+              name: "paymentMethod",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Bo,
+                  {
+                    label: "Payment method",
+                    placeholder: "Select payment method",
+                    options: paymentMethodOptions,
+                    value: field.value || "",
+                    onValueChange: field.onChange,
+                    onBlur: field.onBlur,
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
+                    required: true
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Xo,
+              Controller,
               {
-                label: formData.isDifferentCurrency ? "Total (foreign)" : "Tax Amount",
-                placeholder: "0.00",
-                currencyCode: formData.netCurrency.code,
-                locale: formData.netCurrency.locale,
-                symbolStyle: "narrow",
-                value: formData.netAmount,
-                onChange: (e) => handleCurrencyInputChange("netAmount", e.target.value),
-                enableCurrencySelector: formData.isDifferentCurrency,
-                currencyOptions,
-                onCurrencyChange: (currency) => handleCurrencyChange("netCurrency", currency)
+                name: "netAmount",
+                control,
+                render: ({ field, fieldState }) => {
+                  var _a3, _b, _c;
+                  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    Xo,
+                    {
+                      label: isDifferentCurrency ? "Total (foreign)" : "HST/GST Amount",
+                      placeholder: "0.00",
+                      currencyCode: ((_a3 = formValues.netCurrency) == null ? void 0 : _a3.code) || "CAD",
+                      locale: ((_b = formValues.netCurrency) == null ? void 0 : _b.locale) || "en-CA",
+                      symbolStyle: "narrow",
+                      ...field,
+                      value: field.value || "",
+                      enableCurrencySelector: isDifferentCurrency,
+                      currencyOptions,
+                      onCurrencyChange: (currency) => setValue("netCurrency", { code: currency.code, locale: currency.locale || "en-US" }),
+                      required: true,
+                      error: (_c = fieldState.error) == null ? void 0 : _c.message
+                    }
+                  );
+                }
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
-              Xo,
+              Controller,
               {
-                label: formData.isDifferentCurrency ? "Total (converted)" : "Total (including taxes)",
-                placeholder: "0.00",
-                currencyCode: formData.totalCurrency.code,
-                locale: formData.totalCurrency.locale,
-                symbolStyle: "narrow",
-                value: formData.totalAmount,
-                onChange: (e) => handleCurrencyInputChange("totalAmount", e.target.value),
-                enableCurrencySelector: formData.isDifferentCurrency,
-                currencyOptions,
-                onCurrencyChange: (currency) => handleCurrencyChange("totalCurrency", currency)
+                name: "totalAmount",
+                control,
+                render: ({ field, fieldState }) => {
+                  var _a3, _b, _c;
+                  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    Xo,
+                    {
+                      label: isDifferentCurrency ? "Total (converted)" : "Total (including taxes)",
+                      placeholder: "0.00",
+                      currencyCode: ((_a3 = formValues.totalCurrency) == null ? void 0 : _a3.code) || "CAD",
+                      locale: ((_b = formValues.totalCurrency) == null ? void 0 : _b.locale) || "en-CA",
+                      symbolStyle: "narrow",
+                      ...field,
+                      value: field.value || "",
+                      enableCurrencySelector: isDifferentCurrency,
+                      currencyOptions,
+                      onCurrencyChange: (currency) => setValue("totalCurrency", { code: currency.code, locale: currency.locale || "en-US" }),
+                      required: true,
+                      error: (_c = fieldState.error) == null ? void 0 : _c.message
+                    }
+                  );
+                }
               }
             )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(pa, { label: "Expense made in a different currency", checked: formData.isDifferentCurrency, onCheckedChange: handleDifferentCurrencyChange })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            pa,
+            {
+              label: "Expense made in a different currency",
+              checked: isDifferentCurrency,
+              onCheckedChange: (checked) => setValue("isDifferentCurrency", checked === true)
+            }
+          )
         ] }) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { children: [
@@ -2194,33 +2384,62 @@ const ExpenseForm = forwardRef(({
         ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 gap-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Bo,
+            Controller,
             {
-              label: "Business purpose",
-              placeholder: "Specify what this expense was for",
-              options: expenseTypeOptions,
-              value: formData.businessPurpose,
-              onValueChange: (value) => handleInputChange("businessPurpose", value)
+              name: "businessPurpose",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  BusinessPurposeSelect,
+                  {
+                    value: field.value || "",
+                    onChange: field.onChange,
+                    onBlur: field.onBlur,
+                    required: true,
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            jo,
+            Controller,
             {
-              label: "Expense description",
-              placeholder: "Describe what was purchased",
-              rows: 1,
-              value: formData.expenseDescription,
-              onChange: (e) => handleInputChange("expenseDescription", e.target.value)
+              name: "expenseDescription",
+              control,
+              render: ({ field, fieldState }) => {
+                var _a3;
+                return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  jo,
+                  {
+                    ...field,
+                    label: "Expense description",
+                    placeholder: "Describe what was purchased",
+                    rows: 1,
+                    value: field.value || "",
+                    error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
+                    required: true
+                  }
+                );
+              }
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
-            jo,
+            Controller,
             {
-              label: "Persons entertained",
-              placeholder: "Enter the full names of clients/guests entertained",
-              rows: 1,
-              value: formData.personsEntertained,
-              onChange: (e) => handleInputChange("personsEntertained", e.target.value)
+              name: "personsEntertained",
+              control,
+              render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                jo,
+                {
+                  ...field,
+                  label: "Persons entertained",
+                  placeholder: "Enter the full names of clients/guests entertained",
+                  rows: 1,
+                  value: field.value || ""
+                }
+              )
             }
           )
         ] }) })
@@ -2231,23 +2450,20 @@ const ExpenseForm = forwardRef(({
           {
             iconClassName: "bg-trax-yellow-600",
             title: "COST ALLOCATION",
-            icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ChartColumn, { className: "w-4 h-4 text-trax-neutral-950" }),
-            required: true
+            icon: /* @__PURE__ */ jsxRuntimeExports.jsx(ChartColumn, { className: "w-4 h-4 text-trax-neutral-950" })
           }
         ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
           Yo,
           {
-            allocations: formData.costAllocations,
-            totalAmount: parseFloat(formData.totalAmount) || 0,
-            currency: formData.totalCurrency.code,
+            allocations: formValues.costAllocations || [],
+            totalAmount: parseFloat(formValues.totalAmount || "0"),
+            currency: ((_a2 = formValues.totalCurrency) == null ? void 0 : _a2.code) || "CAD",
             showAddButton: false,
-            onAddAllocation: () => {
-              console.log("Add allocation clicked");
-            },
+            onAddAllocation: () => console.log("Add allocation clicked"),
             onRemoveAllocation: (id) => {
-              const updatedAllocations = formData.costAllocations.filter((a2) => a2.id !== id);
-              handleInputChange("costAllocations", updatedAllocations);
+              const updated = (formValues.costAllocations || []).filter((a2) => a2.id !== id);
+              setValue("costAllocations", updated);
             }
           }
         ) }) })
@@ -2258,28 +2474,143 @@ const ExpenseForm = forwardRef(({
           {
             iconClassName: "bg-trax-violet-100",
             title: "ADDITIONAL COMMENTS",
-            icon: /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquareMore, { className: "w-4 h-4 text-trax-neutral-950" }),
-            required: true
+            icon: /* @__PURE__ */ jsxRuntimeExports.jsx(MessageSquareMore, { className: "w-4 h-4 text-trax-neutral-950" })
           }
         ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(wa, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-1 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          jo,
+          Controller,
           {
-            placeholder: "Add any additional comments...",
-            rows: 1,
-            value: formData.additionalComments,
-            onChange: (e) => handleInputChange("additionalComments", e.target.value)
+            name: "additionalComments",
+            control,
+            render: ({ field }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              jo,
+              {
+                ...field,
+                placeholder: "Add any additional comments...",
+                rows: 1,
+                value: field.value || ""
+              }
+            )
           }
         ) }) })
       ] })
     ] })
   ] });
 });
-const { useEffect, useRef } = await importShared("react");
+const simulateApiDelay = (ms = 800) => new Promise((resolve) => setTimeout(resolve, ms));
+const useSaveExpenseDraft = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ data, draftId }) => {
+      await simulateApiDelay(600);
+      try {
+        const endpoint = draftId ? EXPENSE_ENDPOINTS.UPDATE_DRAFT(draftId) : EXPENSE_ENDPOINTS.SAVE_DRAFT;
+        const method = draftId ? "put" : "post";
+        const response = await apiClient[method](endpoint, { data });
+        return response.data;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onSuccess: (savedDraft) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenseDrafts.all() });
+      qa.success("All changes are saved", {
+        duration: 3e3
+      });
+      console.log("Expense draft saved successfully:", savedDraft);
+    },
+    onError: (error) => {
+      console.error("Failed to save expense draft:", error);
+      qa.error("Failed to save. Please try again", {
+        duration: 3e3
+      });
+    }
+  });
+};
+const useSubmitExpense = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ data }) => {
+      await simulateApiDelay(1e3);
+      try {
+        const response = await apiClient.post(
+          EXPENSE_ENDPOINTS.SUBMIT_EXPENSE,
+          { data }
+        );
+        return response.data;
+      } catch (error) {
+        throw error;
+      }
+    },
+    onSuccess: (submittedExpense) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenses.all() });
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenseDrafts.all() });
+      qa.success("Expense submitted", {
+        duration: 3e3
+      });
+      console.log("Expense submitted successfully:", submittedExpense);
+    },
+    onError: (error) => {
+      console.error("Failed to submit expense:", error);
+      qa.error("Fail to submit", {
+        duration: 3e3
+      });
+    }
+  });
+};
+const useExpenseDraft = (draftId) => {
+  return useQuery({
+    queryKey: draftId ? queryKeys.expenseDrafts.detail(draftId) : queryKeys.expenseDrafts.details(),
+    queryFn: async () => {
+      if (!draftId) throw new Error("Draft ID is required");
+      const response = await apiClient.get(
+        EXPENSE_ENDPOINTS.GET_DRAFT(draftId)
+      );
+      return response.data;
+    },
+    enabled: !!draftId,
+    staleTime: 30 * 1e3
+    // 30 seconds
+  });
+};
+const useDeleteExpenseDraft = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (draftId) => {
+      await simulateApiDelay(500);
+      await apiClient.delete(EXPENSE_ENDPOINTS.DELETE_DRAFT(draftId));
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.expenseDrafts.all() });
+      qa.success("Draft deleted", {
+        duration: 3e3
+      });
+    },
+    onError: (error) => {
+      console.error("Failed to delete draft:", error);
+      qa.error("Failed to delete draft", {
+        duration: 3e3
+      });
+    }
+  });
+};
+const { useCallback, useEffect, useRef, useState } = await importShared("react");
 const NewExpensePage = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const toasterClicked = useRef(false);
   const timeoutRef = useRef(null);
+  const expenseFormRef = useRef(null);
+  const draftId = searchParams.get("draftId");
+  const [currentDraftId, setCurrentDraftId] = useState(draftId);
+  const [expenseTitle, setExpenseTitle] = useState("New Expense");
+  const [expenseStatus, setExpenseStatus] = useState("new");
+  const [submitButtonState, setSubmitButtonState] = useState({ disabled: true });
+  const [saveDraftButtonState, setSaveDraftButtonState] = useState({ disabled: true });
+  const saveDraftMutation = useSaveExpenseDraft();
+  const submitExpenseMutation = useSubmitExpense();
+  const deleteDraftMutation = useDeleteExpenseDraft();
+  const { data: existingDraft } = useExpenseDraft(currentDraftId);
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -2287,13 +2618,49 @@ const NewExpensePage = () => {
       }
     };
   }, []);
-  const expenseFormRef = useRef(null);
-  const handleSubmit = (data) => {
-    console.log("Expense submitted:", data);
-    navigate(RoutePaths.Expenses);
+  useEffect(() => {
+    if (existingDraft) {
+      const vendor = existingDraft.data.vendor || "New Expense";
+      const date = existingDraft.data.expenseDate ? new Date(existingDraft.data.expenseDate).toLocaleDateString() : "";
+      setExpenseTitle(`${vendor}${date ? ` - ${date}` : ""}`);
+      setExpenseStatus("draft");
+    }
+  }, [existingDraft]);
+  const handleSubmit = async (data) => {
+    try {
+      await submitExpenseMutation.mutateAsync({ data });
+      setTimeout(() => {
+        navigate(RoutePaths.Expenses);
+      }, 500);
+    } catch (error) {
+      console.error("Failed to submit expense:", error);
+    }
   };
-  const handleSaveDraft = (data) => {
-    console.log("Full expense draft saved:", data);
+  const handleSaveDraft = async (data) => {
+    try {
+      const result = await saveDraftMutation.mutateAsync({
+        data,
+        draftId: currentDraftId || void 0
+      });
+      if (result.id && !currentDraftId) {
+        setCurrentDraftId(result.id);
+        setExpenseStatus("draft");
+      }
+      const vendor = data.vendor || "New Expense";
+      const date = data.expenseDate ? new Date(data.expenseDate).toLocaleDateString() : "";
+      setExpenseTitle(`${vendor}${date ? ` - ${date}` : ""}`);
+    } catch (error) {
+      console.error("Failed to save draft:", error);
+    }
+  };
+  const handleDeleteDraft = async () => {
+    if (!currentDraftId) return;
+    try {
+      await deleteDraftMutation.mutateAsync(currentDraftId);
+      navigate(RoutePaths.Expenses);
+    } catch (error) {
+      console.error("Failed to delete draft:", error);
+    }
   };
   const handleOverlayClick = (event) => {
     if (!event) return;
@@ -2316,12 +2683,29 @@ const NewExpensePage = () => {
     e.stopPropagation();
     (_a2 = expenseFormRef.current) == null ? void 0 : _a2.saveDraft();
   };
+  const handleSubmitClick = (e) => {
+    var _a2;
+    e.preventDefault();
+    e.stopPropagation();
+    (_a2 = expenseFormRef.current) == null ? void 0 : _a2.submitForm();
+  };
+  const handleButtonStateChange = useCallback((submitState, draftState) => {
+    setSubmitButtonState(submitState);
+    setSaveDraftButtonState(draftState);
+  }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(ExpensesList, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "receipt" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Ja, { open: true, onOpenChange: handleOpenChange, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Zo, { className: "max-w-5xl max-h-[90vh] h-full overflow-hidden flex flex-col", onPointerDownOutside: (e) => handleOverlayClick(e), children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Jo, { className: "pb-3 mb-3 border-b border-exp-primary-blue-100", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(ea, { className: "text-exp-neutral-950", children: "New Expense" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(ea, { className: "text-exp-neutral-950", children: expenseTitle }),
+          expenseStatus === "draft" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "px-2 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-md", children: "DRAFT" }),
+          currentDraftId && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-gray-500", children: [
+            "ID: ",
+            currentDraftId
+          ] })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 relative", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute right-7 top-[-24px] flex flex-nowrap", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(De, { variant: "outlined", iconPosition: "center", className: "text-exp-neutral-70 hover:text-exp-neutral-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronLeft, { className: "size-5" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(De, { variant: "outlined", iconPosition: "center", className: "text-exp-neutral-70 hover:text-exp-neutral-200", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { className: "size-5" }) })
@@ -2333,16 +2717,63 @@ const NewExpensePage = () => {
           {
             ref: expenseFormRef,
             onSubmit: handleSubmit,
-            onSaveDraft: handleSaveDraft
+            onSaveDraft: handleSaveDraft,
+            initialData: existingDraft == null ? void 0 : existingDraft.data,
+            isSubmitting: submitExpenseMutation.isPending,
+            isDrafting: saveDraftMutation.isPending,
+            onButtonStateChange: handleButtonStateChange
           }
         ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Qo, { className: "pt-4 gap-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(De, { type: "button", variant: "outlined", onClick: handleSaveDraftClick, children: "Save Draft" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(De, { type: "button", variant: "primary", disabled: true, className: "opacity-50 cursor-not-allowed", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "size-5" }),
-            "Submit Expense (Coming Soon)"
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Qo, { className: "pt-4 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between w-full", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2", children: currentDraftId && /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              De,
+              {
+                type: "button",
+                variant: "ghost",
+                onClick: handleDeleteDraft,
+                disabled: deleteDraftMutation.isPending,
+                className: "text-red-600 hover:text-red-700",
+                children: deleteDraftMutation.isPending ? "Deleting..." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { className: "size-4" }),
+                  "Delete"
+                ] })
+              }
+            ) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { children: "Delete draft" })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                De,
+                {
+                  type: "button",
+                  variant: "outlined",
+                  onClick: handleSaveDraftClick,
+                  disabled: saveDraftButtonState.disabled,
+                  children: saveDraftMutation.isPending ? "Saving..." : "Save Draft"
+                }
+              ) }) }),
+              saveDraftButtonState.tooltip && /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { children: saveDraftButtonState.tooltip })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                De,
+                {
+                  type: "button",
+                  variant: "primary",
+                  onClick: handleSubmitClick,
+                  disabled: submitButtonState.disabled,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "size-5" }),
+                    submitExpenseMutation.isPending ? "Submitting..." : "Submit Expense"
+                  ]
+                }
+              ) }) }),
+              submitButtonState.tooltip && /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { children: submitButtonState.tooltip })
+            ] })
           ] })
-        ] })
+        ] }) })
       ] })
     ] }) })
   ] });
