@@ -1,6 +1,6 @@
 import { A as AllowedMimeType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
-import { E as ENDPOINT_PATTERNS } from "./endpoints-DyuQahSx.js";
-import { s as shouldMockEndpoint } from "./config-RezmlIHy.js";
+import { a as ENDPOINT_PATTERNS, s as shouldMockEndpoint } from "./config-BPfAis3L.js";
+import { s as shouldSimulateError, g as generateMockError } from "./errorSimulation-OB8hixeM.js";
 function isObject$1(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
 }
@@ -4024,6 +4024,15 @@ class SetupApi extends Disposable {
     };
   }
 }
+async function emitAsync$1(emitter, eventName, ...data) {
+  const listeners = emitter.listeners(eventName);
+  if (listeners.length === 0) {
+    return;
+  }
+  for (const listener of listeners) {
+    await listener.apply(emitter, data);
+  }
+}
 function hasConfigurableGlobal$1(propertyName) {
   const descriptor = Object.getOwnPropertyDescriptor(globalThis, propertyName);
   if (typeof descriptor === "undefined") {
@@ -5145,14 +5154,15 @@ var _WebSocketInterceptor = class extends Interceptor$1 {
         };
         const socket = new WebSocketOverride(url, protocols);
         const transport = new WebSocketClassTransport(socket);
-        queueMicrotask(() => {
+        queueMicrotask(async () => {
           try {
             const server = new WebSocketServerConnection(
               socket,
               transport,
               createConnection
             );
-            const hasConnectionListeners = this.emitter.emit("connection", {
+            const hasConnectionListeners = this.emitter.listenerCount("connection") > 0;
+            await emitAsync$1(this.emitter, "connection", {
               client: new WebSocketClientConnection(socket, transport),
               server,
               info: {
@@ -9812,8 +9822,164 @@ const fileHandlers = [
     });
   })
 ];
+const expenseDrafts = /* @__PURE__ */ new Map();
+const submittedExpenses = /* @__PURE__ */ new Map();
+const expenseHandlers = [
+  http.post(ENDPOINT_PATTERNS.EXPENSES_DRAFTS, async ({ request }) => {
+    await delay(600);
+    const endpoint = new URL(request.url).pathname;
+    if (shouldSimulateError(endpoint)) {
+      const mockError = generateMockError();
+      console.log("❌ MSW: Simulating error for Save Draft", mockError);
+      return HttpResponse.json(
+        { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
+        { status: mockError.status, statusText: mockError.statusText }
+      );
+    }
+    try {
+      const body = await request.json();
+      const draftId = `draft-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+      const draft = {
+        id: draftId,
+        status: "draft",
+        data: body.data,
+        createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+        updatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+        userId: "current-user"
+      };
+      expenseDrafts.set(draftId, draft);
+      return HttpResponse.json(draft, { status: 201 });
+    } catch (error2) {
+      return HttpResponse.json(
+        { error: "Failed to save draft" },
+        { status: 500 }
+      );
+    }
+  }),
+  http.put(ENDPOINT_PATTERNS.EXPENSES_DRAFT_BY_ID, async ({ request, params }) => {
+    await delay(600);
+    const endpoint = new URL(request.url).pathname;
+    if (shouldSimulateError(endpoint)) {
+      const mockError = generateMockError();
+      console.log("❌ MSW: Simulating error for Update Draft", mockError);
+      return HttpResponse.json(
+        { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
+        { status: mockError.status, statusText: mockError.statusText }
+      );
+    }
+    try {
+      const draftId = params.id;
+      const body = await request.json();
+      const existingDraft = expenseDrafts.get(draftId);
+      if (!existingDraft) {
+        return HttpResponse.json(
+          { error: "Draft not found" },
+          { status: 404 }
+        );
+      }
+      const updatedDraft = {
+        ...existingDraft,
+        data: body.data,
+        updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+      };
+      expenseDrafts.set(draftId, updatedDraft);
+      return HttpResponse.json(updatedDraft, { status: 200 });
+    } catch (error2) {
+      return HttpResponse.json(
+        { error: "Failed to update draft" },
+        { status: 500 }
+      );
+    }
+  }),
+  http.get(ENDPOINT_PATTERNS.EXPENSES_DRAFT_BY_ID, async ({ params }) => {
+    await delay(300);
+    const draftId = params.id;
+    const draft = expenseDrafts.get(draftId);
+    if (!draft) {
+      return HttpResponse.json(
+        { error: "Draft not found" },
+        { status: 404 }
+      );
+    }
+    return HttpResponse.json(draft, { status: 200 });
+  }),
+  http.get(ENDPOINT_PATTERNS.EXPENSES_DRAFTS, async () => {
+    await delay(300);
+    const drafts = Array.from(expenseDrafts.values()).sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    );
+    return HttpResponse.json(drafts, { status: 200 });
+  }),
+  http.delete(ENDPOINT_PATTERNS.EXPENSES_DRAFT_BY_ID, async ({ params }) => {
+    await delay(500);
+    const draftId = params.id;
+    if (!expenseDrafts.has(draftId)) {
+      return HttpResponse.json(
+        { error: "Draft not found" },
+        { status: 404 }
+      );
+    }
+    expenseDrafts.delete(draftId);
+    return HttpResponse.json(
+      { message: "Draft deleted successfully" },
+      { status: 200 }
+    );
+  }),
+  http.post(ENDPOINT_PATTERNS.EXPENSES_SUBMIT, async ({ request }) => {
+    await delay(1e3);
+    const endpoint = new URL(request.url).pathname;
+    if (shouldSimulateError(endpoint)) {
+      const mockError = generateMockError();
+      console.log("❌ MSW: Simulating error for Submit Expense", mockError);
+      return HttpResponse.json(
+        { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
+        { status: mockError.status, statusText: mockError.statusText }
+      );
+    }
+    try {
+      const body = await request.json();
+      const expenseId = `expense-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+      const expense = {
+        id: expenseId,
+        status: "submitted",
+        data: body.data,
+        submittedAt: (/* @__PURE__ */ new Date()).toISOString(),
+        createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+        updatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+        userId: "current-user"
+      };
+      submittedExpenses.set(expenseId, expense);
+      return HttpResponse.json(expense, { status: 201 });
+    } catch (error2) {
+      return HttpResponse.json(
+        { error: "Failed to submit expense" },
+        { status: 500 }
+      );
+    }
+  }),
+  http.get(ENDPOINT_PATTERNS.EXPENSES_LIST, async () => {
+    await delay(300);
+    const expenses = Array.from(submittedExpenses.values()).sort(
+      (a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+    );
+    return HttpResponse.json(expenses, { status: 200 });
+  }),
+  http.get(ENDPOINT_PATTERNS.EXPENSE_BY_ID, async ({ params }) => {
+    await delay(300);
+    const expenseId = params.id;
+    const expense = submittedExpenses.get(expenseId);
+    if (!expense) {
+      return HttpResponse.json(
+        { error: "Expense not found" },
+        { status: 404 }
+      );
+    }
+    return HttpResponse.json(expense, { status: 200 });
+  })
+];
 const handlers = [
-  ...fileHandlers
+  ...fileHandlers,
+  ...expenseHandlers
 ];
 const createSmartHandler = () => {
   return http.all("*", async ({ request }) => {

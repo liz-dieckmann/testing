@@ -1,5 +1,8 @@
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { c as createLucideIcon } from "./createLucideIcon-DIm8u9Oh.js";
+import { c as createLucideIcon } from "./createLucideIcon-D0_eAq0F.js";
+import { u as useCompanyStore, l as useQuery, q as queryKeys } from "./LoadingSpinner-Q-lEuprT.js";
+import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
+import { C as CONFIGURATION_ENDPOINTS, B as BUSINESS_PURPOSE_ENDPOINTS } from "./config-BPfAis3L.js";
 /**
  * react-router v7.9.4
  *
@@ -5014,6 +5017,29 @@ function shouldProcessLinkClick(event, target) {
   (!target || target === "_self") && // Let browser handle "target=_blank" etc.
   !isModifiedEvent(event);
 }
+function createSearchParams(init = "") {
+  return new URLSearchParams(
+    typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo2, key) => {
+      let value = init[key];
+      return memo2.concat(
+        Array.isArray(value) ? value.map((v) => [key, v]) : [[key, value]]
+      );
+    }, [])
+  );
+}
+function getSearchParamsForLocation(locationSearch, defaultSearchParams) {
+  let searchParams = createSearchParams(locationSearch);
+  if (defaultSearchParams) {
+    defaultSearchParams.forEach((_, key) => {
+      if (!searchParams.has(key)) {
+        defaultSearchParams.getAll(key).forEach((value) => {
+          searchParams.append(key, value);
+        });
+      }
+    });
+  }
+  return searchParams;
+}
 var _formDataSupportsSubmitter = null;
 function isFormDataSubmitterSupported() {
   if (_formDataSupportsSubmitter === null) {
@@ -6088,6 +6114,39 @@ function useLinkClickHandler(to, {
     ]
   );
 }
+function useSearchParams(defaultInit) {
+  warning(
+    typeof URLSearchParams !== "undefined",
+    `You cannot use the \`useSearchParams\` hook in a browser that does not support the URLSearchParams API. If you need to support Internet Explorer 11, we recommend you load a polyfill such as https://github.com/ungap/url-search-params.`
+  );
+  let defaultSearchParamsRef = React10.useRef(createSearchParams(defaultInit));
+  let hasSetSearchParamsRef = React10.useRef(false);
+  let location = useLocation();
+  let searchParams = React10.useMemo(
+    () => (
+      // Only merge in the defaults if we haven't yet called setSearchParams.
+      // Once we call that we want those to take precedence, otherwise you can't
+      // remove a param with setSearchParams({}) if it has an initial value
+      getSearchParamsForLocation(
+        location.search,
+        hasSetSearchParamsRef.current ? null : defaultSearchParamsRef.current
+      )
+    ),
+    [location.search]
+  );
+  let navigate = useNavigate();
+  let setSearchParams = React10.useCallback(
+    (nextInit, navigateOptions) => {
+      const newSearchParams = createSearchParams(
+        typeof nextInit === "function" ? nextInit(new URLSearchParams(searchParams)) : nextInit
+      );
+      hasSetSearchParamsRef.current = true;
+      navigate("?" + newSearchParams, navigateOptions);
+    },
+    [navigate, searchParams]
+  );
+  return [searchParams, setSearchParams];
+}
 var fetcherId = 0;
 var getUniqueFetcherId = () => `__${String(++fetcherId)}__`;
 function useSubmit() {
@@ -6275,6 +6334,231 @@ var RouteCompanyLabels = /* @__PURE__ */ ((RouteCompanyLabels2) => {
   RouteCompanyLabels2["VrfServices"] = "VRF Services of Texas";
   return RouteCompanyLabels2;
 })(RouteCompanyLabels || {});
+class ConfigurationApiService {
+  async getLogicalCompanies() {
+    const response = await apiClient.get(
+      CONFIGURATION_ENDPOINTS.LOGICAL_COMPANIES
+    );
+    return response.data;
+  }
+  async getLogicalCompanyByShortName(shortName) {
+    const response = await apiClient.get(
+      CONFIGURATION_ENDPOINTS.LOGICAL_COMPANY_BY_NAME(shortName)
+    );
+    return response.data;
+  }
+  async getExpenseTypes(logicalCompanyShortName, params) {
+    const url = CONFIGURATION_ENDPOINTS.EXPENSE_TYPES(logicalCompanyShortName);
+    const response = await apiClient.get(url, { params });
+    console.log(url);
+    return response.data;
+  }
+  async getExpenseTypeById(logicalCompanyShortName, expenseTypeId) {
+    const response = await apiClient.get(
+      CONFIGURATION_ENDPOINTS.EXPENSE_TYPE_BY_ID(logicalCompanyShortName, expenseTypeId)
+    );
+    return response.data;
+  }
+  async createExpenseType(logicalCompanyShortName, data) {
+    const response = await apiClient.post(
+      CONFIGURATION_ENDPOINTS.EXPENSE_TYPE_CREATE(logicalCompanyShortName),
+      data
+    );
+    return response.data;
+  }
+  async updateExpenseType(logicalCompanyShortName, data) {
+    const response = await apiClient.put(
+      CONFIGURATION_ENDPOINTS.EXPENSE_TYPE_UPDATE(logicalCompanyShortName),
+      data
+    );
+    return response.data;
+  }
+  async deleteExpenseType(logicalCompanyShortName, expenseTypeId) {
+    await this.updateExpenseType(logicalCompanyShortName, {
+      Id: expenseTypeId,
+      IsActive: false,
+      UpdatedBy: this.getCurrentUser()
+    });
+  }
+  async activateExpenseType(logicalCompanyShortName, expenseTypeId) {
+    return this.updateExpenseType(logicalCompanyShortName, {
+      Id: expenseTypeId,
+      IsActive: true,
+      UpdatedBy: this.getCurrentUser()
+    });
+  }
+  async deactivateExpenseType(logicalCompanyShortName, expenseTypeId) {
+    return this.updateExpenseType(logicalCompanyShortName, {
+      Id: expenseTypeId,
+      IsActive: false,
+      UpdatedBy: this.getCurrentUser()
+    });
+  }
+  getCurrentUser() {
+    return "current-user";
+  }
+  validateExpenseTypeCreate(data) {
+    const errors = [];
+    if (!data.ExpenseTypeName || data.ExpenseTypeName.length < 1) {
+      errors.push("Expense type name is required");
+    }
+    if (data.ExpenseTypeName && data.ExpenseTypeName.length > 100) {
+      errors.push("Expense type name must not exceed 100 characters");
+    }
+    if (data.ExpenseTypeDescription && data.ExpenseTypeDescription.length > 500) {
+      errors.push("Description must not exceed 500 characters");
+    }
+    if (!data.FormTypeId || data.FormTypeId < 1) {
+      errors.push("Form type is required");
+    }
+    return errors;
+  }
+  validateExpenseTypeUpdate(data) {
+    const errors = [];
+    if (!data.Id || data.Id < 0) {
+      errors.push("Valid expense type ID is required");
+    }
+    if (data.ExpenseTypeName !== null && data.ExpenseTypeName !== void 0) {
+      if (data.ExpenseTypeName.length < 1) {
+        errors.push("Expense type name cannot be empty");
+      }
+      if (data.ExpenseTypeName.length > 100) {
+        errors.push("Expense type name must not exceed 100 characters");
+      }
+    }
+    if (data.ExpenseTypeDescription !== null && data.ExpenseTypeDescription !== void 0) {
+      if (data.ExpenseTypeDescription.length > 500) {
+        errors.push("Description must not exceed 500 characters");
+      }
+    }
+    return errors;
+  }
+  async getBusinessPurposes(logicalCompanyShortName, params) {
+    const url = BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSES(logicalCompanyShortName);
+    const response = await apiClient.get(url, { params });
+    console.log(url);
+    return response.data;
+  }
+  async getBusinessPurposeById(logicalCompanyShortName, businessPurposeId) {
+    const response = await apiClient.get(
+      BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSE_BY_ID(logicalCompanyShortName, businessPurposeId)
+    );
+    return response.data;
+  }
+  async createBusinessPurpose(logicalCompanyShortName, data) {
+    const response = await apiClient.post(
+      BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSE_CREATE(logicalCompanyShortName),
+      data
+    );
+    return response.data;
+  }
+  async updateBusinessPurpose(logicalCompanyShortName, data) {
+    const response = await apiClient.put(
+      BUSINESS_PURPOSE_ENDPOINTS.BUSINESS_PURPOSE_UPDATE(logicalCompanyShortName),
+      data
+    );
+    return response.data;
+  }
+  async deleteBusinessPurpose(logicalCompanyShortName, businessPurposeId) {
+    await this.updateBusinessPurpose(logicalCompanyShortName, {
+      Id: businessPurposeId,
+      IsActive: false,
+      UpdatedBy: this.getCurrentUser()
+    });
+  }
+  async activateBusinessPurpose(logicalCompanyShortName, businessPurposeId) {
+    return this.updateBusinessPurpose(logicalCompanyShortName, {
+      Id: businessPurposeId,
+      IsActive: true,
+      UpdatedBy: this.getCurrentUser()
+    });
+  }
+  async deactivateBusinessPurpose(logicalCompanyShortName, businessPurposeId) {
+    return this.updateBusinessPurpose(logicalCompanyShortName, {
+      Id: businessPurposeId,
+      IsActive: false,
+      UpdatedBy: this.getCurrentUser()
+    });
+  }
+  validateBusinessPurposeCreate(data) {
+    const errors = [];
+    if (!data.BusinessPurposeName || data.BusinessPurposeName.length < 1) {
+      errors.push("Business purpose name is required");
+    }
+    if (data.BusinessPurposeName && data.BusinessPurposeName.length > 100) {
+      errors.push("Business purpose name must not exceed 100 characters");
+    }
+    if (data.BusinessPurposeDescription && data.BusinessPurposeDescription.length > 500) {
+      errors.push("Description must not exceed 500 characters");
+    }
+    return errors;
+  }
+  validateBusinessPurposeUpdate(data) {
+    const errors = [];
+    if (!data.Id || data.Id < 0) {
+      errors.push("Valid business purpose ID is required");
+    }
+    if (data.BusinessPurposeName !== null && data.BusinessPurposeName !== void 0) {
+      if (data.BusinessPurposeName.length < 1) {
+        errors.push("Business purpose name cannot be empty");
+      }
+      if (data.BusinessPurposeName.length > 100) {
+        errors.push("Business purpose name must not exceed 100 characters");
+      }
+    }
+    if (data.BusinessPurposeDescription !== null && data.BusinessPurposeDescription !== void 0) {
+      if (data.BusinessPurposeDescription.length > 500) {
+        errors.push("Description must not exceed 500 characters");
+      }
+    }
+    return errors;
+  }
+}
+const configurationApi = new ConfigurationApiService();
+const { useEffect } = await importShared("react");
+const mapToLogicalCompany = (apiCompany) => ({
+  id: apiCompany.LogicalCompanyShortName,
+  name: apiCompany.LogicalCompanyName,
+  shortName: apiCompany.LogicalCompanyShortName
+});
+const useCompanies = () => {
+  const { setCompanies, setLoading, setError } = useCompanyStore();
+  const query = useQuery({
+    queryKey: queryKeys.companies.list(),
+    queryFn: async () => {
+      const data = await configurationApi.getLogicalCompanies();
+      return data.map(mapToLogicalCompany);
+    },
+    staleTime: 5 * 60 * 1e3,
+    gcTime: 10 * 60 * 1e3
+  });
+  useEffect(() => {
+    setLoading(query.isLoading);
+    if (query.data) {
+      setCompanies(query.data);
+      setError(null);
+    }
+    if (query.error) {
+      setError(query.error instanceof Error ? query.error.message : "Failed to load companies");
+    }
+  }, [query.data, query.isLoading, query.error, setCompanies, setLoading, setError]);
+  return query;
+};
+const useDefaultCompany = () => {
+  const { companies, selectedCompany, setSelectedCompany } = useCompanyStore();
+  const { data: companiesData, isLoading } = useCompanies();
+  useEffect(() => {
+    if (!selectedCompany && companiesData && companiesData.length > 0 && !isLoading) {
+      const defaultCompany = companiesData[0];
+      setSelectedCompany(defaultCompany);
+      localStorage.setItem("selectedCompany", JSON.stringify(defaultCompany));
+    }
+  }, [selectedCompany, companiesData, isLoading, setSelectedCompany]);
+  return {
+    company: selectedCompany || (companies.length > 0 ? companies[0] : null),
+    isLoading
+  };
+};
 export {
   ChartColumn as C,
   FileText as F,
@@ -6287,10 +6571,13 @@ export {
   CreditCard as c,
   RouteCompanyLabels as d,
   RouteCompanyIds as e,
-  ChevronRight as f,
-  useLocation as g,
-  useParams as h,
-  RoutePathConfigChunks as i,
-  createHashRouter as j,
+  useCompanies as f,
+  ChevronRight as g,
+  useLocation as h,
+  useParams as i,
+  RoutePathConfigChunks as j,
+  createHashRouter as k,
+  useDefaultCompany as l,
+  useSearchParams as m,
   useNavigate as u
 };

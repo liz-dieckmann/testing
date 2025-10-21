@@ -1,7 +1,7 @@
 import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
-import { s as shouldMockEndpoint } from "./config-RezmlIHy.js";
-import { e as RouteCompanyIds } from "./routes-D_bdpp_f.js";
-import { F as FILE_ENDPOINTS } from "./endpoints-DyuQahSx.js";
+import { s as shouldMockEndpoint, F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS } from "./config-BPfAis3L.js";
+import { e as RouteCompanyIds } from "./api-DOc46L7T.js";
+import { s as shouldSimulateError, c as createAxiosError } from "./errorSimulation-OB8hixeM.js";
 const mockBusinessPurposes = {
   // Real backend company IDs (from logical-companies API)
   "htson": [
@@ -263,6 +263,8 @@ const mockBusinessPurposes = {
 };
 const uploadedFiles = /* @__PURE__ */ new Map();
 const businessPurposeStore = /* @__PURE__ */ new Map();
+const expenseDrafts = /* @__PURE__ */ new Map();
+const submittedExpenses = /* @__PURE__ */ new Map();
 Object.entries(mockBusinessPurposes).forEach(([companyId, purposes]) => {
   businessPurposeStore.set(companyId, new Map(purposes.map((bp) => [bp.id, bp])));
 });
@@ -302,6 +304,30 @@ class AxiosStrategy {
         }
         if (fullUrl.match(/\/business-purposes\/[^/]+$/) && config.method === "delete") {
           return this.handleBusinessPurposeDeleteMock(config, fullUrl);
+        }
+        if (fullUrl.includes(EXPENSE_ENDPOINTS.SAVE_DRAFT) && config.method === "post") {
+          return this.handleExpenseDraftCreateMock(config);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/expenses\/drafts\/[^/]+$/) && config.method === "put") {
+          return this.handleExpenseDraftUpdateMock(config, fullUrl);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/expenses\/drafts\/[^/]+$/) && config.method === "get") {
+          return this.handleExpenseDraftGetMock(config, fullUrl);
+        }
+        if (fullUrl.includes(EXPENSE_ENDPOINTS.SAVE_DRAFT) && config.method === "get") {
+          return this.handleExpenseDraftsListMock(config);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/expenses\/drafts\/[^/]+$/) && config.method === "delete") {
+          return this.handleExpenseDraftDeleteMock(config, fullUrl);
+        }
+        if (fullUrl.includes(EXPENSE_ENDPOINTS.SUBMIT_EXPENSE) && config.method === "post") {
+          return this.handleExpenseSubmitMock(config);
+        }
+        if (fullUrl.includes(EXPENSE_ENDPOINTS.GET_EXPENSES) && config.method === "get") {
+          return this.handleExpensesListMock(config);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/expenses\/[^/]+$/) && config.method === "get") {
+          return this.handleExpenseGetMock(config, fullUrl);
         }
         return config;
       },
@@ -591,6 +617,284 @@ class AxiosStrategy {
     console.log("✅ Axios Interceptor: Business purpose deleted", { id });
     const mockResponse = {
       data: { message: "Deleted successfully" },
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense Draft CREATE mock
+   */
+  async handleExpenseDraftCreateMock(config) {
+    await this.delay(600);
+    if (shouldSimulateError(EXPENSE_ENDPOINTS.SAVE_DRAFT)) {
+      const error = createAxiosError();
+      console.log("❌ Axios Interceptor: Simulating error for Save Draft", error.response);
+      config.adapter = () => Promise.reject(error);
+      return config;
+    }
+    const body = config.data;
+    const draftId = `draft-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+    const draft = {
+      id: draftId,
+      status: "draft",
+      data: body.data,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      userId: "current-user"
+    };
+    expenseDrafts.set(draftId, draft);
+    console.log("✅ Axios Interceptor: Expense draft created", { id: draftId });
+    const mockResponse = {
+      data: draft,
+      status: 201,
+      statusText: "Created",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense Draft UPDATE mock
+   */
+  async handleExpenseDraftUpdateMock(config, fullUrl) {
+    await this.delay(600);
+    const match = fullUrl.match(/\/drafts\/([^/]+)$/);
+    const draftId = match ? match[1] : null;
+    if (!draftId) {
+      const mockResponse2 = {
+        data: { error: "Invalid draft ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    if (shouldSimulateError(`${EXPENSE_ENDPOINTS.SAVE_DRAFT}/${draftId}`)) {
+      const error = createAxiosError();
+      console.log("❌ Axios Interceptor: Simulating error for Update Draft", error.response);
+      config.adapter = () => Promise.reject(error);
+      return config;
+    }
+    const existingDraft = expenseDrafts.get(draftId);
+    if (!existingDraft) {
+      const mockResponse2 = {
+        data: { error: "Draft not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const body = config.data;
+    const updatedDraft = {
+      ...existingDraft,
+      data: body.data,
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    expenseDrafts.set(draftId, updatedDraft);
+    console.log("✅ Axios Interceptor: Expense draft updated", { id: draftId });
+    const mockResponse = {
+      data: updatedDraft,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense Draft GET mock
+   */
+  async handleExpenseDraftGetMock(config, fullUrl) {
+    await this.delay(300);
+    const match = fullUrl.match(/\/drafts\/([^/]+)$/);
+    const draftId = match ? match[1] : null;
+    if (!draftId) {
+      const mockResponse2 = {
+        data: { error: "Invalid draft ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const draft = expenseDrafts.get(draftId);
+    if (!draft) {
+      const mockResponse2 = {
+        data: { error: "Draft not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const mockResponse = {
+      data: draft,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense Drafts LIST mock
+   */
+  async handleExpenseDraftsListMock(config) {
+    await this.delay(300);
+    const drafts = Array.from(expenseDrafts.values()).sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    );
+    const mockResponse = {
+      data: drafts,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense Draft DELETE mock
+   */
+  async handleExpenseDraftDeleteMock(config, fullUrl) {
+    await this.delay(500);
+    const match = fullUrl.match(/\/drafts\/([^/]+)$/);
+    const draftId = match ? match[1] : null;
+    if (!draftId) {
+      const mockResponse2 = {
+        data: { error: "Invalid draft ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    if (!expenseDrafts.has(draftId)) {
+      const mockResponse2 = {
+        data: { error: "Draft not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    expenseDrafts.delete(draftId);
+    console.log("✅ Axios Interceptor: Expense draft deleted", { id: draftId });
+    const mockResponse = {
+      data: { message: "Draft deleted successfully" },
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense SUBMIT mock
+   */
+  async handleExpenseSubmitMock(config) {
+    await this.delay(1e3);
+    if (shouldSimulateError(EXPENSE_ENDPOINTS.SUBMIT_EXPENSE)) {
+      const error = createAxiosError();
+      console.log("❌ Axios Interceptor: Simulating error for Submit Expense", error.response);
+      config.adapter = () => Promise.reject(error);
+      return config;
+    }
+    const body = config.data;
+    const expenseId = `expense-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+    const expense = {
+      id: expenseId,
+      status: "submitted",
+      data: body.data,
+      submittedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      userId: "current-user"
+    };
+    submittedExpenses.set(expenseId, expense);
+    console.log("✅ Axios Interceptor: Expense submitted", { id: expenseId });
+    const mockResponse = {
+      data: expense,
+      status: 201,
+      statusText: "Created",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expenses LIST mock
+   */
+  async handleExpensesListMock(config) {
+    await this.delay(300);
+    const expenses = Array.from(submittedExpenses.values()).sort(
+      (a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+    );
+    const mockResponse = {
+      data: expenses,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Expense GET mock
+   */
+  async handleExpenseGetMock(config, fullUrl) {
+    await this.delay(300);
+    const match = fullUrl.match(/\/expenses\/([^/]+)$/);
+    const expenseId = match ? match[1] : null;
+    if (!expenseId || expenseId === "drafts") {
+      const mockResponse2 = {
+        data: { error: "Invalid expense ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const expense = submittedExpenses.get(expenseId);
+    if (!expense) {
+      const mockResponse2 = {
+        data: { error: "Expense not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const mockResponse = {
+      data: expense,
       status: 200,
       statusText: "OK",
       headers: {},
