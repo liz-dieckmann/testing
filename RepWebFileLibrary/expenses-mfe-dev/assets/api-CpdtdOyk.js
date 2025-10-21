@@ -1,6 +1,6 @@
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { l as useQuery, q as queryKeys, k as useQueryClient } from "./LoadingSpinner-DqE6Gge9.js";
-import { f as useExpenseStore, e as useMutation } from "./schemas-DZYP4uWY.js";
+import { f as useExpenseStore, e as useMutation } from "./schemas-B2KsKN1r.js";
 import { a as apiClient } from "./axiosInstance-D83Ho1lg.js";
 import { B as BUSINESS_PURPOSE_ENDPOINTS } from "./config-BPfAis3L.js";
 const { useEffect } = await importShared("react");

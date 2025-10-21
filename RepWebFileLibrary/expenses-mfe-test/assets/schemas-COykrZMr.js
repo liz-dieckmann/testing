@@ -5485,7 +5485,7 @@ const ZodCustom = /* @__PURE__ */ $constructor("ZodCustom", (inst, def) => {
   ZodType.init(inst, def);
 });
 function custom(fn, _params) {
-  return _custom(ZodCustom, (() => true), _params);
+  return _custom(ZodCustom, fn ?? (() => true), _params);
 }
 function refine(fn, _params = {}) {
   return _refine(ZodCustom, fn, _params);

@@ -3,15 +3,15 @@ import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { E as ExpensesList } from "./ExpensesList-Ccl5X_MC.js";
 import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, A as Aa, a as Ba, G as Ga, m as ma, b as jo, d as Ao, p as pa, w as wa, B as Bo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-D0_eAq0F.js";
-import { C as Controller, o as object, s as string, b as boolean, c as custom, a as array, _ as _enum, n as number, u as useForm, d as a, e as useMutation } from "./schemas-DZYP4uWY.js";
+import { C as Controller, o as object, s as string, c as custom, b as boolean, a as array, _ as _enum, n as number, u as useForm, d as a, e as useMutation } from "./schemas-COykrZMr.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
-import { L as LoadingSpinner, k as useQueryClient, l as useQuery, q as queryKeys } from "./LoadingSpinner-DqE6Gge9.js";
+import { L as LoadingSpinner, k as useQueryClient, l as useQuery, q as queryKeys } from "./LoadingSpinner-Q-lEuprT.js";
 import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
-import { a as apiClient } from "./axiosInstance-D83Ho1lg.js";
+import { a as apiClient } from "./axiosInstance-BPwdN1IK.js";
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
 import { F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS } from "./config-BPfAis3L.js";
-import { u as useBusinessPurposes } from "./api-5zc7MruU.js";
-import { l as useDefaultCompany, F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, m as useSearchParams, g as ChevronRight, a as RoutePaths } from "./api-DD7FZVDb.js";
+import { u as useBusinessPurposes } from "./api-dBvCgtl5.js";
+import { l as useDefaultCompany, F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, m as useSearchParams, g as ChevronRight, a as RoutePaths } from "./api-DOc46L7T.js";
 import { T as Trash2, S as Send } from "./trash-2-BDRPQK2n.js";
 /**
  * @license lucide-react v0.542.0 - ISC
@@ -1046,8 +1046,7 @@ function SupportingFiles({
       setState((prev) => {
         const newAttachments = [...prev.attachments, ...processedFiles];
         const newErrors = new Map([...prev.errors, ...fileErrors]);
-        const successfulAttachments = newAttachments.filter((a2) => a2.status !== "error");
-        onFilesChange == null ? void 0 : onFilesChange(successfulAttachments);
+        onFilesChange == null ? void 0 : onFilesChange(newAttachments);
         return {
           ...prev,
           attachments: newAttachments,
@@ -1099,8 +1098,7 @@ function SupportingFiles({
               reindexedErrors.set(oldIndex, error);
             }
           });
-          const successfulAttachments = newAttachments.filter((a2) => a2.status !== "error");
-          onFilesChange == null ? void 0 : onFilesChange(successfulAttachments);
+          onFilesChange == null ? void 0 : onFilesChange(newAttachments);
           return {
             ...prev,
             attachments: newAttachments,
@@ -1682,6 +1680,17 @@ const affidavitSchema = object({
     message: "Digital signature must be 1-3 initials"
   })
 });
+const isValidFileAttachment = (file) => {
+  if (!file) return false;
+  if (file.status === "error") return false;
+  if (file.errorMessage) return false;
+  return true;
+};
+const fileAttachmentSchema = custom((val) => {
+  return isValidFileAttachment(val);
+}, {
+  message: "Invalid or corrupted file"
+});
 ({
   SUPPORTED_FORMATS: Object.values(AllowedMimeType),
   MAX_FILE_SIZE_PDF: MIME_TYPE_CONFIG.get(AllowedMimeType.PDF).maxSizeBytes,
@@ -1702,9 +1711,17 @@ const receiptWithAffidavitSchema = object({
 }, {
   message: ((data) => (data == null ? void 0 : data.isReceiptUnavailable) ? "Affidavit is required when receipt is unavailable" : "Receipt is required unless marked as unavailable")(),
   path: ["receiptAttachment"]
+}).refine((data) => {
+  if (data.receiptAttachment && !data.isReceiptUnavailable) {
+    return isValidFileAttachment(data.receiptAttachment);
+  }
+  return true;
+}, {
+  message: "Receipt file is invalid or corrupted",
+  path: ["receiptAttachment"]
 });
 const supportingFilesSchema = object({
-  supportingFiles: array(custom()).max(3, "Maximum 3 supporting files allowed").optional()
+  supportingFiles: array(fileAttachmentSchema).max(3, "Maximum 3 supporting files allowed").optional()
 });
 const expenseDetailsSchema = object({
   expenseType: string().min(1, "Expense type is required"),
@@ -1810,7 +1827,17 @@ const areRequiredFieldsFilled = (data) => {
   if (data.isReceiptUnavailable) {
     return !!(((_b = (_a2 = data.affidavit) == null ? void 0 : _a2.justification) == null ? void 0 : _b.trim()) && ((_d = (_c = data.affidavit) == null ? void 0 : _c.digitalSignature) == null ? void 0 : _d.trim()));
   }
-  return !!data.receiptAttachment;
+  if (!data.receiptAttachment) return false;
+  if (!isValidFileAttachment(data.receiptAttachment)) {
+    return false;
+  }
+  if (data.supportingFiles && data.supportingFiles.length > 0) {
+    const hasInvalidSupportingFile = data.supportingFiles.some(
+      (file) => !isValidFileAttachment(file)
+    );
+    if (hasInvalidSupportingFile) return false;
+  }
+  return true;
 };
 const getFormValidationErrors = (data) => {
   const result = validateExpenseForSubmission(data);
@@ -2785,7 +2812,7 @@ const NewExpensePage = () => {
                   onClick: handleSaveDraftClick,
                   disabled: saveDraftButtonState.disabled,
                   children: saveDraftMutation.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { className: "size-4" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { className: "size-5" }),
                     "Save Draft"
                   ] }) : "Save Draft"
                 }
@@ -2801,8 +2828,8 @@ const NewExpensePage = () => {
                   onClick: handleSubmitClick,
                   disabled: submitButtonState.disabled,
                   children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "size-5" }),
-                    submitExpenseMutation.isPending ? "Submitting..." : "Submit Expense"
+                    submitExpenseMutation.isPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(LoadingSpinner, { className: "size-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "size-5" }),
+                    "Submit Expense"
                   ]
                 }
               ) }) }),
