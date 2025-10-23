@@ -82,8 +82,13 @@ const MOCKED_ENDPOINTS_CONFIG = [
   // Expense Endpoints - use regex for dynamic paths
   {
     path: ENDPOINT_REGEX.EXPENSE_DRAFTS,
-    errorProbability: 50,
+    errorProbability: 20,
     description: "Save/update expense draft"
+  },
+  {
+    path: /\/api\/v1\.0\/expenses\/drafts\/[^/]+$/,
+    errorProbability: 50,
+    description: "Delete expense draft (50% error)"
   },
   {
     path: ENDPOINT_REGEX.EXPENSES,
@@ -103,7 +108,8 @@ const MOCKED_ENDPOINT_PATTERNS = [
   ENDPOINT_REGEX.FILES_SUPPORTING,
   ENDPOINT_REGEX.FILES_STORAGE,
   ENDPOINT_REGEX.EXPENSES,
-  ENDPOINT_REGEX.EXPENSE_DRAFTS
+  ENDPOINT_REGEX.EXPENSE_DRAFTS,
+  /\/api\/v1\.0\/expenses\/drafts\/[^/]+$/
 ];
 const shouldMockEndpoint = (url) => {
   const urlString = typeof url === "string" ? url : url.toString();

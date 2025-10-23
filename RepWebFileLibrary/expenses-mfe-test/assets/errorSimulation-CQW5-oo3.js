@@ -1,4 +1,4 @@
-import { g as getEndpointErrorProbability } from "./config-BD5Vcf6R.js";
+import { g as getEndpointErrorProbability } from "./config-CcAFLaBz.js";
 const DEFAULT_CONFIG = {
   enabled: true,
   globalProbability: 20,

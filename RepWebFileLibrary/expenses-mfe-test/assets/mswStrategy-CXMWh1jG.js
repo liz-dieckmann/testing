@@ -1,6 +1,6 @@
-import { A as AllowedMimeType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
-import { a as ENDPOINT_PATTERNS, s as shouldMockEndpoint } from "./config-BD5Vcf6R.js";
-import { s as shouldSimulateError, g as generateMockError } from "./errorSimulation-CUjZHPbX.js";
+import { A as AllowedMimeType, M as MIME_TYPE_CONFIG } from "./receipt-CrrQbCLn.js";
+import { a as ENDPOINT_PATTERNS, s as shouldMockEndpoint } from "./config-CcAFLaBz.js";
+import { s as shouldSimulateError, g as generateMockError } from "./errorSimulation-CQW5-oo3.js";
 function isObject$1(value) {
   return value != null && typeof value === "object" && !Array.isArray(value);
 }
@@ -9830,7 +9830,6 @@ const expenseHandlers = [
     const endpoint = new URL(request.url).pathname;
     if (shouldSimulateError(endpoint)) {
       const mockError = generateMockError();
-      console.log("❌ MSW: Simulating error for Save Draft", mockError);
       return HttpResponse.json(
         { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
         { status: mockError.status, statusText: mockError.statusText }
@@ -9857,24 +9856,13 @@ const expenseHandlers = [
     }
   }),
   http.put(ENDPOINT_PATTERNS.EXPENSES_DRAFT_BY_ID, async ({ request, params }) => {
-    console.log("🔵 MSW Handler: Update Draft called", { endpoint: new URL(request.url).pathname });
     await delay(600);
     const endpoint = new URL(request.url).pathname;
-    const shouldError = shouldSimulateError(endpoint);
-    console.log("🔍 MSW Handler: shouldSimulateError =", shouldError, "for", endpoint);
-    if (shouldError) {
+    if (shouldSimulateError(endpoint)) {
       const mockError = generateMockError();
-      console.log("❌ MSW: Simulating error for Update Draft", mockError);
-      console.log("🔍 Returning error response with status:", mockError.status);
-      return new HttpResponse(
-        JSON.stringify({ error: mockError.message, code: mockError.code, timestamp: mockError.timestamp }),
-        {
-          status: mockError.status,
-          statusText: mockError.statusText,
-          headers: {
-            "Content-Type": "application/json"
-          }
-        }
+      return HttpResponse.json(
+        { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
+        { status: mockError.status, statusText: mockError.statusText }
       );
     }
     try {
@@ -9920,8 +9908,16 @@ const expenseHandlers = [
     );
     return HttpResponse.json(drafts, { status: 200 });
   }),
-  http.delete(ENDPOINT_PATTERNS.EXPENSES_DRAFT_BY_ID, async ({ params }) => {
+  http.delete(ENDPOINT_PATTERNS.EXPENSES_DRAFT_BY_ID, async ({ request, params }) => {
     await delay(500);
+    const endpoint = new URL(request.url).pathname;
+    if (shouldSimulateError(endpoint)) {
+      const mockError = generateMockError();
+      return HttpResponse.json(
+        { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
+        { status: mockError.status, statusText: mockError.statusText }
+      );
+    }
     const draftId = params.id;
     if (!expenseDrafts.has(draftId)) {
       return HttpResponse.json(
@@ -9940,7 +9936,6 @@ const expenseHandlers = [
     const endpoint = new URL(request.url).pathname;
     if (shouldSimulateError(endpoint)) {
       const mockError = generateMockError();
-      console.log("❌ MSW: Simulating error for Submit Expense", mockError);
       return HttpResponse.json(
         { error: mockError.message, code: mockError.code, timestamp: mockError.timestamp },
         { status: mockError.status, statusText: mockError.statusText }

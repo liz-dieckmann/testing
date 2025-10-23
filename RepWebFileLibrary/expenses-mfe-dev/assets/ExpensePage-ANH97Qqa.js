@@ -3,15 +3,16 @@ import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { E as ExpensesList } from "./ExpensesList-Ccl5X_MC.js";
 import { c as createLucideIcon, y as ya, C as Ca, R as Ra, N as Na, F as Fa, _ as _a, D as De, q as qa, h as ha, x as xn, A as Aa, a as Ba, G as Ga, m as ma, b as jo, d as Ao, p as pa, w as wa, B as Bo, e as Go, X as Xo, Y as Yo, J as Ja, Z as Zo, f as Jo, g as ea, Q as Qo } from "./createLucideIcon-D0_eAq0F.js";
-import { C as Controller, o as object, s as string, c as custom, b as boolean, a as array, _ as _enum, n as number, u as useForm, d as a, e as useMutation } from "./schemas-CXmks9E4.js";
+import { C as Controller, o as object, s as string, c as custom, b as boolean, a as array, _ as _enum, n as number, u as useForm, d as a, e as useMutation } from "./schemas-QlakA0h0.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
-import { L as LoadingSpinner, k as useQueryClient, l as useQuery, q as queryKeys } from "./LoadingSpinner-DP4KJ0Fd.js";
-import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType, M as MIME_TYPE_CONFIG } from "./receipt-BjxWsBul.js";
-import { a as apiClient } from "./axiosInstance-BLV4R70V.js";
+import { L as LoadingSpinner, k as useQueryClient, l as useQuery, q as queryKeys } from "./LoadingSpinner-Cxa4kIgC.js";
+import { A as AllowedMimeType, v as validateReceiptFile, g as getSupportedFormatsText, a as generateAcceptAttribute, b as getFilePreviewType, F as FilePreviewType, r as receiptUploadInstructions, M as MIME_TYPE_CONFIG } from "./receipt-CrrQbCLn.js";
+import { a as apiClient } from "./axiosInstance-DULsLAHG.js";
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
-import { F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS } from "./config-BD5Vcf6R.js";
-import { u as useBusinessPurposes } from "./api-CtFyIzd9.js";
-import { l as useDefaultCompany, F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, m as useSearchParams, g as ChevronRight, a as RoutePaths } from "./api-CYYRJBIg.js";
+import { F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS } from "./config-CcAFLaBz.js";
+import { u as useBusinessPurposes } from "./api-BxC46wEr.js";
+import { l as useDefaultCompany, F as FileText, C as ChartColumn, c as CreditCard, u as useNavigate, i as useParams, a as RoutePaths, g as ChevronRight } from "./api-B4sLBpBv.js";
+import { u as useExpenseTypes } from "./api-D2YlHjMM.js";
 import { T as Trash2, S as Send } from "./trash-2-BDRPQK2n.js";
 /**
  * @license lucide-react v0.542.0 - ISC
@@ -876,7 +877,7 @@ function FileCard({
   if (hasError) {
     return /* @__PURE__ */ jsxRuntimeExports.jsxs(ma, { className: "bg-red-50 px-2 py-2 w-full flex justify-between flex-row items-center", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center flex-1 min-w-0 gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(MdError, { className: "text-red-700 scale-110 shrink-0" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(MdError, { className: "text-red-700 scale-110 shrink-0", title: "File error icon" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { delayDuration: FILE_NAME_POPOVER_DELAY, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { className: "min-w-0 flex-1 text-left flex flex-nowrap items-center", children: fileName(file.originalName) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { variant: "light", size: "sm", className: "max-w-full", side: "bottom", showArrow: false, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-black", children: file.originalName }) })
@@ -890,7 +891,7 @@ function FileCard({
             className: "flex hover:cursor-pointer",
             onClick: () => onRemove(index),
             disabled,
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(RxCross2, { className: "text-trax-red-600" })
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(RxCross2, { className: "text-trax-red-600", "data-testid": "delete-supporting-file-button" })
           }
         )
       ] })
@@ -902,7 +903,7 @@ function FileCard({
       className: "flex items-center flex-1 min-w-0 gap-2 hover:cursor-pointer hover:underline",
       onClick: () => onPreview(file),
       children: [
-        previewType === FilePreviewType.IMAGE ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "icon-file-img" }) : previewType === FilePreviewType.PDF ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "icon-file-pdf" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "text-line-unknown" }),
+        previewType === FilePreviewType.IMAGE ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "icon-file-img", "data-testid": "icon-file-img" }) : previewType === FilePreviewType.PDF ? /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "icon-file-pdf", "data-testid": "icon-file-pdf" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "shrink-0", name: "text-line-unknown", "data-testid": "icon-file-unknown" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-w-0 flex-1 overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { delayDuration: FILE_NAME_POPOVER_DELAY, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { className: "min-w-0 flex-1 text-left flex flex-nowrap items-center", children: fileName(file.originalName) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { variant: "light", size: "sm", className: "max-w-full", side: "bottom", showArrow: false, children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm", children: file.originalName }) })
@@ -915,7 +916,7 @@ function FileCard({
               e.stopPropagation();
               onRemove(index);
             },
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(RxCross2, { className: "text-trax-grey-200 hover:text-trax-neutral-900" })
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(RxCross2, { className: "text-trax-grey-200 hover:text-trax-neutral-900", "data-testid": "delete-supporting-file-button" })
           }
         )
       ]
@@ -1160,6 +1161,7 @@ function SupportingFiles({
         {
           onClick: handleAddSupportingDocumentClick,
           disabled: disabled || state.isUploading,
+          "aria-label": "Add supporting file",
           children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             FaPlus,
             {
@@ -1191,7 +1193,8 @@ function SupportingFiles({
           multiple: true,
           onChange: handleFileChange,
           style: { display: "none" },
-          disabled
+          disabled,
+          "data-testid": "supporting-file-input"
         }
       )
     ] }),
@@ -1459,6 +1462,7 @@ const ReceiptUpload = ({
             onClick: handleDeleteClick,
             className: "rounded-full !bg-white/70",
             title: "Delete receipt",
+            "data-testid": "delete-receipt-button",
             children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "delete", className: "size-5 text-exp-red-500" })
           }
         )
@@ -1475,7 +1479,7 @@ const ReceiptUpload = ({
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center gap-4 h-full", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4.5 flex items-center justify-center bg-exp-teal-200 rounded-full", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "receipt", className: "size-14 text-exp-teal-600" }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-normal text-exp-grey-600", children: getSupportedFormatsText() }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-normal text-exp-grey-600", children: receiptUploadInstructions() }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             De,
             {
@@ -1483,6 +1487,7 @@ const ReceiptUpload = ({
               size: "sm",
               onClick: handleChooseFileClick,
               disabled,
+              "data-testid": "receipt-upload-choose-file-button",
               children: "Choose file"
             }
           )
@@ -1503,7 +1508,8 @@ const ReceiptUpload = ({
         accept: generateAcceptAttribute(),
         onChange: handleFileSelect,
         className: "hidden",
-        disabled
+        disabled,
+        "data-testid": "receipt-upload-input"
       }
     ),
     /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1663,6 +1669,39 @@ const BusinessPurposeSelect = ({
     Bo,
     {
       label: "Business purpose",
+      placeholder: displayPlaceholder,
+      options,
+      value,
+      onValueChange: onChange,
+      onBlur,
+      required,
+      disabled: disabled || isLoading || !companyId,
+      error
+    }
+  );
+};
+const ExpenseTypeSelect = ({
+  value,
+  onChange,
+  onBlur,
+  required = true,
+  disabled = false,
+  placeholder = "Select expense type",
+  error
+}) => {
+  const { company, isLoading: isLoadingCompany } = useDefaultCompany();
+  const companyId = (company == null ? void 0 : company.shortName) || null;
+  const { data: expenseTypes, isLoading: isLoadingExpenses } = useExpenseTypes(companyId, false);
+  const options = (expenseTypes == null ? void 0 : expenseTypes.map((et) => ({
+    value: et.id,
+    label: et.name
+  }))) || [];
+  const isLoading = isLoadingCompany || isLoadingExpenses;
+  const displayPlaceholder = isLoadingCompany ? "Loading company..." : isLoadingExpenses ? "Loading expense types..." : !companyId ? "No company selected" : placeholder;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Bo,
+    {
+      label: "Expense type",
       placeholder: displayPlaceholder,
       options,
       value,
@@ -1875,7 +1914,8 @@ const useFullExpenseForm = ({
   onSaveDraft,
   onDraftSaved,
   isSubmitting = false,
-  isDrafting = false
+  isDrafting = false,
+  draftSaveError = false
 }) => {
   const defaultValues = {
     expenseType: (initialData == null ? void 0 : initialData.expenseType) || "",
@@ -1919,13 +1959,13 @@ const useFullExpenseForm = ({
   const formData = watch();
   const prevIsDraftingRef = useRef$1(isDrafting);
   useEffect$2(() => {
-    if (prevIsDraftingRef.current === true && isDrafting === false) {
+    if (prevIsDraftingRef.current === true && isDrafting === false && !draftSaveError) {
       const currentValues = getValues();
       reset(currentValues, { keepValues: true, keepDirty: false });
       onDraftSaved == null ? void 0 : onDraftSaved();
     }
     prevIsDraftingRef.current = isDrafting;
-  }, [isDrafting, getValues, reset, onDraftSaved]);
+  }, [isDrafting, draftSaveError, getValues, reset, onDraftSaved]);
   const requiredFieldsFilled = useMemo$1(
     () => areRequiredFieldsFilled(formData),
     [formData]
@@ -2100,6 +2140,7 @@ const ExpenseForm = forwardRef(({
   draftId,
   isSubmitting = false,
   isDrafting = false,
+  draftSaveError = false,
   onButtonStateChange
 }, ref) => {
   var _a2;
@@ -2109,7 +2150,8 @@ const ExpenseForm = forwardRef(({
     onSaveDraft,
     onDraftSaved,
     isSubmitting,
-    isDrafting
+    isDrafting,
+    draftSaveError
   });
   const { control, watch, setValue, formState } = fullForm.form;
   const [formErrors, setFormErrors] = useState$1([]);
@@ -2176,13 +2218,6 @@ const ExpenseForm = forwardRef(({
     submitButtonState: fullForm.getSubmitButtonState(),
     saveDraftButtonState: fullForm.getSaveDraftButtonState()
   }), [handleFormSubmit, handleDraftSave, fullForm, formValues]);
-  const expenseTypeOptions = [
-    { value: "travel", label: "Travel" },
-    { value: "meals", label: "Meals & Entertainment" },
-    { value: "supplies", label: "Office Supplies" },
-    { value: "software", label: "Software & Subscriptions" },
-    { value: "other", label: "Other" }
-  ];
   const paymentMethodOptions = [
     {
       value: "ca6252",
@@ -2258,13 +2293,10 @@ const ExpenseForm = forwardRef(({
               render: ({ field, fieldState }) => {
                 var _a3;
                 return /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  Bo,
+                  ExpenseTypeSelect,
                   {
-                    label: "Expense type",
-                    placeholder: "Select expense type",
-                    options: expenseTypeOptions,
                     value: field.value || "",
-                    onValueChange: field.onChange,
+                    onChange: field.onChange,
                     onBlur: field.onBlur,
                     error: (_a3 = fieldState.error) == null ? void 0 : _a3.message,
                     required: true
@@ -2558,26 +2590,17 @@ const useSaveExpenseDraft = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data, draftId }) => {
-      console.log("🔵 MUTATION START: Save Draft", { draftId });
       await simulateApiDelay(600);
       const endpoint = draftId ? EXPENSE_ENDPOINTS.UPDATE_DRAFT(draftId) : EXPENSE_ENDPOINTS.SAVE_DRAFT;
       const method = draftId ? "put" : "post";
-      console.log("🔵 MUTATION: Making API call", { method, endpoint });
-      try {
-        const response = await apiClient[method](endpoint, { data });
-        console.log("✅ MUTATION: API call SUCCESS", { status: response.status, data: response.data });
-        return response.data;
-      } catch (error) {
-        console.error("❌ MUTATION: API call FAILED", error);
-        throw error;
-      }
+      const response = await apiClient[method](endpoint, { data });
+      return response.data;
     },
-    onSuccess: (savedDraft) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.expenseDrafts.all() });
       qa.success("All changes are saved", {
         duration: 3e3
       });
-      console.log("Expense draft saved successfully:", savedDraft);
     },
     onError: (error) => {
       console.error("Failed to save expense draft:", error);
@@ -2591,28 +2614,19 @@ const useSubmitExpense = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data }) => {
-      console.log("🔵 MUTATION START: Submit Expense");
       await simulateApiDelay(1e3);
-      console.log("🔵 MUTATION: Making API call", { endpoint: EXPENSE_ENDPOINTS.SUBMIT_EXPENSE });
-      try {
-        const response = await apiClient.post(
-          EXPENSE_ENDPOINTS.SUBMIT_EXPENSE,
-          { data }
-        );
-        console.log("✅ MUTATION: API call SUCCESS", { status: response.status, data: response.data });
-        return response.data;
-      } catch (error) {
-        console.error("❌ MUTATION: API call FAILED", error);
-        throw error;
-      }
+      const response = await apiClient.post(
+        EXPENSE_ENDPOINTS.SUBMIT_EXPENSE,
+        { data }
+      );
+      return response.data;
     },
-    onSuccess: (submittedExpense) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.expenses.all() });
       queryClient.invalidateQueries({ queryKey: queryKeys.expenseDrafts.all() });
       qa.success("Expense submitted", {
         duration: 3e3
       });
-      console.log("Expense submitted successfully:", submittedExpense);
     },
     onError: (error) => {
       console.error("Failed to submit expense:", error);
@@ -2633,8 +2647,9 @@ const useExpenseDraft = (draftId) => {
       return response.data;
     },
     enabled: !!draftId,
-    staleTime: 30 * 1e3
-    // 30 seconds
+    retry: false,
+    staleTime: 0
+    // Always fetch when ID changes
   });
 };
 const useDeleteExpenseDraft = () => {
@@ -2652,7 +2667,7 @@ const useDeleteExpenseDraft = () => {
     },
     onError: (error) => {
       console.error("Failed to delete draft:", error);
-      qa.error("Failed to delete draft", {
+      qa.error("Fail to delete. Please try again.", {
         duration: 3e3
       });
     }
@@ -2661,40 +2676,29 @@ const useDeleteExpenseDraft = () => {
 const { useCallback, useEffect, useRef, useState } = await importShared("react");
 const NewExpensePage = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const toasterClicked = useRef(false);
-  const timeoutRef = useRef(null);
+  const { id } = useParams();
   const expenseFormRef = useRef(null);
-  const draftId = searchParams.get("draftId");
-  const [currentDraftId, setCurrentDraftId] = useState(draftId);
-  const [expenseTitle, setExpenseTitle] = useState("New Expense");
-  const [expenseStatus, setExpenseStatus] = useState("new");
   const [submitButtonState, setSubmitButtonState] = useState({ disabled: true });
   const [saveDraftButtonState, setSaveDraftButtonState] = useState({ disabled: true });
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const saveDraftMutation = useSaveExpenseDraft();
   const submitExpenseMutation = useSubmitExpense();
   const deleteDraftMutation = useDeleteExpenseDraft();
-  const { data: existingDraft } = useExpenseDraft(currentDraftId);
+  const shouldFetchDraft = id && id !== "new";
+  const { data: existingDraft, error: draftError, isLoading: isDraftLoading } = useExpenseDraft(shouldFetchDraft ? id : null);
+  const draftData = draftError || !existingDraft ? null : existingDraft;
+  const expenseTitle = (draftData == null ? void 0 : draftData.data.vendor) || "New Expense";
+  const isDraft = !!draftData;
+  const currentDraftId = shouldFetchDraft && !draftError && (draftData || isDraftLoading) ? id : null;
   useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-  useEffect(() => {
-    if (existingDraft) {
-      const vendor = existingDraft.data.vendor || "New Expense";
-      setExpenseTitle(vendor);
-      setExpenseStatus("draft");
+    if (draftError && shouldFetchDraft) {
+      navigate(RoutePaths.ExpensesNew, { replace: true });
     }
-  }, [existingDraft]);
+  }, [draftError, shouldFetchDraft, navigate]);
   const handleSubmit = async (data) => {
     try {
       await submitExpenseMutation.mutateAsync({ data });
-      setTimeout(() => {
-        navigate(RoutePaths.Expenses);
-      }, 500);
+      navigate(RoutePaths.Expenses);
     } catch (error) {
       console.error("Failed to submit expense:", error);
     }
@@ -2706,36 +2710,31 @@ const NewExpensePage = () => {
         draftId: currentDraftId || void 0
       });
       if (result.id && !currentDraftId) {
-        setCurrentDraftId(result.id);
-        setExpenseStatus("draft");
+        navigate(`/expenses/${result.id}`, { replace: true });
       }
-      const vendor = data.vendor || "New Expense";
-      setExpenseTitle(vendor);
     } catch (error) {
       console.error("Failed to save draft:", error);
     }
   };
-  const handleDeleteDraft = async () => {
+  const handleDeleteDraft = () => {
+    if (!currentDraftId) return;
+    setIsDeleteDialogOpen(true);
+  };
+  const handleDeleteConfirm = async () => {
     if (!currentDraftId) return;
     try {
       await deleteDraftMutation.mutateAsync(currentDraftId);
+      setIsDeleteDialogOpen(false);
       navigate(RoutePaths.Expenses);
     } catch (error) {
       console.error("Failed to delete draft:", error);
     }
   };
-  const handleOverlayClick = (event) => {
-    if (!event) return;
-    const target = event.target;
-    if (!target.classList.contains("trax-ui-component")) {
-      toasterClicked.current = true;
-      timeoutRef.current = setTimeout(() => {
-        toasterClicked.current = false;
-      }, 100);
-    }
+  const handleDeleteCancel = () => {
+    setIsDeleteDialogOpen(false);
   };
   const handleOpenChange = (open) => {
-    if (!open && !toasterClicked.current) {
+    if (!open) {
       navigate(RoutePaths.Expenses);
     }
   };
@@ -2758,21 +2757,21 @@ const NewExpensePage = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(ExpensesList, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { name: "receipt" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Ja, { open: true, onOpenChange: handleOpenChange, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Zo, { className: "max-w-5xl max-h-[90vh] h-full overflow-hidden flex flex-col", onPointerDownOutside: (e) => handleOverlayClick(e), children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Ja, { open: true, onOpenChange: handleOpenChange, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Zo, { className: "max-w-5xl max-h-[90vh] h-full overflow-hidden flex flex-col", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(Jo, { className: "pb-3 mb-3 border-b border-exp-primary-blue-100", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2 relative", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-start gap-1", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-nowrap items-center justify-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(ea, { className: "text-exp-neutral-900 text-xl font-bold", children: expenseTitle }),
-            (existingDraft == null ? void 0 : existingDraft.data.totalAmount) && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-base font-medium text-exp-neutral-900", children: [
+            (draftData == null ? void 0 : draftData.data.totalAmount) && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-base font-medium text-exp-neutral-900", children: [
               "$",
-              existingDraft.data.totalAmount
+              draftData.data.totalAmount
             ] }),
-            expenseStatus === "draft" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "px-2.5 py-0.5 bg-exp-yellow-200 text-exp-yellow-900 text-sm font-medium rounded-20", children: "DRAFT" })
+            isDraft && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "px-2.5 py-0.5 bg-exp-yellow-200 text-exp-yellow-900 text-sm font-medium rounded-20", children: "DRAFT" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-nowrap items-center justify-center gap-2", children: currentDraftId && existingDraft && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs font-normal text-exp-neutral-300", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-nowrap items-center justify-center gap-2", children: currentDraftId && draftData && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs font-normal text-exp-neutral-300", children: [
             currentDraftId,
             " • Created on ",
-            new Date(existingDraft.createdAt).toLocaleDateString("en-US", {
+            new Date(draftData.createdAt).toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
               year: "numeric"
@@ -2793,30 +2792,30 @@ const NewExpensePage = () => {
             onSaveDraft: handleSaveDraft,
             onDraftSaved: () => {
             },
-            initialData: existingDraft == null ? void 0 : existingDraft.data,
+            initialData: draftData == null ? void 0 : draftData.data,
             draftId: currentDraftId,
             isSubmitting: submitExpenseMutation.isPending,
             isDrafting: saveDraftMutation.isPending,
+            draftSaveError: saveDraftMutation.isError,
             onButtonStateChange: handleButtonStateChange
           }
         ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Qo, { className: "pt-4 gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between w-full", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2", children: currentDraftId && /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Ba, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
               De,
               {
                 type: "button",
                 variant: "ghost",
                 onClick: handleDeleteDraft,
-                disabled: deleteDraftMutation.isPending,
                 className: "text-red-600 hover:text-red-700",
-                children: deleteDraftMutation.isPending ? "Deleting..." : /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
+                children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Trash2, { className: "size-4" }),
                   "Delete"
-                ] })
+                ]
               }
             ) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { children: "Delete draft" })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { className: "text-sm", children: "Delete draft" })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs(Aa, { children: [
@@ -2849,12 +2848,26 @@ const NewExpensePage = () => {
                   ]
                 }
               ) }) }),
-              submitButtonState.tooltip && /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { children: submitButtonState.tooltip })
+              submitButtonState.tooltip && /* @__PURE__ */ jsxRuntimeExports.jsx(Ga, { className: "text-sm", children: submitButtonState.tooltip })
             ] })
           ] })
         ] }) })
       ] })
-    ] }) })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ConfirmDialog,
+      {
+        open: isDeleteDialogOpen,
+        onOpenChange: setIsDeleteDialogOpen,
+        title: "Delete draft",
+        description: "Are you sure you want to delete this expense draft? This action cannot be undone.",
+        confirmLabel: "Delete",
+        cancelLabel: "Cancel",
+        onConfirm: handleDeleteConfirm,
+        onCancel: handleDeleteCancel,
+        isLoading: deleteDraftMutation.isPending
+      }
+    )
   ] });
 };
 export {

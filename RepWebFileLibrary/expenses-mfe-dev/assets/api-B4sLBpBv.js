@@ -1,8 +1,8 @@
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { c as createLucideIcon } from "./createLucideIcon-D0_eAq0F.js";
-import { u as useCompanyStore, l as useQuery, q as queryKeys } from "./LoadingSpinner-DP4KJ0Fd.js";
-import { a as apiClient } from "./axiosInstance-BLV4R70V.js";
-import { C as CONFIGURATION_ENDPOINTS, B as BUSINESS_PURPOSE_ENDPOINTS } from "./config-BD5Vcf6R.js";
+import { u as useCompanyStore, l as useQuery, q as queryKeys } from "./LoadingSpinner-Cxa4kIgC.js";
+import { a as apiClient } from "./axiosInstance-DULsLAHG.js";
+import { C as CONFIGURATION_ENDPOINTS, B as BUSINESS_PURPOSE_ENDPOINTS } from "./config-CcAFLaBz.js";
 /**
  * react-router v7.9.4
  *
@@ -5017,29 +5017,6 @@ function shouldProcessLinkClick(event, target) {
   (!target || target === "_self") && // Let browser handle "target=_blank" etc.
   !isModifiedEvent(event);
 }
-function createSearchParams(init = "") {
-  return new URLSearchParams(
-    typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo2, key) => {
-      let value = init[key];
-      return memo2.concat(
-        Array.isArray(value) ? value.map((v) => [key, v]) : [[key, value]]
-      );
-    }, [])
-  );
-}
-function getSearchParamsForLocation(locationSearch, defaultSearchParams) {
-  let searchParams = createSearchParams(locationSearch);
-  if (defaultSearchParams) {
-    defaultSearchParams.forEach((_, key) => {
-      if (!searchParams.has(key)) {
-        defaultSearchParams.getAll(key).forEach((value) => {
-          searchParams.append(key, value);
-        });
-      }
-    });
-  }
-  return searchParams;
-}
 var _formDataSupportsSubmitter = null;
 function isFormDataSubmitterSupported() {
   if (_formDataSupportsSubmitter === null) {
@@ -6114,39 +6091,6 @@ function useLinkClickHandler(to, {
     ]
   );
 }
-function useSearchParams(defaultInit) {
-  warning(
-    typeof URLSearchParams !== "undefined",
-    `You cannot use the \`useSearchParams\` hook in a browser that does not support the URLSearchParams API. If you need to support Internet Explorer 11, we recommend you load a polyfill such as https://github.com/ungap/url-search-params.`
-  );
-  let defaultSearchParamsRef = React10.useRef(createSearchParams(defaultInit));
-  let hasSetSearchParamsRef = React10.useRef(false);
-  let location = useLocation();
-  let searchParams = React10.useMemo(
-    () => (
-      // Only merge in the defaults if we haven't yet called setSearchParams.
-      // Once we call that we want those to take precedence, otherwise you can't
-      // remove a param with setSearchParams({}) if it has an initial value
-      getSearchParamsForLocation(
-        location.search,
-        hasSetSearchParamsRef.current ? null : defaultSearchParamsRef.current
-      )
-    ),
-    [location.search]
-  );
-  let navigate = useNavigate();
-  let setSearchParams = React10.useCallback(
-    (nextInit, navigateOptions) => {
-      const newSearchParams = createSearchParams(
-        typeof nextInit === "function" ? nextInit(new URLSearchParams(searchParams)) : nextInit
-      );
-      hasSetSearchParamsRef.current = true;
-      navigate("?" + newSearchParams, navigateOptions);
-    },
-    [navigate, searchParams]
-  );
-  return [searchParams, setSearchParams];
-}
 var fetcherId = 0;
 var getUniqueFetcherId = () => `__${String(++fetcherId)}__`;
 function useSubmit() {
@@ -6291,6 +6235,7 @@ var RoutePaths = /* @__PURE__ */ ((RoutePaths2) => {
   RoutePaths2["Root"] = "/";
   RoutePaths2["Expenses"] = "/expenses";
   RoutePaths2["ExpensesNew"] = "/expenses/new";
+  RoutePaths2["ExpensesId"] = "/expenses/:id";
   RoutePaths2["TestingAuthentication"] = "/testing/authentication";
   RoutePaths2["TestingIcons"] = "/testing/icons";
   RoutePaths2["Configurations"] = "/configurations";
@@ -6578,6 +6523,5 @@ export {
   RoutePathConfigChunks as j,
   createHashRouter as k,
   useDefaultCompany as l,
-  useSearchParams as m,
   useNavigate as u
 };

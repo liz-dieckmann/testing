@@ -128,6 +128,7 @@ const generateAcceptAttribute = () => {
   const extensions = mimeTypes.flatMap((mimeType) => MIME_TO_EXTENSION_MAP[mimeType]);
   return [...extensions, ...mimeTypes].join(",");
 };
+const receiptUploadInstructions = () => `Upload an image (max. ${FILE_SIZE_LIMITS.IMAGE_MAX_SIZE_MB}MB) or a PDF (max. ${FILE_SIZE_LIMITS.PDF_MAX_SIZE_MB}MB)`;
 const getSupportedFormatsText = () => {
   const imageFormats = ["PNG", "JPG/JPEG", "HEIC/HEIF", "WebP"];
   const pdfFormat = "PDF";
@@ -183,5 +184,6 @@ export {
   generateAcceptAttribute as a,
   getFilePreviewType as b,
   getSupportedFormatsText as g,
+  receiptUploadInstructions as r,
   validateReceiptFile as v
 };

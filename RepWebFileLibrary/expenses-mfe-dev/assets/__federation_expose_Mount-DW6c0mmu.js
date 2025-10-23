@@ -1,10 +1,10 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-BeCK6RES.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/jsx-runtime-DLKWXVrv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-Ccl5X_MC.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/createLucideIcon-D0_eAq0F.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-DlFISMuz.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/receipt-DwCfDWnv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-Ckmcytwy.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/schemas-QlakA0h0.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/LoadingSpinner-Cxa4kIgC.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosInstance-DULsLAHG.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Icon-CLuFtx_9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-e_IRvegh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/receipt-BjxWsBul.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/config-BD5Vcf6R.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/api-DCXTV3b1.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/api-D--lWoSN.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/trash-2-BDRPQK2n.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Configurations-CgUIRpiX.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/CorporateCards-BGn--eZB.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Payroll-CHdye5gV.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Allocations-C-yIwG6T.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-DfmkxsNf.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/x-B7RnTcsI.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/plus-CKiclhdA.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/layout-dashboard-BoyZ5Pyk.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-66MVHWO2.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/JWTDemo-BzBgUo71.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/shield-BTcAZCzR.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/IconsTestingPage-DKmto-TZ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/mockingStrategy-zwWkVVVp.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=[(()=>{const f="assets/ExpensesPage-BeCK6RES.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/jsx-runtime-DLKWXVrv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensesList-Ccl5X_MC.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/createLucideIcon-D0_eAq0F.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/__federation_fn_import-DlFISMuz.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/receipt-DwCfDWnv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpensePage-ANH97Qqa.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/schemas-QlakA0h0.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/LoadingSpinner-Cxa4kIgC.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/axiosInstance-DULsLAHG.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Icon-CLuFtx_9.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/preload-helper-e_IRvegh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/receipt-CrrQbCLn.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/config-CcAFLaBz.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/api-BxC46wEr.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/api-B4sLBpBv.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/api-D2YlHjMM.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/trash-2-BDRPQK2n.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Configurations-CgUIRpiX.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/CorporateCards-BGn--eZB.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Payroll-CHdye5gV.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/Allocations-C-yIwG6T.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/ExpenseType-bqVxRC0T.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/x-B7RnTcsI.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/plus-CKiclhdA.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/layout-dashboard-BoyZ5Pyk.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/BusinessPurpose-DgEwYkmh.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/JWTDemo-BzBgUo71.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/shield-BTcAZCzR.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/IconsTestingPage-D6aJpCmZ.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})(),(()=>{const f="assets/mockingStrategy-BzTkWXTt.js";const rel=f.startsWith('assets/')?f.slice(7):f;return new URL(rel, import.meta.url).href;})()])))=>i.map(i=>d[i]);
 import { _ as __vitePreload } from "./preload-helper-e_IRvegh.js";
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { r as requireReact } from "./index-xy1wy5yW.js";
 import { r as requireReactDom } from "./index-1vb2Dj7H.js";
-import { R as RouterProvider$1, u as useNavigate, L as Link, a as RoutePaths, F as FileText, C as ChartColumn, b as RouteNames, c as CreditCard, d as RouteCompanyLabels, e as RouteCompanyIds, f as useCompanies, g as ChevronRight, N as NavLink, h as useLocation, i as useParams, j as RoutePathConfigChunks, O as Outlet, k as createHashRouter } from "./api-D--lWoSN.js";
+import { R as RouterProvider$1, u as useNavigate, L as Link, a as RoutePaths, F as FileText, C as ChartColumn, b as RouteNames, c as CreditCard, d as RouteCompanyLabels, e as RouteCompanyIds, f as useCompanies, g as ChevronRight, N as NavLink, h as useLocation, i as useParams, j as RoutePathConfigChunks, O as Outlet, k as createHashRouter } from "./api-B4sLBpBv.js";
 import { c as createLucideIcon, W as Wo, D as De, B as Bo, j as ja } from "./createLucideIcon-D0_eAq0F.js";
 import { P as Plus } from "./plus-CKiclhdA.js";
 import { R as Receipt } from "./receipt-DwCfDWnv.js";
@@ -13023,16 +13023,17 @@ const Layout = () => {
 };
 const { Suspense, lazy } = await importShared("react");
 const Expenses = lazy(() => __vitePreload(() => import("./ExpensesPage-BeCK6RES.js"), true ? __vite__mapDeps([0,1,2,3,4,5]) : void 0, import.meta.url));
-const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-Ckmcytwy.js"), true ? __vite__mapDeps([6,4,1,2,3,5,7,8,9,10,11,12,13,14,15,16]) : void 0, import.meta.url));
-const Configurations = lazy(() => __vitePreload(() => import("./Configurations-CgUIRpiX.js"), true ? __vite__mapDeps([17,1]) : void 0, import.meta.url));
-const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-BGn--eZB.js"), true ? __vite__mapDeps([18,1]) : void 0, import.meta.url));
-const Payroll = lazy(() => __vitePreload(() => import("./Payroll-CHdye5gV.js"), true ? __vite__mapDeps([19,1]) : void 0, import.meta.url));
-const Allocations = lazy(() => __vitePreload(() => import("./Allocations-C-yIwG6T.js"), true ? __vite__mapDeps([20,1]) : void 0, import.meta.url));
-const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-DfmkxsNf.js"), true ? __vite__mapDeps([21,1,4,8,9,7,3,22,23,24]) : void 0, import.meta.url));
-const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-66MVHWO2.js"), true ? __vite__mapDeps([25,1,4,14,8,9,7,13,3,22,23,10,11]) : void 0, import.meta.url));
-const TestingAuthentication = lazy(() => __vitePreload(() => import("./JWTDemo-BzBgUo71.js"), true ? __vite__mapDeps([26,4,1,9,3,27,16]) : void 0, import.meta.url));
-const TestingIcons = lazy(() => __vitePreload(() => import("./IconsTestingPage-DKmto-TZ.js"), true ? __vite__mapDeps([28,4,1,10,11]) : void 0, import.meta.url));
+const NewExpense = lazy(() => __vitePreload(() => import("./ExpensePage-ANH97Qqa.js"), true ? __vite__mapDeps([6,4,1,2,3,5,7,8,9,10,11,12,13,14,15,16,17]) : void 0, import.meta.url));
+const Configurations = lazy(() => __vitePreload(() => import("./Configurations-CgUIRpiX.js"), true ? __vite__mapDeps([18,1]) : void 0, import.meta.url));
+const CorporateCards = lazy(() => __vitePreload(() => import("./CorporateCards-BGn--eZB.js"), true ? __vite__mapDeps([19,1]) : void 0, import.meta.url));
+const Payroll = lazy(() => __vitePreload(() => import("./Payroll-CHdye5gV.js"), true ? __vite__mapDeps([20,1]) : void 0, import.meta.url));
+const Allocations = lazy(() => __vitePreload(() => import("./Allocations-C-yIwG6T.js"), true ? __vite__mapDeps([21,1]) : void 0, import.meta.url));
+const ExpensesType = lazy(() => __vitePreload(() => import("./ExpenseType-bqVxRC0T.js"), true ? __vite__mapDeps([22,1,4,16,8,9,7,3,23,24,25]) : void 0, import.meta.url));
+const BusinessPurpose = lazy(() => __vitePreload(() => import("./BusinessPurpose-DgEwYkmh.js"), true ? __vite__mapDeps([26,1,4,14,8,9,7,13,3,23,24,10,11]) : void 0, import.meta.url));
+const TestingAuthentication = lazy(() => __vitePreload(() => import("./JWTDemo-BzBgUo71.js"), true ? __vite__mapDeps([27,4,1,9,3,28,17]) : void 0, import.meta.url));
+const TestingIcons = lazy(() => __vitePreload(() => import("./IconsTestingPage-D6aJpCmZ.js"), true ? __vite__mapDeps([29,4,1,10,11]) : void 0, import.meta.url));
 const createRouteConfig = () => {
+  var _a;
   const baseRoutes = [
     {
       index: true,
@@ -13045,6 +13046,10 @@ const createRouteConfig = () => {
     },
     {
       path: RoutePaths.ExpensesNew.slice(1),
+      element: /* @__PURE__ */ jsxRuntimeExports.jsx(NewExpense, {})
+    },
+    {
+      path: (_a = RoutePaths.ExpensesId) == null ? void 0 : _a.slice(1),
       element: /* @__PURE__ */ jsxRuntimeExports.jsx(NewExpense, {})
     },
     {
@@ -13164,11 +13169,39 @@ function QueryProvider({ children }) {
   ] });
 }
 await importShared("react");
+function ClickIsolator({
+  children,
+  className,
+  onClick,
+  onPointerDown
+}) {
+  const handlePointerDown = (e) => {
+    e.stopPropagation();
+    onPointerDown == null ? void 0 : onPointerDown(e);
+  };
+  const handleClick = (e) => {
+    e.stopPropagation();
+    onClick == null ? void 0 : onClick(e);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "div",
+    {
+      className,
+      onPointerDown: handlePointerDown,
+      onClick: handleClick,
+      children
+    }
+  );
+}
+function ToasterProvider(props) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ClickIsolator, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(ja, { ...props }) });
+}
+await importShared("react");
 function AppProviders({ children }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(QueryProvider, { children: [
     children,
     /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ja,
+      ToasterProvider,
       {
         position: "bottom-center",
         richColors: true,
@@ -13188,9 +13221,9 @@ const { StrictMode } = await importShared("react");
 const mountedInstances = /* @__PURE__ */ new Map();
 async function initializeMocking() {
   const { mockingStrategy } = await __vitePreload(async () => {
-    const { mockingStrategy: mockingStrategy2 } = await import("./mockingStrategy-zwWkVVVp.js");
+    const { mockingStrategy: mockingStrategy2 } = await import("./mockingStrategy-BzTkWXTt.js");
     return { mockingStrategy: mockingStrategy2 };
-  }, true ? __vite__mapDeps([29,11]) : void 0, import.meta.url);
+  }, true ? __vite__mapDeps([30,11]) : void 0, import.meta.url);
   await mockingStrategy.initialize();
 }
 const mount = (element) => {
@@ -13279,8 +13312,10 @@ const setupCleanupListeners = () => {
   });
   window.addEventListener("popstate", () => {
     console.log("Expenses MFE: Navigation detected, checking for cleanup...");
-    const container = document.getElementById(CONTAINER_ID);
-    if (!container) {
+    const ssrContainer = document.getElementById(CONTAINER_ID);
+    const rootElement = document.getElementById("root");
+    const hasAnyContainer = ssrContainer || rootElement;
+    if (!hasAnyContainer && mountedInstances.size > 0) {
       cleanupAll();
     }
   });

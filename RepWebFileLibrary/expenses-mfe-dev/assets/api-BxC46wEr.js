@@ -2,7 +2,7 @@ import { importShared } from "./__federation_fn_import-DlFISMuz.js";
 import { l as useQuery, q as queryKeys, k as useQueryClient } from "./LoadingSpinner-Cxa4kIgC.js";
 import { f as useExpenseStore, e as useMutation } from "./schemas-QlakA0h0.js";
 import { a as apiClient } from "./axiosInstance-DULsLAHG.js";
-import { B as BUSINESS_PURPOSE_ENDPOINTS } from "./config-BD5Vcf6R.js";
+import { B as BUSINESS_PURPOSE_ENDPOINTS } from "./config-CcAFLaBz.js";
 const { useEffect } = await importShared("react");
 const mapToBusinessPurpose = (apiData) => {
   return {
@@ -97,30 +97,28 @@ const useUpdateBusinessPurpose = () => {
       );
       return mapToBusinessPurpose(response.data);
     },
-    onMutate: async ({ id, companyShortName, data }) => {
-      const queryKey = queryKeys.businessPurposes.list(companyShortName);
-      await queryClient.cancelQueries({ queryKey });
-      const previousData = queryClient.getQueryData(queryKey);
-      queryClient.setQueryData(queryKey, (old) => {
-        if (!old) return old;
+    onMutate: async ({ id, data }) => {
+      await queryClient.cancelQueries({ queryKey: queryKeys.businessPurposes.all() });
+      const previousData = queryClient.getQueriesData({ queryKey: queryKeys.businessPurposes.all() });
+      queryClient.setQueriesData({ queryKey: queryKeys.businessPurposes.all() }, (old) => {
+        if (!Array.isArray(old)) return old;
         return old.map(
           (bp) => bp.id === id ? { ...bp, ...data, modified: /* @__PURE__ */ new Date() } : bp
         );
       });
-      return { previousData, companyShortName };
+      return { previousData };
     },
     onError: (_err, _variables, context) => {
-      if ((context == null ? void 0 : context.previousData) && (context == null ? void 0 : context.companyShortName)) {
-        queryClient.setQueryData(
-          queryKeys.businessPurposes.list(context.companyShortName),
-          context.previousData
-        );
+      if (context == null ? void 0 : context.previousData) {
+        context.previousData.forEach(([queryKey, data]) => {
+          queryClient.setQueryData(queryKey, data);
+        });
       }
     },
-    onSuccess: (updatedBusinessPurpose, variables) => {
+    onSuccess: (updatedBusinessPurpose) => {
       updateBusinessPurpose(updatedBusinessPurpose.id, updatedBusinessPurpose);
       queryClient.invalidateQueries({
-        queryKey: queryKeys.businessPurposes.list(variables.companyShortName)
+        queryKey: queryKeys.businessPurposes.all()
       });
     }
   });

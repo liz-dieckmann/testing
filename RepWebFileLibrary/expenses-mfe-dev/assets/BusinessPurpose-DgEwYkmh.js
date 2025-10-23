@@ -1,9 +1,9 @@
 import { j as jsxRuntimeExports } from "./jsx-runtime-DLKWXVrv.js";
 import { importShared } from "./__federation_fn_import-DlFISMuz.js";
-import { a as useCreateBusinessPurpose, b as useUpdateBusinessPurpose, u as useBusinessPurposes } from "./api-CtFyIzd9.js";
-import { u as useCompanyStore, L as LoadingSpinner } from "./LoadingSpinner-DP4KJ0Fd.js";
+import { a as useCreateBusinessPurpose, b as useUpdateBusinessPurpose, u as useBusinessPurposes } from "./api-BxC46wEr.js";
+import { u as useCompanyStore, L as LoadingSpinner } from "./LoadingSpinner-Cxa4kIgC.js";
 import { D as De, d as Ao, K as Ka, i as m, l as Xa } from "./createLucideIcon-D0_eAq0F.js";
-import { o as object, s as string, l as literal, u as useForm, d as a, C as Controller } from "./schemas-CXmks9E4.js";
+import { o as object, s as string, l as literal, u as useForm, d as a, C as Controller } from "./schemas-QlakA0h0.js";
 import { T as Table2, C as Check, X, P as Pencil, E as EllipsisVertical } from "./x-B7RnTcsI.js";
 import { P as Plus } from "./plus-CKiclhdA.js";
 import { I as Icon } from "./Icon-CLuFtx_9.js";
@@ -349,6 +349,7 @@ const BusinessPurposeActionButtons = React$1.memo(({
   /* @__PURE__ */ jsxRuntimeExports.jsx(
     De,
     {
+      "data-testid": "save-buisness-purpose-button",
       onMouseDown: (e) => {
         e.preventDefault();
         onSubmit();
@@ -363,6 +364,7 @@ const BusinessPurposeActionButtons = React$1.memo(({
   /* @__PURE__ */ jsxRuntimeExports.jsx(
     De,
     {
+      "data-testid": "cancel-buisness-purpose-button",
       onMouseDown: (e) => {
         e.preventDefault();
         onCancel();
@@ -489,6 +491,7 @@ const createActionsColumn = ({
           className: "w-fit flex items-center justify-start px-3 py-2 hover:bg-gray-100 transition-colors rounded-lg",
           variant: "ghost",
           onClick: cellContext.onEdit || (() => onRowEdit == null ? void 0 : onRowEdit(cellContext.row)),
+          "data-testid": `edit-button-${rowId}`,
           children: /* @__PURE__ */ jsxRuntimeExports.jsx(Pencil, { className: "w-4 h-4" })
         }
       ),
