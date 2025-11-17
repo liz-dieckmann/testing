@@ -1,5 +1,5 @@
-import { a as apiClient } from "./axiosInstance-S46OOVwd.js";
-import { s as shouldMockEndpoint, F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS } from "./config-BOIMHUBa.js";
+import { a as apiClient } from "./axiosInstance-Df66sy1J.js";
+import { s as shouldMockEndpoint, F as FILE_ENDPOINTS, E as EXPENSE_ENDPOINTS, M as MILEAGE_ENDPOINTS } from "./config-BOIMHUBa.js";
 import { d as RouteCompanyIds } from "./routes-DvEMxMCl.js";
 import { s as shouldSimulateError, c as createAxiosError } from "./errorSimulation-BCchxPxm.js";
 const mockBusinessPurposes = {
@@ -265,6 +265,8 @@ const uploadedFiles = /* @__PURE__ */ new Map();
 const businessPurposeStore = /* @__PURE__ */ new Map();
 const expenseDrafts = /* @__PURE__ */ new Map();
 const submittedExpenses = /* @__PURE__ */ new Map();
+const mileageDrafts = /* @__PURE__ */ new Map();
+const submittedMileageTrips = /* @__PURE__ */ new Map();
 Object.entries(mockBusinessPurposes).forEach(([companyId, purposes]) => {
   businessPurposeStore.set(companyId, new Map(purposes.map((bp) => [bp.id, bp])));
 });
@@ -328,6 +330,30 @@ class AxiosStrategy {
         }
         if (fullUrl.match(/\/api\/v1\.0\/expenses\/[^/]+$/) && config.method === "get") {
           return this.handleExpenseGetMock(config, fullUrl);
+        }
+        if (fullUrl.includes(MILEAGE_ENDPOINTS.SAVE_DRAFT) && config.method === "post") {
+          return this.handleMileageDraftCreateMock(config);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/mileage-trips\/drafts\/[^/]+$/) && config.method === "put") {
+          return this.handleMileageDraftUpdateMock(config, fullUrl);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/mileage-trips\/drafts\/[^/]+$/) && config.method === "get") {
+          return this.handleMileageDraftGetMock(config, fullUrl);
+        }
+        if (fullUrl.includes(MILEAGE_ENDPOINTS.SAVE_DRAFT) && config.method === "get") {
+          return this.handleMileageDraftsListMock(config);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/mileage-trips\/drafts\/[^/]+$/) && config.method === "delete") {
+          return this.handleMileageDraftDeleteMock(config, fullUrl);
+        }
+        if (fullUrl.includes(MILEAGE_ENDPOINTS.SUBMIT_MILEAGE) && config.method === "post") {
+          return this.handleMileageSubmitMock(config);
+        }
+        if (fullUrl.includes(MILEAGE_ENDPOINTS.GET_MILEAGE_TRIPS) && config.method === "get") {
+          return this.handleMileageTripsListMock(config);
+        }
+        if (fullUrl.match(/\/api\/v1\.0\/mileage-trips\/[^/]+$/) && config.method === "get") {
+          return this.handleMileageTripGetMock(config, fullUrl);
         }
         return config;
       },
@@ -895,6 +921,284 @@ class AxiosStrategy {
     }
     const mockResponse = {
       data: expense,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Draft CREATE mock
+   */
+  async handleMileageDraftCreateMock(config) {
+    await this.delay(600);
+    if (shouldSimulateError(MILEAGE_ENDPOINTS.SAVE_DRAFT)) {
+      const error = createAxiosError(MILEAGE_ENDPOINTS.SAVE_DRAFT, config);
+      console.log("❌ Axios Interceptor: Simulating error for Save Mileage Draft", error.response);
+      config.adapter = () => Promise.reject(error);
+      return config;
+    }
+    const body = config.data;
+    const draftId = `mileage-draft-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+    const draft = {
+      id: draftId,
+      status: "draft",
+      data: body.data,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      userId: "current-user"
+    };
+    mileageDrafts.set(draftId, draft);
+    console.log("✅ Axios Interceptor: Mileage draft created", { id: draftId });
+    const mockResponse = {
+      data: draft,
+      status: 201,
+      statusText: "Created",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Draft UPDATE mock
+   */
+  async handleMileageDraftUpdateMock(config, fullUrl) {
+    await this.delay(600);
+    const match = fullUrl.match(/\/drafts\/([^/]+)$/);
+    const draftId = match ? match[1] : null;
+    if (!draftId) {
+      const mockResponse2 = {
+        data: { error: "Invalid draft ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    if (shouldSimulateError(`${MILEAGE_ENDPOINTS.SAVE_DRAFT}/${draftId}`)) {
+      const error = createAxiosError(`${MILEAGE_ENDPOINTS.SAVE_DRAFT}/${draftId}`, config);
+      console.log("❌ Axios Interceptor: Simulating error for Update Mileage Draft", error.response);
+      config.adapter = () => Promise.reject(error);
+      return config;
+    }
+    const existingDraft = mileageDrafts.get(draftId);
+    if (!existingDraft) {
+      const mockResponse2 = {
+        data: { error: "Draft not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const body = config.data;
+    const updatedDraft = {
+      ...existingDraft,
+      data: body.data,
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString()
+    };
+    mileageDrafts.set(draftId, updatedDraft);
+    console.log("✅ Axios Interceptor: Mileage draft updated", { id: draftId });
+    const mockResponse = {
+      data: updatedDraft,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Draft GET mock
+   */
+  async handleMileageDraftGetMock(config, fullUrl) {
+    await this.delay(300);
+    const match = fullUrl.match(/\/drafts\/([^/]+)$/);
+    const draftId = match ? match[1] : null;
+    if (!draftId) {
+      const mockResponse2 = {
+        data: { error: "Invalid draft ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const draft = mileageDrafts.get(draftId);
+    if (!draft) {
+      const mockResponse2 = {
+        data: { error: "Draft not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const mockResponse = {
+      data: draft,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Drafts LIST mock
+   */
+  async handleMileageDraftsListMock(config) {
+    await this.delay(300);
+    const drafts = Array.from(mileageDrafts.values()).sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    );
+    const mockResponse = {
+      data: drafts,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Draft DELETE mock
+   */
+  async handleMileageDraftDeleteMock(config, fullUrl) {
+    await this.delay(500);
+    const match = fullUrl.match(/\/drafts\/([^/]+)$/);
+    const draftId = match ? match[1] : null;
+    if (!draftId) {
+      const mockResponse2 = {
+        data: { error: "Invalid draft ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    if (!mileageDrafts.has(draftId)) {
+      const mockResponse2 = {
+        data: { error: "Draft not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    mileageDrafts.delete(draftId);
+    console.log("✅ Axios Interceptor: Mileage draft deleted", { id: draftId });
+    const mockResponse = {
+      data: { message: "Draft deleted successfully" },
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage SUBMIT mock
+   */
+  async handleMileageSubmitMock(config) {
+    await this.delay(1e3);
+    if (shouldSimulateError(MILEAGE_ENDPOINTS.SUBMIT_MILEAGE)) {
+      const error = createAxiosError(MILEAGE_ENDPOINTS.SUBMIT_MILEAGE, config);
+      console.log("❌ Axios Interceptor: Simulating error for Submit Mileage", error.response);
+      config.adapter = () => Promise.reject(error);
+      return config;
+    }
+    const body = config.data;
+    const mileageId = `mileage-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+    const mileageTrip = {
+      id: mileageId,
+      status: "submitted",
+      data: body.data,
+      submittedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      updatedAt: (/* @__PURE__ */ new Date()).toISOString(),
+      userId: "current-user"
+    };
+    submittedMileageTrips.set(mileageId, mileageTrip);
+    console.log("✅ Axios Interceptor: Mileage trip submitted", { id: mileageId });
+    const mockResponse = {
+      data: mileageTrip,
+      status: 201,
+      statusText: "Created",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Trips LIST mock
+   */
+  async handleMileageTripsListMock(config) {
+    await this.delay(300);
+    const trips = Array.from(submittedMileageTrips.values()).sort(
+      (a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime()
+    );
+    const mockResponse = {
+      data: trips,
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config
+    };
+    config.adapter = () => Promise.resolve(mockResponse);
+    return config;
+  }
+  /**
+   * Handle Mileage Trip GET mock
+   */
+  async handleMileageTripGetMock(config, fullUrl) {
+    await this.delay(300);
+    const match = fullUrl.match(/\/mileage-trips\/([^/]+)$/);
+    const mileageId = match ? match[1] : null;
+    if (!mileageId || mileageId === "drafts") {
+      const mockResponse2 = {
+        data: { error: "Invalid mileage ID" },
+        status: 400,
+        statusText: "Bad Request",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const trip = submittedMileageTrips.get(mileageId);
+    if (!trip) {
+      const mockResponse2 = {
+        data: { error: "Mileage trip not found" },
+        status: 404,
+        statusText: "Not Found",
+        headers: {},
+        config
+      };
+      config.adapter = () => Promise.reject({ response: mockResponse2 });
+      return config;
+    }
+    const mockResponse = {
+      data: trip,
       status: 200,
       statusText: "OK",
       headers: {},
