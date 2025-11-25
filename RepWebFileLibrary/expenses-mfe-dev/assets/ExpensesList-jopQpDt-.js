@@ -1,12 +1,12 @@
 import { importShared } from "./__federation_fn_import-DD1J_cWq.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-CzdF90_e.js";
-import { a as apiClient, p, H as Hs, C as Ca, _ as _r, e as On, L as La, f as Ls, g as Sa, R as Ra, S as Sn } from "./axiosInstance-DP9FWpUw.js";
+import { a as apiClient, p, H as Hs, C as Ca, _ as _r, e as On, L as La, f as Ls, g as Sa, R as Ra, S as Sn } from "./axiosInstance-C-3zYJ_U.js";
 import { k as useQuery, q as queryKeys } from "./query-keys-DpYAYDxu.js";
 import { E as EXPENSE_ENDPOINTS } from "./endpoints-BX9yOQ37.js";
 import { I as Icon } from "./Icon-DYEjfqv0.js";
-import { C as Clock } from "./clock-D_qw84cN.js";
+import { C as Clock } from "./clock-BzVF2LUT.js";
 import { u as useNavigate, a as RoutePaths } from "./routes-nW3dHYkG.js";
-import { P as Plus } from "./plus-B11KhOqH.js";
+import { P as Plus } from "./plus-CFGTykQ-.js";
 const mapExpenseDraftToListItem = (draft) => ({
   id: draft.id,
   status: "draft",
@@ -586,6 +586,7 @@ const ExpensesList = () => {
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState(DEFAULT_SORTING);
   const [searchValue, setSearchValue] = useState("");
+  const [searchResetKey, setSearchResetKey] = useState(0);
   const skipSearchResetRef = useRef(false);
   const currentStatusFilter = useMemo(() => {
     const statusFilter = columnFilters.find((filter) => filter.id === "status");
@@ -612,6 +613,7 @@ const ExpensesList = () => {
         const statusChanged = prevStatus !== newStatus;
         if (statusChanged && !skipSearchResetRef.current) {
           setSearchValue("");
+          setSearchResetKey((k) => k + 1);
         }
         skipSearchResetRef.current = false;
         const isNavigatingToAll = prevStatus !== void 0 && newStatus === void 0;
@@ -671,7 +673,8 @@ const ExpensesList = () => {
         onChange: handleSearchChange,
         onSearch: handleSearch,
         placeholder: "Search expense by ID..."
-      }
+      },
+      searchResetKey
     ) })
   ] });
   const customLoadingState = /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-center gap-3", children: [

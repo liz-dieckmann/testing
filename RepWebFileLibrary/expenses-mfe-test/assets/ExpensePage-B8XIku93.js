@@ -1,23 +1,23 @@
 import { importShared } from "./__federation_fn_import-DD1J_cWq.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-CzdF90_e.js";
-import { E as ExpensesList } from "./ExpensesList-C-M1Y7Gk.js";
-import { o as os, k as ks, a as apiClient, B as Bs, O as Oa, A as Aa, G as Ga, P as Pe, b as Ba, $ as $r, d as Vr, z as zr, S as Sn } from "./axiosInstance-C-3zYJ_U.js";
-import { E as EXPENSE_DETAILS_SECTION, a as EXPENSE_JUSTIFICATION_SECTION, C as COST_ALLOCATION_SECTION, A as ADDITIONAL_COMMENTS_SECTION } from "./expense-form-sections-B0S4VHcM.js";
-import { E as ExpenseFormField, u as useFormFieldValues, a as useAmountAllocationSync, b as useReceiptCheckboxEffects, c as useExpenseFormLeftColumn, S as SupportingFiles, d as useExpenseFormHandlers, f as fullExpenseValidationStrategy, C as ConfirmDialog } from "./SupportingFilesFormSection-BzjJ0GRA.js";
+import { E as ExpensesList } from "./ExpensesList-DOvNTj2O.js";
+import { o as os, k as ks, a as apiClient, B as Bs, O as Oa, A as Aa, G as Ga, P as Pe, b as Ba, $ as $r, d as Vr, z as zr, S as Sn } from "./axiosInstance-DP9FWpUw.js";
+import { E as EXPENSE_DETAILS_SECTION, a as EXPENSE_JUSTIFICATION_SECTION, C as COST_ALLOCATION_SECTION, A as ADDITIONAL_COMMENTS_SECTION } from "./expense-form-sections-DHoO3PSJ.js";
+import { E as ExpenseFormField, u as useFormFieldValues, a as useAmountAllocationSync, b as useReceiptCheckboxEffects, c as useExpenseFormLeftColumn, S as SupportingFiles, d as useExpenseFormHandlers, f as fullExpenseValidationStrategy, C as ConfirmDialog } from "./SupportingFilesFormSection-TqfCDwXq.js";
 import { I as Icon } from "./Icon-DYEjfqv0.js";
-import "./api-1GCezcmM.js";
-import { a as useMutation } from "./store-BA0spBdd.js";
-import "./api-ChGbT6q2.js";
-import "./api-blHWSJam.js";
-import "./mileage-trip-sections-8hAt_bqU.js";
-import { c as createExpenseForm } from "./form-factory-BmBvBTO9.js";
-import { R as ReceiptSection } from "./ReceiptSection-C28hHMcy.js";
+import "./api-Kj9jIhjr.js";
+import { a as useMutation } from "./store-3xC2HOBr.js";
+import "./api-B1xsbpTB.js";
+import "./api-BMAnnOHy.js";
+import "./mileage-trip-sections-CWUG_uCR.js";
+import { c as createExpenseForm } from "./form-factory-k8BNxHXm.js";
+import { R as ReceiptSection } from "./ReceiptSection-Dhri7abj.js";
 import { u as useNavigate, f as useParams, a as RoutePaths } from "./routes-nW3dHYkG.js";
 import { u as useQueryClient, k as useQuery, q as queryKeys } from "./query-keys-DpYAYDxu.js";
 import { E as EXPENSE_ENDPOINTS } from "./endpoints-BX9yOQ37.js";
-import { C as ChevronLeft } from "./chevron-left-BKd5fkRF.js";
-import { C as ChevronRight } from "./chevron-right-CoYvlgai.js";
-import { T as Trash2, S as Send } from "./trash-2-BIF8s7Jo.js";
+import { C as ChevronLeft } from "./chevron-left-BoGTESgu.js";
+import { C as ChevronRight } from "./chevron-right-IOQTudeL.js";
+import { T as Trash2, S as Send } from "./trash-2-BycJJ2vW.js";
 const mapFullExpenseToDefaultValues = (initialData) => {
   return {
     [ExpenseFormField.ExpenseType]: (initialData == null ? void 0 : initialData.expenseType) ?? "",

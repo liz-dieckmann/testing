@@ -1,6 +1,6 @@
 import { importShared } from "./__federation_fn_import-DD1J_cWq.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-CzdF90_e.js";
-import { E as ExpensesList } from "./ExpensesList-C-M1Y7Gk.js";
+import { E as ExpensesList } from "./ExpensesList-jopQpDt-.js";
 import { M as MILEAGE_DETAILS_SECTION, a as MILEAGE_JUSTIFICATION_SECTION, b as MILEAGE_COST_ALLOCATION_SECTION, c as MILEAGE_ADDITIONAL_COMMENTS_SECTION } from "./mileage-trip-sections-8hAt_bqU.js";
 import { e as useMileageTripFormHandlers, m as mapMileageTripToDefaultValues, g as mileageTripValidationStrategy } from "./SupportingFilesFormSection-BzjJ0GRA.js";
 import { c as createExpenseForm } from "./form-factory-BmBvBTO9.js";
