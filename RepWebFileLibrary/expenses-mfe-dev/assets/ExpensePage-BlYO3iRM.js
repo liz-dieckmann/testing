@@ -1,6 +1,6 @@
 import { importShared } from "./__federation_fn_import-DD1J_cWq.js";
 import { j as jsxRuntimeExports } from "./jsx-runtime-CzdF90_e.js";
-import { E as ExpensesList } from "./ExpensesList-jopQpDt-.js";
+import { E as ExpensesList } from "./ExpensesList-BvxiRDs0.js";
 import { o as os, k as ks, a as apiClient, B as Bs, O as Oa, A as Aa, G as Ga, P as Pe, b as Ba, $ as $r, d as Vr, z as zr, S as Sn } from "./axiosInstance-C-3zYJ_U.js";
 import { E as EXPENSE_DETAILS_SECTION, a as EXPENSE_JUSTIFICATION_SECTION, C as COST_ALLOCATION_SECTION, A as ADDITIONAL_COMMENTS_SECTION } from "./expense-form-sections-B0S4VHcM.js";
 import { E as ExpenseFormField, u as useFormFieldValues, a as useAmountAllocationSync, b as useReceiptCheckboxEffects, c as useExpenseFormLeftColumn, S as SupportingFiles, d as useExpenseFormHandlers, f as fullExpenseValidationStrategy, C as ConfirmDialog } from "./SupportingFilesFormSection-BzjJ0GRA.js";

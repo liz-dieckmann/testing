@@ -1,5 +1,5 @@
 import { j as jsxRuntimeExports } from "./jsx-runtime-CzdF90_e.js";
-import { E as ExpensesList } from "./ExpensesList-DOvNTj2O.js";
+import { E as ExpensesList } from "./ExpensesList-BvxiRDs0.js";
 const ExpensesPage = () => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(ExpensesList, {});
 };

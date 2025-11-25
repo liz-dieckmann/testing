@@ -579,7 +579,7 @@ const ExpenseSearch = ({
     }
   );
 };
-const { useCallback, useMemo, useRef, useState } = await importShared("react");
+const { useCallback, useEffect, useMemo, useRef, useState } = await importShared("react");
 const DEFAULT_SORTING = [{ id: "expenseDate", desc: true }];
 const ExpensesList = () => {
   const navigate = useNavigate();
@@ -587,7 +587,7 @@ const ExpensesList = () => {
   const [sorting, setSorting] = useState(DEFAULT_SORTING);
   const [searchValue, setSearchValue] = useState("");
   const [searchResetKey, setSearchResetKey] = useState(0);
-  const skipSearchResetRef = useRef(false);
+  const searchTriggeredNavigationRef = useRef(false);
   const currentStatusFilter = useMemo(() => {
     const statusFilter = columnFilters.find((filter) => filter.id === "status");
     return (statusFilter == null ? void 0 : statusFilter.value) ?? "all";
@@ -603,6 +603,19 @@ const ExpensesList = () => {
   }, [currentStatusFilter, searchValue, sorting]);
   const { data: expenses = [], isFetching } = useExpensesList(queryParams);
   const { columns } = useExpensesColumns({ currentStatusFilter });
+  const prevStatusRef = useRef(currentStatusFilter);
+  useEffect(() => {
+    const prevStatus = prevStatusRef.current;
+    prevStatusRef.current = currentStatusFilter;
+    if (prevStatus === currentStatusFilter) return;
+    if (searchTriggeredNavigationRef.current && currentStatusFilter === "all") {
+      searchTriggeredNavigationRef.current = false;
+      return;
+    }
+    searchTriggeredNavigationRef.current = false;
+    setSearchValue("");
+    setSearchResetKey((k) => k + 1);
+  }, [currentStatusFilter]);
   const handleColumnFiltersChange = useCallback(
     (updater) => {
       setColumnFilters((prev) => {
@@ -610,12 +623,6 @@ const ExpensesList = () => {
         const newFilters = typeof updater === "function" ? updater(prev) : updater;
         const prevStatus = (_a = prev.find((f) => f.id === "status")) == null ? void 0 : _a.value;
         const newStatus = (_b = newFilters.find((f) => f.id === "status")) == null ? void 0 : _b.value;
-        const statusChanged = prevStatus !== newStatus;
-        if (statusChanged && !skipSearchResetRef.current) {
-          setSearchValue("");
-          setSearchResetKey((k) => k + 1);
-        }
-        skipSearchResetRef.current = false;
         const isNavigatingToAll = prevStatus !== void 0 && newStatus === void 0;
         if (isNavigatingToAll) {
           setSorting(
@@ -636,7 +643,7 @@ const ExpensesList = () => {
   const handleSearch = useCallback((searchId) => {
     const trimmedId = searchId.trim();
     if (trimmedId && currentStatusFilter !== "all") {
-      skipSearchResetRef.current = true;
+      searchTriggeredNavigationRef.current = true;
       setColumnFilters((prev) => prev.filter((filter) => filter.id !== "status"));
     }
     setSearchValue(trimmedId);
