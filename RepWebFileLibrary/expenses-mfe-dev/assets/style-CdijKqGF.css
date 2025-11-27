@@ -63,9 +63,8 @@
 }
 
 .expenses-mfe-scope {
-  all: revert;
   box-sizing: border-box;
-  color: inherit;
+  color: #0f172a;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -76,69 +75,39 @@
 }
 
 .expenses-mfe-scope h1, .expenses-mfe-scope h2, .expenses-mfe-scope h3, .expenses-mfe-scope h4, .expenses-mfe-scope h5, .expenses-mfe-scope h6 {
-  all: revert;
   color: inherit;
   font-family: inherit;
-  font-weight: inherit;
   font-size: inherit;
+  font-weight: inherit;
   line-height: inherit;
-  margin: revert;
-  padding: revert;
+  margin: unset;
+  padding: unset;
 }
 
 .expenses-mfe-scope a, .expenses-mfe-scope a:link, .expenses-mfe-scope a:visited, .expenses-mfe-scope a:hover, .expenses-mfe-scope a:active {
-  all: revert;
   color: inherit;
   -webkit-text-decoration: inherit;
   -webkit-text-decoration: inherit;
   text-decoration: inherit;
 }
 
-.expenses-mfe-scope p, .expenses-mfe-scope span, .expenses-mfe-scope div {
+.expenses-mfe-scope p {
   color: inherit;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
 
-.expenses-mfe-scope ul, .expenses-mfe-scope ol, .expenses-mfe-scope li {
-  all: revert;
-  color: inherit;
-  font-family: inherit;
+.expenses-mfe-scope table {
+  border-collapse: collapse;
+  border-color: inherit;
 }
 
-.expenses-mfe-scope table, .expenses-mfe-scope thead, .expenses-mfe-scope tbody, .expenses-mfe-scope tfoot, .expenses-mfe-scope tr, .expenses-mfe-scope th, .expenses-mfe-scope td {
-  all: revert;
+.expenses-mfe-scope th, .expenses-mfe-scope td {
   color: inherit;
   font-family: inherit;
   font-size: inherit;
   border-color: inherit;
-}
-
-.expenses-mfe-scope input, .expenses-mfe-scope textarea, .expenses-mfe-scope select, .expenses-mfe-scope button {
-  all: revert;
-  font-family: inherit;
-  font-size: inherit;
-  color: inherit;
-}
-
-.expenses-mfe-scope img, .expenses-mfe-scope svg {
-  vertical-align: middle;
-  display: inline-block;
-}
-
-.expenses-mfe-scope {
-  --shell-override-protection: initial;
-}
-
-.expenses-mfe-scope .select a, .expenses-mfe-scope .select a:hover {
-  all: revert;
-  color: inherit;
-  cursor: inherit;
-  -webkit-text-decoration: inherit;
-  -webkit-text-decoration: inherit;
-  text-decoration: inherit;
-  background: inherit;
 }
 
 @layer theme {
